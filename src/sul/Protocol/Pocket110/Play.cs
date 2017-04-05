@@ -74,8 +74,8 @@ namespace sul.Pocket110
         public const uint OutdatedServer = 2;
         public const uint Spawned = 3;
         public const uint InvalidTenant = 4;
-        public const uint EduRequired = 5;
-        public const uint VanillaRequired = 6;
+        public const uint EditionMismatchEduToVanilla = 5;
+        public const uint EditionMismatchVanillaToEdu = 6;
 
         public uint status;
 
