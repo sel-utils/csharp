@@ -19,20 +19,20 @@ namespace sul.Pocket110
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        // edition
-        public const byte Classic = 0;
+        // version
+        public const byte Vanilla = 0;
         public const byte Education = 1;
 
-        public uint protocol;
-        public byte edition;
+        public uint protocol = 110;
+        public byte version;
         public byte[] body;
 
         public Login() {}
 
-        public Login(uint protocol, byte edition, byte[] body)
+        public Login(uint protocol, byte version, byte[] body)
         {
             this.protocol = protocol;
-            this.edition = edition;
+            this.version = version;
             this.body = body;
         }
 
@@ -241,12 +241,12 @@ namespace sul.Pocket110
         public const bool Serverbound = false;
 
         public bool mustAccept;
-        public Types.PackWithSizeArray behaviourPacks;
-        public Types.PackWithSizeArray resourcePacks;
+        public Types.PackWithSize[] behaviourPacks;
+        public Types.PackWithSize[] resourcePacks;
 
         public ResourcePacksInfo() {}
 
-        public ResourcePacksInfo(bool mustAccept, Types.PackWithSizeArray behaviourPacks, Types.PackWithSizeArray resourcePacks)
+        public ResourcePacksInfo(bool mustAccept, Types.PackWithSize[] behaviourPacks, Types.PackWithSize[] resourcePacks)
         {
             this.mustAccept = mustAccept;
             this.behaviourPacks = behaviourPacks;
@@ -286,12 +286,12 @@ namespace sul.Pocket110
         public const bool Serverbound = false;
 
         public bool mustAccept;
-        public Types.PackArray behaviourPacks;
-        public Types.PackArray resourcePacks;
+        public Types.Pack[] behaviourPacks;
+        public Types.Pack[] resourcePacks;
 
         public ResourcePacksStackPacket() {}
 
-        public ResourcePacksStackPacket(bool mustAccept, Types.PackArray behaviourPacks, Types.PackArray resourcePacks)
+        public ResourcePacksStackPacket(bool mustAccept, Types.Pack[] behaviourPacks, Types.Pack[] resourcePacks)
         {
             this.mustAccept = mustAccept;
             this.behaviourPacks = behaviourPacks;
@@ -337,11 +337,11 @@ namespace sul.Pocket110
         public const byte Completed = 4;
 
         public byte status;
-        public Types.PackIds packIds;
+        public string[] packIds;
 
         public ResourcePackClientResponse() {}
 
-        public ResourcePackClientResponse(byte status, Types.PackIds packIds)
+        public ResourcePackClientResponse(byte status, string[] packIds)
         {
             this.status = status;
             this.packIds = packIds;
@@ -421,14 +421,12 @@ namespace sul.Pocket110
         public const bool Serverbound = false;
 
         public int time;
-        public bool daylightCycle;
 
         public SetTime() {}
 
-        public SetTime(int time, bool daylightCycle)
+        public SetTime(int time)
         {
             this.time = time;
-            this.daylightCycle = daylightCycle;
         }
 
         public override int GetId()
@@ -476,6 +474,7 @@ namespace sul.Pocket110
         // world gamemode
         public const int Survival = 0;
         public const int Creative = 1;
+        public const int Adventure = 2;
 
         // difficulty
         public const int Peaceful = 0;
@@ -483,8 +482,8 @@ namespace sul.Pocket110
         public const int Normal = 2;
         public const int Hard = 3;
 
-        // edition
-        public const byte Classic = 0;
+        // version
+        public const byte Vanilla = 0;
         public const byte Education = 1;
 
         public long entityId;
@@ -500,7 +499,7 @@ namespace sul.Pocket110
         public Tuple<int, int, int> spawnPosition;
         public bool loadedInCreative;
         public int time;
-        public byte edition;
+        public byte version;
         public float rainLevel;
         public float lightingLevel;
         public bool commandsEnabled;
@@ -511,7 +510,7 @@ namespace sul.Pocket110
 
         public StartGame() {}
 
-        public StartGame(long entityId, long runtimeId, Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte edition, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, Types.Rule[] gameRules, string levelId, string worldName)
+        public StartGame(long entityId, long runtimeId, Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, Types.Rule[] gameRules, string levelId, string worldName)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -526,7 +525,7 @@ namespace sul.Pocket110
             this.spawnPosition = spawnPosition;
             this.loadedInCreative = loadedInCreative;
             this.time = time;
-            this.edition = edition;
+            this.version = version;
             this.rainLevel = rainLevel;
             this.lightingLevel = lightingLevel;
             this.commandsEnabled = commandsEnabled;
@@ -873,16 +872,18 @@ namespace sul.Pocket110
         public byte pitch;
         public byte headYaw;
         public byte yaw;
+        public bool onGround;
 
         public MoveEntity() {}
 
-        public MoveEntity(long entityId, Tuple<float, float, float> position, byte pitch, byte headYaw, byte yaw)
+        public MoveEntity(long entityId, Tuple<float, float, float> position, byte pitch, byte headYaw, byte yaw, bool onGround)
         {
             this.entityId = entityId;
             this.position = position;
             this.pitch = pitch;
             this.headYaw = headYaw;
             this.yaw = yaw;
+            this.onGround = onGround;
         }
 
         public override int GetId()
@@ -3088,6 +3089,7 @@ namespace sul.Pocket110
         // gamemode
         public const int Survival = 0;
         public const int Creative = 1;
+        public const int Adventure = 2;
 
         public int gamemode;
 
