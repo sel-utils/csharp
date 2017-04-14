@@ -4423,4 +4423,76 @@ namespace sul.Pocket110
 
     }
 
+    public class ShowStoreOffer : Packet
+    {
+
+        public const byte Id = 92;
+
+        public const bool Clientbound = true;
+        public const bool Serverbound = false;
+
+
+
+        public ShowStoreOffer() {}
+
+        public override int GetId()
+        {
+            return Id;
+        }
+
+        public override byte[] Encode()
+        {
+            return this._buffer;
+        }
+
+        public override void Decode(byte[] buffer)
+        {
+            this._buffer = buffer;
+        }
+
+        public static ShowStoreOffer FromBuffer(byte[] buffer)
+        {
+            var ret = new ShowStoreOffer();
+            ret.decode(buffer);
+            return ret;
+        }
+
+    }
+
+    public class PurchaseReceipt : Packet
+    {
+
+        public const byte Id = 93;
+
+        public const bool Clientbound = false;
+        public const bool Serverbound = true;
+
+
+
+        public PurchaseReceipt() {}
+
+        public override int GetId()
+        {
+            return Id;
+        }
+
+        public override byte[] Encode()
+        {
+            return this._buffer;
+        }
+
+        public override void Decode(byte[] buffer)
+        {
+            this._buffer = buffer;
+        }
+
+        public static PurchaseReceipt FromBuffer(byte[] buffer)
+        {
+            var ret = new PurchaseReceipt();
+            ret.decode(buffer);
+            return ret;
+        }
+
+    }
+
 }
