@@ -461,6 +461,11 @@ namespace sul.Pocket110
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
+        // gamemode
+        public const int Survival = 0;
+        public const int Creative = 1;
+        public const int Adventure = 2;
+
         // dimension
         public const int Overworld = 0;
         public const int Nether = 1;
@@ -470,11 +475,6 @@ namespace sul.Pocket110
         public const int Old = 0;
         public const int Infinite = 1;
         public const int Flat = 2;
-
-        // world gamemode
-        public const int Survival = 0;
-        public const int Creative = 1;
-        public const int Adventure = 2;
 
         // difficulty
         public const int Peaceful = 0;
@@ -488,6 +488,7 @@ namespace sul.Pocket110
 
         public long entityId;
         public long runtimeId;
+        public int gamemode;
         public Tuple<float, float, float> position;
         public float yaw;
         public float pitch;
@@ -507,13 +508,15 @@ namespace sul.Pocket110
         public Types.Rule[] gameRules;
         public string levelId;
         public string worldName;
+        public string premiumWorldTemplate;
 
         public StartGame() {}
 
-        public StartGame(long entityId, long runtimeId, Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, Types.Rule[] gameRules, string levelId, string worldName)
+        public StartGame(long entityId, long runtimeId, int gamemode, Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, Types.Rule[] gameRules, string levelId, string worldName, string premiumWorldTemplate)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
+            this.gamemode = gamemode;
             this.position = position;
             this.yaw = yaw;
             this.pitch = pitch;
@@ -533,6 +536,7 @@ namespace sul.Pocket110
             this.gameRules = gameRules;
             this.levelId = levelId;
             this.worldName = worldName;
+            this.premiumWorldTemplate = premiumWorldTemplate;
         }
 
         public override int GetId()
@@ -930,10 +934,11 @@ namespace sul.Pocket110
         public float yaw;
         public byte animation;
         public bool onGround;
+        public long ?;
 
         public MovePlayer() {}
 
-        public MovePlayer(long entityId, Tuple<float, float, float> position, float pitch, float headYaw, float yaw, byte animation, bool onGround)
+        public MovePlayer(long entityId, Tuple<float, float, float> position, float pitch, float headYaw, float yaw, byte animation, bool onGround, long ?)
         {
             this.entityId = entityId;
             this.position = position;
@@ -942,6 +947,7 @@ namespace sul.Pocket110
             this.yaw = yaw;
             this.animation = animation;
             this.onGround = onGround;
+            this.? = ?;
         }
 
         public override int GetId()
