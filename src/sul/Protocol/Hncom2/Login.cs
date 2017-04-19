@@ -127,7 +127,6 @@ namespace sul.Hncom2
         public ulong serverId;
         public ulong reservedUuids;
         public string displayName;
-        public bool onlineMode;
         public Types.GameInfo[] gamesInfo;
         public uint online;
         public int max;
@@ -137,13 +136,12 @@ namespace sul.Hncom2
 
         public HubInfo() {}
 
-        public HubInfo(ulong time, ulong serverId, ulong reservedUuids, string displayName, bool onlineMode, Types.GameInfo[] gamesInfo, uint online, int max, string language, string[] acceptedLanguages, string additionalJson)
+        public HubInfo(ulong time, ulong serverId, ulong reservedUuids, string displayName, Types.GameInfo[] gamesInfo, uint online, int max, string language, string[] acceptedLanguages, string additionalJson)
         {
             this.time = time;
             this.serverId = serverId;
             this.reservedUuids = reservedUuids;
             this.displayName = displayName;
-            this.onlineMode = onlineMode;
             this.gamesInfo = gamesInfo;
             this.online = online;
             this.max = max;
