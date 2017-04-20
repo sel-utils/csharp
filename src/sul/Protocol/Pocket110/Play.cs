@@ -25,14 +25,16 @@ namespace sul.Pocket110
 
         public uint protocol = 110;
         public byte version;
-        public byte[] body;
+        public uint bodyLength;
+        public Types.LoginBody body;
 
         public Login() {}
 
-        public Login(uint protocol, byte version, byte[] body)
+        public Login(uint protocol, byte version, uint bodyLength, Types.LoginBody body)
         {
             this.protocol = protocol;
             this.version = version;
+            this.bodyLength = bodyLength;
             this.body = body;
         }
 
