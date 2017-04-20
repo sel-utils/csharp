@@ -739,16 +739,18 @@ namespace sul.Pocket110
         public Types.Slot item;
         public Tuple<float, float, float> position;
         public Tuple<float, float, float> motion;
+        public sul.Metadata.Pocket110.Metadata metadata;
 
         public AddItemEntity() {}
 
-        public AddItemEntity(long entityId, long runtimeId, Types.Slot item, Tuple<float, float, float> position, Tuple<float, float, float> motion)
+        public AddItemEntity(long entityId, long runtimeId, Types.Slot item, Tuple<float, float, float> position, Tuple<float, float, float> motion, sul.Metadata.Pocket110.Metadata metadata)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
             this.item = item;
             this.position = position;
             this.motion = motion;
+            this.metadata = metadata;
         }
 
         public override int GetId()
@@ -879,10 +881,11 @@ namespace sul.Pocket110
         public byte headYaw;
         public byte yaw;
         public bool onGround;
+        public bool ?;
 
         public MoveEntity() {}
 
-        public MoveEntity(long entityId, Tuple<float, float, float> position, byte pitch, byte headYaw, byte yaw, bool onGround)
+        public MoveEntity(long entityId, Tuple<float, float, float> position, byte pitch, byte headYaw, byte yaw, bool onGround, bool ?)
         {
             this.entityId = entityId;
             this.position = position;
@@ -890,6 +893,7 @@ namespace sul.Pocket110
             this.headYaw = headYaw;
             this.yaw = yaw;
             this.onGround = onGround;
+            this.? = ?;
         }
 
         public override int GetId()
