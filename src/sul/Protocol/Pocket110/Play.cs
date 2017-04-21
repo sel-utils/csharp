@@ -2273,13 +2273,15 @@ namespace sul.Pocket110
 
         public int action;
         public long entityId;
+        public float ?;
 
         public Animate() {}
 
-        public Animate(int action, long entityId)
+        public Animate(int action, long entityId, float ?)
         {
             this.action = action;
             this.entityId = entityId;
+            this.? = ?;
         }
 
         public override int GetId()

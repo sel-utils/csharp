@@ -13,7 +13,7 @@ namespace Utils
 
         public const Website = "https://github.com/sel-project/sel-utils";
 
-        public const Version = 611;
+        public const Version = 81;
 
     }
 
