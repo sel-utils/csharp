@@ -4,11 +4,11 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket111.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket112.xml
  */
-using Types = sul.Pocket111.Types;
+using Types = sul.Pocket112.Types;
 
-namespace sul.Pocket111
+namespace sul.Pocket112
 {
 
     public class Login : Packet
@@ -23,7 +23,7 @@ namespace sul.Pocket111
         public const byte Vanilla = 0;
         public const byte Education = 1;
 
-        public uint protocol = 111;
+        public uint protocol = 112;
         public byte version;
         public uint bodyLength;
         public Types.LoginBody body;
@@ -583,11 +583,11 @@ namespace sul.Pocket111
         public float headYaw;
         public float yaw;
         public Types.Slot heldItem;
-        public sul.Metadata.Pocket111.Metadata metadata;
+        public sul.Metadata.Pocket112.Metadata metadata;
 
         public AddPlayer() {}
 
-        public AddPlayer(Guid uuid, string username, long entityId, long runtimeId, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Types.Slot heldItem, sul.Metadata.Pocket111.Metadata metadata)
+        public AddPlayer(Guid uuid, string username, long entityId, long runtimeId, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Types.Slot heldItem, sul.Metadata.Pocket112.Metadata metadata)
         {
             this.uuid = uuid;
             this.username = username;
@@ -642,12 +642,12 @@ namespace sul.Pocket111
         public float pitch;
         public float yaw;
         public Types.Attribute[] attributes;
-        public sul.Metadata.Pocket111.Metadata metadata;
+        public sul.Metadata.Pocket112.Metadata metadata;
         public Types.Link[] links;
 
         public AddEntity() {}
 
-        public AddEntity(long entityId, long runtimeId, uint type, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float yaw, Types.Attribute[] attributes, sul.Metadata.Pocket111.Metadata metadata, Types.Link[] links)
+        public AddEntity(long entityId, long runtimeId, uint type, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float yaw, Types.Attribute[] attributes, sul.Metadata.Pocket112.Metadata metadata, Types.Link[] links)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -739,11 +739,11 @@ namespace sul.Pocket111
         public Types.Slot item;
         public Tuple<float, float, float> position;
         public Tuple<float, float, float> motion;
-        public sul.Metadata.Pocket111.Metadata metadata;
+        public sul.Metadata.Pocket112.Metadata metadata;
 
         public AddItemEntity() {}
 
-        public AddItemEntity(long entityId, long runtimeId, Types.Slot item, Tuple<float, float, float> position, Tuple<float, float, float> motion, sul.Metadata.Pocket111.Metadata metadata)
+        public AddItemEntity(long entityId, long runtimeId, Types.Slot item, Tuple<float, float, float> position, Tuple<float, float, float> motion, sul.Metadata.Pocket112.Metadata metadata)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -2046,11 +2046,11 @@ namespace sul.Pocket111
         public const bool Serverbound = false;
 
         public long entityId;
-        public sul.Metadata.Pocket111.Metadata metadata;
+        public sul.Metadata.Pocket112.Metadata metadata;
 
         public SetEntityData() {}
 
-        public SetEntityData(long entityId, sul.Metadata.Pocket111.Metadata metadata)
+        public SetEntityData(long entityId, sul.Metadata.Pocket112.Metadata metadata)
         {
             this.entityId = entityId;
             this.metadata = metadata;
