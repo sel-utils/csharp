@@ -931,7 +931,8 @@ namespace sul.Pocket112
         // animation
         public const byte Full = 0;
         public const byte None = 1;
-        public const byte Rotation = 2;
+        public const byte Teleport = 2;
+        public const byte Pitch = 3;
 
         public long entityId;
         public Tuple<float, float, float> position;
@@ -941,10 +942,12 @@ namespace sul.Pocket112
         public byte animation;
         public bool onGround;
         public long ?;
+        public int ?;
+        public int ?;
 
         public MovePlayer() {}
 
-        public MovePlayer(long entityId, Tuple<float, float, float> position, float pitch, float headYaw, float yaw, byte animation, bool onGround, long ?)
+        public MovePlayer(long entityId, Tuple<float, float, float> position, float pitch, float headYaw, float yaw, byte animation, bool onGround, long ?, int ?, int ?)
         {
             this.entityId = entityId;
             this.position = position;
@@ -953,6 +956,8 @@ namespace sul.Pocket112
             this.yaw = yaw;
             this.animation = animation;
             this.onGround = onGround;
+            this.? = ?;
+            this.? = ?;
             this.? = ?;
         }
 
