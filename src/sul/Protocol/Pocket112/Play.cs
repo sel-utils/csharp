@@ -573,7 +573,7 @@ namespace sul.Pocket112
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Guid uuid;
+        public Types.McpeUuid uuid;
         public string username;
         public long entityId;
         public long runtimeId;
@@ -587,7 +587,7 @@ namespace sul.Pocket112
 
         public AddPlayer() {}
 
-        public AddPlayer(Guid uuid, string username, long entityId, long runtimeId, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Types.Slot heldItem, sul.Metadata.Pocket112.Metadata metadata)
+        public AddPlayer(Types.McpeUuid uuid, string username, long entityId, long runtimeId, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Types.Slot heldItem, sul.Metadata.Pocket112.Metadata metadata)
         {
             this.uuid = uuid;
             this.username = username;
@@ -2727,13 +2727,13 @@ namespace sul.Pocket112
 
         public byte window;
         public int type;
-        public Guid uuid;
+        public Types.McpeUuid uuid;
         public Types.Slot[] input;
         public Types.Slot[] output;
 
         public CraftingEvent() {}
 
-        public CraftingEvent(byte window, int type, Guid uuid, Types.Slot[] input, Types.Slot[] output)
+        public CraftingEvent(byte window, int type, Types.McpeUuid uuid, Types.Slot[] input, Types.Slot[] output)
         {
             this.window = window;
             this.type = type;
