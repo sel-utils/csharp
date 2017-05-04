@@ -8,6 +8,9 @@
  */
 using Types = sul.Minecraft316.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Minecraft316
 {
 
@@ -33,14 +36,24 @@ namespace sul.Minecraft316
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteString(reason);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Disconnect FromBuffer(byte[] buffer)
@@ -74,14 +87,24 @@ namespace sul.Minecraft316
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteString(username);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static LoginStart FromBuffer(byte[] buffer)
@@ -119,14 +142,26 @@ namespace sul.Minecraft316
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteString(serverId);
+            foreach(byte publicKeyChild in publicKey){ _buffer.WriteUbyte(publicKeyChild); }
+            foreach(byte verifyTokenChild in verifyToken){ _buffer.WriteUbyte(verifyTokenChild); }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static EncryptionRequest FromBuffer(byte[] buffer)
@@ -162,14 +197,25 @@ namespace sul.Minecraft316
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            foreach(byte sharedSecretChild in sharedSecret){ _buffer.WriteUbyte(sharedSecretChild); }
+            foreach(byte verifyTokenChild in verifyToken){ _buffer.WriteUbyte(verifyTokenChild); }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static EncryptionResponse FromBuffer(byte[] buffer)
@@ -205,14 +251,25 @@ namespace sul.Minecraft316
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteString(uuid);
+            _buffer.WriteString(username);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static LoginSuccess FromBuffer(byte[] buffer)
@@ -246,14 +303,24 @@ namespace sul.Minecraft316
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(thresold);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static SetCompression FromBuffer(byte[] buffer)

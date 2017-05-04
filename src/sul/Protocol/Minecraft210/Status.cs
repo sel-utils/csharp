@@ -8,6 +8,9 @@
  */
 using Types = sul.Minecraft210.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Minecraft210
 {
 
@@ -43,14 +46,27 @@ namespace sul.Minecraft210
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(protocol);
+            _buffer.WriteString(serverAddress);
+            _buffer.WriteBigEndianUshort(serverPort);
+            _buffer.WriteVaruint(next);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Handshake FromBuffer(byte[] buffer)
@@ -79,14 +95,24 @@ namespace sul.Minecraft210
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Request FromBuffer(byte[] buffer)
@@ -120,14 +146,24 @@ namespace sul.Minecraft210
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteString(json);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Response FromBuffer(byte[] buffer)
@@ -161,14 +197,24 @@ namespace sul.Minecraft210
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteVaruint(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadVaruint();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBigEndianLong(id);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Latency FromBuffer(byte[] buffer)

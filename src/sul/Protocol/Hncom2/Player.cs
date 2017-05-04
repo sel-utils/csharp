@@ -8,6 +8,9 @@
  */
 using Types = sul.Hncom2.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Hncom2
 {
 
@@ -80,14 +83,40 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteUbyte(reason);
+            _buffer.WriteUbyte(type);
+            _buffer.WriteVaruint(protocol);
+            _buffer.WriteString(version);
+            _buffer.WriteString(username);
+            _buffer.WriteString(displayName);
+            if(reason!=0){ _buffer.WriteUbyte(dimension); }
+            if(reason!=0){ _buffer.WriteVaruint(viewDistance); }
+            clientAddress.EncodeImpl(_buffer);
+            _buffer.WriteString(serverAddress);
+            _buffer.WriteBigEndianUshort(serverPort);
+            _buffer.WriteUuid(uuid);
+            skin.EncodeImpl(_buffer);
+            _buffer.WriteString(language);
+            _buffer.WriteUbyte(inputMode);
+            _buffer.WriteVaruint(latency);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Add FromBuffer(byte[] buffer)
@@ -129,14 +158,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteUbyte(reason);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Remove FromBuffer(byte[] buffer)
@@ -176,14 +216,27 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteString(reason);
+            _buffer.WriteBool(translation);
+            if(translation==true){ foreach(string parametersChild in parameters){ _buffer.WriteString(parametersChild); } }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Kick FromBuffer(byte[] buffer)
@@ -226,14 +279,26 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteVaruint(node);
+            _buffer.WriteUbyte(onFail);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Transfer FromBuffer(byte[] buffer)
@@ -269,14 +334,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteString(displayName);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateDisplayName FromBuffer(byte[] buffer)
@@ -312,14 +388,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteVaruint(world);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateWorld FromBuffer(byte[] buffer)
@@ -355,14 +442,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteVaruint(viewDistance);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateViewDistance FromBuffer(byte[] buffer)
@@ -398,14 +496,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteString(language);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateLanguage FromBuffer(byte[] buffer)
@@ -441,14 +550,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteUbyte(gamemode);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateGamemode FromBuffer(byte[] buffer)
@@ -489,14 +609,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteUbyte(inputMode);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateInputMode FromBuffer(byte[] buffer)
@@ -532,14 +663,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteVaruint(latency);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateLatency FromBuffer(byte[] buffer)
@@ -575,14 +717,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteBigEndianFloat(packetLoss);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdatePacketLoss FromBuffer(byte[] buffer)
@@ -618,14 +771,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteBytes(packet);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static GamePacket FromBuffer(byte[] buffer)
@@ -663,14 +827,26 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(hubId);
+            _buffer.WriteVaruint(order);
+            _buffer.WriteBytes(packet);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static OrderedGamePacket FromBuffer(byte[] buffer)

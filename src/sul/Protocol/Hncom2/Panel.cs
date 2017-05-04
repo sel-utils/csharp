@@ -8,6 +8,9 @@
  */
 using Types = sul.Hncom2.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Hncom2
 {
 
@@ -37,14 +40,26 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            foreach(byte hashChild in hash){ _buffer.WriteUbyte(hashChild); }
+            foreach(byte addressChild in address){ _buffer.WriteUbyte(addressChild); }
+            _buffer.WriteVaruint(worldId);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Connection FromBuffer(byte[] buffer)

@@ -8,6 +8,9 @@
  */
 using Types = sul.Hncom2.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Hncom2
 {
 
@@ -39,14 +42,27 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(protocol);
+            _buffer.WriteString(password);
+            _buffer.WriteString(name);
+            _buffer.WriteBool(main);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static ConnectionRequest FromBuffer(byte[] buffer)
@@ -93,14 +109,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteUbyte(status);
+            if(status==1||status==2){ _buffer.WriteVaruint(protocol); }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static ConnectionResponse FromBuffer(byte[] buffer)
@@ -155,14 +182,33 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVarulong(time);
+            _buffer.WriteVarulong(serverId);
+            _buffer.WriteVarulong(reservedUuids);
+            _buffer.WriteString(displayName);
+            foreach(Types.GameInfo gamesInfoChild in gamesInfo){ gamesInfoChild.EncodeImpl(_buffer); }
+            _buffer.WriteVaruint(online);
+            _buffer.WriteVarint(max);
+            _buffer.WriteString(language);
+            foreach(string acceptedLanguagesChild in acceptedLanguages){ _buffer.WriteString(acceptedLanguagesChild); }
+            _buffer.WriteString(additionalJson);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static HubInfo FromBuffer(byte[] buffer)
@@ -207,14 +253,28 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVarulong(time);
+            _buffer.WriteVaruint(max);
+            foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeImpl(_buffer); }
+            foreach(Types.Plugin pluginsChild in plugins){ pluginsChild.EncodeImpl(_buffer); }
+            _buffer.WriteString(additionalJson);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static NodeInfo FromBuffer(byte[] buffer)

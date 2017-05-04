@@ -8,6 +8,9 @@
  */
 using Types = sul.Hncom2.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Hncom2
 {
 
@@ -73,14 +76,33 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(worldId);
+            _buffer.WriteString(name);
+            _buffer.WriteUbyte(dimension);
+            _buffer.WriteUbyte(generator);
+            _buffer.WriteUbyte(difficulty);
+            _buffer.WriteUbyte(gamemode);
+            _buffer.WriteVarint<xz>(spawnPoint[0]); _buffer.WriteVarint<xz>(spawnPoint[1]);
+            _buffer.WriteBigEndianShort(time);
+            _buffer.WriteVarint(seed);
+            _buffer.WriteVarint(parent);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Add FromBuffer(byte[] buffer)
@@ -114,14 +136,24 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(worldId);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Remove FromBuffer(byte[] buffer)
@@ -157,14 +189,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(worldId);
+            _buffer.WriteUbyte(difficulty);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateDifficulty FromBuffer(byte[] buffer)
@@ -200,14 +243,25 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteVaruint(worldId);
+            _buffer.WriteUbyte(gamemode);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateGamemode FromBuffer(byte[] buffer)
@@ -253,14 +307,30 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteString(name);
+            _buffer.WriteUbyte(dimension);
+            _buffer.WriteUbyte(generator);
+            _buffer.WriteUbyte(difficulty);
+            _buffer.WriteUbyte(gamemode);
+            _buffer.WriteVarint(seed);
+            _buffer.WriteVarint(parent);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static RequestCreation FromBuffer(byte[] buffer)

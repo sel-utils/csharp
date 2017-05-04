@@ -8,6 +8,9 @@
  */
 using Types = sul.Externalconsole2.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Externalconsole2
 {
 
@@ -39,14 +42,27 @@ namespace sul.Externalconsole2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteUbyte(protocol);
+            _buffer.WriteBool(hash);
+            if(hash==true){ _buffer.WriteString(hashAlgorithm); }
+            if(hash==true){ foreach(byte payloadChild in payload){ _buffer.WriteUbyte(payloadChild); } }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static AuthCredentials FromBuffer(byte[] buffer)
@@ -80,14 +96,24 @@ namespace sul.Externalconsole2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            foreach(byte hashChild in hash){ _buffer.WriteUbyte(hashChild); }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Auth FromBuffer(byte[] buffer)
@@ -121,14 +147,24 @@ namespace sul.Externalconsole2
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteUbyte(status);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Welcome FromBuffer(byte[] buffer)

@@ -8,6 +8,9 @@
  */
 using Types = sul.Raknet8.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Raknet8
 {
 
@@ -33,14 +36,24 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeImpl(_buffer); }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Ack FromBuffer(byte[] buffer)
@@ -74,14 +87,24 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeImpl(_buffer); }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Nack FromBuffer(byte[] buffer)
@@ -117,14 +140,25 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBigEndianTriad(count);
+            encapsulation.EncodeImpl(_buffer);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Encapsulated FromBuffer(byte[] buffer)

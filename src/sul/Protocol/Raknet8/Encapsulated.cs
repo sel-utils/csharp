@@ -8,6 +8,9 @@
  */
 using Types = sul.Raknet8.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Raknet8
 {
 
@@ -35,14 +38,25 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBigEndianLong(clientId);
+            _buffer.WriteBigEndianLong(pingId);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static ClientConnect FromBuffer(byte[] buffer)
@@ -84,14 +98,28 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            clientAddress.EncodeImpl(_buffer);
+            _buffer.WriteBigEndianUshort(mtuLength);
+            foreach(Types.Address systemAddressesChild in systemAddresses){ systemAddressesChild.EncodeImpl(_buffer); }
+            _buffer.WriteBigEndianLong(pingId);
+            _buffer.WriteBigEndianLong(serverId);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static ServerHandshake FromBuffer(byte[] buffer)
@@ -131,14 +159,27 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            clientAddress.EncodeImpl(_buffer);
+            foreach(Types.Address systemAddressesChild in systemAddresses){ systemAddressesChild.EncodeImpl(_buffer); }
+            _buffer.WriteBigEndianLong(pingId);
+            _buffer.WriteBigEndianLong(clientId);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static ClientHandshake FromBuffer(byte[] buffer)
@@ -167,14 +208,24 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static ClientCancelConnection FromBuffer(byte[] buffer)
@@ -208,14 +259,24 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBigEndianLong(time);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Ping FromBuffer(byte[] buffer)
@@ -249,14 +310,24 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBigEndianLong(time);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Pong FromBuffer(byte[] buffer)
@@ -290,14 +361,24 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBytes(packet);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static Mcpe FromBuffer(byte[] buffer)

@@ -8,6 +8,9 @@
  */
 using Types = sul.Externalconsole1.Types;
 
+using Utils.Buffer;
+using Utils.Packet;
+
 namespace sul.Externalconsole1
 {
 
@@ -33,14 +36,24 @@ namespace sul.Externalconsole1
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBigEndianUint(count);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static KeepAlive FromBuffer(byte[] buffer)
@@ -80,14 +93,25 @@ namespace sul.Externalconsole1
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteUbyte(action);
+            _buffer.WriteString(node);
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateNodes FromBuffer(byte[] buffer)
@@ -116,14 +140,24 @@ namespace sul.Externalconsole1
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static RequestStats FromBuffer(byte[] buffer)
@@ -167,14 +201,29 @@ namespace sul.Externalconsole1
             return Id;
         }
 
-        public override byte[] Encode()
+        public override void EncodeId(Buffer _buffer)
         {
-            return this._buffer;
+            _buffer.WriteUbyte(Id);
         }
 
-        public override void Decode(byte[] buffer)
+        public override void DecodeId(Buffer _buffer)
         {
-            this._buffer = buffer;
+            _buffer.ReadUbyte();
+        }
+
+        public override void EncodeImpl(Buffer _buffer)
+        {
+            _buffer.WriteBigEndianUint(onlinePlayers);
+            _buffer.WriteBigEndianUint(maxPlayers);
+            _buffer.WriteBigEndianUint(uptime);
+            _buffer.WriteBigEndianUint(upload);
+            _buffer.WriteBigEndianUint(download);
+            foreach(Types.NodeStats nodesChild in nodes){ nodesChild.EncodeImpl(_buffer); }
+        }
+
+        public override void DecodeImpl(Buffer _buffer)
+        {
+
         }
 
         public static UpdateStats FromBuffer(byte[] buffer)
