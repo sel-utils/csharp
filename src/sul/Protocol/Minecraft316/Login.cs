@@ -162,6 +162,8 @@ namespace sul.Minecraft316
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static EncryptionRequest FromBuffer(byte[] buffer)
@@ -216,6 +218,7 @@ namespace sul.Minecraft316
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static EncryptionResponse FromBuffer(byte[] buffer)
@@ -269,6 +272,7 @@ namespace sul.Minecraft316
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 

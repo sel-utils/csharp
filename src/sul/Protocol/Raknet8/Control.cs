@@ -159,6 +159,7 @@ namespace sul.Raknet8
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static Encapsulated FromBuffer(byte[] buffer)

@@ -63,6 +63,9 @@ namespace sul.Externalconsole2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+            if(hash==true){  }
+            if(hash==true){  }
         }
 
         public static AuthCredentials FromBuffer(byte[] buffer)

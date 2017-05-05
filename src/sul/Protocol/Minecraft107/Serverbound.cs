@@ -114,6 +114,9 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+            if(hasPosition==true){  }
         }
 
         public static TabComplete FromBuffer(byte[] buffer)
@@ -305,6 +308,11 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
         }
 
         public static ClientSettings FromBuffer(byte[] buffer)
@@ -362,6 +370,8 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static ConfirmTransaction FromBuffer(byte[] buffer)
@@ -415,6 +425,7 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -481,6 +492,11 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
+
 
         }
 
@@ -587,6 +603,7 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static PluginMessage FromBuffer(byte[] buffer)
@@ -656,6 +673,9 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+            if(type==2){  }
+            if(type==2){  }
         }
 
         public static UseEntity FromBuffer(byte[] buffer)
@@ -761,6 +781,7 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static PlayerPosition FromBuffer(byte[] buffer)
@@ -821,6 +842,9 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
         }
 
         public static PlayerPositionAndLook FromBuffer(byte[] buffer)
@@ -877,6 +901,8 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -986,6 +1012,8 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static VehicleMove FromBuffer(byte[] buffer)
@@ -1039,6 +1067,7 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -1102,6 +1131,8 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -1169,6 +1200,8 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -1238,6 +1271,8 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+            if(action==5){  }
         }
 
         public static EntityAction FromBuffer(byte[] buffer)
@@ -1299,6 +1334,8 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static SteerVehicle FromBuffer(byte[] buffer)
@@ -1358,6 +1395,7 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -1464,6 +1502,7 @@ namespace sul.Minecraft107
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static CreativeInventoryAction FromBuffer(byte[] buffer)
@@ -1517,6 +1556,7 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -1687,6 +1727,9 @@ namespace sul.Minecraft107
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
 
         }
 

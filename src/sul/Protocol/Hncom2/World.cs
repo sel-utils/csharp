@@ -103,6 +103,15 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
+
+
+
+
         }
 
         public static Add FromBuffer(byte[] buffer)
@@ -208,6 +217,7 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static UpdateDifficulty FromBuffer(byte[] buffer)
@@ -261,6 +271,7 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -330,6 +341,12 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
+
+
 
         }
 

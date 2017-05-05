@@ -117,6 +117,22 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
+
+            if(reason!=0){  }
+            if(reason!=0){  }
+
+
+
+
+
+
+
+
         }
 
         public static Add FromBuffer(byte[] buffer)
@@ -176,6 +192,7 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -237,6 +254,9 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+            if(translation==true){  }
         }
 
         public static Kick FromBuffer(byte[] buffer)
@@ -299,6 +319,8 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static Transfer FromBuffer(byte[] buffer)
@@ -352,6 +374,7 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -407,6 +430,7 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static UpdateWorld FromBuffer(byte[] buffer)
@@ -460,6 +484,7 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -515,6 +540,7 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static UpdateLanguage FromBuffer(byte[] buffer)
@@ -568,6 +594,7 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -628,6 +655,7 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static UpdateInputMode FromBuffer(byte[] buffer)
@@ -681,6 +709,7 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -736,6 +765,7 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static UpdatePacketLoss FromBuffer(byte[] buffer)
@@ -789,6 +819,7 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -846,6 +877,8 @@ namespace sul.Hncom2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 

@@ -57,6 +57,7 @@ namespace sul.Raknet8
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static ClientConnect FromBuffer(byte[] buffer)
@@ -120,6 +121,10 @@ namespace sul.Raknet8
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static ServerHandshake FromBuffer(byte[] buffer)
@@ -179,6 +184,9 @@ namespace sul.Raknet8
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
 
         }
 

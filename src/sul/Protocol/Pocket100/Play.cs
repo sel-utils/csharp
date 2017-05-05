@@ -64,6 +64,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static Login FromBuffer(byte[] buffer)
@@ -177,6 +179,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static ServerToClientHandshake FromBuffer(byte[] buffer)
@@ -277,6 +280,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+            if(hideDisconnectionScreen==false){  }
         }
 
         public static Disconnect FromBuffer(byte[] buffer)
@@ -385,6 +389,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static ResourcePacksInfo FromBuffer(byte[] buffer)
@@ -441,6 +447,8 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -501,6 +509,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -606,6 +615,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -739,6 +749,25 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         public static StartGame FromBuffer(byte[] buffer)
@@ -820,6 +849,16 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
+
+
+
+
+
         }
 
         public static AddPlayer FromBuffer(byte[] buffer)
@@ -897,6 +936,15 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
+
+
+
+
+
 
         }
 
@@ -1012,6 +1060,10 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static AddItemEntity FromBuffer(byte[] buffer)
@@ -1072,6 +1124,9 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
         }
 
         public static AddHangingEntity FromBuffer(byte[] buffer)
@@ -1125,6 +1180,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -1188,6 +1244,10 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
 
         }
 
@@ -1262,6 +1322,12 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
+
+
 
         }
 
@@ -1428,6 +1494,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static UpdateBlock FromBuffer(byte[] buffer)
@@ -1491,6 +1559,10 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static AddPainting FromBuffer(byte[] buffer)
@@ -1547,6 +1619,8 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -1705,6 +1779,10 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static LevelSoundEvent FromBuffer(byte[] buffer)
@@ -1812,6 +1890,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static LevelEvent FromBuffer(byte[] buffer)
@@ -1865,6 +1945,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -1939,6 +2020,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static EntityEvent FromBuffer(byte[] buffer)
@@ -2010,6 +2093,11 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
         }
 
         public static MobEffect FromBuffer(byte[] buffer)
@@ -2063,6 +2151,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -2127,6 +2216,10 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static MobEquipment FromBuffer(byte[] buffer)
@@ -2180,6 +2273,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -2240,6 +2334,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -2309,6 +2404,12 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
+
+
 
         }
 
@@ -2384,6 +2485,9 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
 
         }
 
@@ -2541,6 +2645,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static SetEntityData FromBuffer(byte[] buffer)
@@ -2594,6 +2699,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -2656,6 +2762,8 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -2765,6 +2873,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static SetSpawnPosition FromBuffer(byte[] buffer)
@@ -2822,6 +2932,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -2931,6 +3042,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static DropItem FromBuffer(byte[] buffer)
@@ -2984,6 +3096,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -3047,6 +3160,10 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
 
         }
 
@@ -3162,6 +3279,10 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static ContainerSetSlot FromBuffer(byte[] buffer)
@@ -3219,6 +3340,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static ContainerSetData FromBuffer(byte[] buffer)
@@ -3275,6 +3398,8 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -3390,6 +3515,10 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static CraftingEvent FromBuffer(byte[] buffer)
@@ -3462,6 +3591,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static AdventureSettings FromBuffer(byte[] buffer)
@@ -3515,6 +3645,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -3573,6 +3704,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static PlayerInput FromBuffer(byte[] buffer)
@@ -3626,6 +3759,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -3797,6 +3931,8 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
         }
 
         public static ChangeDimension FromBuffer(byte[] buffer)
@@ -3957,6 +4093,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static TelemetryEvent FromBuffer(byte[] buffer)
@@ -4010,6 +4147,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -4085,6 +4223,12 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+            if(update==2||update==4){  }
+            if(update==2){  }
+            if(update==2){  }
+            if(update==2){  }
+            if(update==4){  }
         }
 
         public static ClientboundMapItemData FromBuffer(byte[] buffer)
@@ -4292,6 +4436,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static ItemFrameDropItem FromBuffer(byte[] buffer)
@@ -4448,6 +4593,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static Camera FromBuffer(byte[] buffer)
@@ -4558,6 +4704,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static BossEvent FromBuffer(byte[] buffer)
@@ -4616,6 +4763,7 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static ShowCredits FromBuffer(byte[] buffer)
@@ -4669,6 +4817,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -4742,6 +4891,13 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
+
+
         }
 
         public static CommandStep FromBuffer(byte[] buffer)
@@ -4805,6 +4961,10 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static ResourcePackDataInfo FromBuffer(byte[] buffer)
@@ -4865,6 +5025,9 @@ namespace sul.Pocket100
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
         }
 
         public static ResourcePackChunkData FromBuffer(byte[] buffer)
@@ -4918,6 +5081,7 @@ namespace sul.Pocket100
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 

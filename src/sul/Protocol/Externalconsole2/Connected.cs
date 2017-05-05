@@ -66,6 +66,10 @@ namespace sul.Externalconsole2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
         }
 
         public static ConsoleMessage FromBuffer(byte[] buffer)
@@ -119,6 +123,7 @@ namespace sul.Externalconsole2
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 

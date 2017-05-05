@@ -108,6 +108,7 @@ namespace sul.Hncom2
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static Compressed FromBuffer(byte[] buffer)

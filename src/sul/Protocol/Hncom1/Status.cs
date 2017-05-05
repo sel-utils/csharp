@@ -63,6 +63,9 @@ namespace sul.Hncom1
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
         }
 
         public static AddNode FromBuffer(byte[] buffer)
@@ -168,6 +171,7 @@ namespace sul.Hncom1
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static MessageServerbound FromBuffer(byte[] buffer)
@@ -221,6 +225,7 @@ namespace sul.Hncom1
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
 
         }
 
@@ -279,6 +284,7 @@ namespace sul.Hncom1
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static Players FromBuffer(byte[] buffer)
@@ -335,6 +341,8 @@ namespace sul.Hncom1
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -395,6 +403,9 @@ namespace sul.Hncom1
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
 
         }
 
@@ -461,6 +472,9 @@ namespace sul.Hncom1
         public override void DecodeImpl(Buffer _buffer)
         {
 
+            if(origin!=0){  }
+
+
         }
 
         public static RemoteCommand FromBuffer(byte[] buffer)
@@ -525,6 +539,8 @@ namespace sul.Hncom1
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 

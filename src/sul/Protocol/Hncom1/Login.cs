@@ -63,6 +63,9 @@ namespace sul.Hncom1
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
         }
 
         public static ConnectionRequest FromBuffer(byte[] buffer)
@@ -128,6 +131,7 @@ namespace sul.Hncom1
         public override void DecodeImpl(Buffer _buffer)
         {
 
+            if(status==1||status==2){  }
         }
 
         public static ConnectionResponse FromBuffer(byte[] buffer)
@@ -212,6 +216,16 @@ namespace sul.Hncom1
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
+
+
+
+
+
+
+
         }
 
         public static HubInfo FromBuffer(byte[] buffer)
@@ -277,6 +291,10 @@ namespace sul.Hncom1
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
 
         }
 

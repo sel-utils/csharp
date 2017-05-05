@@ -57,6 +57,7 @@ namespace sul.Raknet8
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
         }
 
         public static Ping FromBuffer(byte[] buffer)
@@ -117,6 +118,9 @@ namespace sul.Raknet8
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
         }
 
         public static Pong FromBuffer(byte[] buffer)
@@ -173,6 +177,8 @@ namespace sul.Raknet8
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
 
         }
 
@@ -234,6 +240,9 @@ namespace sul.Raknet8
         public override void DecodeImpl(Buffer _buffer)
         {
 
+
+
+
         }
 
         public static OpenConnectionReply1 FromBuffer(byte[] buffer)
@@ -293,6 +302,9 @@ namespace sul.Raknet8
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
 
         }
 
@@ -356,6 +368,10 @@ namespace sul.Raknet8
 
         public override void DecodeImpl(Buffer _buffer)
         {
+
+
+
+
 
         }
 
