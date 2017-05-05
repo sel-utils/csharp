@@ -20,7 +20,7 @@ namespace Utils
             return buffer.buffer;
         }
 
-        public Packet Decode(byte[] _buffer)
+        public Stream Decode(byte[] _buffer)
         {
             var buffer = Buffer.Reader(_buffer);
             DecodeImpl(buffer);

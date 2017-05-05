@@ -28,16 +28,14 @@ namespace sul.Pocket112
 
         public uint protocol = 112;
         public byte version;
-        public uint bodyLength;
         public Types.LoginBody body;
 
         public Login() {}
 
-        public Login(uint protocol, byte version, uint bodyLength, Types.LoginBody body)
+        public Login(uint protocol, byte version, Types.LoginBody body)
         {
             this.protocol = protocol;
             this.version = version;
-            this.bodyLength = bodyLength;
             this.body = body;
         }
 
@@ -60,13 +58,11 @@ namespace sul.Pocket112
         {
             _buffer.WriteBigEndianUint(protocol);
             _buffer.WriteUbyte(version);
-            _buffer.WriteVaruint(bodyLength);
             body.EncodeImpl(_buffer);
         }
 
         public override void DecodeImpl(Buffer _buffer)
         {
-
 
 
 

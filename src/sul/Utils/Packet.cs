@@ -20,7 +20,7 @@ namespace Utils
             return base.Encode();
         }
 
-        public Packet DecodeWithoutId(byte[] _buffer)
+        public Stream DecodeWithoutId(byte[] _buffer)
         {
             return base.Decode(_buffer);
         }
@@ -33,7 +33,7 @@ namespace Utils
             return buffer.buffer;
         }
 
-        public override Packet Decode(byte[] _buffer)
+        public override Stream Decode(byte[] _buffer)
         {
             var buffer = Buffer.Reader(_buffer);
             DecodeId(buffer);
