@@ -44,17 +44,17 @@ namespace sul.Externalconsole2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(node);
             _buffer.WriteBigEndianUlong(timestamp);
@@ -63,7 +63,7 @@ namespace sul.Externalconsole2
             _buffer.WriteBigEndianInt(commandId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -105,23 +105,23 @@ namespace sul.Externalconsole2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(command);
             _buffer.WriteBigEndianUint(commandId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -153,22 +153,22 @@ namespace sul.Externalconsole2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }

@@ -42,17 +42,17 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(protocol);
             _buffer.WriteString(password);
@@ -60,7 +60,7 @@ namespace sul.Hncom2
             _buffer.WriteBool(main);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -112,23 +112,23 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
             if(status==1||status==2){ _buffer.WriteVaruint(protocol); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
             if(status==1||status==2){  }
@@ -186,23 +186,23 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarulong(time);
             _buffer.WriteVarulong(serverId);
             _buffer.WriteVarulong(reservedUuids);
             _buffer.WriteString(displayName);
-            foreach(Types.GameInfo gamesInfoChild in gamesInfo){ gamesInfoChild.EncodeImpl(_buffer); }
+            foreach(Types.GameInfo gamesInfoChild in gamesInfo){ gamesInfoChild.EncodeBody(_buffer); }
             _buffer.WriteVaruint(online);
             _buffer.WriteVarint(max);
             _buffer.WriteString(language);
@@ -210,7 +210,7 @@ namespace sul.Hncom2
             _buffer.WriteString(additionalJson);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -266,26 +266,26 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarulong(time);
             _buffer.WriteVaruint(max);
-            foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeImpl(_buffer); }
-            foreach(Types.Plugin pluginsChild in plugins){ pluginsChild.EncodeImpl(_buffer); }
+            foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeBody(_buffer); }
+            foreach(Types.Plugin pluginsChild in plugins){ pluginsChild.EncodeBody(_buffer); }
             _buffer.WriteString(additionalJson);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 

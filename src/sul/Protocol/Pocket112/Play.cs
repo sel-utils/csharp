@@ -44,24 +44,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUint(protocol);
             _buffer.WriteUbyte(version);
-            body.EncodeImpl(_buffer);
+            body.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -108,22 +108,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUint(status);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -161,23 +161,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(serverPublicKey);
             foreach(byte tokenChild in token){ _buffer.WriteUbyte(tokenChild); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -209,22 +209,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -262,23 +262,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(hideDisconnectionScreen);
             if(hideDisconnectionScreen==false){ _buffer.WriteString(message); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
             if(hideDisconnectionScreen==false){  }
@@ -319,24 +319,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(mustAccept);
-            foreach(Types.PackWithSize behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeImpl(_buffer); }
-            foreach(Types.PackWithSize resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeImpl(_buffer); }
+            foreach(Types.PackWithSize behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
+            foreach(Types.PackWithSize resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -378,24 +378,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(mustAccept);
-            foreach(Types.Pack behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeImpl(_buffer); }
-            foreach(Types.Pack resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeImpl(_buffer); }
+            foreach(Types.Pack behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
+            foreach(Types.Pack resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -441,23 +441,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
             foreach(string packIdsChild in packIds){ _buffer.WriteString(packIdsChild); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -494,22 +494,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(type);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -545,22 +545,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(time);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -665,17 +665,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
@@ -696,13 +696,13 @@ namespace sul.Pocket112
             _buffer.WriteBigEndianFloat(lightingLevel);
             _buffer.WriteBool(commandsEnabled);
             _buffer.WriteBool(textureRequired);
-            foreach(Types.Rule gameRulesChild in gameRules){ gameRulesChild.EncodeImpl(_buffer); }
+            foreach(Types.Rule gameRulesChild in gameRules){ gameRulesChild.EncodeBody(_buffer); }
             _buffer.WriteString(levelId);
             _buffer.WriteString(worldName);
             _buffer.WriteString(premiumWorldTemplate);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -780,19 +780,19 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            uuid.EncodeImpl(_buffer);
+            uuid.EncodeBody(_buffer);
             _buffer.WriteString(username);
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
@@ -801,11 +801,11 @@ namespace sul.Pocket112
             _buffer.WriteBigEndianFloat(pitch);
             _buffer.WriteBigEndianFloat(headYaw);
             _buffer.WriteBigEndianFloat(yaw);
-            heldItem.EncodeImpl(_buffer);
-            metadata.EncodeImpl(_buffer);
+            heldItem.EncodeBody(_buffer);
+            metadata.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -869,17 +869,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
@@ -888,12 +888,12 @@ namespace sul.Pocket112
             _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
             _buffer.WriteBigEndianFloat(pitch);
             _buffer.WriteBigEndianFloat(yaw);
-            foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeImpl(_buffer); }
-            metadata.EncodeImpl(_buffer);
-            foreach(Types.Link linksChild in links){ linksChild.EncodeImpl(_buffer); }
+            foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
+            metadata.EncodeBody(_buffer);
+            foreach(Types.Link linksChild in links){ linksChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -938,22 +938,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -999,27 +999,27 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
             _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
-            metadata.EncodeImpl(_buffer);
+            metadata.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1066,25 +1066,25 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteVarint(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1125,23 +1125,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(collected);
             _buffer.WriteVarlong(collector);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1190,17 +1190,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
@@ -1211,7 +1211,7 @@ namespace sul.Pocket112
             _buffer.WriteBool(teleported);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1277,17 +1277,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
@@ -1301,7 +1301,7 @@ namespace sul.Pocket112
             if(animation==3){ _buffer.WriteLittleEndianInt(?); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1346,22 +1346,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(rider);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -1397,22 +1397,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -1458,24 +1458,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteVaruint(block);
             _buffer.WriteVaruint(flagsAndMeta);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1521,26 +1521,26 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteVarint(direction);
             _buffer.WriteString(title);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1584,24 +1584,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
             _buffer.WriteBigEndianFloat(radius);
-            foreach(Types.BlockPosition destroyedBlocksChild in destroyedBlocks){ destroyedBlocksChild.EncodeImpl(_buffer); }
+            foreach(Types.BlockPosition destroyedBlocksChild in destroyedBlocks){ destroyedBlocksChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1747,17 +1747,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(sound);
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
@@ -1766,7 +1766,7 @@ namespace sul.Pocket112
             _buffer.WriteBool(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1865,24 +1865,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(eventId);
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
             _buffer.WriteVarint(data);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1922,23 +1922,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             foreach(int dataChild in data){ _buffer.WriteVarint(dataChild); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1995,24 +1995,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteUbyte(eventId);
             _buffer.WriteVarint(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2065,17 +2065,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteUbyte(eventId);
@@ -2085,7 +2085,7 @@ namespace sul.Pocket112
             _buffer.WriteVarint(duration);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2128,23 +2128,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeImpl(_buffer); }
+            foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2189,26 +2189,26 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
             _buffer.WriteUbyte(inventorySlot);
             _buffer.WriteUbyte(hotbarSlot);
             _buffer.WriteUbyte(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2250,23 +2250,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            foreach(Types.Slot armorChild in armor){ armorChild.EncodeImpl(_buffer); }
+            foreach(Types.Slot armorChild in armor){ armorChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2311,23 +2311,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
             _buffer.WriteVarlong(target);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2366,23 +2366,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint<xyz>(position[0]); _buffer.WriteVarint<xyz>(position[1]); _buffer.WriteVarint<xyz>(position[2]);
             _buffer.WriteUbyte(slot);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2431,28 +2431,28 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            blockPosition.EncodeImpl(_buffer);
+            blockPosition.EncodeBody(_buffer);
             _buffer.WriteVaruint(hotbarSlot);
             _buffer.WriteVarint(face);
             _buffer.WriteFloat<xyz>(facePosition[0]); _buffer.WriteFloat<xyz>(facePosition[1]); _buffer.WriteFloat<xyz>(facePosition[2]);
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
             _buffer.WriteVarint(slot);
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2516,25 +2516,25 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarint(action);
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteVarint(face);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2577,24 +2577,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteBigEndianFloat(distance);
             _buffer.WriteBool(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2632,22 +2632,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -2685,23 +2685,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            metadata.EncodeImpl(_buffer);
+            metadata.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2740,23 +2740,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2802,24 +2802,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(from);
             _buffer.WriteVarlong(to);
             _buffer.WriteUbyte(action);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2857,22 +2857,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(health);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -2912,24 +2912,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(?);
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteBool(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -2975,24 +2975,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(action);
             _buffer.WriteVarlong(entityId);
             if(action>128){ _buffer.WriteBigEndianFloat(?); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3030,22 +3030,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -3086,23 +3086,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3145,25 +3145,25 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(action);
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
             _buffer.WriteVarint(?);
             _buffer.WriteVarint(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3208,25 +3208,25 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteUbyte(type);
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteVarlong(entityId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3265,22 +3265,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -3324,26 +3324,26 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(slot);
             _buffer.WriteVarint(hotbarSlot);
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
             _buffer.WriteUbyte(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3387,24 +3387,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(property);
             _buffer.WriteVarint(value);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3448,25 +3448,25 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(window);
             _buffer.WriteVarlong(entityId);
-            foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeImpl(_buffer); }
+            foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
             foreach(int hotbarChild in hotbar){ _buffer.WriteVarint(hotbarChild); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3505,22 +3505,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(Types.Recipe recipesChild in recipes){ recipesChild.EncodeImpl(_buffer); }
+            foreach(Types.Recipe recipesChild in recipes){ recipesChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -3564,26 +3564,26 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(type);
-            uuid.EncodeImpl(_buffer);
-            foreach(Types.Slot inputChild in input){ inputChild.EncodeImpl(_buffer); }
-            foreach(Types.Slot outputChild in output){ outputChild.EncodeImpl(_buffer); }
+            uuid.EncodeBody(_buffer);
+            foreach(Types.Slot inputChild in input){ inputChild.EncodeBody(_buffer); }
+            foreach(Types.Slot outputChild in output){ outputChild.EncodeBody(_buffer); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3644,23 +3644,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(flags);
             _buffer.WriteVaruint(permissions);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3699,23 +3699,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteBytes(nbt);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3756,24 +3756,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
             _buffer.WriteUbyte(flags);
             _buffer.WriteBool(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3813,23 +3813,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint<xz>(position[0]); _buffer.WriteVarint<xz>(position[1]);
-            data.EncodeImpl(_buffer);
+            data.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -3866,22 +3866,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(enabled);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -3923,22 +3923,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(difficulty);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -3983,24 +3983,24 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(dimension);
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
             _buffer.WriteBool(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4043,22 +4043,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(gamemode);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4094,22 +4094,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4140,22 +4140,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4193,23 +4193,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarint(eventId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4248,23 +4248,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
             _buffer.WriteVarint(count);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4318,17 +4318,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(mapId);
             _buffer.WriteVaruint(update);
@@ -4336,10 +4336,10 @@ namespace sul.Pocket112
             if(update==2){ _buffer.WriteVarint<xz>(size[0]); _buffer.WriteVarint<xz>(size[1]); }
             if(update==2){ _buffer.WriteVarint<xz>(offset[0]); _buffer.WriteVarint<xz>(offset[1]); }
             if(update==2){ _buffer.WriteBytes(data); }
-            if(update==4){ foreach(Types.Decoration decorationsChild in decorations){ decorationsChild.EncodeImpl(_buffer); } }
+            if(update==4){ foreach(Types.Decoration decorationsChild in decorations){ decorationsChild.EncodeBody(_buffer); } }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4381,22 +4381,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(mapId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4432,22 +4432,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(radius);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4483,22 +4483,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(radius);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4536,23 +4536,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            position.EncodeImpl(_buffer);
-            item.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
+            item.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4589,22 +4589,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4640,22 +4640,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            rules.EncodeImpl(_buffer);
+            rules.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4693,23 +4693,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(?);
             _buffer.WriteVarlong(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4746,22 +4746,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
-            item.EncodeImpl(_buffer);
+            item.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -4804,23 +4804,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVaruint(eventId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4863,23 +4863,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarint(status);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4918,23 +4918,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(commands);
             _buffer.WriteString(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -4985,17 +4985,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(command);
             _buffer.WriteString(overload);
@@ -5007,7 +5007,7 @@ namespace sul.Pocket112
             _buffer.WriteString(output);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5068,20 +5068,20 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(updateBlock);
-            if(updateBlock==true){ position.EncodeImpl(_buffer); }
+            if(updateBlock==true){ position.EncodeBody(_buffer); }
             if(updateBlock==true){ _buffer.WriteVaruint(mode); }
             if(updateBlock==true){ _buffer.WriteBool(redstoneMode); }
             if(updateBlock==true){ _buffer.WriteBool(conditional); }
@@ -5092,7 +5092,7 @@ namespace sul.Pocket112
             _buffer.WriteBool(trackOutput);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
             if(updateBlock==true){  }
@@ -5153,17 +5153,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(?);
             _buffer.WriteUbyte(?);
@@ -5176,7 +5176,7 @@ namespace sul.Pocket112
             _buffer.WriteBytes(offers);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5215,22 +5215,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -5274,17 +5274,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(id);
             _buffer.WriteVaruint(maxChunkSize);
@@ -5293,7 +5293,7 @@ namespace sul.Pocket112
             _buffer.WriteString(sha256);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5339,17 +5339,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(id);
             _buffer.WriteVaruint(chunkIndex);
@@ -5357,7 +5357,7 @@ namespace sul.Pocket112
             foreach(byte dataChild in data){ _buffer.WriteUbyte(dataChild); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5398,23 +5398,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(id);
             _buffer.WriteVaruint(chunkIndex);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5453,23 +5453,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(ip);
             _buffer.WriteLittleEndianUshort(port);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5512,25 +5512,25 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(?);
-            position.EncodeImpl(_buffer);
+            position.EncodeBody(_buffer);
             _buffer.WriteBigEndianFloat(?);
             _buffer.WriteBigEndianFloat(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5571,23 +5571,23 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(?);
             _buffer.WriteBool(?);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5640,17 +5640,17 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(action);
             _buffer.WriteString(text);
@@ -5659,7 +5659,7 @@ namespace sul.Pocket112
             _buffer.WriteVarint(fadeOut);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -5694,22 +5694,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -5740,22 +5740,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -5786,22 +5786,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -5832,22 +5832,22 @@ namespace sul.Pocket112
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
 
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }

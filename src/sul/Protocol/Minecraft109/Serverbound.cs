@@ -36,22 +36,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(teleportId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -93,17 +93,17 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(text);
             _buffer.WriteBool(command);
@@ -111,7 +111,7 @@ namespace sul.Minecraft109
             if(hasPosition==true){ _buffer.WriteBigEndianUlong(block); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -150,22 +150,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(text);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -206,22 +206,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(action);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -285,17 +285,17 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(language);
             _buffer.WriteUbyte(viewDistance);
@@ -305,7 +305,7 @@ namespace sul.Minecraft109
             _buffer.WriteUbyte(mainHand);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -350,24 +350,24 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteBigEndianUshort(action);
             _buffer.WriteBool(accepted);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -407,23 +407,23 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteUbyte(enchantment);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -470,27 +470,27 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteBigEndianUshort(slot);
             _buffer.WriteUbyte(button);
             _buffer.WriteBigEndianUshort(action);
             _buffer.WriteVaruint(mode);
-            clickedItem.EncodeImpl(_buffer);
+            clickedItem.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -531,22 +531,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -584,23 +584,23 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(channel);
             _buffer.WriteBytes(data);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -652,17 +652,17 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(target);
             _buffer.WriteVaruint(type);
@@ -670,7 +670,7 @@ namespace sul.Minecraft109
             if(type==2){ _buffer.WriteVaruint(hand); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -709,22 +709,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(id);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -762,23 +762,23 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
             _buffer.WriteBool(onGround);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -821,17 +821,17 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
             _buffer.WriteBigEndianFloat(yaw);
@@ -839,7 +839,7 @@ namespace sul.Minecraft109
             _buffer.WriteBool(onGround);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -882,24 +882,24 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
             _buffer.WriteBool(onGround);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -937,22 +937,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(onGround);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -992,24 +992,24 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1049,23 +1049,23 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(rightPaddleTurning);
             _buffer.WriteBool(leftPaddleTurning);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1112,24 +1112,24 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(flags);
             _buffer.WriteBigEndianFloat(flyingSpeed);
             _buffer.WriteBigEndianFloat(walkingSpeed);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1181,24 +1181,24 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(status);
             _buffer.WriteBigEndianUlong(position);
             _buffer.WriteUbyte(face);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1251,24 +1251,24 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
             _buffer.WriteVaruint(action);
             if(action==5){ _buffer.WriteVaruint(jumpBoost); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1314,24 +1314,24 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianFloat(sideways);
             _buffer.WriteBigEndianFloat(forward);
             _buffer.WriteUbyte(flags);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1377,23 +1377,23 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(hash);
             _buffer.WriteVaruint(result);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1430,22 +1430,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(slot);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -1483,23 +1483,23 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(slot);
-            clickedItem.EncodeImpl(_buffer);
+            clickedItem.EncodeBody(_buffer);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1538,23 +1538,23 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUlong(position);
             foreach(string linesChild in lines){ _buffer.WriteString(linesChild); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1595,22 +1595,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hand);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -1646,22 +1646,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUuid(player);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }
@@ -1707,17 +1707,17 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUlong(position);
             _buffer.WriteVaruint(face);
@@ -1725,7 +1725,7 @@ namespace sul.Minecraft109
             _buffer.WriteUbyte<xyz>(cursorPosition[0]); _buffer.WriteUbyte<xyz>(cursorPosition[1]); _buffer.WriteUbyte<xyz>(cursorPosition[2]);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -1768,22 +1768,22 @@ namespace sul.Minecraft109
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadVaruint();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hand);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
         }

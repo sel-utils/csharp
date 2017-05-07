@@ -27,9 +27,19 @@ namespace Utils
             return this;
         }
 
-        public abstract void EncodeImpl(Buffer buffer);
+        public void EncodeBody(Buffer buffer)
+        {
+            EncodeImpl(buffer);
+        }
 
-        public abstract void DecodeImpl(Buffer buffer);
+        public void DecodeBody(Buffer buffer)
+        {
+            DecodeImpl(buffer);
+        }
+
+        protected abstract void EncodeImpl(Buffer buffer);
+
+        protected abstract void DecodeImpl(Buffer buffer);
 
     }
 

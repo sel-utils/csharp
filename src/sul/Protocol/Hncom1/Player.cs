@@ -78,17 +78,17 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteUbyte(reason);
@@ -99,17 +99,17 @@ namespace sul.Hncom1
             _buffer.WriteString(displayName);
             if(reason!=0){ _buffer.WriteByte(dimension); }
             if(reason!=0){ _buffer.WriteVaruint(viewDistance); }
-            clientAddress.EncodeImpl(_buffer);
+            clientAddress.EncodeBody(_buffer);
             _buffer.WriteString(serverAddress);
             _buffer.WriteBigEndianUshort(serverPort);
             _buffer.WriteUuid(uuid);
-            skin.EncodeImpl(_buffer);
+            skin.EncodeBody(_buffer);
             _buffer.WriteString(language);
             _buffer.WriteUbyte(inputMode);
             _buffer.WriteVaruint(latency);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -169,23 +169,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteUbyte(reason);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -228,17 +228,17 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteString(reason);
@@ -246,7 +246,7 @@ namespace sul.Hncom1
             if(translation==true){ foreach(string parametersChild in parameters){ _buffer.WriteString(parametersChild); } }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -294,24 +294,24 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(node);
             _buffer.WriteUbyte(onFail);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -351,23 +351,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteString(displayName);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -408,24 +408,24 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteString(world);
             _buffer.WriteByte(dimension);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -465,23 +465,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(viewDistance);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -520,23 +520,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteString(language);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -580,23 +580,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteUbyte(inputMode);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -635,23 +635,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(latency);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -690,23 +690,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteBigEndianFloat(packetLoss);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -745,23 +745,23 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteBytes(packet);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -802,24 +802,24 @@ namespace sul.Hncom1
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(order);
             _buffer.WriteBytes(packet);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 

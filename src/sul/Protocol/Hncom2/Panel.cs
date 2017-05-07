@@ -40,24 +40,24 @@ namespace sul.Hncom2
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             foreach(byte hashChild in hash){ _buffer.WriteUbyte(hashChild); }
             foreach(byte addressChild in address){ _buffer.WriteUbyte(addressChild); }
             _buffer.WriteVaruint(worldId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 

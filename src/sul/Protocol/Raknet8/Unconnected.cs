@@ -38,23 +38,23 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianLong(pingId);
             foreach(byte magicChild in magic){ _buffer.WriteUbyte(magicChild); }
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -97,17 +97,17 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianLong(pingId);
             _buffer.WriteBigEndianLong(serverId);
@@ -115,7 +115,7 @@ namespace sul.Raknet8
             _buffer.WriteString(status);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -158,24 +158,24 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             foreach(byte magicChild in magic){ _buffer.WriteUbyte(magicChild); }
             _buffer.WriteUbyte(protocol);
             _buffer.WriteBytes(mtu);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -219,17 +219,17 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             foreach(byte magicChild in magic){ _buffer.WriteUbyte(magicChild); }
             _buffer.WriteBigEndianLong(serverId);
@@ -237,7 +237,7 @@ namespace sul.Raknet8
             _buffer.WriteBigEndianUshort(mtuLength);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -282,25 +282,25 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             foreach(byte magicChild in magic){ _buffer.WriteUbyte(magicChild); }
-            serverAddress.EncodeImpl(_buffer);
+            serverAddress.EncodeBody(_buffer);
             _buffer.WriteBigEndianUshort(mtuLength);
             _buffer.WriteBigEndianLong(clientId);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 
@@ -347,26 +347,26 @@ namespace sul.Raknet8
             return Id;
         }
 
-        public override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        public override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(Buffer _buffer)
         {
             _buffer.ReadUbyte();
         }
 
-        public override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(Buffer _buffer)
         {
             foreach(byte magicChild in magic){ _buffer.WriteUbyte(magicChild); }
             _buffer.WriteBigEndianLong(serverId);
-            clientAddress.EncodeImpl(_buffer);
+            clientAddress.EncodeBody(_buffer);
             _buffer.WriteBigEndianUshort(mtuLength);
             _buffer.WriteBool(security);
         }
 
-        public override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(Buffer _buffer)
         {
 
 

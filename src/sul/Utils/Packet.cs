@@ -29,7 +29,7 @@ namespace Utils
         {
             var buffer = Buffer.Writer();
             EncodeId(buffer);
-            EncodeImpl(buffer);
+            EncodeBody(buffer);
             return buffer.buffer;
         }
 
@@ -37,13 +37,13 @@ namespace Utils
         {
             var buffer = Buffer.Reader(_buffer);
             DecodeId(buffer);
-            DecodeImpl(buffer);
+            DecodeBody(buffer);
             return this;
         }
 
-        public abstract void EncodeId(Buffer buffer);
+        protected abstract void EncodeId(Buffer buffer);
 
-        public abstract void DecodeId(Buffer buffer);
+        protected abstract void DecodeId(Buffer buffer);
 
     }
 
