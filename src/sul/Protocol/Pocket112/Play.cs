@@ -302,12 +302,12 @@ namespace sul.Pocket112
         public const bool Serverbound = false;
 
         public bool mustAccept;
-        public Types.PackWithSize[] behaviourPacks;
-        public Types.PackWithSize[] resourcePacks;
+        public Types.PackWithSizeArray behaviourPacks;
+        public Types.PackWithSizeArray resourcePacks;
 
         public ResourcePacksInfo() {}
 
-        public ResourcePacksInfo(bool mustAccept, Types.PackWithSize[] behaviourPacks, Types.PackWithSize[] resourcePacks)
+        public ResourcePacksInfo(bool mustAccept, Types.PackWithSizeArray behaviourPacks, Types.PackWithSizeArray resourcePacks)
         {
             this.mustAccept = mustAccept;
             this.behaviourPacks = behaviourPacks;
@@ -332,8 +332,8 @@ namespace sul.Pocket112
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(mustAccept);
-            foreach(Types.PackWithSize behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
-            foreach(Types.PackWithSize resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
+            behaviourPacks.EncodeBody(_buffer);
+            resourcePacks.EncodeBody(_buffer);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -426,11 +426,11 @@ namespace sul.Pocket112
         public const byte Completed = 4;
 
         public byte status;
-        public string[] packIds;
+        public Types.PackIds packIds;
 
         public ResourcePackClientResponse() {}
 
-        public ResourcePackClientResponse(byte status, string[] packIds)
+        public ResourcePackClientResponse(byte status, Types.PackIds packIds)
         {
             this.status = status;
             this.packIds = packIds;
@@ -454,7 +454,7 @@ namespace sul.Pocket112
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
-            foreach(string packIdsChild in packIds){ _buffer.WriteString(packIdsChild); }
+            packIds.EncodeBody(_buffer);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -5287,9 +5287,9 @@ namespace sul.Pocket112
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(id);
-            _buffer.WriteVaruint(maxChunkSize);
-            _buffer.WriteVaruint(chunkCount);
-            _buffer.WriteVarulong(compressedPackSize);
+            _buffer.WriteLittleEndianUint(maxChunkSize);
+            _buffer.WriteLittleEndianUint(chunkCount);
+            _buffer.WriteLittleEndianUlong(compressedPackSize);
             _buffer.WriteString(sha256);
         }
 
@@ -5322,11 +5322,11 @@ namespace sul.Pocket112
         public string id;
         public uint chunkIndex;
         public ulong progress;
-        public byte[] data;
+        public Types.UintLeBytes data;
 
         public ResourcePackChunkData() {}
 
-        public ResourcePackChunkData(string id, uint chunkIndex, ulong progress, byte[] data)
+        public ResourcePackChunkData(string id, uint chunkIndex, ulong progress, Types.UintLeBytes data)
         {
             this.id = id;
             this.chunkIndex = chunkIndex;
@@ -5352,9 +5352,9 @@ namespace sul.Pocket112
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(id);
-            _buffer.WriteVaruint(chunkIndex);
-            _buffer.WriteVarulong(progress);
-            foreach(byte dataChild in data){ _buffer.WriteUbyte(dataChild); }
+            _buffer.WriteLittleEndianUint(chunkIndex);
+            _buffer.WriteLittleEndianUlong(progress);
+            data.EncodeBody(_buffer);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -5411,7 +5411,7 @@ namespace sul.Pocket112
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteString(id);
-            _buffer.WriteVaruint(chunkIndex);
+            _buffer.WriteLittleEndianUint(chunkIndex);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
