@@ -105,7 +105,7 @@ namespace sul.Minecraft316
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(text);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(text)); _buffer.WriteString(text);
             _buffer.WriteBool(command);
             _buffer.WriteBool(hasPosition);
             if(hasPosition==true){ _buffer.WriteBigEndianUlong(block); }
@@ -162,7 +162,7 @@ namespace sul.Minecraft316
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(text);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(text)); _buffer.WriteString(text);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -297,7 +297,7 @@ namespace sul.Minecraft316
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(language);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
             _buffer.WriteUbyte(viewDistance);
             _buffer.WriteVaruint(chatMode);
             _buffer.WriteBool(chatColors);
@@ -596,7 +596,7 @@ namespace sul.Minecraft316
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(channel);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(channel)); _buffer.WriteString(channel);
             _buffer.WriteBytes(data);
         }
 
@@ -666,7 +666,7 @@ namespace sul.Minecraft316
         {
             _buffer.WriteVaruint(target);
             _buffer.WriteVaruint(type);
-            if(type==2){ _buffer.WriteFloat<xyz>(targetPosition[0]); _buffer.WriteFloat<xyz>(targetPosition[1]); _buffer.WriteFloat<xyz>(targetPosition[2]); }
+            if(type==2){ _buffer.WriteBigEndianFloat(targetPosition[0]); _buffer.WriteBigEndianFloat(targetPosition[1]); _buffer.WriteBigEndianFloat(targetPosition[2]); }
             if(type==2){ _buffer.WriteVaruint(hand); }
         }
 
@@ -774,7 +774,7 @@ namespace sul.Minecraft316
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteBool(onGround);
         }
 
@@ -833,7 +833,7 @@ namespace sul.Minecraft316
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
             _buffer.WriteBool(onGround);
@@ -1004,7 +1004,7 @@ namespace sul.Minecraft316
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
         }
@@ -1547,7 +1547,7 @@ namespace sul.Minecraft316
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUlong(position);
-            foreach(string linesChild in lines){ _buffer.WriteString(linesChild); }
+            foreach(string linesChild in lines){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(linesChild)); _buffer.WriteString(linesChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1718,7 +1718,7 @@ namespace sul.Minecraft316
             _buffer.WriteBigEndianUlong(position);
             _buffer.WriteVaruint(face);
             _buffer.WriteVaruint(hand);
-            _buffer.WriteFloat<xyz>(cursorPosition[0]); _buffer.WriteFloat<xyz>(cursorPosition[1]); _buffer.WriteFloat<xyz>(cursorPosition[2]);
+            _buffer.WriteBigEndianFloat(cursorPosition[0]); _buffer.WriteBigEndianFloat(cursorPosition[1]); _buffer.WriteBigEndianFloat(cursorPosition[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

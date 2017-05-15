@@ -56,8 +56,8 @@ namespace sul.Externalconsole2
         {
             _buffer.WriteUbyte(protocol);
             _buffer.WriteBool(hash);
-            if(hash==true){ _buffer.WriteString(hashAlgorithm); }
-            if(hash==true){ foreach(byte payloadChild in payload){ _buffer.WriteUbyte(payloadChild); } }
+            if(hash==true){ _buffer.WriteUshort(Encoding.UTF8.GetByteCount(hashAlgorithm)); _buffer.WriteString(hashAlgorithm); }
+            if(hash==true){ _buffer.WriteUshort(payload.Length); _buffer.WriteBytes(payload); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -111,7 +111,7 @@ namespace sul.Externalconsole2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(byte hashChild in hash){ _buffer.WriteUbyte(hashChild); }
+            _buffer.WriteUshort(hash.Length); _buffer.WriteBytes(hash);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

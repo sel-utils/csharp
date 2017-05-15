@@ -48,7 +48,7 @@ namespace sul.Minecraft107
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(reason);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(reason)); _buffer.WriteString(reason);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -99,7 +99,7 @@ namespace sul.Minecraft107
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(username);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(username)); _buffer.WriteString(username);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -154,9 +154,9 @@ namespace sul.Minecraft107
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(serverId);
-            foreach(byte publicKeyChild in publicKey){ _buffer.WriteUbyte(publicKeyChild); }
-            foreach(byte verifyTokenChild in verifyToken){ _buffer.WriteUbyte(verifyTokenChild); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(serverId)); _buffer.WriteString(serverId);
+            _buffer.WriteVaruint(publicKey.Length); _buffer.WriteBytes(publicKey);
+            _buffer.WriteVaruint(verifyToken.Length); _buffer.WriteBytes(verifyToken);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -211,8 +211,8 @@ namespace sul.Minecraft107
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(byte sharedSecretChild in sharedSecret){ _buffer.WriteUbyte(sharedSecretChild); }
-            foreach(byte verifyTokenChild in verifyToken){ _buffer.WriteUbyte(verifyTokenChild); }
+            _buffer.WriteVaruint(sharedSecret.Length); _buffer.WriteBytes(sharedSecret);
+            _buffer.WriteVaruint(verifyToken.Length); _buffer.WriteBytes(verifyToken);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -266,8 +266,8 @@ namespace sul.Minecraft107
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(uuid);
-            _buffer.WriteString(username);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(uuid)); _buffer.WriteString(uuid);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(username)); _buffer.WriteString(username);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

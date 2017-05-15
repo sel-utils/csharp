@@ -48,7 +48,7 @@ namespace sul.Raknet8
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
+            _buffer.WriteUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -99,7 +99,7 @@ namespace sul.Raknet8
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
+            _buffer.WriteUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -152,7 +152,7 @@ namespace sul.Raknet8
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteBigEndianTriad(count);
+            _buffer.WriteLittleEndianTriad(count);
             encapsulation.EncodeBody(_buffer);
         }
 

@@ -48,7 +48,7 @@ namespace sul.Hncom2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(byte[] packetsChild in packets){ foreach(byte packetsChildChild in packetsChild){ _buffer.WriteUbyte(packetsChildChild); } }
+            _buffer.WriteVaruint(packets.Length); foreach(byte[] packetsChild in packets){ _buffer.WriteVaruint(packetsChild.Length); _buffer.WriteBytes(packetsChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)

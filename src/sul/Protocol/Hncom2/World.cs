@@ -89,12 +89,12 @@ namespace sul.Hncom2
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(worldId);
-            _buffer.WriteString(name);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteUbyte(dimension);
             _buffer.WriteUbyte(generator);
             _buffer.WriteUbyte(difficulty);
             _buffer.WriteUbyte(gamemode);
-            _buffer.WriteVarint<xz>(spawnPoint[0]); _buffer.WriteVarint<xz>(spawnPoint[1]);
+            _buffer.WriteVarint(spawnPoint[0]); _buffer.WriteVarint(spawnPoint[1]);
             _buffer.WriteBigEndianShort(time);
             _buffer.WriteVarint(seed);
             _buffer.WriteVarint(parent);
@@ -330,7 +330,7 @@ namespace sul.Hncom2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(name);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteUbyte(dimension);
             _buffer.WriteUbyte(generator);
             _buffer.WriteUbyte(difficulty);

@@ -59,7 +59,7 @@ namespace sul.Minecraft315
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(protocol);
-            _buffer.WriteString(serverAddress);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(serverAddress)); _buffer.WriteString(serverAddress);
             _buffer.WriteBigEndianUshort(serverPort);
             _buffer.WriteVaruint(next);
         }
@@ -161,7 +161,7 @@ namespace sul.Minecraft315
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(json);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(json)); _buffer.WriteString(json);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

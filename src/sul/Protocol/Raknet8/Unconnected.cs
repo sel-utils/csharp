@@ -112,7 +112,7 @@ namespace sul.Raknet8
             _buffer.WriteBigEndianLong(pingId);
             _buffer.WriteBigEndianLong(serverId);
             foreach(byte magicChild in magic){ _buffer.WriteUbyte(magicChild); }
-            _buffer.WriteString(status);
+            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(status)); _buffer.WriteString(status);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

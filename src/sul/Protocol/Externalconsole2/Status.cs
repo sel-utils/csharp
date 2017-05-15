@@ -106,7 +106,7 @@ namespace sul.Externalconsole2
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
-            _buffer.WriteString(node);
+            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -219,7 +219,7 @@ namespace sul.Externalconsole2
             _buffer.WriteBigEndianUint(uptime);
             _buffer.WriteBigEndianUint(upload);
             _buffer.WriteBigEndianUint(download);
-            foreach(Types.NodeStats nodesChild in nodes){ nodesChild.EncodeBody(_buffer); }
+            _buffer.WriteUshort(nodes.Length); foreach(Types.NodeStats nodesChild in nodes){ nodesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)

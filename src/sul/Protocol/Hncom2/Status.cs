@@ -55,9 +55,9 @@ namespace sul.Hncom2
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
-            _buffer.WriteString(name);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteBool(main);
-            foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(acceptedGames.Length); foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -164,8 +164,8 @@ namespace sul.Hncom2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(uint addresseesChild in addressees){ _buffer.WriteVaruint(addresseesChild); }
-            foreach(byte payloadChild in payload){ _buffer.WriteUbyte(payloadChild); }
+            _buffer.WriteVaruint(addressees.Length); foreach(uint addresseesChild in addressees){ _buffer.WriteVaruint(addresseesChild); }
+            _buffer.WriteVaruint(payload.Length); _buffer.WriteBytes(payload);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -220,7 +220,7 @@ namespace sul.Hncom2
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(sender);
-            foreach(byte payloadChild in payload){ _buffer.WriteUbyte(payloadChild); }
+            _buffer.WriteVaruint(payload.Length); _buffer.WriteBytes(payload);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -402,8 +402,8 @@ namespace sul.Hncom2
         {
             _buffer.WriteVarulong(timestamp);
             _buffer.WriteVarint(world);
-            if(world<0){ _buffer.WriteString(logger); }
-            _buffer.WriteString(message);
+            if(world<0){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(logger)); _buffer.WriteString(logger); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
             _buffer.WriteVarint(commandId);
         }
 
@@ -472,7 +472,7 @@ namespace sul.Hncom2
         {
             _buffer.WriteUbyte(origin);
             if(origin!=0){ sender.EncodeBody(_buffer); }
-            _buffer.WriteString(command);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
             _buffer.WriteVarint(commandId);
         }
 
@@ -602,11 +602,11 @@ namespace sul.Hncom2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(displayName);
-            foreach(Types.Motd motdsChild in motds){ motdsChild.EncodeBody(_buffer); }
-            _buffer.WriteString(language);
-            foreach(string acceptedLanguagesChild in acceptedLanguages){ _buffer.WriteString(acceptedLanguagesChild); }
-            _buffer.WriteString(socialJson);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
+            _buffer.WriteVaruint(motds.Length); foreach(Types.Motd motdsChild in motds){ motdsChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
+            _buffer.WriteVaruint(acceptedLanguages.Length); foreach(string acceptedLanguagesChild in acceptedLanguages){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(acceptedLanguagesChild)); _buffer.WriteString(acceptedLanguagesChild); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(socialJson)); _buffer.WriteString(socialJson);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

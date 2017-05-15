@@ -55,8 +55,8 @@ namespace sul.Hncom2
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(protocol);
-            _buffer.WriteString(password);
-            _buffer.WriteString(name);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(password)); _buffer.WriteString(password);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteBool(main);
         }
 
@@ -201,13 +201,13 @@ namespace sul.Hncom2
             _buffer.WriteVarulong(time);
             _buffer.WriteVarulong(serverId);
             _buffer.WriteVarulong(reservedUuids);
-            _buffer.WriteString(displayName);
-            foreach(Types.GameInfo gamesInfoChild in gamesInfo){ gamesInfoChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
+            _buffer.WriteVaruint(gamesInfo.Length); foreach(Types.GameInfo gamesInfoChild in gamesInfo){ gamesInfoChild.EncodeBody(_buffer); }
             _buffer.WriteVaruint(online);
             _buffer.WriteVarint(max);
-            _buffer.WriteString(language);
-            foreach(string acceptedLanguagesChild in acceptedLanguages){ _buffer.WriteString(acceptedLanguagesChild); }
-            _buffer.WriteString(additionalJson);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
+            _buffer.WriteVaruint(acceptedLanguages.Length); foreach(string acceptedLanguagesChild in acceptedLanguages){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(acceptedLanguagesChild)); _buffer.WriteString(acceptedLanguagesChild); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(additionalJson)); _buffer.WriteString(additionalJson);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -280,9 +280,9 @@ namespace sul.Hncom2
         {
             _buffer.WriteVarulong(time);
             _buffer.WriteVaruint(max);
-            foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeBody(_buffer); }
-            foreach(Types.Plugin pluginsChild in plugins){ pluginsChild.EncodeBody(_buffer); }
-            _buffer.WriteString(additionalJson);
+            _buffer.WriteVaruint(acceptedGames.Length); foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(plugins.Length); foreach(Types.Plugin pluginsChild in plugins){ pluginsChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(additionalJson)); _buffer.WriteString(additionalJson);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

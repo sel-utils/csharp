@@ -58,7 +58,7 @@ namespace sul.Pocket105
         {
             _buffer.WriteBigEndianUint(protocol);
             _buffer.WriteUbyte(edition);
-            foreach(byte bodyChild in body){ _buffer.WriteUbyte(bodyChild); }
+            _buffer.WriteVaruint(body.Length); _buffer.WriteBytes(body);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -172,8 +172,8 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(serverPublicKey);
-            foreach(byte tokenChild in token){ _buffer.WriteUbyte(tokenChild); }
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(serverPublicKey)); _buffer.WriteString(serverPublicKey);
+            _buffer.WriteVaruint(token.Length); _buffer.WriteBytes(token);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -274,7 +274,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(hideDisconnectionScreen);
-            if(hideDisconnectionScreen==false){ _buffer.WriteString(message); }
+            if(hideDisconnectionScreen==false){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -326,7 +326,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(byte dataChild in data){ _buffer.WriteUbyte(dataChild); }
+            _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -352,12 +352,12 @@ namespace sul.Pocket105
         public const bool Serverbound = false;
 
         public bool mustAccept;
-        public Types.PackWithSizeArray behaviourPacks;
-        public Types.PackWithSizeArray resourcePacks;
+        public Types.PackWithSize[] behaviourPacks;
+        public Types.PackWithSize[] resourcePacks;
 
         public ResourcePacksInfo() {}
 
-        public ResourcePacksInfo(bool mustAccept, Types.PackWithSizeArray behaviourPacks, Types.PackWithSizeArray resourcePacks)
+        public ResourcePacksInfo(bool mustAccept, Types.PackWithSize[] behaviourPacks, Types.PackWithSize[] resourcePacks)
         {
             this.mustAccept = mustAccept;
             this.behaviourPacks = behaviourPacks;
@@ -382,8 +382,8 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(mustAccept);
-            behaviourPacks.EncodeBody(_buffer);
-            resourcePacks.EncodeBody(_buffer);
+            _buffer.WriteLittleEndianUshort(behaviourPacks.Length); foreach(Types.PackWithSize behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
+            _buffer.WriteLittleEndianUshort(resourcePacks.Length); foreach(Types.PackWithSize resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -411,12 +411,12 @@ namespace sul.Pocket105
         public const bool Serverbound = false;
 
         public bool mustAccept;
-        public Types.PackArray behaviourPacks;
-        public Types.PackArray resourcePacks;
+        public Types.Pack[] behaviourPacks;
+        public Types.Pack[] resourcePacks;
 
         public ResourcePacksStackPacket() {}
 
-        public ResourcePacksStackPacket(bool mustAccept, Types.PackArray behaviourPacks, Types.PackArray resourcePacks)
+        public ResourcePacksStackPacket(bool mustAccept, Types.Pack[] behaviourPacks, Types.Pack[] resourcePacks)
         {
             this.mustAccept = mustAccept;
             this.behaviourPacks = behaviourPacks;
@@ -441,8 +441,8 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBool(mustAccept);
-            behaviourPacks.EncodeBody(_buffer);
-            resourcePacks.EncodeBody(_buffer);
+            _buffer.WriteLittleEndianUshort(behaviourPacks.Length); foreach(Types.Pack behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
+            _buffer.WriteLittleEndianUshort(resourcePacks.Length); foreach(Types.Pack resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -476,11 +476,11 @@ namespace sul.Pocket105
         public const byte Completed = 4;
 
         public byte status;
-        public Types.PackIds packIds;
+        public string[] packIds;
 
         public ResourcePackClientResponse() {}
 
-        public ResourcePackClientResponse(byte status, Types.PackIds packIds)
+        public ResourcePackClientResponse(byte status, string[] packIds)
         {
             this.status = status;
             this.packIds = packIds;
@@ -504,7 +504,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
-            packIds.EncodeBody(_buffer);
+            _buffer.WriteLittleEndianUshort(packIds.Length); foreach(string packIdsChild in packIds){ _buffer.WriteLittleEndianVaruint(Encoding.UTF8.GetByteCount(packIdsChild)); _buffer.WriteLittleEndianString(packIdsChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -726,24 +726,24 @@ namespace sul.Pocket105
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteBigEndianFloat(yaw);
-            _buffer.WriteBigEndianFloat(pitch);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(yaw);
+            _buffer.WriteLittleEndianFloat(pitch);
             _buffer.WriteVarint(seed);
             _buffer.WriteVarint(dimension);
             _buffer.WriteVarint(generator);
             _buffer.WriteVarint(worldGamemode);
             _buffer.WriteVarint(difficulty);
-            _buffer.WriteVarint<xyz>(spawnPosition[0]); _buffer.WriteVarint<xyz>(spawnPosition[1]); _buffer.WriteVarint<xyz>(spawnPosition[2]);
+            _buffer.WriteVarint(spawnPosition[0]); _buffer.WriteVarint(spawnPosition[1]); _buffer.WriteVarint(spawnPosition[2]);
             _buffer.WriteBool(loadedInCreative);
             _buffer.WriteVarint(time);
             _buffer.WriteUbyte(edition);
-            _buffer.WriteBigEndianFloat(rainLevel);
-            _buffer.WriteBigEndianFloat(lightingLevel);
+            _buffer.WriteLittleEndianFloat(rainLevel);
+            _buffer.WriteLittleEndianFloat(lightingLevel);
             _buffer.WriteBool(commandsEnabled);
             _buffer.WriteBool(textureRequired);
-            _buffer.WriteString(levelId);
-            _buffer.WriteString(worldName);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(levelId)); _buffer.WriteString(levelId);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(worldName)); _buffer.WriteString(worldName);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -834,14 +834,14 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
-            _buffer.WriteString(username);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(username)); _buffer.WriteString(username);
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
-            _buffer.WriteBigEndianFloat(pitch);
-            _buffer.WriteBigEndianFloat(headYaw);
-            _buffer.WriteBigEndianFloat(yaw);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
+            _buffer.WriteLittleEndianFloat(pitch);
+            _buffer.WriteLittleEndianFloat(headYaw);
+            _buffer.WriteLittleEndianFloat(yaw);
             heldItem.EncodeBody(_buffer);
             metadata.EncodeBody(_buffer);
         }
@@ -925,13 +925,13 @@ namespace sul.Pocket105
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
             _buffer.WriteVaruint(type);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
-            _buffer.WriteBigEndianFloat(pitch);
-            _buffer.WriteBigEndianFloat(yaw);
-            foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
+            _buffer.WriteLittleEndianFloat(pitch);
+            _buffer.WriteLittleEndianFloat(yaw);
+            _buffer.WriteVaruint(attributes.Length); foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
             metadata.EncodeBody(_buffer);
-            foreach(Types.Link linksChild in links){ linksChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(links.Length); foreach(Types.Link linksChild in links){ linksChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1053,8 +1053,8 @@ namespace sul.Pocket105
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
             item.EncodeBody(_buffer);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1086,16 +1086,16 @@ namespace sul.Pocket105
         public long entityId;
         public long runtimeId;
         public Types.BlockPosition position;
-        public int ?;
+        public int unknown3;
 
         public AddHangingEntity() {}
 
-        public AddHangingEntity(long entityId, long runtimeId, Types.BlockPosition position, int ?)
+        public AddHangingEntity(long entityId, long runtimeId, Types.BlockPosition position, int unknown3)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
             this.position = position;
-            this.? = ?;
+            this.unknown3 = unknown3;
         }
 
         public override int GetId()
@@ -1118,7 +1118,7 @@ namespace sul.Pocket105
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
             position.EncodeBody(_buffer);
-            _buffer.WriteVarint(?);
+            _buffer.WriteVarint(unknown3);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1236,7 +1236,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
             _buffer.WriteUbyte(pitch);
             _buffer.WriteUbyte(headYaw);
             _buffer.WriteUbyte(yaw);
@@ -1312,10 +1312,10 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteBigEndianFloat(pitch);
-            _buffer.WriteBigEndianFloat(headYaw);
-            _buffer.WriteBigEndianFloat(yaw);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(pitch);
+            _buffer.WriteLittleEndianFloat(headYaw);
+            _buffer.WriteLittleEndianFloat(yaw);
             _buffer.WriteUbyte(animation);
             _buffer.WriteBool(onGround);
         }
@@ -1553,7 +1553,7 @@ namespace sul.Pocket105
             _buffer.WriteVarlong(runtimeId);
             position.EncodeBody(_buffer);
             _buffer.WriteVarint(direction);
-            _buffer.WriteString(title);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1612,9 +1612,9 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteBigEndianFloat(radius);
-            foreach(Types.BlockPosition destroyedBlocksChild in destroyedBlocks){ destroyedBlocksChild.EncodeBody(_buffer); }
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(radius);
+            _buffer.WriteVaruint(destroyedBlocks.Length); foreach(Types.BlockPosition destroyedBlocksChild in destroyedBlocks){ destroyedBlocksChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1743,17 +1743,17 @@ namespace sul.Pocket105
         public Tuple<float, float, float> position;
         public uint volume;
         public int pitch;
-        public bool ?;
+        public bool unknown4;
 
         public LevelSoundEvent() {}
 
-        public LevelSoundEvent(byte sound, Tuple<float, float, float> position, uint volume, int pitch, bool ?)
+        public LevelSoundEvent(byte sound, Tuple<float, float, float> position, uint volume, int pitch, bool unknown4)
         {
             this.sound = sound;
             this.position = position;
             this.volume = volume;
             this.pitch = pitch;
-            this.? = ?;
+            this.unknown4 = unknown4;
         }
 
         public override int GetId()
@@ -1774,10 +1774,10 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(sound);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
             _buffer.WriteVaruint(volume);
             _buffer.WriteVarint(pitch);
-            _buffer.WriteBool(?);
+            _buffer.WriteBool(unknown4);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1887,7 +1887,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(eventId);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
             _buffer.WriteVarint(data);
         }
 
@@ -1988,15 +1988,15 @@ namespace sul.Pocket105
 
         public long entityId;
         public byte eventId;
-        public int ?;
+        public int unknown2;
 
         public EntityEvent() {}
 
-        public EntityEvent(long entityId, byte eventId, int ?)
+        public EntityEvent(long entityId, byte eventId, int unknown2)
         {
             this.entityId = entityId;
             this.eventId = eventId;
-            this.? = ?;
+            this.unknown2 = unknown2;
         }
 
         public override int GetId()
@@ -2018,7 +2018,7 @@ namespace sul.Pocket105
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteUbyte(eventId);
-            _buffer.WriteVarint(?);
+            _buffer.WriteVarint(unknown2);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2150,7 +2150,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(attributes.Length); foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2180,17 +2180,17 @@ namespace sul.Pocket105
         public Types.Slot item;
         public byte inventorySlot;
         public byte hotbarSlot;
-        public byte ?;
+        public byte unknown4;
 
         public MobEquipment() {}
 
-        public MobEquipment(long entityId, Types.Slot item, byte inventorySlot, byte hotbarSlot, byte ?)
+        public MobEquipment(long entityId, Types.Slot item, byte inventorySlot, byte hotbarSlot, byte unknown4)
         {
             this.entityId = entityId;
             this.item = item;
             this.inventorySlot = inventorySlot;
             this.hotbarSlot = hotbarSlot;
-            this.? = ?;
+            this.unknown4 = unknown4;
         }
 
         public override int GetId()
@@ -2214,7 +2214,7 @@ namespace sul.Pocket105
             item.EncodeBody(_buffer);
             _buffer.WriteUbyte(inventorySlot);
             _buffer.WriteUbyte(hotbarSlot);
-            _buffer.WriteUbyte(?);
+            _buffer.WriteUbyte(unknown4);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2387,7 +2387,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteVarint<xyz>(position[0]); _buffer.WriteVarint<xyz>(position[1]); _buffer.WriteVarint<xyz>(position[2]);
+            _buffer.WriteVarint(position[0]); _buffer.WriteVarint(position[1]); _buffer.WriteVarint(position[2]);
             _buffer.WriteUbyte(slot);
         }
 
@@ -2455,8 +2455,8 @@ namespace sul.Pocket105
             blockPosition.EncodeBody(_buffer);
             _buffer.WriteVaruint(hotbarSlot);
             _buffer.WriteVarint(face);
-            _buffer.WriteFloat<xyz>(facePosition[0]); _buffer.WriteFloat<xyz>(facePosition[1]); _buffer.WriteFloat<xyz>(facePosition[2]);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
+            _buffer.WriteLittleEndianFloat(facePosition[0]); _buffer.WriteLittleEndianFloat(facePosition[1]); _buffer.WriteLittleEndianFloat(facePosition[2]);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
             _buffer.WriteVarint(slot);
             item.EncodeBody(_buffer);
         }
@@ -2593,7 +2593,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteBigEndianFloat(distance);
+            _buffer.WriteLittleEndianFloat(distance);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2618,13 +2618,13 @@ namespace sul.Pocket105
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public int ?;
+        public int unknown0;
 
         public HurtArmor() {}
 
-        public HurtArmor(int ?)
+        public HurtArmor(int unknown0)
         {
-            this.? = ?;
+            this.unknown0 = unknown0;
         }
 
         public override int GetId()
@@ -2644,7 +2644,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteVarint(?);
+            _buffer.WriteVarint(unknown0);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2753,7 +2753,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
+            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2894,17 +2894,17 @@ namespace sul.Pocket105
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public int ?;
+        public int unknown0;
         public Types.BlockPosition position;
-        public bool ?;
+        public bool unknown2;
 
         public SetSpawnPosition() {}
 
-        public SetSpawnPosition(int ?, Types.BlockPosition position, bool ?)
+        public SetSpawnPosition(int unknown0, Types.BlockPosition position, bool unknown2)
         {
-            this.? = ?;
+            this.unknown0 = unknown0;
             this.position = position;
-            this.? = ?;
+            this.unknown2 = unknown2;
         }
 
         public override int GetId()
@@ -2924,9 +2924,9 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteVarint(?);
+            _buffer.WriteVarint(unknown0);
             position.EncodeBody(_buffer);
-            _buffer.WriteBool(?);
+            _buffer.WriteBool(unknown2);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3038,7 +3038,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3298,17 +3298,17 @@ namespace sul.Pocket105
         public int slot;
         public int hotbarSlot;
         public Types.Slot item;
-        public byte ?;
+        public byte unknown4;
 
         public ContainerSetSlot() {}
 
-        public ContainerSetSlot(byte window, int slot, int hotbarSlot, Types.Slot item, byte ?)
+        public ContainerSetSlot(byte window, int slot, int hotbarSlot, Types.Slot item, byte unknown4)
         {
             this.window = window;
             this.slot = slot;
             this.hotbarSlot = hotbarSlot;
             this.item = item;
-            this.? = ?;
+            this.unknown4 = unknown4;
         }
 
         public override int GetId()
@@ -3332,7 +3332,7 @@ namespace sul.Pocket105
             _buffer.WriteVarint(slot);
             _buffer.WriteVarint(hotbarSlot);
             item.EncodeBody(_buffer);
-            _buffer.WriteUbyte(?);
+            _buffer.WriteUbyte(unknown4);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3451,8 +3451,8 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
-            foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
-            foreach(int hotbarChild in hotbar){ _buffer.WriteVarint(hotbarChild); }
+            _buffer.WriteVaruint(slots.Length); foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(hotbar.Length); foreach(int hotbarChild in hotbar){ _buffer.WriteVarint(hotbarChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3505,7 +3505,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(Types.Recipe recipesChild in recipes){ recipesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(recipes.Length); foreach(Types.Recipe recipesChild in recipes){ recipesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3567,8 +3567,8 @@ namespace sul.Pocket105
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(type);
             _buffer.WriteUuid(uuid);
-            foreach(Types.Slot inputChild in input){ inputChild.EncodeBody(_buffer); }
-            foreach(Types.Slot outputChild in output){ outputChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(input.Length); foreach(Types.Slot inputChild in input){ inputChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(output.Length); foreach(Types.Slot outputChild in output){ outputChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3727,15 +3727,15 @@ namespace sul.Pocket105
 
         public Tuple<float, float, float> motion;
         public byte flags;
-        public bool ?;
+        public bool unknown2;
 
         public PlayerInput() {}
 
-        public PlayerInput(Tuple<float, float, float> motion, byte flags, bool ?)
+        public PlayerInput(Tuple<float, float, float> motion, byte flags, bool unknown2)
         {
             this.motion = motion;
             this.flags = flags;
-            this.? = ?;
+            this.unknown2 = unknown2;
         }
 
         public override int GetId()
@@ -3755,9 +3755,9 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
+            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
             _buffer.WriteUbyte(flags);
-            _buffer.WriteBool(?);
+            _buffer.WriteBool(unknown2);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3812,7 +3812,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteVarint<xz>(position[0]); _buffer.WriteVarint<xz>(position[1]);
+            _buffer.WriteVarint(position[0]); _buffer.WriteVarint(position[1]);
             data.EncodeBody(_buffer);
         }
 
@@ -3954,15 +3954,15 @@ namespace sul.Pocket105
 
         public int dimension;
         public Tuple<float, float, float> position;
-        public bool ?;
+        public bool unknown2;
 
         public ChangeDimension() {}
 
-        public ChangeDimension(int dimension, Tuple<float, float, float> position, bool ?)
+        public ChangeDimension(int dimension, Tuple<float, float, float> position, bool unknown2)
         {
             this.dimension = dimension;
             this.position = position;
-            this.? = ?;
+            this.unknown2 = unknown2;
         }
 
         public override int GetId()
@@ -3983,8 +3983,8 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(dimension);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteBool(?);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteBool(unknown2);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4200,7 +4200,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
+            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
             _buffer.WriteVarint(count);
         }
 
@@ -4273,10 +4273,10 @@ namespace sul.Pocket105
             _buffer.WriteVarlong(mapId);
             _buffer.WriteVaruint(update);
             if(update==2||update==4){ _buffer.WriteUbyte(scale); }
-            if(update==2){ _buffer.WriteVarint<xz>(size[0]); _buffer.WriteVarint<xz>(size[1]); }
-            if(update==2){ _buffer.WriteVarint<xz>(offset[0]); _buffer.WriteVarint<xz>(offset[1]); }
+            if(update==2){ _buffer.WriteVarint(size[0]); _buffer.WriteVarint(size[1]); }
+            if(update==2){ _buffer.WriteVarint(offset[0]); _buffer.WriteVarint(offset[1]); }
             if(update==2){ _buffer.WriteBytes(data); }
-            if(update==4){ foreach(Types.Decoration decorationsChild in decorations){ decorationsChild.EncodeBody(_buffer); } }
+            if(update==4){ _buffer.WriteVaruint(decorations.Length); foreach(Types.Decoration decorationsChild in decorations){ decorationsChild.EncodeBody(_buffer); } }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4566,11 +4566,11 @@ namespace sul.Pocket105
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Types.Rules rules;
+        public Types.Rule[] rules;
 
         public GameRulesChanged() {}
 
-        public GameRulesChanged(Types.Rules rules)
+        public GameRulesChanged(Types.Rule[] rules)
         {
             this.rules = rules;
         }
@@ -4592,7 +4592,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            rules.EncodeBody(_buffer);
+            _buffer.WriteUint(rules.Length); foreach(Types.Rule rulesChild in rules){ rulesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4617,15 +4617,15 @@ namespace sul.Pocket105
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public long ?;
-        public long ?;
+        public long unknown0;
+        public long unknown1;
 
         public Camera() {}
 
-        public Camera(long ?, long ?)
+        public Camera(long unknown0, long unknown1)
         {
-            this.? = ?;
-            this.? = ?;
+            this.unknown0 = unknown0;
+            this.unknown1 = unknown1;
         }
 
         public override int GetId()
@@ -4645,8 +4645,8 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteVarlong(?);
-            _buffer.WriteVarlong(?);
+            _buffer.WriteVarlong(unknown0);
+            _buffer.WriteVarlong(unknown1);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4843,14 +4843,14 @@ namespace sul.Pocket105
         public const bool Serverbound = false;
 
         public string commands;
-        public string ?;
+        public string unknown1;
 
         public AvailableCommands() {}
 
-        public AvailableCommands(string commands, string ?)
+        public AvailableCommands(string commands, string unknown1)
         {
             this.commands = commands;
-            this.? = ?;
+            this.unknown1 = unknown1;
         }
 
         public override int GetId()
@@ -4870,8 +4870,8 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(commands);
-            _buffer.WriteString(?);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(commands)); _buffer.WriteString(commands);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown1)); _buffer.WriteString(unknown1);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4899,7 +4899,7 @@ namespace sul.Pocket105
 
         public string command;
         public string overload;
-        public uint ?;
+        public uint unknown2;
         public uint currentStep;
         public bool done;
         public ulong clientId;
@@ -4908,11 +4908,11 @@ namespace sul.Pocket105
 
         public CommandStep() {}
 
-        public CommandStep(string command, string overload, uint ?, uint currentStep, bool done, ulong clientId, string input, string output)
+        public CommandStep(string command, string overload, uint unknown2, uint currentStep, bool done, ulong clientId, string input, string output)
         {
             this.command = command;
             this.overload = overload;
-            this.? = ?;
+            this.unknown2 = unknown2;
             this.currentStep = currentStep;
             this.done = done;
             this.clientId = clientId;
@@ -4937,14 +4937,14 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(command);
-            _buffer.WriteString(overload);
-            _buffer.WriteVaruint(?);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(overload)); _buffer.WriteString(overload);
+            _buffer.WriteVaruint(unknown2);
             _buffer.WriteVaruint(currentStep);
             _buffer.WriteBool(done);
             _buffer.WriteVarulong(clientId);
-            _buffer.WriteString(input);
-            _buffer.WriteString(output);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(input)); _buffer.WriteString(input);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(output)); _buffer.WriteString(output);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -5026,9 +5026,9 @@ namespace sul.Pocket105
             if(updateBlock==true){ _buffer.WriteBool(redstoneMode); }
             if(updateBlock==true){ _buffer.WriteBool(conditional); }
             if(updateBlock==false){ _buffer.WriteVarlong(minecart); }
-            _buffer.WriteString(command);
-            _buffer.WriteString(lastOutput);
-            _buffer.WriteString(hover);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(lastOutput)); _buffer.WriteString(lastOutput);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(hover)); _buffer.WriteString(hover);
             _buffer.WriteBool(trackOutput);
         }
 
@@ -5063,28 +5063,28 @@ namespace sul.Pocket105
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public byte ?;
-        public byte ?;
-        public int ?;
-        public int ?;
-        public bool ?;
+        public byte unknown0;
+        public byte unknown1;
+        public int unknown2;
+        public int unknown3;
+        public bool unknown4;
         public long trader;
         public long player;
-        public string ?;
+        public string unknown7;
         public byte[] offers;
 
         public UpdateTrade() {}
 
-        public UpdateTrade(byte ?, byte ?, int ?, int ?, bool ?, long trader, long player, string ?, byte[] offers)
+        public UpdateTrade(byte unknown0, byte unknown1, int unknown2, int unknown3, bool unknown4, long trader, long player, string unknown7, byte[] offers)
         {
-            this.? = ?;
-            this.? = ?;
-            this.? = ?;
-            this.? = ?;
-            this.? = ?;
+            this.unknown0 = unknown0;
+            this.unknown1 = unknown1;
+            this.unknown2 = unknown2;
+            this.unknown3 = unknown3;
+            this.unknown4 = unknown4;
             this.trader = trader;
             this.player = player;
-            this.? = ?;
+            this.unknown7 = unknown7;
             this.offers = offers;
         }
 
@@ -5105,14 +5105,14 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteUbyte(?);
-            _buffer.WriteUbyte(?);
-            _buffer.WriteVarint(?);
-            _buffer.WriteVarint(?);
-            _buffer.WriteBool(?);
+            _buffer.WriteUbyte(unknown0);
+            _buffer.WriteUbyte(unknown1);
+            _buffer.WriteVarint(unknown2);
+            _buffer.WriteVarint(unknown3);
+            _buffer.WriteBool(unknown4);
             _buffer.WriteVarlong(trader);
             _buffer.WriteVarlong(player);
-            _buffer.WriteString(?);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown7)); _buffer.WriteString(unknown7);
             _buffer.WriteBytes(offers);
         }
 
@@ -5180,11 +5180,11 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(id);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteLittleEndianUint(maxChunkSize);
             _buffer.WriteLittleEndianUint(chunkCount);
             _buffer.WriteLittleEndianUlong(compressedPackSize);
-            _buffer.WriteString(sha256);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(sha256)); _buffer.WriteString(sha256);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -5245,10 +5245,10 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(id);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteLittleEndianUint(chunkIndex);
             _buffer.WriteLittleEndianUlong(progress);
-            foreach(byte dataChild in data){ _buffer.WriteUbyte(dataChild); }
+            _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -5304,7 +5304,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(id);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteLittleEndianUint(chunkIndex);
         }
 
@@ -5359,7 +5359,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(ip);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(ip)); _buffer.WriteString(ip);
             _buffer.WriteLittleEndianUshort(port);
         }
 
@@ -5386,19 +5386,19 @@ namespace sul.Pocket105
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public string ?;
+        public string unknown0;
         public Types.BlockPosition position;
-        public float ?;
-        public float ?;
+        public float unknown2;
+        public float unknown3;
 
         public PlaySound() {}
 
-        public PlaySound(string ?, Types.BlockPosition position, float ?, float ?)
+        public PlaySound(string unknown0, Types.BlockPosition position, float unknown2, float unknown3)
         {
-            this.? = ?;
+            this.unknown0 = unknown0;
             this.position = position;
-            this.? = ?;
-            this.? = ?;
+            this.unknown2 = unknown2;
+            this.unknown3 = unknown3;
         }
 
         public override int GetId()
@@ -5418,10 +5418,10 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(?);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown0)); _buffer.WriteString(unknown0);
             position.EncodeBody(_buffer);
-            _buffer.WriteBigEndianFloat(?);
-            _buffer.WriteBigEndianFloat(?);
+            _buffer.WriteLittleEndianFloat(unknown2);
+            _buffer.WriteLittleEndianFloat(unknown3);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -5449,15 +5449,15 @@ namespace sul.Pocket105
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public string ?;
-        public bool ?;
+        public string unknown0;
+        public bool unknown1;
 
         public StopSound() {}
 
-        public StopSound(string ?, bool ?)
+        public StopSound(string unknown0, bool unknown1)
         {
-            this.? = ?;
-            this.? = ?;
+            this.unknown0 = unknown0;
+            this.unknown1 = unknown1;
         }
 
         public override int GetId()
@@ -5477,8 +5477,8 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(?);
-            _buffer.WriteBool(?);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown0)); _buffer.WriteString(unknown0);
+            _buffer.WriteBool(unknown1);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -5547,7 +5547,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVarint(action);
-            _buffer.WriteString(text);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(text)); _buffer.WriteString(text);
             _buffer.WriteVarint(fadeIn);
             _buffer.WriteVarint(stay);
             _buffer.WriteVarint(fadeOut);

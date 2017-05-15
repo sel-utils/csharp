@@ -94,17 +94,17 @@ namespace sul.Hncom1
             _buffer.WriteUbyte(reason);
             _buffer.WriteUbyte(type);
             _buffer.WriteVaruint(protocol);
-            _buffer.WriteString(version);
-            _buffer.WriteString(username);
-            _buffer.WriteString(displayName);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(version)); _buffer.WriteString(version);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(username)); _buffer.WriteString(username);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
             if(reason!=0){ _buffer.WriteByte(dimension); }
             if(reason!=0){ _buffer.WriteVaruint(viewDistance); }
             clientAddress.EncodeBody(_buffer);
-            _buffer.WriteString(serverAddress);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(serverAddress)); _buffer.WriteString(serverAddress);
             _buffer.WriteBigEndianUshort(serverPort);
             _buffer.WriteUuid(uuid);
             skin.EncodeBody(_buffer);
-            _buffer.WriteString(language);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
             _buffer.WriteUbyte(inputMode);
             _buffer.WriteVaruint(latency);
         }
@@ -241,9 +241,9 @@ namespace sul.Hncom1
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
-            _buffer.WriteString(reason);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(reason)); _buffer.WriteString(reason);
             _buffer.WriteBool(translation);
-            if(translation==true){ foreach(string parametersChild in parameters){ _buffer.WriteString(parametersChild); } }
+            if(translation==true){ _buffer.WriteVaruint(parameters.Length); foreach(string parametersChild in parameters){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(parametersChild)); _buffer.WriteString(parametersChild); } }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -364,7 +364,7 @@ namespace sul.Hncom1
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
-            _buffer.WriteString(displayName);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -421,7 +421,7 @@ namespace sul.Hncom1
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
-            _buffer.WriteString(world);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(world)); _buffer.WriteString(world);
             _buffer.WriteByte(dimension);
         }
 
@@ -533,7 +533,7 @@ namespace sul.Hncom1
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
-            _buffer.WriteString(language);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

@@ -65,11 +65,11 @@ namespace sul.Minecraft109
             _buffer.WriteVaruint(entityId);
             _buffer.WriteUuid(uuid);
             _buffer.WriteUbyte(type);
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteUbyte(pitch);
             _buffer.WriteUbyte(yaw);
             _buffer.WriteBigEndianInt(data);
-            _buffer.WriteShort<xyz>(velocity[0]); _buffer.WriteShort<xyz>(velocity[1]); _buffer.WriteShort<xyz>(velocity[2]);
+            _buffer.WriteBigEndianShort(velocity[0]); _buffer.WriteBigEndianShort(velocity[1]); _buffer.WriteBigEndianShort(velocity[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -132,7 +132,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteBigEndianUshort(count);
         }
 
@@ -195,7 +195,7 @@ namespace sul.Minecraft109
         {
             _buffer.WriteVaruint(entityId);
             _buffer.WriteUbyte(type);
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -267,11 +267,11 @@ namespace sul.Minecraft109
             _buffer.WriteVaruint(entityId);
             _buffer.WriteUuid(uuid);
             _buffer.WriteUbyte(type);
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteUbyte(yaw);
             _buffer.WriteUbyte(pitch);
             _buffer.WriteUbyte(headPitch);
-            _buffer.WriteShort<xyz>(velocity[0]); _buffer.WriteShort<xyz>(velocity[1]); _buffer.WriteShort<xyz>(velocity[2]);
+            _buffer.WriteBigEndianShort(velocity[0]); _buffer.WriteBigEndianShort(velocity[1]); _buffer.WriteBigEndianShort(velocity[2]);
             metadata.EncodeBody(_buffer);
         }
 
@@ -347,7 +347,7 @@ namespace sul.Minecraft109
         {
             _buffer.WriteVaruint(entityId);
             _buffer.WriteUuid(uuid);
-            _buffer.WriteString(title);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
             _buffer.WriteBigEndianUlong(position);
             _buffer.WriteUbyte(direction);
         }
@@ -416,7 +416,7 @@ namespace sul.Minecraft109
         {
             _buffer.WriteVaruint(entityId);
             _buffer.WriteUuid(uuid);
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteUbyte(yaw);
             _buffer.WriteUbyte(pitch);
             metadata.EncodeBody(_buffer);
@@ -538,7 +538,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(Types.Statistic statisticsChild in statistics){ statisticsChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(statistics.Length); foreach(Types.Statistic statisticsChild in statistics){ statisticsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -969,7 +969,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(string matchesChild in matches){ _buffer.WriteString(matchesChild); }
+            _buffer.WriteVaruint(matches.Length); foreach(string matchesChild in matches){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(matchesChild)); _buffer.WriteString(matchesChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1027,7 +1027,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(message);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
             _buffer.WriteUbyte(position);
         }
 
@@ -1082,8 +1082,8 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteInt<xz>(chunk[0]); _buffer.WriteInt<xz>(chunk[1]);
-            foreach(Types.BlockChange changesChild in changes){ changesChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianInt(chunk[0]); _buffer.WriteBigEndianInt(chunk[1]);
+            _buffer.WriteVaruint(changes.Length); foreach(Types.BlockChange changesChild in changes){ changesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1252,8 +1252,8 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
-            _buffer.WriteString(type);
-            _buffer.WriteString(title);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(type)); _buffer.WriteString(type);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
             _buffer.WriteUbyte(slots);
         }
 
@@ -1283,11 +1283,11 @@ namespace sul.Minecraft109
         public const bool Serverbound = false;
 
         public byte window;
-        public Types.Slots slots;
+        public Types.Slot[] slots;
 
         public WindowItems() {}
 
-        public WindowItems(byte window, Types.Slots slots)
+        public WindowItems(byte window, Types.Slot[] slots)
         {
             this.window = window;
             this.slots = slots;
@@ -1311,7 +1311,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
-            slots.EncodeBody(_buffer);
+            _buffer.WriteUshort(slots.Length); foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1559,7 +1559,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(channel);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(channel)); _buffer.WriteString(channel);
             _buffer.WriteBytes(data);
         }
 
@@ -1620,9 +1620,9 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(name);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteVaruint(category);
-            _buffer.WriteInt<xyz>(position[0]); _buffer.WriteInt<xyz>(position[1]); _buffer.WriteInt<xyz>(position[2]);
+            _buffer.WriteBigEndianInt(position[0]); _buffer.WriteBigEndianInt(position[1]); _buffer.WriteBigEndianInt(position[2]);
             _buffer.WriteBigEndianFloat(volume);
             _buffer.WriteUbyte(pitch);
         }
@@ -1679,7 +1679,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(reason);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(reason)); _buffer.WriteString(reason);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1798,12 +1798,12 @@ namespace sul.Minecraft109
 
         public Tuple<float, float, float> position;
         public float radius;
-        public Types.ExplosionRecords records;
+        public Tuple<sbyte, sbyte, sbyte>[] records;
         public Tuple<float, float, float> motion;
 
         public Explosion() {}
 
-        public Explosion(Tuple<float, float, float> position, float radius, Types.ExplosionRecords records, Tuple<float, float, float> motion)
+        public Explosion(Tuple<float, float, float> position, float radius, Tuple<sbyte, sbyte, sbyte>[] records, Tuple<float, float, float> motion)
         {
             this.position = position;
             this.radius = radius;
@@ -1828,10 +1828,10 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
+            _buffer.WriteBigEndianFloat(position[0]); _buffer.WriteBigEndianFloat(position[1]); _buffer.WriteBigEndianFloat(position[2]);
             _buffer.WriteBigEndianFloat(radius);
-            records.EncodeBody(_buffer);
-            _buffer.WriteFloat<xyz>(motion[0]); _buffer.WriteFloat<xyz>(motion[1]); _buffer.WriteFloat<xyz>(motion[2]);
+            _buffer.WriteUint(records.Length); foreach(Tuple<sbyte, sbyte, sbyte> recordsChild in records){ _buffer.WriteByte(recordsChild[0]); _buffer.WriteByte(recordsChild[1]); _buffer.WriteByte(recordsChild[2]); }
+            _buffer.WriteBigEndianFloat(motion[0]); _buffer.WriteBigEndianFloat(motion[1]); _buffer.WriteBigEndianFloat(motion[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1885,7 +1885,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteInt<xz>(position[0]); _buffer.WriteInt<xz>(position[1]);
+            _buffer.WriteBigEndianInt(position[0]); _buffer.WriteBigEndianInt(position[1]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2074,10 +2074,10 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteInt<xz>(position[0]); _buffer.WriteInt<xz>(position[1]);
+            _buffer.WriteBigEndianInt(position[0]); _buffer.WriteBigEndianInt(position[1]);
             _buffer.WriteBool(full);
             _buffer.WriteVaruint(sections);
-            foreach(byte dataChild in data){ _buffer.WriteUbyte(dataChild); }
+            _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2305,8 +2305,8 @@ namespace sul.Minecraft109
         {
             _buffer.WriteBigEndianUint(particleId);
             _buffer.WriteBool(longDistance);
-            _buffer.WriteFloat<xyz>(position[0]); _buffer.WriteFloat<xyz>(position[1]); _buffer.WriteFloat<xyz>(position[2]);
-            _buffer.WriteFloat<xyz>(offset[0]); _buffer.WriteFloat<xyz>(offset[1]); _buffer.WriteFloat<xyz>(offset[2]);
+            _buffer.WriteBigEndianFloat(position[0]); _buffer.WriteBigEndianFloat(position[1]); _buffer.WriteBigEndianFloat(position[2]);
+            _buffer.WriteBigEndianFloat(offset[0]); _buffer.WriteBigEndianFloat(offset[1]); _buffer.WriteBigEndianFloat(offset[2]);
             _buffer.WriteBigEndianFloat(data);
             _buffer.WriteBigEndianUint(count);
             foreach(uint additionalDataChild in additionalData){ _buffer.WriteVaruint(additionalDataChild); }
@@ -2406,7 +2406,7 @@ namespace sul.Minecraft109
             _buffer.WriteBigEndianInt(dimension);
             _buffer.WriteUbyte(difficulty);
             _buffer.WriteUbyte(maxPlayers);
-            _buffer.WriteString(levelType);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(levelType)); _buffer.WriteString(levelType);
             _buffer.WriteBool(reducedDebug);
         }
 
@@ -2481,11 +2481,11 @@ namespace sul.Minecraft109
             _buffer.WriteVaruint(mapId);
             _buffer.WriteUbyte(scale);
             _buffer.WriteBool(showIcons);
-            foreach(Types.Icon iconsChild in icons){ iconsChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(icons.Length); foreach(Types.Icon iconsChild in icons){ iconsChild.EncodeBody(_buffer); }
             _buffer.WriteUbyte(colums);
             _buffer.WriteUbyte(rows);
-            _buffer.WriteUbyte<xz>(offset[0]); _buffer.WriteUbyte<xz>(offset[1]);
-            foreach(byte dataChild in data){ _buffer.WriteUbyte(dataChild); }
+            _buffer.WriteUbyte(offset[0]); _buffer.WriteUbyte(offset[1]);
+            _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -2548,7 +2548,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            _buffer.WriteShort<xyz>(delta[0]); _buffer.WriteShort<xyz>(delta[1]); _buffer.WriteShort<xyz>(delta[2]);
+            _buffer.WriteBigEndianShort(delta[0]); _buffer.WriteBigEndianShort(delta[1]); _buffer.WriteBigEndianShort(delta[2]);
             _buffer.WriteBool(onGround);
         }
 
@@ -2611,7 +2611,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            _buffer.WriteShort<xyz>(delta[0]); _buffer.WriteShort<xyz>(delta[1]); _buffer.WriteShort<xyz>(delta[2]);
+            _buffer.WriteBigEndianShort(delta[0]); _buffer.WriteBigEndianShort(delta[1]); _buffer.WriteBigEndianShort(delta[2]);
             _buffer.WriteUbyte(yaw);
             _buffer.WriteUbyte(pitch);
             _buffer.WriteBool(onGround);
@@ -2787,7 +2787,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
         }
@@ -3075,7 +3075,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
             _buffer.WriteUbyte(flags);
@@ -3189,7 +3189,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            foreach(uint entityIdsChild in entityIds){ _buffer.WriteVaruint(entityIdsChild); }
+            _buffer.WriteVaruint(entityIds.Length); foreach(uint entityIdsChild in entityIds){ _buffer.WriteVaruint(entityIdsChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3297,8 +3297,8 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(url);
-            _buffer.WriteString(hash);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(url)); _buffer.WriteString(url);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(hash)); _buffer.WriteString(hash);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3382,7 +3382,7 @@ namespace sul.Minecraft109
             _buffer.WriteBigEndianInt(dimension);
             _buffer.WriteUbyte(difficulty);
             _buffer.WriteUbyte(gamemode);
-            _buffer.WriteString(levelType);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(levelType)); _buffer.WriteString(levelType);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3652,7 +3652,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(position);
-            _buffer.WriteString(scoreName);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(scoreName)); _buffer.WriteString(scoreName);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3817,7 +3817,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            _buffer.WriteShort<xyz>(velocity[0]); _buffer.WriteShort<xyz>(velocity[1]); _buffer.WriteShort<xyz>(velocity[2]);
+            _buffer.WriteBigEndianShort(velocity[0]); _buffer.WriteBigEndianShort(velocity[1]); _buffer.WriteBigEndianShort(velocity[2]);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4061,10 +4061,10 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(name);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteUbyte(mode);
-            if(mode!=1){ _buffer.WriteString(value); }
-            if(mode!=1){ _buffer.WriteString(type); }
+            if(mode!=1){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(value)); _buffer.WriteString(value); }
+            if(mode!=1){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(type)); _buffer.WriteString(type); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4121,7 +4121,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            foreach(uint passengersChild in passengers){ _buffer.WriteVaruint(passengersChild); }
+            _buffer.WriteVaruint(passengers.Length); foreach(uint passengersChild in passengers){ _buffer.WriteVaruint(passengersChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4175,7 +4175,7 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(name);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteUbyte(mode);
         }
 
@@ -4238,9 +4238,9 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(scoreName);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(scoreName)); _buffer.WriteString(scoreName);
             _buffer.WriteUbyte(action);
-            _buffer.WriteString(objectiveName);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(objectiveName)); _buffer.WriteString(objectiveName);
             if(action==0){ _buffer.WriteVaruint(value); }
         }
 
@@ -4455,7 +4455,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteBigEndianUlong(position);
-            foreach(string linesChild in lines){ _buffer.WriteString(linesChild); }
+            foreach(string linesChild in lines){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(linesChild)); _buffer.WriteString(linesChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4517,7 +4517,7 @@ namespace sul.Minecraft109
         {
             _buffer.WriteVaruint(soundId);
             _buffer.WriteVaruint(category);
-            _buffer.WriteInt<xyz>(position[0]); _buffer.WriteInt<xyz>(position[1]); _buffer.WriteInt<xyz>(position[2]);
+            _buffer.WriteBigEndianInt(position[0]); _buffer.WriteBigEndianInt(position[1]); _buffer.WriteBigEndianInt(position[2]);
             _buffer.WriteBigEndianFloat(volume);
             _buffer.WriteUbyte(pitch);
         }
@@ -4576,8 +4576,8 @@ namespace sul.Minecraft109
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(header);
-            _buffer.WriteString(footer);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(header)); _buffer.WriteString(header);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(footer)); _buffer.WriteString(footer);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4693,7 +4693,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            _buffer.WriteDouble<xyz>(position[0]); _buffer.WriteDouble<xyz>(position[1]); _buffer.WriteDouble<xyz>(position[2]);
+            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
             _buffer.WriteUbyte(yaw);
             _buffer.WriteUbyte(pitch);
             _buffer.WriteBool(onGround);
@@ -4726,11 +4726,11 @@ namespace sul.Minecraft109
         public const bool Serverbound = false;
 
         public uint entityId;
-        public Types.Attributes attributes;
+        public Types.Attribute[] attributes;
 
         public EntityProperties() {}
 
-        public EntityProperties(uint entityId, Types.Attributes attributes)
+        public EntityProperties(uint entityId, Types.Attribute[] attributes)
         {
             this.entityId = entityId;
             this.attributes = attributes;
@@ -4754,7 +4754,7 @@ namespace sul.Minecraft109
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            attributes.EncodeBody(_buffer);
+            _buffer.WriteUint(attributes.Length); foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)

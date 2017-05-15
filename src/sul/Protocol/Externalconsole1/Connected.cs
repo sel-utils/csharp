@@ -54,10 +54,10 @@ namespace sul.Externalconsole1
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(node);
+            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
             _buffer.WriteBigEndianUlong(timestamp);
-            _buffer.WriteString(logger);
-            _buffer.WriteString(message);
+            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(logger)); _buffer.WriteString(logger);
+            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -111,7 +111,7 @@ namespace sul.Externalconsole1
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteString(command);
+            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

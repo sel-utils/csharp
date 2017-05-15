@@ -53,7 +53,7 @@ namespace sul.Hncom2
         protected override void EncodeImpl(Buffer _buffer)
         {
             foreach(byte hashChild in hash){ _buffer.WriteUbyte(hashChild); }
-            foreach(byte addressChild in address){ _buffer.WriteUbyte(addressChild); }
+            _buffer.WriteVaruint(address.Length); _buffer.WriteBytes(address);
             _buffer.WriteVaruint(worldId);
         }
 
