@@ -11,7 +11,7 @@ using Types = sul.Externalconsole2.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Externalconsole2
+namespace sul.Externalconsole2.Login
 {
 
     public class AuthCredentials : Packet
@@ -56,8 +56,8 @@ namespace sul.Externalconsole2
         {
             _buffer.WriteUbyte(protocol);
             _buffer.WriteBool(hash);
-            if(hash==true){ _buffer.WriteUshort(Encoding.UTF8.GetByteCount(hashAlgorithm)); _buffer.WriteString(hashAlgorithm); }
-            if(hash==true){ _buffer.WriteUshort(payload.Length); _buffer.WriteBytes(payload); }
+            if(hash==true){ _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(hashAlgorithm)); _buffer.WriteString(hashAlgorithm); }
+            if(hash==true){ _buffer.WriteBigEndianUshort(payload.Length); _buffer.WriteBytes(payload); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -111,7 +111,7 @@ namespace sul.Externalconsole2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteUshort(hash.Length); _buffer.WriteBytes(hash);
+            _buffer.WriteBigEndianUshort(hash.Length); _buffer.WriteBytes(hash);
         }
 
         protected override void DecodeImpl(Buffer _buffer)

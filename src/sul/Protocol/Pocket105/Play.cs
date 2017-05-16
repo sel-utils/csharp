@@ -11,7 +11,7 @@ using Types = sul.Pocket105.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Pocket105
+namespace sul.Pocket105.Play
 {
 
     public class Login : Packet
@@ -504,7 +504,7 @@ namespace sul.Pocket105
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
-            _buffer.WriteLittleEndianUshort(packIds.Length); foreach(string packIdsChild in packIds){ _buffer.WriteLittleEndianVaruint(Encoding.UTF8.GetByteCount(packIdsChild)); _buffer.WriteLittleEndianString(packIdsChild); }
+            _buffer.WriteLittleEndianUshort(packIds.Length); foreach(string packIdsChild in packIds){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(packIdsChild)); _buffer.WriteString(packIdsChild); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -3363,15 +3363,15 @@ namespace sul.Pocket105
 
         public byte window;
         public int property;
-        public int value;
+        public int @value;
 
         public ContainerSetData() {}
 
-        public ContainerSetData(byte window, int property, int value)
+        public ContainerSetData(byte window, int property, int @value)
         {
             this.window = window;
             this.property = property;
-            this.value = value;
+            this.@value = @value;
         }
 
         public override int GetId()
@@ -3393,7 +3393,7 @@ namespace sul.Pocket105
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(property);
-            _buffer.WriteVarint(value);
+            _buffer.WriteVarint(@value);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4592,7 +4592,7 @@ namespace sul.Pocket105
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteUint(rules.Length); foreach(Types.Rule rulesChild in rules){ rulesChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUint(rules.Length); foreach(Types.Rule rulesChild in rules){ rulesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)

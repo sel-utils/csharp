@@ -11,7 +11,7 @@ using Types = sul.Raknet8.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Raknet8
+namespace sul.Raknet8.Control
 {
 
     public class Ack : Packet
@@ -48,7 +48,7 @@ namespace sul.Raknet8
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -99,7 +99,7 @@ namespace sul.Raknet8
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)

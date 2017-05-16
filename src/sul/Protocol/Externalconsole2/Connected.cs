@@ -11,7 +11,7 @@ using Types = sul.Externalconsole2.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Externalconsole2
+namespace sul.Externalconsole2.Connected
 {
 
     public class ConsoleMessage : Packet
@@ -56,10 +56,10 @@ namespace sul.Externalconsole2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
+            _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
             _buffer.WriteBigEndianUlong(timestamp);
-            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(logger)); _buffer.WriteString(logger);
-            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(logger)); _buffer.WriteString(logger);
+            _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
             _buffer.WriteBigEndianInt(commandId);
         }
 
@@ -117,7 +117,7 @@ namespace sul.Externalconsole2
 
         protected override void EncodeImpl(Buffer _buffer)
         {
-            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
+            _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
             _buffer.WriteBigEndianUint(commandId);
         }
 

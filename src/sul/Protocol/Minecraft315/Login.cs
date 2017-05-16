@@ -11,7 +11,7 @@ using Types = sul.Minecraft315.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Minecraft315
+namespace sul.Minecraft315.Login
 {
 
     public class Disconnect : Packet

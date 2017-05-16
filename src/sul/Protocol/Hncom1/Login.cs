@@ -11,7 +11,7 @@ using Types = sul.Hncom1.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Hncom1
+namespace sul.Hncom1.Login
 {
 
     public class ConnectionRequest : Packet

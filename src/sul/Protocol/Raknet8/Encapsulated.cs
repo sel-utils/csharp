@@ -11,7 +11,7 @@ using Types = sul.Raknet8.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Raknet8
+namespace sul.Raknet8.Encapsulated
 {
 
     public class ClientConnect : Packet

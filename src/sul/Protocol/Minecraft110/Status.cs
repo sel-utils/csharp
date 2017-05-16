@@ -11,7 +11,7 @@ using Types = sul.Minecraft110.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Minecraft110
+namespace sul.Minecraft110.Status
 {
 
     public class Handshake : Packet

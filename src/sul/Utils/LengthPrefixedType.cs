@@ -26,9 +26,9 @@ namespace Utils
             DecodeImpl(buffer.ReadBytes(DecodeLength(buffer)));
         }
 
-        protected void EncodeLength(int length, Buffer buffer);
+        protected abstract void EncodeLength(int length, Buffer buffer);
 
-        protected int DecodeLength(Buffer buffer);
+        protected abstract int DecodeLength(Buffer buffer);
 
     }
 

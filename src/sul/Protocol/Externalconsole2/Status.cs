@@ -11,7 +11,7 @@ using Types = sul.Externalconsole2.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Externalconsole2
+namespace sul.Externalconsole2.Status
 {
 
     public class KeepAlive : Packet
@@ -106,7 +106,7 @@ namespace sul.Externalconsole2
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
-            _buffer.WriteUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
+            _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -219,7 +219,7 @@ namespace sul.Externalconsole2
             _buffer.WriteBigEndianUint(uptime);
             _buffer.WriteBigEndianUint(upload);
             _buffer.WriteBigEndianUint(download);
-            _buffer.WriteUshort(nodes.Length); foreach(Types.NodeStats nodesChild in nodes){ nodesChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(nodes.Length); foreach(Types.NodeStats nodesChild in nodes){ nodesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)

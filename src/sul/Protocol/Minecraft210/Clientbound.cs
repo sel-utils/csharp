@@ -11,7 +11,7 @@ using Types = sul.Minecraft210.Types;
 using Utils.Buffer;
 using Utils.Packet;
 
-namespace sul.Minecraft210
+namespace sul.Minecraft210.Clientbound
 {
 
     public class SpawnObject : Packet
@@ -1312,7 +1312,7 @@ namespace sul.Minecraft210
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
-            _buffer.WriteUshort(slots.Length); foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(slots.Length); foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1361,15 +1361,15 @@ namespace sul.Minecraft210
 
         public byte window;
         public ushort property;
-        public short value;
+        public short @value;
 
         public WindowProperty() {}
 
-        public WindowProperty(byte window, ushort property, short value)
+        public WindowProperty(byte window, ushort property, short @value)
         {
             this.window = window;
             this.property = property;
-            this.value = value;
+            this.@value = @value;
         }
 
         public override int GetId()
@@ -1391,7 +1391,7 @@ namespace sul.Minecraft210
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteBigEndianUshort(property);
-            _buffer.WriteBigEndianShort(value);
+            _buffer.WriteBigEndianShort(@value);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -1833,7 +1833,7 @@ namespace sul.Minecraft210
         {
             _buffer.WriteBigEndianFloat(position[0]); _buffer.WriteBigEndianFloat(position[1]); _buffer.WriteBigEndianFloat(position[2]);
             _buffer.WriteBigEndianFloat(radius);
-            _buffer.WriteUint(records.Length); foreach(Tuple<sbyte, sbyte, sbyte> recordsChild in records){ _buffer.WriteByte(recordsChild[0]); _buffer.WriteByte(recordsChild[1]); _buffer.WriteByte(recordsChild[2]); }
+            _buffer.WriteBigEndianUint(records.Length); foreach(Tuple<sbyte, sbyte, sbyte> recordsChild in records){ _buffer.WriteByte(recordsChild[0]); _buffer.WriteByte(recordsChild[1]); _buffer.WriteByte(recordsChild[2]); }
             _buffer.WriteBigEndianFloat(motion[0]); _buffer.WriteBigEndianFloat(motion[1]); _buffer.WriteBigEndianFloat(motion[2]);
         }
 
@@ -1940,14 +1940,14 @@ namespace sul.Minecraft210
         public const float Dark = 1;
 
         public byte reason;
-        public float value;
+        public float @value;
 
         public ChangeGameState() {}
 
-        public ChangeGameState(byte reason, float value)
+        public ChangeGameState(byte reason, float @value)
         {
             this.reason = reason;
-            this.value = value;
+            this.@value = @value;
         }
 
         public override int GetId()
@@ -1968,7 +1968,7 @@ namespace sul.Minecraft210
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteUbyte(reason);
-            _buffer.WriteBigEndianFloat(value);
+            _buffer.WriteBigEndianFloat(@value);
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4043,16 +4043,16 @@ namespace sul.Minecraft210
 
         public string name;
         public byte mode;
-        public string value;
+        public string @value;
         public string type;
 
         public ScoreboardObjective() {}
 
-        public ScoreboardObjective(string name, byte mode, string value, string type)
+        public ScoreboardObjective(string name, byte mode, string @value, string type)
         {
             this.name = name;
             this.mode = mode;
-            this.value = value;
+            this.@value = @value;
             this.type = type;
         }
 
@@ -4075,7 +4075,7 @@ namespace sul.Minecraft210
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteUbyte(mode);
-            if(mode!=1){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(value)); _buffer.WriteString(value); }
+            if(mode!=1){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(@value)); _buffer.WriteString(@value); }
             if(mode!=1){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(type)); _buffer.WriteString(type); }
         }
 
@@ -4221,16 +4221,16 @@ namespace sul.Minecraft210
         public string scoreName;
         public byte action;
         public string objectiveName;
-        public uint value;
+        public uint @value;
 
         public UpdateScore() {}
 
-        public UpdateScore(string scoreName, byte action, string objectiveName, uint value)
+        public UpdateScore(string scoreName, byte action, string objectiveName, uint @value)
         {
             this.scoreName = scoreName;
             this.action = action;
             this.objectiveName = objectiveName;
-            this.value = value;
+            this.@value = @value;
         }
 
         public override int GetId()
@@ -4253,7 +4253,7 @@ namespace sul.Minecraft210
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(scoreName)); _buffer.WriteString(scoreName);
             _buffer.WriteUbyte(action);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(objectiveName)); _buffer.WriteString(objectiveName);
-            if(action==0){ _buffer.WriteVaruint(value); }
+            if(action==0){ _buffer.WriteVaruint(@value); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
@@ -4711,7 +4711,7 @@ namespace sul.Minecraft210
         protected override void EncodeImpl(Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
-            _buffer.WriteUint(attributes.Length); foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUint(attributes.Length); foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(Buffer _buffer)
