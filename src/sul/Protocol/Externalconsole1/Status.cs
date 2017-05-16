@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/externalconsole1.xml
  */
-using Types = sul.Externalconsole1.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Externalconsole1.Types;
 
 namespace sul.Externalconsole1.Status
 {
 
-    public class KeepAlive : Packet
+    public class KeepAlive : sul.Utils.Packet
     {
 
         public const byte Id = 0;
@@ -24,7 +24,7 @@ namespace sul.Externalconsole1.Status
 
         public uint count;
 
-        public KeepAlive() {}
+        public KeepAlive() : this(0) {}
 
         public KeepAlive(uint count)
         {
@@ -33,39 +33,39 @@ namespace sul.Externalconsole1.Status
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUint(count);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //count = _buffer.ReadBigEndianUint();
         }
 
         public static KeepAlive FromBuffer(byte[] buffer)
         {
             var ret = new KeepAlive();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateNodes : Packet
+    public class UpdateNodes : sul.Utils.Packet
     {
 
         public const byte Id = 1;
@@ -74,13 +74,13 @@ namespace sul.Externalconsole1.Status
         public const bool Serverbound = false;
 
         // action
-        public const byte Add = 0;
-        public const byte Remove = 1;
+        public const byte ADD = 0;
+        public const byte REMOVE = 1;
 
         public byte action;
         public string node;
 
-        public UpdateNodes() {}
+        public UpdateNodes() : this(0, "") {}
 
         public UpdateNodes(byte action, string node)
         {
@@ -90,41 +90,41 @@ namespace sul.Externalconsole1.Status
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
             _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //action = _buffer.ReadUbyte();
+            //node = _buffer.ReadString();
         }
 
         public static UpdateNodes FromBuffer(byte[] buffer)
         {
             var ret = new UpdateNodes();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class RequestStats : Packet
+    public class RequestStats : sul.Utils.Packet
     {
 
         public const byte Id = 2;
@@ -134,29 +134,32 @@ namespace sul.Externalconsole1.Status
 
 
 
-        public RequestStats() {}
+        public RequestStats()
+        {
+
+        }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
@@ -164,13 +167,13 @@ namespace sul.Externalconsole1.Status
         public static RequestStats FromBuffer(byte[] buffer)
         {
             var ret = new RequestStats();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateStats : Packet
+    public class UpdateStats : sul.Utils.Packet
     {
 
         public const byte Id = 3;
@@ -183,11 +186,11 @@ namespace sul.Externalconsole1.Status
         public uint uptime;
         public uint upload;
         public uint download;
-        public Types.NodeStats[] nodes;
+        public NodeStats[] nodes;
 
-        public UpdateStats() {}
+        public UpdateStats() : this(0, 0, 0, 0, 0, new NodeStats[]{}) {}
 
-        public UpdateStats(uint onlinePlayers, uint maxPlayers, uint uptime, uint upload, uint download, Types.NodeStats[] nodes)
+        public UpdateStats(uint onlinePlayers, uint maxPlayers, uint uptime, uint upload, uint download, NodeStats[] nodes)
         {
             this.onlinePlayers = onlinePlayers;
             this.maxPlayers = maxPlayers;
@@ -199,43 +202,43 @@ namespace sul.Externalconsole1.Status
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUint(onlinePlayers);
             _buffer.WriteBigEndianUint(maxPlayers);
             _buffer.WriteBigEndianUint(uptime);
             _buffer.WriteBigEndianUint(upload);
             _buffer.WriteBigEndianUint(download);
-            _buffer.WriteBigEndianUshort(nodes.Length); foreach(Types.NodeStats nodesChild in nodes){ nodesChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(nodes.Length); foreach (NodeStats nodesChild in nodes){ nodesChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
+            //onlinePlayers = _buffer.ReadBigEndianUint();
+            //maxPlayers = _buffer.ReadBigEndianUint();
+            //uptime = _buffer.ReadBigEndianUint();
+            //upload = _buffer.ReadBigEndianUint();
+            //download = _buffer.ReadBigEndianUint();
+            //nodes.DecodeBody(_buffer);
         }
 
         public static UpdateStats FromBuffer(byte[] buffer)
         {
             var ret = new UpdateStats();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

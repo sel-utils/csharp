@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/hncom2.xml
  */
-using Types = sul.Hncom2.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Hncom2.Types;
 
 namespace sul.Hncom2.Panel
 {
 
-    public class Connection : Packet
+    public class Connection : sul.Utils.Packet
     {
 
         public const byte Id = 36;
@@ -22,13 +22,13 @@ namespace sul.Hncom2.Panel
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public byte[64] hash;
+        public byte[] hash;
         public byte[] address;
         public uint worldId;
 
-        public Connection() {}
+        public Connection() : this(new byte[64], new byte[]{}, 0) {}
 
-        public Connection(byte[64] hash, byte[] address, uint worldId)
+        public Connection(byte[] hash, byte[] address, uint worldId)
         {
             this.hash = hash;
             this.address = address;
@@ -37,37 +37,37 @@ namespace sul.Hncom2.Panel
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            foreach(byte hashChild in hash){ _buffer.WriteUbyte(hashChild); }
+            foreach (byte hashChild in hash){ _buffer.WriteUbyte(hashChild); }
             _buffer.WriteVaruint(address.Length); _buffer.WriteBytes(address);
             _buffer.WriteVaruint(worldId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //hash.DecodeBody(_buffer);
+            //address.DecodeBody(_buffer);
+            //worldId = _buffer.ReadVaruint();
         }
 
         public static Connection FromBuffer(byte[] buffer)
         {
             var ret = new Connection();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

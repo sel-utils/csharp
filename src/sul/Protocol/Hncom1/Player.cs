@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/hncom1.xml
  */
-using Types = sul.Hncom1.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Hncom1.Types;
 
 namespace sul.Hncom1.Player
 {
 
-    public class Add : Packet
+    public class Add : sul.Utils.Packet
     {
 
         public const byte Id = 15;
@@ -23,14 +23,14 @@ namespace sul.Hncom1.Player
         public const bool Serverbound = false;
 
         // reason
-        public const byte FirstJoin = 0;
-        public const byte Transferred = 1;
-        public const byte ForciblyTransferred = 2;
+        public const byte FIRST_JOIN = 0;
+        public const byte TRANSFERRED = 1;
+        public const byte FORCIBLY_TRANSFERRED = 2;
 
         // input mode
-        public const byte Keyboard = 0;
-        public const byte Touch = 1;
-        public const byte Controller = 2;
+        public const byte KEYBOARD = 0;
+        public const byte TOUCH = 1;
+        public const byte CONTROLLER = 2;
 
         public uint hubId;
         public byte reason;
@@ -41,18 +41,18 @@ namespace sul.Hncom1.Player
         public string displayName;
         public sbyte dimension;
         public uint viewDistance;
-        public Types.Address clientAddress;
+        public Address clientAddress;
         public string serverAddress;
         public ushort serverPort;
-        public Guid uuid;
-        public Types.Skin skin;
+        public System.Guid uuid;
+        public Skin skin;
         public string language;
         public byte inputMode;
         public uint latency;
 
-        public Add() {}
+        public Add() : this(0, 0, 0, 0, "", "", "", 0, 0, new Address(), "", 0, System.Guid.Empty, new Skin(), "", 0, 0) {}
 
-        public Add(uint hubId, byte reason, byte type, uint protocol, string version, string username, string displayName, sbyte dimension, uint viewDistance, Types.Address clientAddress, string serverAddress, ushort serverPort, Guid uuid, Types.Skin skin, string language, byte inputMode, uint latency)
+        public Add(uint hubId, byte reason, byte type, uint protocol, string version, string username, string displayName, sbyte dimension, uint viewDistance, Address clientAddress, string serverAddress, ushort serverPort, System.Guid uuid, Skin skin, string language, byte inputMode, uint latency)
         {
             this.hubId = hubId;
             this.reason = reason;
@@ -75,20 +75,20 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteUbyte(reason);
@@ -109,37 +109,37 @@ namespace sul.Hncom1.Player
             _buffer.WriteVaruint(latency);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-            if(reason!=0){  }
-            if(reason!=0){  }
-
-
-
-
-
-
-
-
+            //hubId = _buffer.ReadVaruint();
+            //reason = _buffer.ReadUbyte();
+            //type = _buffer.ReadUbyte();
+            //protocol = _buffer.ReadVaruint();
+            //version = _buffer.ReadString();
+            //username = _buffer.ReadString();
+            //displayName = _buffer.ReadString();
+            //if(reason!=0){ dimension = _buffer.ReadByte(); }
+            //if(reason!=0){ viewDistance = _buffer.ReadVaruint(); }
+            //clientAddress.DecodeBody(_buffer);
+            //serverAddress = _buffer.ReadString();
+            //serverPort = _buffer.ReadBigEndianUshort();
+            //uuid = _buffer.ReadUuid();
+            //skin.DecodeBody(_buffer);
+            //language = _buffer.ReadString();
+            //inputMode = _buffer.ReadUbyte();
+            //latency = _buffer.ReadVaruint();
         }
 
         public static Add FromBuffer(byte[] buffer)
         {
             var ret = new Add();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Remove : Packet
+    public class Remove : sul.Utils.Packet
     {
 
         public const byte Id = 16;
@@ -148,15 +148,15 @@ namespace sul.Hncom1.Player
         public const bool Serverbound = false;
 
         // reason
-        public const byte Left = 0;
-        public const byte TimedOut = 1;
-        public const byte Kicked = 2;
-        public const byte Transferred = 3;
+        public const byte LEFT = 0;
+        public const byte TIMED_OUT = 1;
+        public const byte KICKED = 2;
+        public const byte TRANSFERRED = 3;
 
         public uint hubId;
         public byte reason;
 
-        public Remove() {}
+        public Remove() : this(0, 0) {}
 
         public Remove(uint hubId, byte reason)
         {
@@ -166,41 +166,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteUbyte(reason);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //reason = _buffer.ReadUbyte();
         }
 
         public static Remove FromBuffer(byte[] buffer)
         {
             var ret = new Remove();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Kick : Packet
+    public class Kick : sul.Utils.Packet
     {
 
         public const byte Id = 17;
@@ -213,7 +213,7 @@ namespace sul.Hncom1.Player
         public bool translation;
         public string[] parameters;
 
-        public Kick() {}
+        public Kick() : this(0, "", false, new string[]{}) {}
 
         public Kick(uint hubId, string reason, bool translation, string[] parameters)
         {
@@ -225,45 +225,45 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(reason)); _buffer.WriteString(reason);
             _buffer.WriteBool(translation);
-            if(translation==true){ _buffer.WriteVaruint(parameters.Length); foreach(string parametersChild in parameters){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(parametersChild)); _buffer.WriteString(parametersChild); } }
+            if(translation==true){ _buffer.WriteVaruint(parameters.Length); foreach (string parametersChild in parameters){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(parametersChild)); _buffer.WriteString(parametersChild); } }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-            if(translation==true){  }
+            //hubId = _buffer.ReadVaruint();
+            //reason = _buffer.ReadString();
+            //translation = _buffer.ReadBool();
+            //if(translation==true){ parameters.DecodeBody(_buffer); }
         }
 
         public static Kick FromBuffer(byte[] buffer)
         {
             var ret = new Kick();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Transfer : Packet
+    public class Transfer : sul.Utils.Packet
     {
 
         public const byte Id = 18;
@@ -272,15 +272,15 @@ namespace sul.Hncom1.Player
         public const bool Serverbound = true;
 
         // on fail
-        public const byte Disconnect = 0;
-        public const byte Auto = 1;
-        public const byte Reconnect = 2;
+        public const byte DISCONNECT = 0;
+        public const byte AUTO = 1;
+        public const byte RECONNECT = 2;
 
         public uint hubId;
         public uint node;
         public byte onFail;
 
-        public Transfer() {}
+        public Transfer() : this(0, 0, 0) {}
 
         public Transfer(uint hubId, uint node, byte onFail)
         {
@@ -291,43 +291,43 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(node);
             _buffer.WriteUbyte(onFail);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //hubId = _buffer.ReadVaruint();
+            //node = _buffer.ReadVaruint();
+            //onFail = _buffer.ReadUbyte();
         }
 
         public static Transfer FromBuffer(byte[] buffer)
         {
             var ret = new Transfer();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateDisplayName : Packet
+    public class UpdateDisplayName : sul.Utils.Packet
     {
 
         public const byte Id = 19;
@@ -338,7 +338,7 @@ namespace sul.Hncom1.Player
         public uint hubId;
         public string displayName;
 
-        public UpdateDisplayName() {}
+        public UpdateDisplayName() : this(0, "") {}
 
         public UpdateDisplayName(uint hubId, string displayName)
         {
@@ -348,41 +348,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //displayName = _buffer.ReadString();
         }
 
         public static UpdateDisplayName FromBuffer(byte[] buffer)
         {
             var ret = new UpdateDisplayName();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateWorld : Packet
+    public class UpdateWorld : sul.Utils.Packet
     {
 
         public const byte Id = 20;
@@ -394,7 +394,7 @@ namespace sul.Hncom1.Player
         public string world;
         public sbyte dimension;
 
-        public UpdateWorld() {}
+        public UpdateWorld() : this(0, "", 0) {}
 
         public UpdateWorld(uint hubId, string world, sbyte dimension)
         {
@@ -405,43 +405,43 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(world)); _buffer.WriteString(world);
             _buffer.WriteByte(dimension);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //hubId = _buffer.ReadVaruint();
+            //world = _buffer.ReadString();
+            //dimension = _buffer.ReadByte();
         }
 
         public static UpdateWorld FromBuffer(byte[] buffer)
         {
             var ret = new UpdateWorld();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateViewDistance : Packet
+    public class UpdateViewDistance : sul.Utils.Packet
     {
 
         public const byte Id = 21;
@@ -452,7 +452,7 @@ namespace sul.Hncom1.Player
         public uint hubId;
         public uint viewDistance;
 
-        public UpdateViewDistance() {}
+        public UpdateViewDistance() : this(0, 0) {}
 
         public UpdateViewDistance(uint hubId, uint viewDistance)
         {
@@ -462,41 +462,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(viewDistance);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //viewDistance = _buffer.ReadVaruint();
         }
 
         public static UpdateViewDistance FromBuffer(byte[] buffer)
         {
             var ret = new UpdateViewDistance();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateLanguage : Packet
+    public class UpdateLanguage : sul.Utils.Packet
     {
 
         public const byte Id = 22;
@@ -507,7 +507,7 @@ namespace sul.Hncom1.Player
         public uint hubId;
         public string language;
 
-        public UpdateLanguage() {}
+        public UpdateLanguage() : this(0, "") {}
 
         public UpdateLanguage(uint hubId, string language)
         {
@@ -517,41 +517,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //language = _buffer.ReadString();
         }
 
         public static UpdateLanguage FromBuffer(byte[] buffer)
         {
             var ret = new UpdateLanguage();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateInputMode : Packet
+    public class UpdateInputMode : sul.Utils.Packet
     {
 
         public const byte Id = 23;
@@ -560,14 +560,14 @@ namespace sul.Hncom1.Player
         public const bool Serverbound = false;
 
         // input mode
-        public const byte Keyboard = 0;
-        public const byte Touch = 1;
-        public const byte Controller = 2;
+        public const byte KEYBOARD = 0;
+        public const byte TOUCH = 1;
+        public const byte CONTROLLER = 2;
 
         public uint hubId;
         public byte inputMode;
 
-        public UpdateInputMode() {}
+        public UpdateInputMode() : this(0, 0) {}
 
         public UpdateInputMode(uint hubId, byte inputMode)
         {
@@ -577,41 +577,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteUbyte(inputMode);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //inputMode = _buffer.ReadUbyte();
         }
 
         public static UpdateInputMode FromBuffer(byte[] buffer)
         {
             var ret = new UpdateInputMode();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateLatency : Packet
+    public class UpdateLatency : sul.Utils.Packet
     {
 
         public const byte Id = 24;
@@ -622,7 +622,7 @@ namespace sul.Hncom1.Player
         public uint hubId;
         public uint latency;
 
-        public UpdateLatency() {}
+        public UpdateLatency() : this(0, 0) {}
 
         public UpdateLatency(uint hubId, uint latency)
         {
@@ -632,41 +632,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(latency);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //latency = _buffer.ReadVaruint();
         }
 
         public static UpdateLatency FromBuffer(byte[] buffer)
         {
             var ret = new UpdateLatency();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdatePacketLoss : Packet
+    public class UpdatePacketLoss : sul.Utils.Packet
     {
 
         public const byte Id = 25;
@@ -677,7 +677,7 @@ namespace sul.Hncom1.Player
         public uint hubId;
         public float packetLoss;
 
-        public UpdatePacketLoss() {}
+        public UpdatePacketLoss() : this(0, 0) {}
 
         public UpdatePacketLoss(uint hubId, float packetLoss)
         {
@@ -687,41 +687,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteBigEndianFloat(packetLoss);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //packetLoss = _buffer.ReadBigEndianFloat();
         }
 
         public static UpdatePacketLoss FromBuffer(byte[] buffer)
         {
             var ret = new UpdatePacketLoss();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class GamePacket : Packet
+    public class GamePacket : sul.Utils.Packet
     {
 
         public const byte Id = 26;
@@ -732,7 +732,7 @@ namespace sul.Hncom1.Player
         public uint hubId;
         public byte[] packet;
 
-        public GamePacket() {}
+        public GamePacket() : this(0, new byte[]{}) {}
 
         public GamePacket(uint hubId, byte[] packet)
         {
@@ -742,41 +742,41 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteBytes(packet);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hubId = _buffer.ReadVaruint();
+            //packet = _buffer.ReadBytes();
         }
 
         public static GamePacket FromBuffer(byte[] buffer)
         {
             var ret = new GamePacket();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class OrderedGamePacket : Packet
+    public class OrderedGamePacket : sul.Utils.Packet
     {
 
         public const byte Id = 27;
@@ -788,7 +788,7 @@ namespace sul.Hncom1.Player
         public uint order;
         public byte[] packet;
 
-        public OrderedGamePacket() {}
+        public OrderedGamePacket() : this(0, 0, new byte[]{}) {}
 
         public OrderedGamePacket(uint hubId, uint order, byte[] packet)
         {
@@ -799,37 +799,37 @@ namespace sul.Hncom1.Player
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hubId);
             _buffer.WriteVaruint(order);
             _buffer.WriteBytes(packet);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //hubId = _buffer.ReadVaruint();
+            //order = _buffer.ReadVaruint();
+            //packet = _buffer.ReadBytes();
         }
 
         public static OrderedGamePacket FromBuffer(byte[] buffer)
         {
             var ret = new OrderedGamePacket();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

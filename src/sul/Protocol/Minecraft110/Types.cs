@@ -6,20 +6,18 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft110.xml
  */
-using Utils.Buffer;
-using Utils.LengthPrefixedType;
-using Utils.Stream;
+using System.Text;
 
 namespace sul.Minecraft110.Types
 {
 
-    public class Statistic : Stream
+    public class Statistic : sul.Utils.Stream
     {
 
         public string name;
         public uint @value;
 
-        public Statistic() {}
+        public Statistic() : this("", 0) {}
 
         public Statistic(string name, uint @value)
         {
@@ -27,28 +25,28 @@ namespace sul.Minecraft110.Types
             this.@value = @value;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteVaruint(@value);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //name = _buffer.ReadString();
+            //@value = _buffer.ReadVaruint();
         }
 
     }
 
-    public class BlockChange : Stream
+    public class BlockChange : sul.Utils.Stream
     {
 
         public byte xz;
         public byte y;
         public uint block;
 
-        public BlockChange() {}
+        public BlockChange() : this(0, 0, 0) {}
 
         public BlockChange(byte xz, byte y, uint block)
         {
@@ -57,23 +55,23 @@ namespace sul.Minecraft110.Types
             this.block = block;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(xz);
             _buffer.WriteUbyte(y);
             _buffer.WriteVaruint(block);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //xz = _buffer.ReadUbyte();
+            //y = _buffer.ReadUbyte();
+            //block = _buffer.ReadVaruint();
         }
 
     }
 
-    public class Slot : Stream
+    public class Slot : sul.Utils.Stream
     {
 
         public short id;
@@ -81,7 +79,7 @@ namespace sul.Minecraft110.Types
         public ushort damage;
         public byte[] nbt;
 
-        public Slot() {}
+        public Slot() : this(0, 0, 0, new byte[]{}) {}
 
         public Slot(short id, byte count, ushort damage, byte[] nbt)
         {
@@ -91,7 +89,7 @@ namespace sul.Minecraft110.Types
             this.nbt = nbt;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianShort(id);
             if(id>0){ _buffer.WriteUbyte(count); }
@@ -99,54 +97,54 @@ namespace sul.Minecraft110.Types
             if(id>0){ _buffer.WriteBytes(nbt); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-            if(id>0){  }
-            if(id>0){  }
-            if(id>0){  }
+            //id = _buffer.ReadBigEndianShort();
+            //if(id>0){ count = _buffer.ReadUbyte(); }
+            //if(id>0){ damage = _buffer.ReadBigEndianUshort(); }
+            //if(id>0){ nbt = _buffer.ReadBytes(); }
         }
 
     }
 
-    public class Icon : Stream
+    public class Icon : sul.Utils.Stream
     {
 
         // direction and type
-        public const byte WhiteArrow = 0;
-        public const byte GreenArrow = 1;
-        public const byte RedArrow = 2;
-        public const byte BlueArrow = 3;
-        public const byte WhiteCross = 4;
-        public const byte RedPointer = 5;
-        public const byte WhiteCircle = 6;
+        public const byte WHITE_ARROW = 0;
+        public const byte GREEN_ARROW = 1;
+        public const byte RED_ARROW = 2;
+        public const byte BLUE_ARROW = 3;
+        public const byte WHITE_CROSS = 4;
+        public const byte RED_POINTER = 5;
+        public const byte WHITE_CIRCLE = 6;
 
         public byte directionAndType;
-        public Tuple<byte, byte> position;
+        public System.Tuple<byte, byte> position;
 
-        public Icon() {}
+        public Icon() : this(0, null) {}
 
-        public Icon(byte directionAndType, Tuple<byte, byte> position)
+        public Icon(byte directionAndType, System.Tuple<byte, byte> position)
         {
             this.directionAndType = directionAndType;
             this.position = position;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(directionAndType);
-            _buffer.WriteUbyte(position[0]); _buffer.WriteUbyte(position[1]);
+            _buffer.WriteUbyte(position.Item1); _buffer.WriteUbyte(position.Item2);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //directionAndType = _buffer.ReadUbyte();
+            //position.Item1 = _buffer.ReadUbyte(); position.Item2 = _buffer.ReadUbyte();
         }
 
     }
 
-    public class Property : Stream
+    public class Property : sul.Utils.Stream
     {
 
         public string name;
@@ -154,7 +152,7 @@ namespace sul.Minecraft110.Types
         public bool signed;
         public string signature;
 
-        public Property() {}
+        public Property() : this("", "", false, "") {}
 
         public Property(string name, string @value, bool signed, string signature)
         {
@@ -164,7 +162,7 @@ namespace sul.Minecraft110.Types
             this.signature = signature;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(@value)); _buffer.WriteString(@value);
@@ -172,36 +170,36 @@ namespace sul.Minecraft110.Types
             if(signed==true){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(signature)); _buffer.WriteString(signature); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-            if(signed==true){  }
+            //name = _buffer.ReadString();
+            //@value = _buffer.ReadString();
+            //signed = _buffer.ReadBool();
+            //if(signed==true){ signature = _buffer.ReadString(); }
         }
 
     }
 
-    public class ListAddPlayer : Stream
+    public class ListAddPlayer : sul.Utils.Stream
     {
 
         // gamemode
-        public const uint Survival = 0;
-        public const uint Creative = 1;
-        public const uint Adventure = 2;
-        public const uint Spectator = 3;
+        public const uint SURVIVAL = 0;
+        public const uint CREATIVE = 1;
+        public const uint ADVENTURE = 2;
+        public const uint SPECTATOR = 3;
 
-        public Guid uuid;
+        public System.Guid uuid;
         public string name;
-        public Types.Property[] properties;
+        public Property[] properties;
         public uint gamemode;
         public uint latency;
         public bool hasDisplayName;
         public string displayName;
 
-        public ListAddPlayer() {}
+        public ListAddPlayer() : this(System.Guid.Empty, "", new Property[]{}, 0, 0, false, "") {}
 
-        public ListAddPlayer(Guid uuid, string name, Types.Property[] properties, uint gamemode, uint latency, bool hasDisplayName, string displayName)
+        public ListAddPlayer(System.Guid uuid, string name, Property[] properties, uint gamemode, uint latency, bool hasDisplayName, string displayName)
         {
             this.uuid = uuid;
             this.name = name;
@@ -212,200 +210,200 @@ namespace sul.Minecraft110.Types
             this.displayName = displayName;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
-            _buffer.WriteVaruint(properties.Length); foreach(Types.Property propertiesChild in properties){ propertiesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(properties.Length); foreach (Property propertiesChild in properties){ propertiesChild.EncodeBody(_buffer); }
             _buffer.WriteVaruint(gamemode);
             _buffer.WriteVaruint(latency);
             _buffer.WriteBool(hasDisplayName);
             if(hasDisplayName==true){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-            if(hasDisplayName==true){  }
+            //uuid = _buffer.ReadUuid();
+            //name = _buffer.ReadString();
+            //properties.DecodeBody(_buffer);
+            //gamemode = _buffer.ReadVaruint();
+            //latency = _buffer.ReadVaruint();
+            //hasDisplayName = _buffer.ReadBool();
+            //if(hasDisplayName==true){ displayName = _buffer.ReadString(); }
         }
 
     }
 
-    public class ListUpdateGamemode : Stream
+    public class ListUpdateGamemode : sul.Utils.Stream
     {
 
         // gamemode
-        public const uint Survival = 0;
-        public const uint Creative = 1;
-        public const uint Adventure = 2;
-        public const uint Spectator = 3;
+        public const uint SURVIVAL = 0;
+        public const uint CREATIVE = 1;
+        public const uint ADVENTURE = 2;
+        public const uint SPECTATOR = 3;
 
-        public Guid uuid;
+        public System.Guid uuid;
         public uint gamemode;
 
-        public ListUpdateGamemode() {}
+        public ListUpdateGamemode() : this(System.Guid.Empty, 0) {}
 
-        public ListUpdateGamemode(Guid uuid, uint gamemode)
+        public ListUpdateGamemode(System.Guid uuid, uint gamemode)
         {
             this.uuid = uuid;
             this.gamemode = gamemode;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
             _buffer.WriteVaruint(gamemode);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //uuid = _buffer.ReadUuid();
+            //gamemode = _buffer.ReadVaruint();
         }
 
     }
 
-    public class ListUpdateLatency : Stream
+    public class ListUpdateLatency : sul.Utils.Stream
     {
 
-        public Guid uuid;
+        public System.Guid uuid;
         public uint latency;
 
-        public ListUpdateLatency() {}
+        public ListUpdateLatency() : this(System.Guid.Empty, 0) {}
 
-        public ListUpdateLatency(Guid uuid, uint latency)
+        public ListUpdateLatency(System.Guid uuid, uint latency)
         {
             this.uuid = uuid;
             this.latency = latency;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
             _buffer.WriteVaruint(latency);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //uuid = _buffer.ReadUuid();
+            //latency = _buffer.ReadVaruint();
         }
 
     }
 
-    public class ListUpdateDisplayName : Stream
+    public class ListUpdateDisplayName : sul.Utils.Stream
     {
 
-        public Guid uuid;
+        public System.Guid uuid;
         public bool hasDisplayName;
         public string displayName;
 
-        public ListUpdateDisplayName() {}
+        public ListUpdateDisplayName() : this(System.Guid.Empty, false, "") {}
 
-        public ListUpdateDisplayName(Guid uuid, bool hasDisplayName, string displayName)
+        public ListUpdateDisplayName(System.Guid uuid, bool hasDisplayName, string displayName)
         {
             this.uuid = uuid;
             this.hasDisplayName = hasDisplayName;
             this.displayName = displayName;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
             _buffer.WriteBool(hasDisplayName);
             if(hasDisplayName==true){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-            if(hasDisplayName==true){  }
+            //uuid = _buffer.ReadUuid();
+            //hasDisplayName = _buffer.ReadBool();
+            //if(hasDisplayName==true){ displayName = _buffer.ReadString(); }
         }
 
     }
 
-    public class Modifier : Stream
+    public class Modifier : sul.Utils.Stream
     {
 
         // operation
-        public const byte AddSubstractAmount = 0;
-        public const byte AddSubstractAmountPercentage = 1;
-        public const byte MultiplyAmountPercentage = 2;
+        public const byte ADD_SUBSTRACT_AMOUNT = 0;
+        public const byte ADD_SUBSTRACT_AMOUNT_PERCENTAGE = 1;
+        public const byte MULTIPLY_AMOUNT_PERCENTAGE = 2;
 
-        public Guid uuid;
+        public System.Guid uuid;
         public double amount;
         public byte operation;
 
-        public Modifier() {}
+        public Modifier() : this(System.Guid.Empty, 0, 0) {}
 
-        public Modifier(Guid uuid, double amount, byte operation)
+        public Modifier(System.Guid uuid, double amount, byte operation)
         {
             this.uuid = uuid;
             this.amount = amount;
             this.operation = operation;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
             _buffer.WriteBigEndianDouble(amount);
             _buffer.WriteUbyte(operation);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //uuid = _buffer.ReadUuid();
+            //amount = _buffer.ReadBigEndianDouble();
+            //operation = _buffer.ReadUbyte();
         }
 
     }
 
-    public class Attribute : Stream
+    public class Attribute : sul.Utils.Stream
     {
 
         public string key;
         public double @value;
-        public Types.Modifier[] modifiers;
+        public Modifier[] modifiers;
 
-        public Attribute() {}
+        public Attribute() : this("", 0, new Modifier[]{}) {}
 
-        public Attribute(string key, double @value, Types.Modifier[] modifiers)
+        public Attribute(string key, double @value, Modifier[] modifiers)
         {
             this.key = key;
             this.@value = @value;
             this.modifiers = modifiers;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(key)); _buffer.WriteString(key);
             _buffer.WriteBigEndianDouble(@value);
-            _buffer.WriteVaruint(modifiers.Length); foreach(Types.Modifier modifiersChild in modifiers){ modifiersChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(modifiers.Length); foreach (Modifier modifiersChild in modifiers){ modifiersChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //key = _buffer.ReadString();
+            //@value = _buffer.ReadBigEndianDouble();
+            //modifiers.DecodeBody(_buffer);
         }
 
     }
 
-    public class OptionalPosition : Stream
+    public class OptionalPosition : sul.Utils.Stream
     {
 
         public bool hasPosition;
         public ulong position;
 
-        public OptionalPosition() {}
+        public OptionalPosition() : this(false, 0) {}
 
         public OptionalPosition(bool hasPosition, ulong position)
         {
@@ -413,44 +411,44 @@ namespace sul.Minecraft110.Types
             this.position = position;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(hasPosition);
             if(hasPosition==true){ _buffer.WriteBigEndianUlong(position); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-            if(hasPosition==true){  }
+            //hasPosition = _buffer.ReadBool();
+            //if(hasPosition==true){ position = _buffer.ReadBigEndianUlong(); }
         }
 
     }
 
-    public class OptionalUuid : Stream
+    public class OptionalUuid : sul.Utils.Stream
     {
 
         public bool hasUuid;
-        public Guid uuid;
+        public System.Guid uuid;
 
-        public OptionalUuid() {}
+        public OptionalUuid() : this(false, System.Guid.Empty) {}
 
-        public OptionalUuid(bool hasUuid, Guid uuid)
+        public OptionalUuid(bool hasUuid, System.Guid uuid)
         {
             this.hasUuid = hasUuid;
             this.uuid = uuid;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(hasUuid);
             _buffer.WriteUuid(uuid);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hasUuid = _buffer.ReadBool();
+            //uuid = _buffer.ReadUuid();
         }
 
     }

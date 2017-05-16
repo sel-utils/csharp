@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket102.xml
  */
-using Types = sul.Pocket102.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Pocket102.Types;
 
 namespace sul.Pocket102.Play
 {
 
-    public class Login : Packet
+    public class Login : sul.Utils.Packet
     {
 
         public const byte Id = 1;
@@ -23,14 +23,14 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // edition
-        public const byte Classic = 0;
-        public const byte Education = 1;
+        public const byte CLASSIC = 0;
+        public const byte EDUCATION = 1;
 
         public uint protocol;
         public byte edition;
         public byte[] body;
 
-        public Login() {}
+        public Login() : this(0, 0, new byte[]{}) {}
 
         public Login(uint protocol, byte edition, byte[] body)
         {
@@ -41,43 +41,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUint(protocol);
             _buffer.WriteUbyte(edition);
             _buffer.WriteVaruint(body.Length); _buffer.WriteBytes(body);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //protocol = _buffer.ReadBigEndianUint();
+            //edition = _buffer.ReadUbyte();
+            //body.DecodeBody(_buffer);
         }
 
         public static Login FromBuffer(byte[] buffer)
         {
             var ret = new Login();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayStatus : Packet
+    public class PlayStatus : sul.Utils.Packet
     {
 
         public const byte Id = 2;
@@ -86,16 +86,16 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // status
-        public const uint Ok = 0;
-        public const uint OutdatedClient = 1;
-        public const uint OutdatedServer = 2;
-        public const uint Spawned = 3;
-        public const uint InvalidTenant = 4;
-        public const uint EditionMismatch = 5;
+        public const uint OK = 0;
+        public const uint OUTDATED_CLIENT = 1;
+        public const uint OUTDATED_SERVER = 2;
+        public const uint SPAWNED = 3;
+        public const uint INVALID_TENANT = 4;
+        public const uint EDITION_MISMATCH = 5;
 
         public uint status;
 
-        public PlayStatus() {}
+        public PlayStatus() : this(0) {}
 
         public PlayStatus(uint status)
         {
@@ -104,39 +104,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUint(status);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //status = _buffer.ReadBigEndianUint();
         }
 
         public static PlayStatus FromBuffer(byte[] buffer)
         {
             var ret = new PlayStatus();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ServerToClientHandshake : Packet
+    public class ServerToClientHandshake : sul.Utils.Packet
     {
 
         public const byte Id = 3;
@@ -147,7 +147,7 @@ namespace sul.Pocket102.Play
         public string serverPublicKey;
         public byte[] token;
 
-        public ServerToClientHandshake() {}
+        public ServerToClientHandshake() : this("", new byte[]{}) {}
 
         public ServerToClientHandshake(string serverPublicKey, byte[] token)
         {
@@ -157,41 +157,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(serverPublicKey)); _buffer.WriteString(serverPublicKey);
             _buffer.WriteVaruint(token.Length); _buffer.WriteBytes(token);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //serverPublicKey = _buffer.ReadString();
+            //token.DecodeBody(_buffer);
         }
 
         public static ServerToClientHandshake FromBuffer(byte[] buffer)
         {
             var ret = new ServerToClientHandshake();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ClientToServerHandshake : Packet
+    public class ClientToServerHandshake : sul.Utils.Packet
     {
 
         public const byte Id = 4;
@@ -201,29 +201,32 @@ namespace sul.Pocket102.Play
 
 
 
-        public ClientToServerHandshake() {}
+        public ClientToServerHandshake()
+        {
+
+        }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
@@ -231,13 +234,13 @@ namespace sul.Pocket102.Play
         public static ClientToServerHandshake FromBuffer(byte[] buffer)
         {
             var ret = new ClientToServerHandshake();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Disconnect : Packet
+    public class Disconnect : sul.Utils.Packet
     {
 
         public const byte Id = 5;
@@ -248,7 +251,7 @@ namespace sul.Pocket102.Play
         public bool hideDisconnectionScreen;
         public string message;
 
-        public Disconnect() {}
+        public Disconnect() : this(false, "") {}
 
         public Disconnect(bool hideDisconnectionScreen, string message)
         {
@@ -258,41 +261,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(hideDisconnectionScreen);
             if(hideDisconnectionScreen==false){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-            if(hideDisconnectionScreen==false){  }
+            //hideDisconnectionScreen = _buffer.ReadBool();
+            //if(hideDisconnectionScreen==false){ message = _buffer.ReadString(); }
         }
 
         public static Disconnect FromBuffer(byte[] buffer)
         {
             var ret = new Disconnect();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Batch : Packet
+    public class Batch : sul.Utils.Packet
     {
 
         public const byte Id = 6;
@@ -302,7 +305,7 @@ namespace sul.Pocket102.Play
 
         public byte[] data;
 
-        public Batch() {}
+        public Batch() : this(new byte[]{}) {}
 
         public Batch(byte[] data)
         {
@@ -311,39 +314,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //data.DecodeBody(_buffer);
         }
 
         public static Batch FromBuffer(byte[] buffer)
         {
             var ret = new Batch();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ResourcePacksInfo : Packet
+    public class ResourcePacksInfo : sul.Utils.Packet
     {
 
         public const byte Id = 7;
@@ -352,12 +355,12 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public bool mustAccept;
-        public Types.PackWithSize[] behaviourPacks;
-        public Types.PackWithSize[] resourcePacks;
+        public PackWithSize[] behaviourPacks;
+        public PackWithSize[] resourcePacks;
 
-        public ResourcePacksInfo() {}
+        public ResourcePacksInfo() : this(false, new PackWithSize[]{}, new PackWithSize[]{}) {}
 
-        public ResourcePacksInfo(bool mustAccept, Types.PackWithSize[] behaviourPacks, Types.PackWithSize[] resourcePacks)
+        public ResourcePacksInfo(bool mustAccept, PackWithSize[] behaviourPacks, PackWithSize[] resourcePacks)
         {
             this.mustAccept = mustAccept;
             this.behaviourPacks = behaviourPacks;
@@ -366,43 +369,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(mustAccept);
-            _buffer.WriteLittleEndianUshort(behaviourPacks.Length); foreach(Types.PackWithSize behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
-            _buffer.WriteLittleEndianUshort(resourcePacks.Length); foreach(Types.PackWithSize resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(behaviourPacks.Length); foreach (PackWithSize behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(resourcePacks.Length); foreach (PackWithSize resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //mustAccept = _buffer.ReadBool();
+            //behaviourPacks.DecodeBody(_buffer);
+            //resourcePacks.DecodeBody(_buffer);
         }
 
         public static ResourcePacksInfo FromBuffer(byte[] buffer)
         {
             var ret = new ResourcePacksInfo();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ResourcePacksStackPacket : Packet
+    public class ResourcePacksStackPacket : sul.Utils.Packet
     {
 
         public const byte Id = 8;
@@ -411,12 +414,12 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public bool mustAccept;
-        public Types.Pack[] behaviourPacks;
-        public Types.Pack[] resourcePacks;
+        public Pack[] behaviourPacks;
+        public Pack[] resourcePacks;
 
-        public ResourcePacksStackPacket() {}
+        public ResourcePacksStackPacket() : this(false, new Pack[]{}, new Pack[]{}) {}
 
-        public ResourcePacksStackPacket(bool mustAccept, Types.Pack[] behaviourPacks, Types.Pack[] resourcePacks)
+        public ResourcePacksStackPacket(bool mustAccept, Pack[] behaviourPacks, Pack[] resourcePacks)
         {
             this.mustAccept = mustAccept;
             this.behaviourPacks = behaviourPacks;
@@ -425,43 +428,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(mustAccept);
-            _buffer.WriteLittleEndianUshort(behaviourPacks.Length); foreach(Types.Pack behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
-            _buffer.WriteLittleEndianUshort(resourcePacks.Length); foreach(Types.Pack resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(behaviourPacks.Length); foreach (Pack behaviourPacksChild in behaviourPacks){ behaviourPacksChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(resourcePacks.Length); foreach (Pack resourcePacksChild in resourcePacks){ resourcePacksChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //mustAccept = _buffer.ReadBool();
+            //behaviourPacks.DecodeBody(_buffer);
+            //resourcePacks.DecodeBody(_buffer);
         }
 
         public static ResourcePacksStackPacket FromBuffer(byte[] buffer)
         {
             var ret = new ResourcePacksStackPacket();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ResourcePackClientResponse : Packet
+    public class ResourcePackClientResponse : sul.Utils.Packet
     {
 
         public const byte Id = 9;
@@ -470,15 +473,15 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // status
-        public const byte Refused = 1;
-        public const byte SendPacks = 2;
-        public const byte HaveAllPacks = 3;
-        public const byte Completed = 4;
+        public const byte REFUSED = 1;
+        public const byte SEND_PACKS = 2;
+        public const byte HAVE_ALL_PACKS = 3;
+        public const byte COMPLETED = 4;
 
         public byte status;
         public string[] packIds;
 
-        public ResourcePackClientResponse() {}
+        public ResourcePackClientResponse() : this(0, new string[]{}) {}
 
         public ResourcePackClientResponse(byte status, string[] packIds)
         {
@@ -488,41 +491,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
-            _buffer.WriteLittleEndianUshort(packIds.Length); foreach(string packIdsChild in packIds){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(packIdsChild)); _buffer.WriteString(packIdsChild); }
+            _buffer.WriteBigEndianUshort(packIds.Length); foreach (string packIdsChild in packIds){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(packIdsChild)); _buffer.WriteString(packIdsChild); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //status = _buffer.ReadUbyte();
+            //packIds.DecodeBody(_buffer);
         }
 
         public static ResourcePackClientResponse FromBuffer(byte[] buffer)
         {
             var ret = new ResourcePackClientResponse();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Text : Packet
+    public class Text : sul.Utils.Packet
     {
 
         public const byte Id = 10;
@@ -532,7 +535,7 @@ namespace sul.Pocket102.Play
 
         public byte type;
 
-        public Text() {}
+        public Text() : this(0) {}
 
         public Text(byte type)
         {
@@ -541,39 +544,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(type);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //type = _buffer.ReadUbyte();
         }
 
         public static Text FromBuffer(byte[] buffer)
         {
             var ret = new Text();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetTime : Packet
+    public class SetTime : sul.Utils.Packet
     {
 
         public const byte Id = 11;
@@ -584,7 +587,7 @@ namespace sul.Pocket102.Play
         public int time;
         public bool daylightCycle;
 
-        public SetTime() {}
+        public SetTime() : this(0, false) {}
 
         public SetTime(int time, bool daylightCycle)
         {
@@ -594,41 +597,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(time);
             _buffer.WriteBool(daylightCycle);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //time = _buffer.ReadVarint();
+            //daylightCycle = _buffer.ReadBool();
         }
 
         public static SetTime FromBuffer(byte[] buffer)
         {
             var ret = new SetTime();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class StartGame : Packet
+    public class StartGame : sul.Utils.Packet
     {
 
         public const byte Id = 12;
@@ -637,40 +640,40 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // dimension
-        public const int Overworld = 0;
-        public const int Nether = 1;
-        public const int End = 2;
+        public const int OVERWORLD = 0;
+        public const int NETHER = 1;
+        public const int END = 2;
 
         // generator
-        public const int Old = 0;
-        public const int Infinite = 1;
-        public const int Flat = 2;
+        public const int OLD = 0;
+        public const int INFINITE = 1;
+        public const int FLAT = 2;
 
         // world gamemode
-        public const int Survival = 0;
-        public const int Creative = 1;
+        public const int SURVIVAL = 0;
+        public const int CREATIVE = 1;
 
         // difficulty
-        public const int Peaceful = 0;
-        public const int Easy = 1;
-        public const int Normal = 2;
-        public const int Hard = 3;
+        public const int PEACEFUL = 0;
+        public const int EASY = 1;
+        public const int NORMAL = 2;
+        public const int HARD = 3;
 
         // edition
-        public const byte Classic = 0;
-        public const byte Education = 1;
+        public const byte CLASSIC = 0;
+        public const byte EDUCATION = 1;
 
         public long entityId;
         public long runtimeId;
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public float yaw;
         public float pitch;
         public int seed;
-        public int dimension = 0;
-        public int generator = 1;
+        public int dimension;
+        public int generator;
         public int worldGamemode;
         public int difficulty;
-        public Tuple<int, int, int> spawnPosition;
+        public System.Tuple<int, int, int> spawnPosition;
         public bool loadedInCreative;
         public int time;
         public byte edition;
@@ -681,9 +684,9 @@ namespace sul.Pocket102.Play
         public string levelId;
         public string worldName;
 
-        public StartGame() {}
+        public StartGame() : this(0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, false, false, "", "") {}
 
-        public StartGame(long entityId, long runtimeId, Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte edition, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, string levelId, string worldName)
+        public StartGame(long entityId, long runtimeId, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte edition, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, string levelId, string worldName)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -709,24 +712,24 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteLittleEndianFloat(yaw);
             _buffer.WriteLittleEndianFloat(pitch);
             _buffer.WriteVarint(seed);
@@ -734,7 +737,7 @@ namespace sul.Pocket102.Play
             _buffer.WriteVarint(generator);
             _buffer.WriteVarint(worldGamemode);
             _buffer.WriteVarint(difficulty);
-            _buffer.WriteVarint(spawnPosition[0]); _buffer.WriteVarint(spawnPosition[1]); _buffer.WriteVarint(spawnPosition[2]);
+            _buffer.WriteVarint(spawnPosition.Item1); _buffer.WriteVarint(spawnPosition.Item2); _buffer.WriteVarint(spawnPosition.Item3);
             _buffer.WriteBool(loadedInCreative);
             _buffer.WriteVarint(time);
             _buffer.WriteUbyte(edition);
@@ -746,40 +749,40 @@ namespace sul.Pocket102.Play
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(worldName)); _buffer.WriteString(worldName);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //runtimeId = _buffer.ReadVarlong();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //yaw = _buffer.ReadLittleEndianFloat();
+            //pitch = _buffer.ReadLittleEndianFloat();
+            //seed = _buffer.ReadVarint();
+            //dimension = _buffer.ReadVarint();
+            //generator = _buffer.ReadVarint();
+            //worldGamemode = _buffer.ReadVarint();
+            //difficulty = _buffer.ReadVarint();
+            //spawnPosition.Item1 = _buffer.ReadVarint(); spawnPosition.Item2 = _buffer.ReadVarint(); spawnPosition.Item3 = _buffer.ReadVarint();
+            //loadedInCreative = _buffer.ReadBool();
+            //time = _buffer.ReadVarint();
+            //edition = _buffer.ReadUbyte();
+            //rainLevel = _buffer.ReadLittleEndianFloat();
+            //lightingLevel = _buffer.ReadLittleEndianFloat();
+            //commandsEnabled = _buffer.ReadBool();
+            //textureRequired = _buffer.ReadBool();
+            //levelId = _buffer.ReadString();
+            //worldName = _buffer.ReadString();
         }
 
         public static StartGame FromBuffer(byte[] buffer)
         {
             var ret = new StartGame();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AddPlayer : Packet
+    public class AddPlayer : sul.Utils.Packet
     {
 
         public const byte Id = 13;
@@ -787,21 +790,21 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Guid uuid;
+        public System.Guid uuid;
         public string username;
         public long entityId;
         public long runtimeId;
-        public Tuple<float, float, float> position;
-        public Tuple<float, float, float> motion;
+        public System.Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> motion;
         public float pitch;
         public float headYaw;
         public float yaw;
-        public Types.Slot heldItem;
-        public sul.Metadata.Pocket102.Metadata metadata;
+        public Slot heldItem;
+        public Metadata metadata;
 
-        public AddPlayer() {}
+        public AddPlayer() : this(System.Guid.Empty, "", 0, 0, null, null, 0, 0, 0, new Slot(), new Metadata()) {}
 
-        public AddPlayer(Guid uuid, string username, long entityId, long runtimeId, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Types.Slot heldItem, sul.Metadata.Pocket102.Metadata metadata)
+        public AddPlayer(System.Guid uuid, string username, long entityId, long runtimeId, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Slot heldItem, Metadata metadata)
         {
             this.uuid = uuid;
             this.username = username;
@@ -818,27 +821,27 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(username)); _buffer.WriteString(username);
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
-            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
+            _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
             _buffer.WriteLittleEndianFloat(pitch);
             _buffer.WriteLittleEndianFloat(headYaw);
             _buffer.WriteLittleEndianFloat(yaw);
@@ -846,31 +849,31 @@ namespace sul.Pocket102.Play
             metadata.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-
-
-
-
+            //uuid = _buffer.ReadUuid();
+            //username = _buffer.ReadString();
+            //entityId = _buffer.ReadVarlong();
+            //runtimeId = _buffer.ReadVarlong();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
+            //pitch = _buffer.ReadLittleEndianFloat();
+            //headYaw = _buffer.ReadLittleEndianFloat();
+            //yaw = _buffer.ReadLittleEndianFloat();
+            //heldItem.DecodeBody(_buffer);
+            //metadata.DecodeBody(_buffer);
         }
 
         public static AddPlayer FromBuffer(byte[] buffer)
         {
             var ret = new AddPlayer();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AddEntity : Packet
+    public class AddEntity : sul.Utils.Packet
     {
 
         public const byte Id = 14;
@@ -881,17 +884,17 @@ namespace sul.Pocket102.Play
         public long entityId;
         public long runtimeId;
         public uint type;
-        public Tuple<float, float, float> position;
-        public Tuple<float, float, float> motion;
+        public System.Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> motion;
         public float pitch;
         public float yaw;
-        public Types.Attribute[] attributes;
-        public sul.Metadata.Pocket102.Metadata metadata;
-        public Types.Link[] links;
+        public Attribute[] attributes;
+        public Metadata metadata;
+        public Link[] links;
 
-        public AddEntity() {}
+        public AddEntity() : this(0, 0, 0, null, null, 0, 0, new Attribute[]{}, new Metadata(), new Link[]{}) {}
 
-        public AddEntity(long entityId, long runtimeId, uint type, Tuple<float, float, float> position, Tuple<float, float, float> motion, float pitch, float yaw, Types.Attribute[] attributes, sul.Metadata.Pocket102.Metadata metadata, Types.Link[] links)
+        public AddEntity(long entityId, long runtimeId, uint type, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float yaw, Attribute[] attributes, Metadata metadata, Link[] links)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -907,57 +910,57 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
             _buffer.WriteVaruint(type);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
-            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
+            _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
             _buffer.WriteLittleEndianFloat(pitch);
             _buffer.WriteLittleEndianFloat(yaw);
-            _buffer.WriteVaruint(attributes.Length); foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(attributes.Length); foreach (Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
             metadata.EncodeBody(_buffer);
-            _buffer.WriteVaruint(links.Length); foreach(Types.Link linksChild in links){ linksChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(links.Length); foreach (Link linksChild in links){ linksChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //runtimeId = _buffer.ReadVarlong();
+            //type = _buffer.ReadVaruint();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
+            //pitch = _buffer.ReadLittleEndianFloat();
+            //yaw = _buffer.ReadLittleEndianFloat();
+            //attributes.DecodeBody(_buffer);
+            //metadata.DecodeBody(_buffer);
+            //links.DecodeBody(_buffer);
         }
 
         public static AddEntity FromBuffer(byte[] buffer)
         {
             var ret = new AddEntity();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class RemoveEntity : Packet
+    public class RemoveEntity : sul.Utils.Packet
     {
 
         public const byte Id = 15;
@@ -967,7 +970,7 @@ namespace sul.Pocket102.Play
 
         public long entityId;
 
-        public RemoveEntity() {}
+        public RemoveEntity() : this(0) {}
 
         public RemoveEntity(long entityId)
         {
@@ -976,39 +979,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //entityId = _buffer.ReadVarlong();
         }
 
         public static RemoveEntity FromBuffer(byte[] buffer)
         {
             var ret = new RemoveEntity();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AddItemEntity : Packet
+    public class AddItemEntity : sul.Utils.Packet
     {
 
         public const byte Id = 16;
@@ -1018,13 +1021,13 @@ namespace sul.Pocket102.Play
 
         public long entityId;
         public long runtimeId;
-        public Types.Slot item;
-        public Tuple<float, float, float> position;
-        public Tuple<float, float, float> motion;
+        public Slot item;
+        public System.Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> motion;
 
-        public AddItemEntity() {}
+        public AddItemEntity() : this(0, 0, new Slot(), null, null) {}
 
-        public AddItemEntity(long entityId, long runtimeId, Types.Slot item, Tuple<float, float, float> position, Tuple<float, float, float> motion)
+        public AddItemEntity(long entityId, long runtimeId, Slot item, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -1035,47 +1038,47 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
             item.EncodeBody(_buffer);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
-            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
+            _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //runtimeId = _buffer.ReadVarlong();
+            //item.DecodeBody(_buffer);
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
         }
 
         public static AddItemEntity FromBuffer(byte[] buffer)
         {
             var ret = new AddItemEntity();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AddHangingEntity : Packet
+    public class AddHangingEntity : sul.Utils.Packet
     {
 
         public const byte Id = 17;
@@ -1085,12 +1088,12 @@ namespace sul.Pocket102.Play
 
         public long entityId;
         public long runtimeId;
-        public Types.BlockPosition position;
+        public BlockPosition position;
         public int unknown3;
 
-        public AddHangingEntity() {}
+        public AddHangingEntity() : this(0, 0, new BlockPosition(), 0) {}
 
-        public AddHangingEntity(long entityId, long runtimeId, Types.BlockPosition position, int unknown3)
+        public AddHangingEntity(long entityId, long runtimeId, BlockPosition position, int unknown3)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -1100,20 +1103,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
@@ -1121,24 +1124,24 @@ namespace sul.Pocket102.Play
             _buffer.WriteVarint(unknown3);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //runtimeId = _buffer.ReadVarlong();
+            //position.DecodeBody(_buffer);
+            //unknown3 = _buffer.ReadVarint();
         }
 
         public static AddHangingEntity FromBuffer(byte[] buffer)
         {
             var ret = new AddHangingEntity();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class TakeItemEntity : Packet
+    public class TakeItemEntity : sul.Utils.Packet
     {
 
         public const byte Id = 18;
@@ -1149,7 +1152,7 @@ namespace sul.Pocket102.Play
         public long collected;
         public long collector;
 
-        public TakeItemEntity() {}
+        public TakeItemEntity() : this(0, 0) {}
 
         public TakeItemEntity(long collected, long collector)
         {
@@ -1159,41 +1162,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(collected);
             _buffer.WriteVarlong(collector);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //collected = _buffer.ReadVarlong();
+            //collector = _buffer.ReadVarlong();
         }
 
         public static TakeItemEntity FromBuffer(byte[] buffer)
         {
             var ret = new TakeItemEntity();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class MoveEntity : Packet
+    public class MoveEntity : sul.Utils.Packet
     {
 
         public const byte Id = 19;
@@ -1202,14 +1205,14 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public byte pitch;
         public byte headYaw;
         public byte yaw;
 
-        public MoveEntity() {}
+        public MoveEntity() : this(0, null, 0, 0, 0) {}
 
-        public MoveEntity(long entityId, Tuple<float, float, float> position, byte pitch, byte headYaw, byte yaw)
+        public MoveEntity(long entityId, System.Tuple<float, float, float> position, byte pitch, byte headYaw, byte yaw)
         {
             this.entityId = entityId;
             this.position = position;
@@ -1220,47 +1223,47 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteUbyte(pitch);
             _buffer.WriteUbyte(headYaw);
             _buffer.WriteUbyte(yaw);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //pitch = _buffer.ReadUbyte();
+            //headYaw = _buffer.ReadUbyte();
+            //yaw = _buffer.ReadUbyte();
         }
 
         public static MoveEntity FromBuffer(byte[] buffer)
         {
             var ret = new MoveEntity();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class MovePlayer : Packet
+    public class MovePlayer : sul.Utils.Packet
     {
 
         public const byte Id = 20;
@@ -1269,21 +1272,21 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // animation
-        public const byte Full = 0;
-        public const byte None = 1;
-        public const byte Rotation = 2;
+        public const byte FULL = 0;
+        public const byte NONE = 1;
+        public const byte ROTATION = 2;
 
         public long entityId;
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public float pitch;
         public float headYaw;
         public float yaw;
         public byte animation;
         public bool onGround;
 
-        public MovePlayer() {}
+        public MovePlayer() : this(0, null, 0, 0, 0, 0, false) {}
 
-        public MovePlayer(long entityId, Tuple<float, float, float> position, float pitch, float headYaw, float yaw, byte animation, bool onGround)
+        public MovePlayer(long entityId, System.Tuple<float, float, float> position, float pitch, float headYaw, float yaw, byte animation, bool onGround)
         {
             this.entityId = entityId;
             this.position = position;
@@ -1296,23 +1299,23 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteLittleEndianFloat(pitch);
             _buffer.WriteLittleEndianFloat(headYaw);
             _buffer.WriteLittleEndianFloat(yaw);
@@ -1320,27 +1323,27 @@ namespace sul.Pocket102.Play
             _buffer.WriteBool(onGround);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //pitch = _buffer.ReadLittleEndianFloat();
+            //headYaw = _buffer.ReadLittleEndianFloat();
+            //yaw = _buffer.ReadLittleEndianFloat();
+            //animation = _buffer.ReadUbyte();
+            //onGround = _buffer.ReadBool();
         }
 
         public static MovePlayer FromBuffer(byte[] buffer)
         {
             var ret = new MovePlayer();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class RiderJump : Packet
+    public class RiderJump : sul.Utils.Packet
     {
 
         public const byte Id = 21;
@@ -1350,7 +1353,7 @@ namespace sul.Pocket102.Play
 
         public long rider;
 
-        public RiderJump() {}
+        public RiderJump() : this(0) {}
 
         public RiderJump(long rider)
         {
@@ -1359,39 +1362,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(rider);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //rider = _buffer.ReadVarlong();
         }
 
         public static RiderJump FromBuffer(byte[] buffer)
         {
             var ret = new RiderJump();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class RemoveBlock : Packet
+    public class RemoveBlock : sul.Utils.Packet
     {
 
         public const byte Id = 22;
@@ -1399,50 +1402,50 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Types.BlockPosition position;
+        public BlockPosition position;
 
-        public RemoveBlock() {}
+        public RemoveBlock() : this(new BlockPosition()) {}
 
-        public RemoveBlock(Types.BlockPosition position)
+        public RemoveBlock(BlockPosition position)
         {
             this.position = position;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             position.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //position.DecodeBody(_buffer);
         }
 
         public static RemoveBlock FromBuffer(byte[] buffer)
         {
             var ret = new RemoveBlock();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateBlock : Packet
+    public class UpdateBlock : sul.Utils.Packet
     {
 
         public const byte Id = 23;
@@ -1451,18 +1454,18 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // flags and meta
-        public const uint Neighbors = 1;
-        public const uint Network = 2;
-        public const uint NoGraphic = 4;
-        public const uint Priority = 8;
+        public const uint NEIGHBORS = 1;
+        public const uint NETWORK = 2;
+        public const uint NO_GRAPHIC = 4;
+        public const uint PRIORITY = 8;
 
-        public Types.BlockPosition position;
+        public BlockPosition position;
         public uint block;
         public uint flagsAndMeta;
 
-        public UpdateBlock() {}
+        public UpdateBlock() : this(new BlockPosition(), 0, 0) {}
 
-        public UpdateBlock(Types.BlockPosition position, uint block, uint flagsAndMeta)
+        public UpdateBlock(BlockPosition position, uint block, uint flagsAndMeta)
         {
             this.position = position;
             this.block = block;
@@ -1471,43 +1474,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             position.EncodeBody(_buffer);
             _buffer.WriteVaruint(block);
             _buffer.WriteVaruint(flagsAndMeta);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //position.DecodeBody(_buffer);
+            //block = _buffer.ReadVaruint();
+            //flagsAndMeta = _buffer.ReadVaruint();
         }
 
         public static UpdateBlock FromBuffer(byte[] buffer)
         {
             var ret = new UpdateBlock();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AddPainting : Packet
+    public class AddPainting : sul.Utils.Packet
     {
 
         public const byte Id = 24;
@@ -1517,13 +1520,13 @@ namespace sul.Pocket102.Play
 
         public long entityId;
         public long runtimeId;
-        public Types.BlockPosition position;
+        public BlockPosition position;
         public int direction;
         public string title;
 
-        public AddPainting() {}
+        public AddPainting() : this(0, 0, new BlockPosition(), 0, "") {}
 
-        public AddPainting(long entityId, long runtimeId, Types.BlockPosition position, int direction, string title)
+        public AddPainting(long entityId, long runtimeId, BlockPosition position, int direction, string title)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -1534,20 +1537,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarlong(runtimeId);
@@ -1556,25 +1559,25 @@ namespace sul.Pocket102.Play
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //runtimeId = _buffer.ReadVarlong();
+            //position.DecodeBody(_buffer);
+            //direction = _buffer.ReadVarint();
+            //title = _buffer.ReadString();
         }
 
         public static AddPainting FromBuffer(byte[] buffer)
         {
             var ret = new AddPainting();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Explode : Packet
+    public class Explode : sul.Utils.Packet
     {
 
         public const byte Id = 25;
@@ -1582,13 +1585,13 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public float radius;
-        public Types.BlockPosition[] destroyedBlocks;
+        public BlockPosition[] destroyedBlocks;
 
-        public Explode() {}
+        public Explode() : this(null, 0, new BlockPosition[]{}) {}
 
-        public Explode(Tuple<float, float, float> position, float radius, Types.BlockPosition[] destroyedBlocks)
+        public Explode(System.Tuple<float, float, float> position, float radius, BlockPosition[] destroyedBlocks)
         {
             this.position = position;
             this.radius = radius;
@@ -1597,43 +1600,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteLittleEndianFloat(radius);
-            _buffer.WriteVaruint(destroyedBlocks.Length); foreach(Types.BlockPosition destroyedBlocksChild in destroyedBlocks){ destroyedBlocksChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(destroyedBlocks.Length); foreach (BlockPosition destroyedBlocksChild in destroyedBlocks){ destroyedBlocksChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //radius = _buffer.ReadLittleEndianFloat();
+            //destroyedBlocks.DecodeBody(_buffer);
         }
 
         public static Explode FromBuffer(byte[] buffer)
         {
             var ret = new Explode();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class LevelSoundEvent : Packet
+    public class LevelSoundEvent : sul.Utils.Packet
     {
 
         public const byte Id = 26;
@@ -1642,112 +1645,112 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // sound
-        public const byte ItemUseOn = 0;
-        public const byte Hit = 1;
-        public const byte Step = 2;
-        public const byte Jump = 3;
-        public const byte Break = 4;
-        public const byte Place = 5;
-        public const byte HeavyStep = 6;
-        public const byte Gallop = 7;
-        public const byte Fall = 8;
-        public const byte Ambient = 9;
-        public const byte AmbientBaby = 10;
-        public const byte AmbientInWater = 11;
-        public const byte Breathe = 12;
-        public const byte Death = 13;
-        public const byte DeathInWater = 14;
-        public const byte DeathToZombie = 15;
-        public const byte Hurt = 16;
-        public const byte HurtInWater = 17;
-        public const byte Mad = 18;
-        public const byte Boost = 19;
-        public const byte Bow = 20;
-        public const byte SquishBig = 21;
-        public const byte SquishSmall = 22;
-        public const byte FallBig = 23;
-        public const byte FallSmall = 24;
-        public const byte Splash = 25;
-        public const byte Fizz = 26;
-        public const byte Flap = 27;
-        public const byte Swim = 28;
-        public const byte Drink = 29;
-        public const byte Eat = 30;
-        public const byte Takeoff = 31;
-        public const byte Shake = 32;
-        public const byte Plop = 33;
-        public const byte Land = 34;
-        public const byte Saddle = 35;
-        public const byte Armor = 36;
-        public const byte AddChest = 37;
-        public const byte Throw = 38;
-        public const byte Attack = 39;
-        public const byte AttackNodamage = 40;
-        public const byte Warn = 41;
-        public const byte Shear = 42;
-        public const byte Milk = 43;
-        public const byte Thunder = 44;
-        public const byte Explode = 45;
-        public const byte Fire = 46;
-        public const byte Ignite = 47;
-        public const byte Fuse = 48;
-        public const byte Stare = 49;
-        public const byte Spawn = 50;
-        public const byte Shoot = 51;
-        public const byte BreakBlock = 52;
-        public const byte Remedy = 53;
-        public const byte Unfect = 54;
-        public const byte Levelup = 55;
-        public const byte BowHit = 56;
-        public const byte BulletHit = 57;
-        public const byte ExtinguishFire = 58;
-        public const byte ItemFizz = 59;
-        public const byte ChestOpen = 60;
-        public const byte ChestClosed = 61;
-        public const byte PowerOn = 62;
-        public const byte PowerOff = 63;
-        public const byte Attach = 64;
-        public const byte Detach = 65;
-        public const byte Deny = 66;
-        public const byte Tripod = 67;
-        public const byte Pop = 68;
-        public const byte DropSlot = 69;
-        public const byte Note = 70;
-        public const byte Thorns = 71;
-        public const byte PistonIn = 72;
-        public const byte PistonOut = 73;
-        public const byte Portal = 74;
-        public const byte Water = 75;
-        public const byte LavaPop = 76;
-        public const byte Lava = 77;
-        public const byte Burp = 78;
-        public const byte BucketFillWater = 79;
-        public const byte BucketFillLava = 80;
-        public const byte BucketEmptyWater = 81;
-        public const byte BucketEmptyLava = 82;
-        public const byte GuardianFlop = 83;
-        public const byte ElderguardianCurse = 84;
-        public const byte MobWarning = 85;
-        public const byte MobWarningBaby = 86;
-        public const byte Teleport = 87;
-        public const byte ShulkerOpen = 88;
-        public const byte ShulkerClose = 89;
-        public const byte Haggle = 90;
-        public const byte HaggleYes = 91;
-        public const byte HaggleNo = 92;
-        public const byte HaggleIdle = 93;
-        public const byte Default = 94;
-        public const byte Undefined = 95;
+        public const byte ITEM_USE_ON = 0;
+        public const byte HIT = 1;
+        public const byte STEP = 2;
+        public const byte JUMP = 3;
+        public const byte BREAK = 4;
+        public const byte PLACE = 5;
+        public const byte HEAVY_STEP = 6;
+        public const byte GALLOP = 7;
+        public const byte FALL = 8;
+        public const byte AMBIENT = 9;
+        public const byte AMBIENT_BABY = 10;
+        public const byte AMBIENT_IN_WATER = 11;
+        public const byte BREATHE = 12;
+        public const byte DEATH = 13;
+        public const byte DEATH_IN_WATER = 14;
+        public const byte DEATH_TO_ZOMBIE = 15;
+        public const byte HURT = 16;
+        public const byte HURT_IN_WATER = 17;
+        public const byte MAD = 18;
+        public const byte BOOST = 19;
+        public const byte BOW = 20;
+        public const byte SQUISH_BIG = 21;
+        public const byte SQUISH_SMALL = 22;
+        public const byte FALL_BIG = 23;
+        public const byte FALL_SMALL = 24;
+        public const byte SPLASH = 25;
+        public const byte FIZZ = 26;
+        public const byte FLAP = 27;
+        public const byte SWIM = 28;
+        public const byte DRINK = 29;
+        public const byte EAT = 30;
+        public const byte TAKEOFF = 31;
+        public const byte SHAKE = 32;
+        public const byte PLOP = 33;
+        public const byte LAND = 34;
+        public const byte SADDLE = 35;
+        public const byte ARMOR = 36;
+        public const byte ADD_CHEST = 37;
+        public const byte THROW = 38;
+        public const byte ATTACK = 39;
+        public const byte ATTACK_NODAMAGE = 40;
+        public const byte WARN = 41;
+        public const byte SHEAR = 42;
+        public const byte MILK = 43;
+        public const byte THUNDER = 44;
+        public const byte EXPLODE = 45;
+        public const byte FIRE = 46;
+        public const byte IGNITE = 47;
+        public const byte FUSE = 48;
+        public const byte STARE = 49;
+        public const byte SPAWN = 50;
+        public const byte SHOOT = 51;
+        public const byte BREAK_BLOCK = 52;
+        public const byte REMEDY = 53;
+        public const byte UNFECT = 54;
+        public const byte LEVELUP = 55;
+        public const byte BOW_HIT = 56;
+        public const byte BULLET_HIT = 57;
+        public const byte EXTINGUISH_FIRE = 58;
+        public const byte ITEM_FIZZ = 59;
+        public const byte CHEST_OPEN = 60;
+        public const byte CHEST_CLOSED = 61;
+        public const byte POWER_ON = 62;
+        public const byte POWER_OFF = 63;
+        public const byte ATTACH = 64;
+        public const byte DETACH = 65;
+        public const byte DENY = 66;
+        public const byte TRIPOD = 67;
+        public const byte POP = 68;
+        public const byte DROP_SLOT = 69;
+        public const byte NOTE = 70;
+        public const byte THORNS = 71;
+        public const byte PISTON_IN = 72;
+        public const byte PISTON_OUT = 73;
+        public const byte PORTAL = 74;
+        public const byte WATER = 75;
+        public const byte LAVA_POP = 76;
+        public const byte LAVA = 77;
+        public const byte BURP = 78;
+        public const byte BUCKET_FILL_WATER = 79;
+        public const byte BUCKET_FILL_LAVA = 80;
+        public const byte BUCKET_EMPTY_WATER = 81;
+        public const byte BUCKET_EMPTY_LAVA = 82;
+        public const byte GUARDIAN_FLOP = 83;
+        public const byte ELDERGUARDIAN_CURSE = 84;
+        public const byte MOB_WARNING = 85;
+        public const byte MOB_WARNING_BABY = 86;
+        public const byte TELEPORT = 87;
+        public const byte SHULKER_OPEN = 88;
+        public const byte SHULKER_CLOSE = 89;
+        public const byte HAGGLE = 90;
+        public const byte HAGGLE_YES = 91;
+        public const byte HAGGLE_NO = 92;
+        public const byte HAGGLE_IDLE = 93;
+        public const byte DEFAULT = 94;
+        public const byte UNDEFINED = 95;
 
         public byte sound;
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public uint volume;
         public int pitch;
         public bool unknown4;
 
-        public LevelSoundEvent() {}
+        public LevelSoundEvent() : this(0, null, 0, 0, false) {}
 
-        public LevelSoundEvent(byte sound, Tuple<float, float, float> position, uint volume, int pitch, bool unknown4)
+        public LevelSoundEvent(byte sound, System.Tuple<float, float, float> position, uint volume, int pitch, bool unknown4)
         {
             this.sound = sound;
             this.position = position;
@@ -1758,47 +1761,47 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(sound);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteVaruint(volume);
             _buffer.WriteVarint(pitch);
             _buffer.WriteBool(unknown4);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //sound = _buffer.ReadUbyte();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //volume = _buffer.ReadVaruint();
+            //pitch = _buffer.ReadVarint();
+            //unknown4 = _buffer.ReadBool();
         }
 
         public static LevelSoundEvent FromBuffer(byte[] buffer)
         {
             var ret = new LevelSoundEvent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class LevelEvent : Packet
+    public class LevelEvent : sul.Utils.Packet
     {
 
         public const byte Id = 27;
@@ -1807,62 +1810,62 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // event id
-        public const int StartRain = 3001;
-        public const int StartThunder = 3002;
-        public const int StopRain = 3003;
-        public const int StopThunder = 3004;
-        public const int SetData = 4000;
-        public const int PlayersSleeping = 9800;
-        public const int Bubble = 16385;
-        public const int Critical = 16386;
-        public const int BlockForceField = 16387;
-        public const int Smoke = 16388;
-        public const int Explode = 16389;
-        public const int Evaporation = 16390;
-        public const int Flame = 16391;
-        public const int Lava = 16392;
-        public const int LargeSmoke = 16393;
-        public const int Redstone = 16394;
-        public const int RisingRedDust = 16395;
-        public const int ItemBreak = 16396;
-        public const int SnowballPoof = 16397;
-        public const int HugeExplode = 16398;
-        public const int HugeExplodeSeed = 16399;
-        public const int MobFlame = 16400;
-        public const int Heart = 16401;
-        public const int Terrain = 16402;
-        public const int TownAura = 16403;
-        public const int Portal = 16404;
-        public const int WaterSplash = 16405;
-        public const int WaterWake = 16406;
-        public const int DripWater = 16407;
-        public const int DripLava = 16408;
-        public const int FallingDust = 16409;
-        public const int MobSpell = 16410;
-        public const int MobSpellAmbient = 16411;
-        public const int MobSpellInstantaneous = 16412;
-        public const int Ink = 16413;
-        public const int Slime = 16414;
-        public const int RainSplash = 16415;
-        public const int VillagerAngry = 16416;
-        public const int VillagerHappy = 16417;
-        public const int EnchantmentTable = 16418;
-        public const int TrackingEmitter = 16419;
-        public const int Note = 16420;
-        public const int WitchSpell = 16421;
-        public const int Carrot = 16422;
-        public const int EndRod = 16424;
-        public const int DragonBreath = 16425;
-        public const int Shoot = 2000;
-        public const int Destroy = 2001;
+        public const int START_RAIN = 3001;
+        public const int START_THUNDER = 3002;
+        public const int STOP_RAIN = 3003;
+        public const int STOP_THUNDER = 3004;
+        public const int SET_DATA = 4000;
+        public const int PLAYERS_SLEEPING = 9800;
+        public const int BUBBLE = 16385;
+        public const int CRITICAL = 16386;
+        public const int BLOCK_FORCE_FIELD = 16387;
+        public const int SMOKE = 16388;
+        public const int EXPLODE = 16389;
+        public const int EVAPORATION = 16390;
+        public const int FLAME = 16391;
+        public const int LAVA = 16392;
+        public const int LARGE_SMOKE = 16393;
+        public const int REDSTONE = 16394;
+        public const int RISING_RED_DUST = 16395;
+        public const int ITEM_BREAK = 16396;
+        public const int SNOWBALL_POOF = 16397;
+        public const int HUGE_EXPLODE = 16398;
+        public const int HUGE_EXPLODE_SEED = 16399;
+        public const int MOB_FLAME = 16400;
+        public const int HEART = 16401;
+        public const int TERRAIN = 16402;
+        public const int TOWN_AURA = 16403;
+        public const int PORTAL = 16404;
+        public const int WATER_SPLASH = 16405;
+        public const int WATER_WAKE = 16406;
+        public const int DRIP_WATER = 16407;
+        public const int DRIP_LAVA = 16408;
+        public const int FALLING_DUST = 16409;
+        public const int MOB_SPELL = 16410;
+        public const int MOB_SPELL_AMBIENT = 16411;
+        public const int MOB_SPELL_INSTANTANEOUS = 16412;
+        public const int INK = 16413;
+        public const int SLIME = 16414;
+        public const int RAIN_SPLASH = 16415;
+        public const int VILLAGER_ANGRY = 16416;
+        public const int VILLAGER_HAPPY = 16417;
+        public const int ENCHANTMENT_TABLE = 16418;
+        public const int TRACKING_EMITTER = 16419;
+        public const int NOTE = 16420;
+        public const int WITCH_SPELL = 16421;
+        public const int CARROT = 16422;
+        public const int END_ROD = 16424;
+        public const int DRAGON_BREATH = 16425;
+        public const int SHOOT = 2000;
+        public const int DESTROY = 2001;
 
         public int eventId;
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public int data;
 
-        public LevelEvent() {}
+        public LevelEvent() : this(0, null, 0) {}
 
-        public LevelEvent(int eventId, Tuple<float, float, float> position, int data)
+        public LevelEvent(int eventId, System.Tuple<float, float, float> position, int data)
         {
             this.eventId = eventId;
             this.position = position;
@@ -1871,43 +1874,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(eventId);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteVarint(data);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //eventId = _buffer.ReadVarint();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //data = _buffer.ReadVarint();
         }
 
         public static LevelEvent FromBuffer(byte[] buffer)
         {
             var ret = new LevelEvent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class BlockEvent : Packet
+    public class BlockEvent : sul.Utils.Packet
     {
 
         public const byte Id = 28;
@@ -1915,12 +1918,12 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Types.BlockPosition position;
-        public int[2] data;
+        public BlockPosition position;
+        public int[] data;
 
-        public BlockEvent() {}
+        public BlockEvent() : this(new BlockPosition(), new int[2]) {}
 
-        public BlockEvent(Types.BlockPosition position, int[2] data)
+        public BlockEvent(BlockPosition position, int[] data)
         {
             this.position = position;
             this.data = data;
@@ -1928,41 +1931,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             position.EncodeBody(_buffer);
-            foreach(int dataChild in data){ _buffer.WriteVarint(dataChild); }
+            foreach (int dataChild in data){ _buffer.WriteVarint(dataChild); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //position.DecodeBody(_buffer);
+            //data.DecodeBody(_buffer);
         }
 
         public static BlockEvent FromBuffer(byte[] buffer)
         {
             var ret = new BlockEvent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class EntityEvent : Packet
+    public class EntityEvent : sul.Utils.Packet
     {
 
         public const byte Id = 29;
@@ -1971,26 +1974,26 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // event id
-        public const byte HurtAnimation = 2;
-        public const byte DeathAnimation = 3;
-        public const byte TameFail = 6;
-        public const byte TameSuccess = 7;
-        public const byte ShakeWet = 8;
-        public const byte UseItem = 9;
-        public const byte EatGrassAnimation = 10;
-        public const byte FishHookBubbles = 11;
-        public const byte FishHookPosition = 12;
-        public const byte FishHookHook = 13;
-        public const byte FishHookTease = 14;
-        public const byte SquidInkCloud = 15;
-        public const byte AmbientSound = 16;
-        public const byte Respawn = 17;
+        public const byte HURT_ANIMATION = 2;
+        public const byte DEATH_ANIMATION = 3;
+        public const byte TAME_FAIL = 6;
+        public const byte TAME_SUCCESS = 7;
+        public const byte SHAKE_WET = 8;
+        public const byte USE_ITEM = 9;
+        public const byte EAT_GRASS_ANIMATION = 10;
+        public const byte FISH_HOOK_BUBBLES = 11;
+        public const byte FISH_HOOK_POSITION = 12;
+        public const byte FISH_HOOK_HOOK = 13;
+        public const byte FISH_HOOK_TEASE = 14;
+        public const byte SQUID_INK_CLOUD = 15;
+        public const byte AMBIENT_SOUND = 16;
+        public const byte RESPAWN = 17;
 
         public long entityId;
         public byte eventId;
         public int unknown2;
 
-        public EntityEvent() {}
+        public EntityEvent() : this(0, 0, 0) {}
 
         public EntityEvent(long entityId, byte eventId, int unknown2)
         {
@@ -2001,43 +2004,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteUbyte(eventId);
             _buffer.WriteVarint(unknown2);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //eventId = _buffer.ReadUbyte();
+            //unknown2 = _buffer.ReadVarint();
         }
 
         public static EntityEvent FromBuffer(byte[] buffer)
         {
             var ret = new EntityEvent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class MobEffect : Packet
+    public class MobEffect : sul.Utils.Packet
     {
 
         public const byte Id = 30;
@@ -2046,9 +2049,9 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // event id
-        public const byte Add = 1;
-        public const byte Modify = 2;
-        public const byte Remove = 3;
+        public const byte ADD = 1;
+        public const byte MODIFY = 2;
+        public const byte REMOVE = 3;
 
         public long entityId;
         public byte eventId;
@@ -2057,7 +2060,7 @@ namespace sul.Pocket102.Play
         public bool particles;
         public int duration;
 
-        public MobEffect() {}
+        public MobEffect() : this(0, 0, 0, 0, false, 0) {}
 
         public MobEffect(long entityId, byte eventId, int effect, int amplifier, bool particles, int duration)
         {
@@ -2071,20 +2074,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteUbyte(eventId);
@@ -2094,26 +2097,26 @@ namespace sul.Pocket102.Play
             _buffer.WriteVarint(duration);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //eventId = _buffer.ReadUbyte();
+            //effect = _buffer.ReadVarint();
+            //amplifier = _buffer.ReadVarint();
+            //particles = _buffer.ReadBool();
+            //duration = _buffer.ReadVarint();
         }
 
         public static MobEffect FromBuffer(byte[] buffer)
         {
             var ret = new MobEffect();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateAttributes : Packet
+    public class UpdateAttributes : sul.Utils.Packet
     {
 
         public const byte Id = 31;
@@ -2122,11 +2125,11 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public Types.Attribute[] attributes;
+        public Attribute[] attributes;
 
-        public UpdateAttributes() {}
+        public UpdateAttributes() : this(0, new Attribute[]{}) {}
 
-        public UpdateAttributes(long entityId, Types.Attribute[] attributes)
+        public UpdateAttributes(long entityId, Attribute[] attributes)
         {
             this.entityId = entityId;
             this.attributes = attributes;
@@ -2134,41 +2137,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteVaruint(attributes.Length); foreach(Types.Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(attributes.Length); foreach (Attribute attributesChild in attributes){ attributesChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //entityId = _buffer.ReadVarlong();
+            //attributes.DecodeBody(_buffer);
         }
 
         public static UpdateAttributes FromBuffer(byte[] buffer)
         {
             var ret = new UpdateAttributes();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class MobEquipment : Packet
+    public class MobEquipment : sul.Utils.Packet
     {
 
         public const byte Id = 32;
@@ -2177,14 +2180,14 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         public long entityId;
-        public Types.Slot item;
+        public Slot item;
         public byte inventorySlot;
         public byte hotbarSlot;
         public byte unknown4;
 
-        public MobEquipment() {}
+        public MobEquipment() : this(0, new Slot(), 0, 0, 0) {}
 
-        public MobEquipment(long entityId, Types.Slot item, byte inventorySlot, byte hotbarSlot, byte unknown4)
+        public MobEquipment(long entityId, Slot item, byte inventorySlot, byte hotbarSlot, byte unknown4)
         {
             this.entityId = entityId;
             this.item = item;
@@ -2195,20 +2198,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             item.EncodeBody(_buffer);
@@ -2217,25 +2220,25 @@ namespace sul.Pocket102.Play
             _buffer.WriteUbyte(unknown4);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //item.DecodeBody(_buffer);
+            //inventorySlot = _buffer.ReadUbyte();
+            //hotbarSlot = _buffer.ReadUbyte();
+            //unknown4 = _buffer.ReadUbyte();
         }
 
         public static MobEquipment FromBuffer(byte[] buffer)
         {
             var ret = new MobEquipment();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class MobArmorEquipment : Packet
+    public class MobArmorEquipment : sul.Utils.Packet
     {
 
         public const byte Id = 33;
@@ -2244,11 +2247,11 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         public long entityId;
-        public Types.Slot[4] armor;
+        public Slot[] armor;
 
-        public MobArmorEquipment() {}
+        public MobArmorEquipment() : this(0, new Slot[4]) {}
 
-        public MobArmorEquipment(long entityId, Types.Slot[4] armor)
+        public MobArmorEquipment(long entityId, Slot[] armor)
         {
             this.entityId = entityId;
             this.armor = armor;
@@ -2256,41 +2259,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            foreach(Types.Slot armorChild in armor){ armorChild.EncodeBody(_buffer); }
+            foreach (Slot armorChild in armor){ armorChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //entityId = _buffer.ReadVarlong();
+            //armor.DecodeBody(_buffer);
         }
 
         public static MobArmorEquipment FromBuffer(byte[] buffer)
         {
             var ret = new MobArmorEquipment();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Interact : Packet
+    public class Interact : sul.Utils.Packet
     {
 
         public const byte Id = 34;
@@ -2299,15 +2302,15 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // action
-        public const byte Attack = 1;
-        public const byte Interact = 2;
-        public const byte LeaveVehicle = 3;
-        public const byte Hover = 4;
+        public const byte ATTACK = 1;
+        public const byte INTERACT = 2;
+        public const byte LEAVE_VEHICLE = 3;
+        public const byte HOVER = 4;
 
         public byte action;
         public long target;
 
-        public Interact() {}
+        public Interact() : this(0, 0) {}
 
         public Interact(byte action, long target)
         {
@@ -2317,41 +2320,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
             _buffer.WriteVarlong(target);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //action = _buffer.ReadUbyte();
+            //target = _buffer.ReadVarlong();
         }
 
         public static Interact FromBuffer(byte[] buffer)
         {
             var ret = new Interact();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UseItem : Packet
+    public class UseItem : sul.Utils.Packet
     {
 
         public const byte Id = 35;
@@ -2359,17 +2362,17 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Types.BlockPosition blockPosition;
+        public BlockPosition blockPosition;
         public uint hotbarSlot;
         public int face;
-        public Tuple<float, float, float> facePosition;
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> facePosition;
+        public System.Tuple<float, float, float> position;
         public int slot;
-        public Types.Slot item;
+        public Slot item;
 
-        public UseItem() {}
+        public UseItem() : this(new BlockPosition(), 0, 0, null, null, 0, new Slot()) {}
 
-        public UseItem(Types.BlockPosition blockPosition, uint hotbarSlot, int face, Tuple<float, float, float> facePosition, Tuple<float, float, float> position, int slot, Types.Slot item)
+        public UseItem(BlockPosition blockPosition, uint hotbarSlot, int face, System.Tuple<float, float, float> facePosition, System.Tuple<float, float, float> position, int slot, Slot item)
         {
             this.blockPosition = blockPosition;
             this.hotbarSlot = hotbarSlot;
@@ -2382,51 +2385,51 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             blockPosition.EncodeBody(_buffer);
             _buffer.WriteVaruint(hotbarSlot);
             _buffer.WriteVarint(face);
-            _buffer.WriteLittleEndianFloat(facePosition[0]); _buffer.WriteLittleEndianFloat(facePosition[1]); _buffer.WriteLittleEndianFloat(facePosition[2]);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(facePosition.Item1); _buffer.WriteLittleEndianFloat(facePosition.Item2); _buffer.WriteLittleEndianFloat(facePosition.Item3);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteVarint(slot);
             item.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
+            //blockPosition.DecodeBody(_buffer);
+            //hotbarSlot = _buffer.ReadVaruint();
+            //face = _buffer.ReadVarint();
+            //facePosition.Item1 = _buffer.ReadLittleEndianFloat(); facePosition.Item2 = _buffer.ReadLittleEndianFloat(); facePosition.Item3 = _buffer.ReadLittleEndianFloat();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //slot = _buffer.ReadVarint();
+            //item.DecodeBody(_buffer);
         }
 
         public static UseItem FromBuffer(byte[] buffer)
         {
             var ret = new UseItem();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerAction : Packet
+    public class PlayerAction : sul.Utils.Packet
     {
 
         public const byte Id = 36;
@@ -2435,28 +2438,28 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // action
-        public const int StartBreak = 0;
-        public const int AbortBreak = 1;
-        public const int StopBreak = 2;
-        public const int ReleaseItem = 5;
-        public const int StopSleeping = 6;
-        public const int Respawn = 7;
-        public const int Jump = 8;
-        public const int StartSprint = 9;
-        public const int StopSprint = 10;
-        public const int StartSneak = 11;
-        public const int StopSneak = 12;
-        public const int StartGliding = 15;
-        public const int StopGliding = 16;
+        public const int START_BREAK = 0;
+        public const int ABORT_BREAK = 1;
+        public const int STOP_BREAK = 2;
+        public const int RELEASE_ITEM = 5;
+        public const int STOP_SLEEPING = 6;
+        public const int RESPAWN = 7;
+        public const int JUMP = 8;
+        public const int START_SPRINT = 9;
+        public const int STOP_SPRINT = 10;
+        public const int START_SNEAK = 11;
+        public const int STOP_SNEAK = 12;
+        public const int START_GLIDING = 15;
+        public const int STOP_GLIDING = 16;
 
         public long entityId;
         public int action;
-        public Types.BlockPosition position;
+        public BlockPosition position;
         public int face;
 
-        public PlayerAction() {}
+        public PlayerAction() : this(0, 0, new BlockPosition(), 0) {}
 
-        public PlayerAction(long entityId, int action, Types.BlockPosition position, int face)
+        public PlayerAction(long entityId, int action, BlockPosition position, int face)
         {
             this.entityId = entityId;
             this.action = action;
@@ -2466,20 +2469,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarint(action);
@@ -2487,24 +2490,24 @@ namespace sul.Pocket102.Play
             _buffer.WriteVarint(face);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //entityId = _buffer.ReadVarlong();
+            //action = _buffer.ReadVarint();
+            //position.DecodeBody(_buffer);
+            //face = _buffer.ReadVarint();
         }
 
         public static PlayerAction FromBuffer(byte[] buffer)
         {
             var ret = new PlayerAction();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerFall : Packet
+    public class PlayerFall : sul.Utils.Packet
     {
 
         public const byte Id = 37;
@@ -2514,7 +2517,7 @@ namespace sul.Pocket102.Play
 
         public float distance;
 
-        public PlayerFall() {}
+        public PlayerFall() : this(0) {}
 
         public PlayerFall(float distance)
         {
@@ -2523,39 +2526,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteLittleEndianFloat(distance);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //distance = _buffer.ReadLittleEndianFloat();
         }
 
         public static PlayerFall FromBuffer(byte[] buffer)
         {
             var ret = new PlayerFall();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class HurtArmor : Packet
+    public class HurtArmor : sul.Utils.Packet
     {
 
         public const byte Id = 38;
@@ -2565,7 +2568,7 @@ namespace sul.Pocket102.Play
 
         public int unknown0;
 
-        public HurtArmor() {}
+        public HurtArmor() : this(0) {}
 
         public HurtArmor(int unknown0)
         {
@@ -2574,39 +2577,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(unknown0);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //unknown0 = _buffer.ReadVarint();
         }
 
         public static HurtArmor FromBuffer(byte[] buffer)
         {
             var ret = new HurtArmor();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetEntityData : Packet
+    public class SetEntityData : sul.Utils.Packet
     {
 
         public const byte Id = 39;
@@ -2615,11 +2618,11 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public sul.Metadata.Pocket102.Metadata metadata;
+        public Metadata metadata;
 
-        public SetEntityData() {}
+        public SetEntityData() : this(0, new Metadata()) {}
 
-        public SetEntityData(long entityId, sul.Metadata.Pocket102.Metadata metadata)
+        public SetEntityData(long entityId, Metadata metadata)
         {
             this.entityId = entityId;
             this.metadata = metadata;
@@ -2627,41 +2630,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             metadata.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //entityId = _buffer.ReadVarlong();
+            //metadata.DecodeBody(_buffer);
         }
 
         public static SetEntityData FromBuffer(byte[] buffer)
         {
             var ret = new SetEntityData();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetEntityMotion : Packet
+    public class SetEntityMotion : sul.Utils.Packet
     {
 
         public const byte Id = 40;
@@ -2670,11 +2673,11 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public Tuple<float, float, float> motion;
+        public System.Tuple<float, float, float> motion;
 
-        public SetEntityMotion() {}
+        public SetEntityMotion() : this(0, null) {}
 
-        public SetEntityMotion(long entityId, Tuple<float, float, float> motion)
+        public SetEntityMotion(long entityId, System.Tuple<float, float, float> motion)
         {
             this.entityId = entityId;
             this.motion = motion;
@@ -2682,41 +2685,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
+            _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //entityId = _buffer.ReadVarlong();
+            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
         }
 
         public static SetEntityMotion FromBuffer(byte[] buffer)
         {
             var ret = new SetEntityMotion();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetEntityLink : Packet
+    public class SetEntityLink : sul.Utils.Packet
     {
 
         public const byte Id = 41;
@@ -2725,15 +2728,15 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // action
-        public const byte Add = 0;
-        public const byte Ride = 1;
-        public const byte Remove = 2;
+        public const byte ADD = 0;
+        public const byte RIDE = 1;
+        public const byte REMOVE = 2;
 
         public long from;
         public long to;
         public byte action;
 
-        public SetEntityLink() {}
+        public SetEntityLink() : this(0, 0, 0) {}
 
         public SetEntityLink(long from, long to, byte action)
         {
@@ -2744,43 +2747,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(from);
             _buffer.WriteVarlong(to);
             _buffer.WriteUbyte(action);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //from = _buffer.ReadVarlong();
+            //to = _buffer.ReadVarlong();
+            //action = _buffer.ReadUbyte();
         }
 
         public static SetEntityLink FromBuffer(byte[] buffer)
         {
             var ret = new SetEntityLink();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetHealth : Packet
+    public class SetHealth : sul.Utils.Packet
     {
 
         public const byte Id = 42;
@@ -2790,7 +2793,7 @@ namespace sul.Pocket102.Play
 
         public int health;
 
-        public SetHealth() {}
+        public SetHealth() : this(0) {}
 
         public SetHealth(int health)
         {
@@ -2799,39 +2802,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(health);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //health = _buffer.ReadVarint();
         }
 
         public static SetHealth FromBuffer(byte[] buffer)
         {
             var ret = new SetHealth();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetSpawnPosition : Packet
+    public class SetSpawnPosition : sul.Utils.Packet
     {
 
         public const byte Id = 43;
@@ -2840,12 +2843,12 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public int unknown0;
-        public Types.BlockPosition position;
+        public BlockPosition position;
         public bool unknown2;
 
-        public SetSpawnPosition() {}
+        public SetSpawnPosition() : this(0, new BlockPosition(), false) {}
 
-        public SetSpawnPosition(int unknown0, Types.BlockPosition position, bool unknown2)
+        public SetSpawnPosition(int unknown0, BlockPosition position, bool unknown2)
         {
             this.unknown0 = unknown0;
             this.position = position;
@@ -2854,43 +2857,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(unknown0);
             position.EncodeBody(_buffer);
             _buffer.WriteBool(unknown2);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //unknown0 = _buffer.ReadVarint();
+            //position.DecodeBody(_buffer);
+            //unknown2 = _buffer.ReadBool();
         }
 
         public static SetSpawnPosition FromBuffer(byte[] buffer)
         {
             var ret = new SetSpawnPosition();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Animate : Packet
+    public class Animate : sul.Utils.Packet
     {
 
         public const byte Id = 44;
@@ -2899,13 +2902,13 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // action
-        public const int Breaking = 1;
-        public const int WakeUp = 3;
+        public const int BREAKING = 1;
+        public const int WAKE_UP = 3;
 
         public int action;
         public long entityId;
 
-        public Animate() {}
+        public Animate() : this(0, 0) {}
 
         public Animate(int action, long entityId)
         {
@@ -2915,41 +2918,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(action);
             _buffer.WriteVarlong(entityId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //action = _buffer.ReadVarint();
+            //entityId = _buffer.ReadVarlong();
         }
 
         public static Animate FromBuffer(byte[] buffer)
         {
             var ret = new Animate();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Respawn : Packet
+    public class Respawn : sul.Utils.Packet
     {
 
         public const byte Id = 45;
@@ -2957,50 +2960,50 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
 
-        public Respawn() {}
+        public Respawn() : this(null) {}
 
-        public Respawn(Tuple<float, float, float> position)
+        public Respawn(System.Tuple<float, float, float> position)
         {
             this.position = position;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
         }
 
         public static Respawn FromBuffer(byte[] buffer)
         {
             var ret = new Respawn();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class DropItem : Packet
+    public class DropItem : sul.Utils.Packet
     {
 
         public const byte Id = 46;
@@ -3009,14 +3012,14 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // action
-        public const byte Drop = 0;
+        public const byte DROP = 0;
 
         public byte action;
-        public Types.Slot item;
+        public Slot item;
 
-        public DropItem() {}
+        public DropItem() : this(0, new Slot()) {}
 
-        public DropItem(byte action, Types.Slot item)
+        public DropItem(byte action, Slot item)
         {
             this.action = action;
             this.item = item;
@@ -3024,41 +3027,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
             item.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //action = _buffer.ReadUbyte();
+            //item.DecodeBody(_buffer);
         }
 
         public static DropItem FromBuffer(byte[] buffer)
         {
             var ret = new DropItem();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class InventoryAction : Packet
+    public class InventoryAction : sul.Utils.Packet
     {
 
         public const byte Id = 47;
@@ -3067,11 +3070,11 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         public int action;
-        public Types.Slot item;
+        public Slot item;
 
-        public InventoryAction() {}
+        public InventoryAction() : this(0, new Slot()) {}
 
-        public InventoryAction(int action, Types.Slot item)
+        public InventoryAction(int action, Slot item)
         {
             this.action = action;
             this.item = item;
@@ -3079,41 +3082,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(action);
             item.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //action = _buffer.ReadVarint();
+            //item.DecodeBody(_buffer);
         }
 
         public static InventoryAction FromBuffer(byte[] buffer)
         {
             var ret = new InventoryAction();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ContainerOpen : Packet
+    public class ContainerOpen : sul.Utils.Packet
     {
 
         public const byte Id = 48;
@@ -3124,12 +3127,12 @@ namespace sul.Pocket102.Play
         public byte window;
         public byte type;
         public int slotCount;
-        public Types.BlockPosition position;
+        public BlockPosition position;
         public long entityId;
 
-        public ContainerOpen() {}
+        public ContainerOpen() : this(0, 0, 0, new BlockPosition(), 0) {}
 
-        public ContainerOpen(byte window, byte type, int slotCount, Types.BlockPosition position, long entityId)
+        public ContainerOpen(byte window, byte type, int slotCount, BlockPosition position, long entityId)
         {
             this.window = window;
             this.type = type;
@@ -3140,20 +3143,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteUbyte(type);
@@ -3162,25 +3165,25 @@ namespace sul.Pocket102.Play
             _buffer.WriteVarlong(entityId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //window = _buffer.ReadUbyte();
+            //type = _buffer.ReadUbyte();
+            //slotCount = _buffer.ReadVarint();
+            //position.DecodeBody(_buffer);
+            //entityId = _buffer.ReadVarlong();
         }
 
         public static ContainerOpen FromBuffer(byte[] buffer)
         {
             var ret = new ContainerOpen();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ContainerClose : Packet
+    public class ContainerClose : sul.Utils.Packet
     {
 
         public const byte Id = 49;
@@ -3190,7 +3193,7 @@ namespace sul.Pocket102.Play
 
         public byte window;
 
-        public ContainerClose() {}
+        public ContainerClose() : this(0) {}
 
         public ContainerClose(byte window)
         {
@@ -3199,39 +3202,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //window = _buffer.ReadUbyte();
         }
 
         public static ContainerClose FromBuffer(byte[] buffer)
         {
             var ret = new ContainerClose();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ContainerSetSlot : Packet
+    public class ContainerSetSlot : sul.Utils.Packet
     {
 
         public const byte Id = 50;
@@ -3242,12 +3245,12 @@ namespace sul.Pocket102.Play
         public byte window;
         public int slot;
         public int hotbarSlot;
-        public Types.Slot item;
+        public Slot item;
         public byte unknown4;
 
-        public ContainerSetSlot() {}
+        public ContainerSetSlot() : this(0, 0, 0, new Slot(), 0) {}
 
-        public ContainerSetSlot(byte window, int slot, int hotbarSlot, Types.Slot item, byte unknown4)
+        public ContainerSetSlot(byte window, int slot, int hotbarSlot, Slot item, byte unknown4)
         {
             this.window = window;
             this.slot = slot;
@@ -3258,20 +3261,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(slot);
@@ -3280,25 +3283,25 @@ namespace sul.Pocket102.Play
             _buffer.WriteUbyte(unknown4);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //window = _buffer.ReadUbyte();
+            //slot = _buffer.ReadVarint();
+            //hotbarSlot = _buffer.ReadVarint();
+            //item.DecodeBody(_buffer);
+            //unknown4 = _buffer.ReadUbyte();
         }
 
         public static ContainerSetSlot FromBuffer(byte[] buffer)
         {
             var ret = new ContainerSetSlot();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ContainerSetData : Packet
+    public class ContainerSetData : sul.Utils.Packet
     {
 
         public const byte Id = 51;
@@ -3310,7 +3313,7 @@ namespace sul.Pocket102.Play
         public int property;
         public int @value;
 
-        public ContainerSetData() {}
+        public ContainerSetData() : this(0, 0, 0) {}
 
         public ContainerSetData(byte window, int property, int @value)
         {
@@ -3321,43 +3324,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(property);
             _buffer.WriteVarint(@value);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //window = _buffer.ReadUbyte();
+            //property = _buffer.ReadVarint();
+            //@value = _buffer.ReadVarint();
         }
 
         public static ContainerSetData FromBuffer(byte[] buffer)
         {
             var ret = new ContainerSetData();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ContainerSetContent : Packet
+    public class ContainerSetContent : sul.Utils.Packet
     {
 
         public const byte Id = 52;
@@ -3366,12 +3369,12 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public byte window;
-        public Types.Slot[] slots;
+        public Slot[] slots;
         public int[] hotbar;
 
-        public ContainerSetContent() {}
+        public ContainerSetContent() : this(0, new Slot[]{}, new int[]{}) {}
 
-        public ContainerSetContent(byte window, Types.Slot[] slots, int[] hotbar)
+        public ContainerSetContent(byte window, Slot[] slots, int[] hotbar)
         {
             this.window = window;
             this.slots = slots;
@@ -3380,43 +3383,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
-            _buffer.WriteVaruint(slots.Length); foreach(Types.Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
-            _buffer.WriteVaruint(hotbar.Length); foreach(int hotbarChild in hotbar){ _buffer.WriteVarint(hotbarChild); }
+            _buffer.WriteVaruint(slots.Length); foreach (Slot slotsChild in slots){ slotsChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(hotbar.Length); foreach (int hotbarChild in hotbar){ _buffer.WriteVarint(hotbarChild); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //window = _buffer.ReadUbyte();
+            //slots.DecodeBody(_buffer);
+            //hotbar.DecodeBody(_buffer);
         }
 
         public static ContainerSetContent FromBuffer(byte[] buffer)
         {
             var ret = new ContainerSetContent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class CraftingData : Packet
+    public class CraftingData : sul.Utils.Packet
     {
 
         public const byte Id = 53;
@@ -3424,50 +3427,50 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Types.Recipe[] recipes;
+        public Recipe[] recipes;
 
-        public CraftingData() {}
+        public CraftingData() : this(new Recipe[]{}) {}
 
-        public CraftingData(Types.Recipe[] recipes)
+        public CraftingData(Recipe[] recipes)
         {
             this.recipes = recipes;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVaruint(recipes.Length); foreach(Types.Recipe recipesChild in recipes){ recipesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(recipes.Length); foreach (Recipe recipesChild in recipes){ recipesChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //recipes.DecodeBody(_buffer);
         }
 
         public static CraftingData FromBuffer(byte[] buffer)
         {
             var ret = new CraftingData();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class CraftingEvent : Packet
+    public class CraftingEvent : sul.Utils.Packet
     {
 
         public const byte Id = 54;
@@ -3477,13 +3480,13 @@ namespace sul.Pocket102.Play
 
         public byte window;
         public int type;
-        public Guid uuid;
-        public Types.Slot[] input;
-        public Types.Slot[] output;
+        public System.Guid uuid;
+        public Slot[] input;
+        public Slot[] output;
 
-        public CraftingEvent() {}
+        public CraftingEvent() : this(0, 0, System.Guid.Empty, new Slot[]{}, new Slot[]{}) {}
 
-        public CraftingEvent(byte window, int type, Guid uuid, Types.Slot[] input, Types.Slot[] output)
+        public CraftingEvent(byte window, int type, System.Guid uuid, Slot[] input, Slot[] output)
         {
             this.window = window;
             this.type = type;
@@ -3494,47 +3497,47 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteVarint(type);
             _buffer.WriteUuid(uuid);
-            _buffer.WriteVaruint(input.Length); foreach(Types.Slot inputChild in input){ inputChild.EncodeBody(_buffer); }
-            _buffer.WriteVaruint(output.Length); foreach(Types.Slot outputChild in output){ outputChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(input.Length); foreach (Slot inputChild in input){ inputChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(output.Length); foreach (Slot outputChild in output){ outputChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //window = _buffer.ReadUbyte();
+            //type = _buffer.ReadVarint();
+            //uuid = _buffer.ReadUuid();
+            //input.DecodeBody(_buffer);
+            //output.DecodeBody(_buffer);
         }
 
         public static CraftingEvent FromBuffer(byte[] buffer)
         {
             var ret = new CraftingEvent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AdventureSettings : Packet
+    public class AdventureSettings : sul.Utils.Packet
     {
 
         public const byte Id = 55;
@@ -3543,27 +3546,27 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // flags
-        public const uint ImmutableWorld = 1;
-        public const uint PvpDisabled = 2;
-        public const uint PvmDisabled = 4;
-        public const uint MvpDisbaled = 8;
-        public const uint EvpDisabled = 16;
-        public const uint AutoJump = 32;
-        public const uint AllowFlight = 64;
-        public const uint NoClip = 128;
-        public const uint Flying = 512;
+        public const uint IMMUTABLE_WORLD = 1;
+        public const uint PVP_DISABLED = 2;
+        public const uint PVM_DISABLED = 4;
+        public const uint MVP_DISBALED = 8;
+        public const uint EVP_DISABLED = 16;
+        public const uint AUTO_JUMP = 32;
+        public const uint ALLOW_FLIGHT = 64;
+        public const uint NO_CLIP = 128;
+        public const uint FLYING = 512;
 
         // permissions
-        public const uint User = 0;
-        public const uint Operator = 1;
-        public const uint Host = 2;
-        public const uint Automation = 3;
-        public const uint Admin = 4;
+        public const uint USER = 0;
+        public const uint OPERATOR = 1;
+        public const uint HOST = 2;
+        public const uint AUTOMATION = 3;
+        public const uint ADMIN = 4;
 
         public uint flags;
         public uint permissions;
 
-        public AdventureSettings() {}
+        public AdventureSettings() : this(0, 0) {}
 
         public AdventureSettings(uint flags, uint permissions)
         {
@@ -3573,41 +3576,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(flags);
             _buffer.WriteVaruint(permissions);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //flags = _buffer.ReadVaruint();
+            //permissions = _buffer.ReadVaruint();
         }
 
         public static AdventureSettings FromBuffer(byte[] buffer)
         {
             var ret = new AdventureSettings();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class BlockEntityData : Packet
+    public class BlockEntityData : sul.Utils.Packet
     {
 
         public const byte Id = 56;
@@ -3615,12 +3618,12 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Types.BlockPosition position;
+        public BlockPosition position;
         public byte[] nbt;
 
-        public BlockEntityData() {}
+        public BlockEntityData() : this(new BlockPosition(), new byte[]{}) {}
 
-        public BlockEntityData(Types.BlockPosition position, byte[] nbt)
+        public BlockEntityData(BlockPosition position, byte[] nbt)
         {
             this.position = position;
             this.nbt = nbt;
@@ -3628,41 +3631,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             position.EncodeBody(_buffer);
             _buffer.WriteBytes(nbt);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //position.DecodeBody(_buffer);
+            //nbt = _buffer.ReadBytes();
         }
 
         public static BlockEntityData FromBuffer(byte[] buffer)
         {
             var ret = new BlockEntityData();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerInput : Packet
+    public class PlayerInput : sul.Utils.Packet
     {
 
         public const byte Id = 57;
@@ -3670,13 +3673,13 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Tuple<float, float, float> motion;
+        public System.Tuple<float, float, float> motion;
         public byte flags;
         public bool unknown2;
 
-        public PlayerInput() {}
+        public PlayerInput() : this(null, 0, false) {}
 
-        public PlayerInput(Tuple<float, float, float> motion, byte flags, bool unknown2)
+        public PlayerInput(System.Tuple<float, float, float> motion, byte flags, bool unknown2)
         {
             this.motion = motion;
             this.flags = flags;
@@ -3685,43 +3688,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteLittleEndianFloat(motion[0]); _buffer.WriteLittleEndianFloat(motion[1]); _buffer.WriteLittleEndianFloat(motion[2]);
+            _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
             _buffer.WriteUbyte(flags);
             _buffer.WriteBool(unknown2);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
+            //flags = _buffer.ReadUbyte();
+            //unknown2 = _buffer.ReadBool();
         }
 
         public static PlayerInput FromBuffer(byte[] buffer)
         {
             var ret = new PlayerInput();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class FullChunkData : Packet
+    public class FullChunkData : sul.Utils.Packet
     {
 
         public const byte Id = 58;
@@ -3729,12 +3732,12 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Tuple<int, int> position;
-        public Types.ChunkData data;
+        public System.Tuple<int, int> position;
+        public ChunkData data;
 
-        public FullChunkData() {}
+        public FullChunkData() : this(null, new ChunkData()) {}
 
-        public FullChunkData(Tuple<int, int> position, Types.ChunkData data)
+        public FullChunkData(System.Tuple<int, int> position, ChunkData data)
         {
             this.position = position;
             this.data = data;
@@ -3742,41 +3745,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVarint(position[0]); _buffer.WriteVarint(position[1]);
+            _buffer.WriteVarint(position.Item1); _buffer.WriteVarint(position.Item2);
             data.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //position.Item1 = _buffer.ReadVarint(); position.Item2 = _buffer.ReadVarint();
+            //data.DecodeBody(_buffer);
         }
 
         public static FullChunkData FromBuffer(byte[] buffer)
         {
             var ret = new FullChunkData();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetCommandsEnabled : Packet
+    public class SetCommandsEnabled : sul.Utils.Packet
     {
 
         public const byte Id = 59;
@@ -3786,7 +3789,7 @@ namespace sul.Pocket102.Play
 
         public bool enabled;
 
-        public SetCommandsEnabled() {}
+        public SetCommandsEnabled() : this(false) {}
 
         public SetCommandsEnabled(bool enabled)
         {
@@ -3795,39 +3798,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(enabled);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //enabled = _buffer.ReadBool();
         }
 
         public static SetCommandsEnabled FromBuffer(byte[] buffer)
         {
             var ret = new SetCommandsEnabled();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetDifficulty : Packet
+    public class SetDifficulty : sul.Utils.Packet
     {
 
         public const byte Id = 60;
@@ -3836,14 +3839,14 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // difficulty
-        public const uint Peaceful = 0;
-        public const uint Easy = 1;
-        public const uint Normal = 2;
-        public const uint Hard = 3;
+        public const uint PEACEFUL = 0;
+        public const uint EASY = 1;
+        public const uint NORMAL = 2;
+        public const uint HARD = 3;
 
         public uint difficulty;
 
-        public SetDifficulty() {}
+        public SetDifficulty() : this(0) {}
 
         public SetDifficulty(uint difficulty)
         {
@@ -3852,39 +3855,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(difficulty);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //difficulty = _buffer.ReadVaruint();
         }
 
         public static SetDifficulty FromBuffer(byte[] buffer)
         {
             var ret = new SetDifficulty();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ChangeDimension : Packet
+    public class ChangeDimension : sul.Utils.Packet
     {
 
         public const byte Id = 61;
@@ -3893,17 +3896,17 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // dimension
-        public const int Overworld = 0;
-        public const int Nether = 1;
-        public const int End = 2;
+        public const int OVERWORLD = 0;
+        public const int NETHER = 1;
+        public const int END = 2;
 
         public int dimension;
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public bool unknown2;
 
-        public ChangeDimension() {}
+        public ChangeDimension() : this(0, null, false) {}
 
-        public ChangeDimension(int dimension, Tuple<float, float, float> position, bool unknown2)
+        public ChangeDimension(int dimension, System.Tuple<float, float, float> position, bool unknown2)
         {
             this.dimension = dimension;
             this.position = position;
@@ -3912,43 +3915,43 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(dimension);
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteBool(unknown2);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //dimension = _buffer.ReadVarint();
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //unknown2 = _buffer.ReadBool();
         }
 
         public static ChangeDimension FromBuffer(byte[] buffer)
         {
             var ret = new ChangeDimension();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SetPlayerGameType : Packet
+    public class SetPlayerGameType : sul.Utils.Packet
     {
 
         public const byte Id = 62;
@@ -3957,12 +3960,12 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // gamemode
-        public const int Survival = 0;
-        public const int Creative = 1;
+        public const int SURVIVAL = 0;
+        public const int CREATIVE = 1;
 
         public int gamemode;
 
-        public SetPlayerGameType() {}
+        public SetPlayerGameType() : this(0) {}
 
         public SetPlayerGameType(int gamemode)
         {
@@ -3971,39 +3974,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(gamemode);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //gamemode = _buffer.ReadVarint();
         }
 
         public static SetPlayerGameType FromBuffer(byte[] buffer)
         {
             var ret = new SetPlayerGameType();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerList : Packet
+    public class PlayerList : sul.Utils.Packet
     {
 
         public const byte Id = 63;
@@ -4013,7 +4016,7 @@ namespace sul.Pocket102.Play
 
         public byte action;
 
-        public PlayerList() {}
+        public PlayerList() : this(0) {}
 
         public PlayerList(byte action)
         {
@@ -4022,39 +4025,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(action);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //action = _buffer.ReadUbyte();
         }
 
         public static PlayerList FromBuffer(byte[] buffer)
         {
             var ret = new PlayerList();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class TelemetryEvent : Packet
+    public class TelemetryEvent : sul.Utils.Packet
     {
 
         public const byte Id = 64;
@@ -4065,7 +4068,7 @@ namespace sul.Pocket102.Play
         public long entityId;
         public int eventId;
 
-        public TelemetryEvent() {}
+        public TelemetryEvent() : this(0, 0) {}
 
         public TelemetryEvent(long entityId, int eventId)
         {
@@ -4075,41 +4078,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarint(eventId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //entityId = _buffer.ReadVarlong();
+            //eventId = _buffer.ReadVarint();
         }
 
         public static TelemetryEvent FromBuffer(byte[] buffer)
         {
             var ret = new TelemetryEvent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SpawnExperienceOrb : Packet
+    public class SpawnExperienceOrb : sul.Utils.Packet
     {
 
         public const byte Id = 65;
@@ -4117,12 +4120,12 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Tuple<float, float, float> position;
+        public System.Tuple<float, float, float> position;
         public int count;
 
-        public SpawnExperienceOrb() {}
+        public SpawnExperienceOrb() : this(null, 0) {}
 
-        public SpawnExperienceOrb(Tuple<float, float, float> position, int count)
+        public SpawnExperienceOrb(System.Tuple<float, float, float> position, int count)
         {
             this.position = position;
             this.count = count;
@@ -4130,41 +4133,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteLittleEndianFloat(position[0]); _buffer.WriteLittleEndianFloat(position[1]); _buffer.WriteLittleEndianFloat(position[2]);
+            _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteVarint(count);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //count = _buffer.ReadVarint();
         }
 
         public static SpawnExperienceOrb FromBuffer(byte[] buffer)
         {
             var ret = new SpawnExperienceOrb();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ClientboundMapItemData : Packet
+    public class ClientboundMapItemData : sul.Utils.Packet
     {
 
         public const byte Id = 66;
@@ -4173,21 +4176,21 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // update
-        public const uint Texture = 2;
-        public const uint Decorations = 4;
-        public const uint Entities = 8;
+        public const uint TEXTURE = 2;
+        public const uint DECORATIONS = 4;
+        public const uint ENTITIES = 8;
 
         public long mapId;
         public uint update;
         public byte scale;
-        public Tuple<int, int> size;
-        public Tuple<int, int> offset;
+        public System.Tuple<int, int> size;
+        public System.Tuple<int, int> offset;
         public byte[] data;
-        public Types.Decoration[] decorations;
+        public Decoration[] decorations;
 
-        public ClientboundMapItemData() {}
+        public ClientboundMapItemData() : this(0, 0, 0, null, null, new byte[]{}, new Decoration[]{}) {}
 
-        public ClientboundMapItemData(long mapId, uint update, byte scale, Tuple<int, int> size, Tuple<int, int> offset, byte[] data, Types.Decoration[] decorations)
+        public ClientboundMapItemData(long mapId, uint update, byte scale, System.Tuple<int, int> size, System.Tuple<int, int> offset, byte[] data, Decoration[] decorations)
         {
             this.mapId = mapId;
             this.update = update;
@@ -4200,51 +4203,51 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(mapId);
             _buffer.WriteVaruint(update);
             if(update==2||update==4){ _buffer.WriteUbyte(scale); }
-            if(update==2){ _buffer.WriteVarint(size[0]); _buffer.WriteVarint(size[1]); }
-            if(update==2){ _buffer.WriteVarint(offset[0]); _buffer.WriteVarint(offset[1]); }
+            if(update==2){ _buffer.WriteVarint(size.Item1); _buffer.WriteVarint(size.Item2); }
+            if(update==2){ _buffer.WriteVarint(offset.Item1); _buffer.WriteVarint(offset.Item2); }
             if(update==2){ _buffer.WriteBytes(data); }
-            if(update==4){ _buffer.WriteVaruint(decorations.Length); foreach(Types.Decoration decorationsChild in decorations){ decorationsChild.EncodeBody(_buffer); } }
+            if(update==4){ _buffer.WriteVaruint(decorations.Length); foreach (Decoration decorationsChild in decorations){ decorationsChild.EncodeBody(_buffer); } }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-            if(update==2||update==4){  }
-            if(update==2){  }
-            if(update==2){  }
-            if(update==2){  }
-            if(update==4){  }
+            //mapId = _buffer.ReadVarlong();
+            //update = _buffer.ReadVaruint();
+            //if(update==2||update==4){ scale = _buffer.ReadUbyte(); }
+            //if(update==2){ size.Item1 = _buffer.ReadVarint(); size.Item2 = _buffer.ReadVarint(); }
+            //if(update==2){ offset.Item1 = _buffer.ReadVarint(); offset.Item2 = _buffer.ReadVarint(); }
+            //if(update==2){ data = _buffer.ReadBytes(); }
+            //if(update==4){ decorations.DecodeBody(_buffer); }
         }
 
         public static ClientboundMapItemData FromBuffer(byte[] buffer)
         {
             var ret = new ClientboundMapItemData();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class MapInfoRequest : Packet
+    public class MapInfoRequest : sul.Utils.Packet
     {
 
         public const byte Id = 67;
@@ -4254,7 +4257,7 @@ namespace sul.Pocket102.Play
 
         public long mapId;
 
-        public MapInfoRequest() {}
+        public MapInfoRequest() : this(0) {}
 
         public MapInfoRequest(long mapId)
         {
@@ -4263,39 +4266,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(mapId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //mapId = _buffer.ReadVarlong();
         }
 
         public static MapInfoRequest FromBuffer(byte[] buffer)
         {
             var ret = new MapInfoRequest();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class RequestChunkRadius : Packet
+    public class RequestChunkRadius : sul.Utils.Packet
     {
 
         public const byte Id = 68;
@@ -4305,7 +4308,7 @@ namespace sul.Pocket102.Play
 
         public int radius;
 
-        public RequestChunkRadius() {}
+        public RequestChunkRadius() : this(0) {}
 
         public RequestChunkRadius(int radius)
         {
@@ -4314,39 +4317,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(radius);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //radius = _buffer.ReadVarint();
         }
 
         public static RequestChunkRadius FromBuffer(byte[] buffer)
         {
             var ret = new RequestChunkRadius();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ChunkRadiusUpdated : Packet
+    public class ChunkRadiusUpdated : sul.Utils.Packet
     {
 
         public const byte Id = 69;
@@ -4356,7 +4359,7 @@ namespace sul.Pocket102.Play
 
         public int radius;
 
-        public ChunkRadiusUpdated() {}
+        public ChunkRadiusUpdated() : this(0) {}
 
         public ChunkRadiusUpdated(int radius)
         {
@@ -4365,39 +4368,39 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(radius);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //radius = _buffer.ReadVarint();
         }
 
         public static ChunkRadiusUpdated FromBuffer(byte[] buffer)
         {
             var ret = new ChunkRadiusUpdated();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ItemFrameDropItem : Packet
+    public class ItemFrameDropItem : sul.Utils.Packet
     {
 
         public const byte Id = 70;
@@ -4405,12 +4408,12 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Types.BlockPosition position;
-        public Types.Slot item;
+        public BlockPosition position;
+        public Slot item;
 
-        public ItemFrameDropItem() {}
+        public ItemFrameDropItem() : this(new BlockPosition(), new Slot()) {}
 
-        public ItemFrameDropItem(Types.BlockPosition position, Types.Slot item)
+        public ItemFrameDropItem(BlockPosition position, Slot item)
         {
             this.position = position;
             this.item = item;
@@ -4418,41 +4421,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             position.EncodeBody(_buffer);
             item.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //position.DecodeBody(_buffer);
+            //item.DecodeBody(_buffer);
         }
 
         public static ItemFrameDropItem FromBuffer(byte[] buffer)
         {
             var ret = new ItemFrameDropItem();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ReplaceSelectedItem : Packet
+    public class ReplaceSelectedItem : sul.Utils.Packet
     {
 
         public const byte Id = 71;
@@ -4460,50 +4463,50 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Types.Slot item;
+        public Slot item;
 
-        public ReplaceSelectedItem() {}
+        public ReplaceSelectedItem() : this(new Slot()) {}
 
-        public ReplaceSelectedItem(Types.Slot item)
+        public ReplaceSelectedItem(Slot item)
         {
             this.item = item;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             item.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //item.DecodeBody(_buffer);
         }
 
         public static ReplaceSelectedItem FromBuffer(byte[] buffer)
         {
             var ret = new ReplaceSelectedItem();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class GameRulesChanged : Packet
+    public class GameRulesChanged : sul.Utils.Packet
     {
 
         public const byte Id = 72;
@@ -4511,50 +4514,50 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Types.Rule[] rules;
+        public Rule[] rules;
 
-        public GameRulesChanged() {}
+        public GameRulesChanged() : this(new Rule[]{}) {}
 
-        public GameRulesChanged(Types.Rule[] rules)
+        public GameRulesChanged(Rule[] rules)
         {
             this.rules = rules;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteBigEndianUint(rules.Length); foreach(Types.Rule rulesChild in rules){ rulesChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUint(rules.Length); foreach (Rule rulesChild in rules){ rulesChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //rules.DecodeBody(_buffer);
         }
 
         public static GameRulesChanged FromBuffer(byte[] buffer)
         {
             var ret = new GameRulesChanged();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Camera : Packet
+    public class Camera : sul.Utils.Packet
     {
 
         public const byte Id = 73;
@@ -4565,7 +4568,7 @@ namespace sul.Pocket102.Play
         public long unknown0;
         public long unknown1;
 
-        public Camera() {}
+        public Camera() : this(0, 0) {}
 
         public Camera(long unknown0, long unknown1)
         {
@@ -4575,41 +4578,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(unknown0);
             _buffer.WriteVarlong(unknown1);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //unknown0 = _buffer.ReadVarlong();
+            //unknown1 = _buffer.ReadVarlong();
         }
 
         public static Camera FromBuffer(byte[] buffer)
         {
             var ret = new Camera();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AddItem : Packet
+    public class AddItem : sul.Utils.Packet
     {
 
         public const byte Id = 74;
@@ -4617,50 +4620,50 @@ namespace sul.Pocket102.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public Types.Slot item;
+        public Slot item;
 
-        public AddItem() {}
+        public AddItem() : this(new Slot()) {}
 
-        public AddItem(Types.Slot item)
+        public AddItem(Slot item)
         {
             this.item = item;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             item.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //item.DecodeBody(_buffer);
         }
 
         public static AddItem FromBuffer(byte[] buffer)
         {
             var ret = new AddItem();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class BossEvent : Packet
+    public class BossEvent : sul.Utils.Packet
     {
 
         public const byte Id = 75;
@@ -4669,14 +4672,14 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         // event id
-        public const uint Add = 0;
-        public const uint Update = 1;
-        public const uint Remove = 2;
+        public const uint ADD = 0;
+        public const uint UPDATE = 1;
+        public const uint REMOVE = 2;
 
         public long entityId;
         public uint eventId;
 
-        public BossEvent() {}
+        public BossEvent() : this(0, 0) {}
 
         public BossEvent(long entityId, uint eventId)
         {
@@ -4686,41 +4689,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVaruint(eventId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //entityId = _buffer.ReadVarlong();
+            //eventId = _buffer.ReadVaruint();
         }
 
         public static BossEvent FromBuffer(byte[] buffer)
         {
             var ret = new BossEvent();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ShowCredits : Packet
+    public class ShowCredits : sul.Utils.Packet
     {
 
         public const byte Id = 76;
@@ -4729,13 +4732,13 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = true;
 
         // status
-        public const int Start = 0;
-        public const int End = 1;
+        public const int START = 0;
+        public const int END = 1;
 
         public long entityId;
         public int status;
 
-        public ShowCredits() {}
+        public ShowCredits() : this(0, 0) {}
 
         public ShowCredits(long entityId, int status)
         {
@@ -4745,41 +4748,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVarint(status);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //entityId = _buffer.ReadVarlong();
+            //status = _buffer.ReadVarint();
         }
 
         public static ShowCredits FromBuffer(byte[] buffer)
         {
             var ret = new ShowCredits();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class AvailableCommands : Packet
+    public class AvailableCommands : sul.Utils.Packet
     {
 
         public const byte Id = 77;
@@ -4790,7 +4793,7 @@ namespace sul.Pocket102.Play
         public string commands;
         public string unknown1;
 
-        public AvailableCommands() {}
+        public AvailableCommands() : this("", "") {}
 
         public AvailableCommands(string commands, string unknown1)
         {
@@ -4800,41 +4803,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(commands)); _buffer.WriteString(commands);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown1)); _buffer.WriteString(unknown1);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //commands = _buffer.ReadString();
+            //unknown1 = _buffer.ReadString();
         }
 
         public static AvailableCommands FromBuffer(byte[] buffer)
         {
             var ret = new AvailableCommands();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class CommandStep : Packet
+    public class CommandStep : sul.Utils.Packet
     {
 
         public const byte Id = 78;
@@ -4851,7 +4854,7 @@ namespace sul.Pocket102.Play
         public string input;
         public string output;
 
-        public CommandStep() {}
+        public CommandStep() : this("", "", 0, 0, false, 0, "", "") {}
 
         public CommandStep(string command, string overload, uint unknown2, uint currentStep, bool done, ulong clientId, string input, string output)
         {
@@ -4867,20 +4870,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(overload)); _buffer.WriteString(overload);
@@ -4892,28 +4895,28 @@ namespace sul.Pocket102.Play
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(output)); _buffer.WriteString(output);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-
+            //command = _buffer.ReadString();
+            //overload = _buffer.ReadString();
+            //unknown2 = _buffer.ReadVaruint();
+            //currentStep = _buffer.ReadVaruint();
+            //done = _buffer.ReadBool();
+            //clientId = _buffer.ReadVarulong();
+            //input = _buffer.ReadString();
+            //output = _buffer.ReadString();
         }
 
         public static CommandStep FromBuffer(byte[] buffer)
         {
             var ret = new CommandStep();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateTrade : Packet
+    public class UpdateTrade : sul.Utils.Packet
     {
 
         public const byte Id = 79;
@@ -4931,7 +4934,7 @@ namespace sul.Pocket102.Play
         public string unknown7;
         public byte[] offers;
 
-        public UpdateTrade() {}
+        public UpdateTrade() : this(0, 0, 0, 0, false, 0, 0, "", new byte[]{}) {}
 
         public UpdateTrade(byte unknown0, byte unknown1, int unknown2, int unknown3, bool unknown4, long trader, long player, string unknown7, byte[] offers)
         {
@@ -4948,20 +4951,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(unknown0);
             _buffer.WriteUbyte(unknown1);
@@ -4974,29 +4977,29 @@ namespace sul.Pocket102.Play
             _buffer.WriteBytes(offers);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-
-
+            //unknown0 = _buffer.ReadUbyte();
+            //unknown1 = _buffer.ReadUbyte();
+            //unknown2 = _buffer.ReadVarint();
+            //unknown3 = _buffer.ReadVarint();
+            //unknown4 = _buffer.ReadBool();
+            //trader = _buffer.ReadVarlong();
+            //player = _buffer.ReadVarlong();
+            //unknown7 = _buffer.ReadString();
+            //offers = _buffer.ReadBytes();
         }
 
         public static UpdateTrade FromBuffer(byte[] buffer)
         {
             var ret = new UpdateTrade();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ResourcePackDataInfo : Packet
+    public class ResourcePackDataInfo : sul.Utils.Packet
     {
 
         public const byte Id = 80;
@@ -5010,7 +5013,7 @@ namespace sul.Pocket102.Play
         public ulong compressedPackSize;
         public string sha256;
 
-        public ResourcePackDataInfo() {}
+        public ResourcePackDataInfo() : this("", 0, 0, 0, "") {}
 
         public ResourcePackDataInfo(string id, uint maxChunkSize, uint chunkCount, ulong compressedPackSize, string sha256)
         {
@@ -5023,20 +5026,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteLittleEndianUint(maxChunkSize);
@@ -5045,25 +5048,25 @@ namespace sul.Pocket102.Play
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(sha256)); _buffer.WriteString(sha256);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //id = _buffer.ReadString();
+            //maxChunkSize = _buffer.ReadLittleEndianUint();
+            //chunkCount = _buffer.ReadLittleEndianUint();
+            //compressedPackSize = _buffer.ReadLittleEndianUlong();
+            //sha256 = _buffer.ReadString();
         }
 
         public static ResourcePackDataInfo FromBuffer(byte[] buffer)
         {
             var ret = new ResourcePackDataInfo();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ResourcePackChunkData : Packet
+    public class ResourcePackChunkData : sul.Utils.Packet
     {
 
         public const byte Id = 81;
@@ -5076,7 +5079,7 @@ namespace sul.Pocket102.Play
         public ulong progress;
         public byte[] data;
 
-        public ResourcePackChunkData() {}
+        public ResourcePackChunkData() : this("", 0, 0, new byte[]{}) {}
 
         public ResourcePackChunkData(string id, uint chunkIndex, ulong progress, byte[] data)
         {
@@ -5088,20 +5091,20 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteLittleEndianUint(chunkIndex);
@@ -5109,24 +5112,24 @@ namespace sul.Pocket102.Play
             _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //id = _buffer.ReadString();
+            //chunkIndex = _buffer.ReadLittleEndianUint();
+            //progress = _buffer.ReadLittleEndianUlong();
+            //data.DecodeBody(_buffer);
         }
 
         public static ResourcePackChunkData FromBuffer(byte[] buffer)
         {
             var ret = new ResourcePackChunkData();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ResourcePackChunkRequest : Packet
+    public class ResourcePackChunkRequest : sul.Utils.Packet
     {
 
         public const byte Id = 82;
@@ -5137,7 +5140,7 @@ namespace sul.Pocket102.Play
         public string id;
         public uint chunkIndex;
 
-        public ResourcePackChunkRequest() {}
+        public ResourcePackChunkRequest() : this("", 0) {}
 
         public ResourcePackChunkRequest(string id, uint chunkIndex)
         {
@@ -5147,41 +5150,41 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteLittleEndianUint(chunkIndex);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //id = _buffer.ReadString();
+            //chunkIndex = _buffer.ReadLittleEndianUint();
         }
 
         public static ResourcePackChunkRequest FromBuffer(byte[] buffer)
         {
             var ret = new ResourcePackChunkRequest();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Transfer : Packet
+    public class Transfer : sul.Utils.Packet
     {
 
         public const byte Id = 83;
@@ -5190,9 +5193,9 @@ namespace sul.Pocket102.Play
         public const bool Serverbound = false;
 
         public string ip;
-        public ushort port = 19132;
+        public ushort port;
 
-        public Transfer() {}
+        public Transfer() : this("", 19132) {}
 
         public Transfer(string ip, ushort port)
         {
@@ -5202,35 +5205,35 @@ namespace sul.Pocket102.Play
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(ip)); _buffer.WriteString(ip);
             _buffer.WriteLittleEndianUshort(port);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //ip = _buffer.ReadString();
+            //port = _buffer.ReadLittleEndianUshort();
         }
 
         public static Transfer FromBuffer(byte[] buffer)
         {
             var ret = new Transfer();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

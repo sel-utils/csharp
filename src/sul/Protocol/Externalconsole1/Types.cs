@@ -6,24 +6,22 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/externalconsole1.xml
  */
-using Utils.Buffer;
-using Utils.LengthPrefixedType;
-using Utils.Stream;
+using System.Text;
 
 namespace sul.Externalconsole1.Types
 {
 
-    public class Game : Stream
+    public class Game : sul.Utils.Stream
     {
 
         // type
-        public const byte Pocket = 1;
-        public const byte Minecraft = 2;
+        public const byte POCKET = 1;
+        public const byte MINECRAFT = 2;
 
         public byte type;
         public uint[] protocols;
 
-        public Game() {}
+        public Game() : this(0, new uint[]{}) {}
 
         public Game(byte type, uint[] protocols)
         {
@@ -31,21 +29,21 @@ namespace sul.Externalconsole1.Types
             this.protocols = protocols;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(type);
-            _buffer.WriteBigEndianUshort(protocols.Length); foreach(uint protocolsChild in protocols){ _buffer.WriteBigEndianUint(protocolsChild); }
+            _buffer.WriteBigEndianUshort(protocols.Length); foreach (uint protocolsChild in protocols){ _buffer.WriteBigEndianUint(protocolsChild); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //type = _buffer.ReadUbyte();
+            //protocols.DecodeBody(_buffer);
         }
 
     }
 
-    public class NodeStats : Stream
+    public class NodeStats : sul.Utils.Stream
     {
 
         public string name;
@@ -53,7 +51,7 @@ namespace sul.Externalconsole1.Types
         public ulong ram;
         public float cpu;
 
-        public NodeStats() {}
+        public NodeStats() : this("", 0, 0, 0) {}
 
         public NodeStats(string name, float tps, ulong ram, float cpu)
         {
@@ -63,7 +61,7 @@ namespace sul.Externalconsole1.Types
             this.cpu = cpu;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteBigEndianFloat(tps);
@@ -71,12 +69,12 @@ namespace sul.Externalconsole1.Types
             _buffer.WriteBigEndianFloat(cpu);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //name = _buffer.ReadString();
+            //tps = _buffer.ReadBigEndianFloat();
+            //ram = _buffer.ReadBigEndianUlong();
+            //cpu = _buffer.ReadBigEndianFloat();
         }
 
     }

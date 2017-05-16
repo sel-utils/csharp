@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/externalconsole1.xml
  */
-using Types = sul.Externalconsole1.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Externalconsole1.Types;
 
 namespace sul.Externalconsole1.Login
 {
 
-    public class AuthCredentials : Packet
+    public class AuthCredentials : sul.Utils.Packet
     {
 
         public const byte Id = 0;
@@ -27,7 +27,7 @@ namespace sul.Externalconsole1.Login
         public string hashAlgorithm;
         public byte[] payload;
 
-        public AuthCredentials() {}
+        public AuthCredentials() : this(0, false, "", new byte[]{}) {}
 
         public AuthCredentials(byte protocol, bool hash, string hashAlgorithm, byte[] payload)
         {
@@ -39,20 +39,20 @@ namespace sul.Externalconsole1.Login
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(protocol);
             _buffer.WriteBool(hash);
@@ -60,24 +60,24 @@ namespace sul.Externalconsole1.Login
             if(hash==true){ _buffer.WriteBigEndianUshort(payload.Length); _buffer.WriteBytes(payload); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-            if(hash==true){  }
-            if(hash==true){  }
+            //protocol = _buffer.ReadUbyte();
+            //hash = _buffer.ReadBool();
+            //if(hash==true){ hashAlgorithm = _buffer.ReadString(); }
+            //if(hash==true){ payload.DecodeBody(_buffer); }
         }
 
         public static AuthCredentials FromBuffer(byte[] buffer)
         {
             var ret = new AuthCredentials();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Auth : Packet
+    public class Auth : sul.Utils.Packet
     {
 
         public const byte Id = 1;
@@ -87,7 +87,7 @@ namespace sul.Externalconsole1.Login
 
         public byte[] hash;
 
-        public Auth() {}
+        public Auth() : this(new byte[]{}) {}
 
         public Auth(byte[] hash)
         {
@@ -96,39 +96,39 @@ namespace sul.Externalconsole1.Login
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(hash.Length); _buffer.WriteBytes(hash);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //hash.DecodeBody(_buffer);
         }
 
         public static Auth FromBuffer(byte[] buffer)
         {
             var ret = new Auth();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Welcome : Packet
+    public class Welcome : sul.Utils.Packet
     {
 
         public const byte Id = 2;
@@ -138,7 +138,7 @@ namespace sul.Externalconsole1.Login
 
         public byte status;
 
-        public Welcome() {}
+        public Welcome() : this(0) {}
 
         public Welcome(byte status)
         {
@@ -147,33 +147,33 @@ namespace sul.Externalconsole1.Login
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //status = _buffer.ReadUbyte();
         }
 
         public static Welcome FromBuffer(byte[] buffer)
         {
             var ret = new Welcome();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

@@ -6,24 +6,22 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/raknet8.xml
  */
-using Utils.Buffer;
-using Utils.LengthPrefixedType;
-using Utils.Stream;
+using System.Text;
 
 namespace sul.Raknet8.Types
 {
 
-    public class Address : Stream
+    public class Address : sul.Utils.Stream
     {
 
         public byte type;
         public uint ipv4;
-        public byte[16] ipv6;
+        public byte[] ipv6;
         public ushort port;
 
-        public Address() {}
+        public Address() : this(0, 0, new byte[16], 0) {}
 
-        public Address(byte type, uint ipv4, byte[16] ipv6, ushort port)
+        public Address(byte type, uint ipv4, byte[] ipv6, ushort port)
         {
             this.type = type;
             this.ipv4 = ipv4;
@@ -31,32 +29,32 @@ namespace sul.Raknet8.Types
             this.port = port;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(type);
             if(type==4){ _buffer.WriteBigEndianUint(ipv4); }
-            if(type==6){ foreach(byte ipv6Child in ipv6){ _buffer.WriteUbyte(ipv6Child); } }
+            if(type==6){ foreach (byte ipv6Child in ipv6){ _buffer.WriteUbyte(ipv6Child); } }
             _buffer.WriteBigEndianUshort(port);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-            if(type==4){  }
-            if(type==6){  }
-
+            //type = _buffer.ReadUbyte();
+            //if(type==4){ ipv4 = _buffer.ReadBigEndianUint(); }
+            //if(type==6){ ipv6.DecodeBody(_buffer); }
+            //port = _buffer.ReadBigEndianUshort();
         }
 
     }
 
-    public class Acknowledge : Stream
+    public class Acknowledge : sul.Utils.Stream
     {
 
         public bool unique;
         public int first;
         public int last;
 
-        public Acknowledge() {}
+        public Acknowledge() : this(false, 0, 0) {}
 
         public Acknowledge(bool unique, int first, int last)
         {
@@ -65,23 +63,23 @@ namespace sul.Raknet8.Types
             this.last = last;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(unique);
             _buffer.WriteLittleEndianTriad(first);
             if(unique==false){ _buffer.WriteLittleEndianTriad(last); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-            if(unique==false){  }
+            //unique = _buffer.ReadBool();
+            //first = _buffer.ReadLittleEndianTriad();
+            //if(unique==false){ last = _buffer.ReadLittleEndianTriad(); }
         }
 
     }
 
-    public class Encapsulation : Stream
+    public class Encapsulation : sul.Utils.Stream
     {
 
         public byte info;
@@ -89,12 +87,12 @@ namespace sul.Raknet8.Types
         public int messageIndex;
         public int orderIndex;
         public byte orderChannel;
-        public Types.Split split;
+        public Split split;
         public byte[] payload;
 
-        public Encapsulation() {}
+        public Encapsulation() : this(0, 0, 0, 0, 0, new Split(), new byte[]{}) {}
 
-        public Encapsulation(byte info, ushort length, int messageIndex, int orderIndex, byte orderChannel, Types.Split split, byte[] payload)
+        public Encapsulation(byte info, ushort length, int messageIndex, int orderIndex, byte orderChannel, Split split, byte[] payload)
         {
             this.info = info;
             this.length = length;
@@ -105,7 +103,7 @@ namespace sul.Raknet8.Types
             this.payload = payload;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(info);
             _buffer.WriteBigEndianUshort(length);
@@ -116,27 +114,27 @@ namespace sul.Raknet8.Types
             _buffer.WriteBytes(payload);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-            if((info&0x7F)>=64){  }
-            if((info&0x7F)>=96){  }
-            if((info&0x7F)>=96){  }
-            if((info&0x10)!=0){  }
-
+            //info = _buffer.ReadUbyte();
+            //length = _buffer.ReadBigEndianUshort();
+            //if((info&0x7F)>=64){ messageIndex = _buffer.ReadLittleEndianTriad(); }
+            //if((info&0x7F)>=96){ orderIndex = _buffer.ReadLittleEndianTriad(); }
+            //if((info&0x7F)>=96){ orderChannel = _buffer.ReadUbyte(); }
+            //if((info&0x10)!=0){ split.DecodeBody(_buffer); }
+            //payload = _buffer.ReadBytes();
         }
 
     }
 
-    public class Split : Stream
+    public class Split : sul.Utils.Stream
     {
 
         public uint count;
         public ushort id;
         public uint order;
 
-        public Split() {}
+        public Split() : this(0, 0, 0) {}
 
         public Split(uint count, ushort id, uint order)
         {
@@ -145,18 +143,18 @@ namespace sul.Raknet8.Types
             this.order = order;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUint(count);
             _buffer.WriteBigEndianUshort(id);
             _buffer.WriteBigEndianUint(order);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //count = _buffer.ReadBigEndianUint();
+            //id = _buffer.ReadBigEndianUshort();
+            //order = _buffer.ReadBigEndianUint();
         }
 
     }

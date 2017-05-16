@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/externalconsole2.xml
  */
-using Types = sul.Externalconsole2.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Externalconsole2.Types;
 
 namespace sul.Externalconsole2.Connected
 {
 
-    public class ConsoleMessage : Packet
+    public class ConsoleMessage : sul.Utils.Packet
     {
 
         public const byte Id = 4;
@@ -28,7 +28,7 @@ namespace sul.Externalconsole2.Connected
         public string message;
         public int commandId;
 
-        public ConsoleMessage() {}
+        public ConsoleMessage() : this("", 0, "", "", 0) {}
 
         public ConsoleMessage(string node, ulong timestamp, string logger, string message, int commandId)
         {
@@ -41,20 +41,20 @@ namespace sul.Externalconsole2.Connected
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(node)); _buffer.WriteString(node);
             _buffer.WriteBigEndianUlong(timestamp);
@@ -63,25 +63,25 @@ namespace sul.Externalconsole2.Connected
             _buffer.WriteBigEndianInt(commandId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //node = _buffer.ReadString();
+            //timestamp = _buffer.ReadBigEndianUlong();
+            //logger = _buffer.ReadString();
+            //message = _buffer.ReadString();
+            //commandId = _buffer.ReadBigEndianInt();
         }
 
         public static ConsoleMessage FromBuffer(byte[] buffer)
         {
             var ret = new ConsoleMessage();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Command : Packet
+    public class Command : sul.Utils.Packet
     {
 
         public const byte Id = 5;
@@ -92,7 +92,7 @@ namespace sul.Externalconsole2.Connected
         public string command;
         public uint commandId;
 
-        public Command() {}
+        public Command() : this("", 0) {}
 
         public Command(string command, uint commandId)
         {
@@ -102,41 +102,41 @@ namespace sul.Externalconsole2.Connected
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
             _buffer.WriteBigEndianUint(commandId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //command = _buffer.ReadString();
+            //commandId = _buffer.ReadBigEndianUint();
         }
 
         public static Command FromBuffer(byte[] buffer)
         {
             var ret = new Command();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PermissionDenied : Packet
+    public class PermissionDenied : sul.Utils.Packet
     {
 
         public const byte Id = 6;
@@ -146,29 +146,32 @@ namespace sul.Externalconsole2.Connected
 
 
 
-        public PermissionDenied() {}
+        public PermissionDenied()
+        {
+
+        }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
@@ -176,7 +179,7 @@ namespace sul.Externalconsole2.Connected
         public static PermissionDenied FromBuffer(byte[] buffer)
         {
             var ret = new PermissionDenied();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

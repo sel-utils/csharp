@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/hncom2.xml
  */
-using Types = sul.Hncom2.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Hncom2.Types;
 
 namespace sul.Hncom2.Util
 {
 
-    public class Uncompressed : Packet
+    public class Uncompressed : sul.Utils.Packet
     {
 
         public const byte Id = 1;
@@ -24,7 +24,7 @@ namespace sul.Hncom2.Util
 
         public byte[][] packets;
 
-        public Uncompressed() {}
+        public Uncompressed() : this(new byte[][]{}) {}
 
         public Uncompressed(byte[][] packets)
         {
@@ -33,39 +33,39 @@ namespace sul.Hncom2.Util
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVaruint(packets.Length); foreach(byte[] packetsChild in packets){ _buffer.WriteVaruint(packetsChild.Length); _buffer.WriteBytes(packetsChild); }
+            _buffer.WriteVaruint(packets.Length); foreach (byte[] packetsChild in packets){ _buffer.WriteVaruint(packetsChild.Length); _buffer.WriteBytes(packetsChild); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //packets.DecodeBody(_buffer);
         }
 
         public static Uncompressed FromBuffer(byte[] buffer)
         {
             var ret = new Uncompressed();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Compressed : Packet
+    public class Compressed : sul.Utils.Packet
     {
 
         public const byte Id = 2;
@@ -76,7 +76,7 @@ namespace sul.Hncom2.Util
         public uint size;
         public byte[] payload;
 
-        public Compressed() {}
+        public Compressed() : this(0, new byte[]{}) {}
 
         public Compressed(uint size, byte[] payload)
         {
@@ -86,35 +86,35 @@ namespace sul.Hncom2.Util
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(size);
             _buffer.WriteBytes(payload);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //size = _buffer.ReadVaruint();
+            //payload = _buffer.ReadBytes();
         }
 
         public static Compressed FromBuffer(byte[] buffer)
         {
             var ret = new Compressed();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

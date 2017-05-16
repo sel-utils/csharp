@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{9835A9AC-DD06-452F-9ECA-5D8373934657}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <RootNamespace>sel-utils</RootNamespace>
+        <AssemblyName>sel-utils</AssemblyName>
+        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>..\bin\Debug</OutputPath>
+        <DefineConstants>DEBUG;</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <ConsolePause>false</ConsolePause>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>full</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>..\bin\Release</OutputPath>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="sul\Protocol\Pocket112\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket112\Play.cs" />
+        <Compile Include="sul\Protocol\Minecraft109\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft109\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft109\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft109\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft109\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft110\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft110\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft110\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft110\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft110\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Pocket102\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket102\Play.cs" />
+        <Compile Include="sul\Protocol\Raknet8\Types.cs" />
+        <Compile Include="sul\Protocol\Raknet8\Control.cs" />
+        <Compile Include="sul\Protocol\Raknet8\Unconnected.cs" />
+        <Compile Include="sul\Protocol\Raknet8\Encapsulated.cs" />
+        <Compile Include="sul\Protocol\Pocket105\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket105\Play.cs" />
+        <Compile Include="sul\Protocol\Minecraft107\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft107\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft107\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft107\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft107\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Pocket100\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket100\Play.cs" />
+        <Compile Include="sul\Protocol\Hncom1\Types.cs" />
+        <Compile Include="sul\Protocol\Hncom1\Login.cs" />
+        <Compile Include="sul\Protocol\Hncom1\Status.cs" />
+        <Compile Include="sul\Protocol\Hncom1\Player.cs" />
+        <Compile Include="sul\Protocol\Pocket101\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket101\Play.cs" />
+        <Compile Include="sul\Protocol\Minecraft108\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft108\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft108\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft108\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft108\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft210\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft210\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft210\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft210\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft210\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Hncom2\Types.cs" />
+        <Compile Include="sul\Protocol\Hncom2\Util.cs" />
+        <Compile Include="sul\Protocol\Hncom2\Login.cs" />
+        <Compile Include="sul\Protocol\Hncom2\Status.cs" />
+        <Compile Include="sul\Protocol\Hncom2\Player.cs" />
+        <Compile Include="sul\Protocol\Hncom2\World.cs" />
+        <Compile Include="sul\Protocol\Hncom2\Panel.cs" />
+        <Compile Include="sul\Protocol\Minecraft316\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft316\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft316\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft316\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft316\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Externalconsole2\Types.cs" />
+        <Compile Include="sul\Protocol\Externalconsole2\Login.cs" />
+        <Compile Include="sul\Protocol\Externalconsole2\Status.cs" />
+        <Compile Include="sul\Protocol\Externalconsole2\Connected.cs" />
+        <Compile Include="sul\Protocol\Externalconsole1\Types.cs" />
+        <Compile Include="sul\Protocol\Externalconsole1\Login.cs" />
+        <Compile Include="sul\Protocol\Externalconsole1\Status.cs" />
+        <Compile Include="sul\Protocol\Externalconsole1\Connected.cs" />
+        <Compile Include="sul\Protocol\Minecraft315\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft315\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft315\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft315\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft315\Serverbound.cs" />
+        <Compile Include="sul\Utils\About.cs" />
+        <Compile Include="sul\Utils\Buffer.cs" />
+        <Compile Include="sul\Utils\LengthPrefixedType.cs" />
+        <Compile Include="sul\Utils\Packet.cs" />
+        <Compile Include="sul\Utils\Stream.cs" />
+        <Compile Include="sul\Utils\Metadata.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -6,20 +6,18 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/hncom1.xml
  */
-using Utils.Buffer;
-using Utils.LengthPrefixedType;
-using Utils.Stream;
+using System.Text;
 
 namespace sul.Hncom1.Types
 {
 
-    public class Address : Stream
+    public class Address : sul.Utils.Stream
     {
 
         public byte[] bytes;
         public ushort port;
 
-        public Address() {}
+        public Address() : this(new byte[]{}, 0) {}
 
         public Address(byte[] bytes, ushort port)
         {
@@ -27,32 +25,32 @@ namespace sul.Hncom1.Types
             this.port = port;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(bytes.Length); _buffer.WriteBytes(bytes);
             _buffer.WriteBigEndianUshort(port);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //bytes.DecodeBody(_buffer);
+            //port = _buffer.ReadBigEndianUshort();
         }
 
     }
 
-    public class Game : Stream
+    public class Game : sul.Utils.Stream
     {
 
         // type
-        public const byte Pocket = 1;
-        public const byte Minecraft = 2;
-        public const byte Console = 3;
+        public const byte POCKET = 1;
+        public const byte MINECRAFT = 2;
+        public const byte CONSOLE = 3;
 
         public byte type;
         public uint[] protocols;
 
-        public Game() {}
+        public Game() : this(0, new uint[]{}) {}
 
         public Game(byte type, uint[] protocols)
         {
@@ -60,59 +58,59 @@ namespace sul.Hncom1.Types
             this.protocols = protocols;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(type);
-            _buffer.WriteVaruint(protocols.Length); foreach(uint protocolsChild in protocols){ _buffer.WriteVaruint(protocolsChild); }
+            _buffer.WriteVaruint(protocols.Length); foreach (uint protocolsChild in protocols){ _buffer.WriteVaruint(protocolsChild); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //type = _buffer.ReadUbyte();
+            //protocols.DecodeBody(_buffer);
         }
 
     }
 
-    public class GameInfo : Stream
+    public class GameInfo : sul.Utils.Stream
     {
 
-        public Types.Game game;
+        public Game game;
         public string motd;
         public ushort port;
 
-        public GameInfo() {}
+        public GameInfo() : this(new Game(), "", 0) {}
 
-        public GameInfo(Types.Game game, string motd, ushort port)
+        public GameInfo(Game game, string motd, ushort port)
         {
             this.game = game;
             this.motd = motd;
             this.port = port;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             game.EncodeBody(_buffer);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(motd)); _buffer.WriteString(motd);
             _buffer.WriteBigEndianUshort(port);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //game.DecodeBody(_buffer);
+            //motd = _buffer.ReadString();
+            //port = _buffer.ReadBigEndianUshort();
         }
 
     }
 
-    public class Plugin : Stream
+    public class Plugin : sul.Utils.Stream
     {
 
         public string name;
         public string version;
 
-        public Plugin() {}
+        public Plugin() : this("", "") {}
 
         public Plugin(string name, string version)
         {
@@ -120,27 +118,27 @@ namespace sul.Hncom1.Types
             this.version = version;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(version)); _buffer.WriteString(version);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //name = _buffer.ReadString();
+            //version = _buffer.ReadString();
         }
 
     }
 
-    public class Skin : Stream
+    public class Skin : sul.Utils.Stream
     {
 
         public string name;
         public byte[] data;
 
-        public Skin() {}
+        public Skin() : this("", new byte[]{}) {}
 
         public Skin(string name, byte[] data)
         {
@@ -148,16 +146,16 @@ namespace sul.Hncom1.Types
             this.data = data;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //name = _buffer.ReadString();
+            //data.DecodeBody(_buffer);
         }
 
     }

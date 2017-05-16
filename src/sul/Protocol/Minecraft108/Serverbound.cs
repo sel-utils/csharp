@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft108.xml
  */
-using Types = sul.Minecraft108.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Minecraft108.Types;
 
 namespace sul.Minecraft108.Serverbound
 {
 
-    public class TeleportConfirm : Packet
+    public class TeleportConfirm : sul.Utils.Packet
     {
 
         public const uint Id = 0;
@@ -24,7 +24,7 @@ namespace sul.Minecraft108.Serverbound
 
         public uint teleportId;
 
-        public TeleportConfirm() {}
+        public TeleportConfirm() : this(0) {}
 
         public TeleportConfirm(uint teleportId)
         {
@@ -33,39 +33,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(teleportId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //teleportId = _buffer.ReadVaruint();
         }
 
         public static TeleportConfirm FromBuffer(byte[] buffer)
         {
             var ret = new TeleportConfirm();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class TabComplete : Packet
+    public class TabComplete : sul.Utils.Packet
     {
 
         public const uint Id = 1;
@@ -78,7 +78,7 @@ namespace sul.Minecraft108.Serverbound
         public bool hasPosition;
         public ulong block;
 
-        public TabComplete() {}
+        public TabComplete() : this("", false, false, 0) {}
 
         public TabComplete(string text, bool command, bool hasPosition, ulong block)
         {
@@ -90,20 +90,20 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(text)); _buffer.WriteString(text);
             _buffer.WriteBool(command);
@@ -111,24 +111,24 @@ namespace sul.Minecraft108.Serverbound
             if(hasPosition==true){ _buffer.WriteBigEndianUlong(block); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-            if(hasPosition==true){  }
+            //text = _buffer.ReadString();
+            //command = _buffer.ReadBool();
+            //hasPosition = _buffer.ReadBool();
+            //if(hasPosition==true){ block = _buffer.ReadBigEndianUlong(); }
         }
 
         public static TabComplete FromBuffer(byte[] buffer)
         {
             var ret = new TabComplete();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ChatMessage : Packet
+    public class ChatMessage : sul.Utils.Packet
     {
 
         public const uint Id = 2;
@@ -138,7 +138,7 @@ namespace sul.Minecraft108.Serverbound
 
         public string text;
 
-        public ChatMessage() {}
+        public ChatMessage() : this("") {}
 
         public ChatMessage(string text)
         {
@@ -147,39 +147,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(text)); _buffer.WriteString(text);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //text = _buffer.ReadString();
         }
 
         public static ChatMessage FromBuffer(byte[] buffer)
         {
             var ret = new ChatMessage();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ClientStatus : Packet
+    public class ClientStatus : sul.Utils.Packet
     {
 
         public const uint Id = 3;
@@ -188,13 +188,13 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // action
-        public const uint Respawn = 0;
-        public const uint RequestStats = 1;
-        public const uint OpenInventory = 2;
+        public const uint RESPAWN = 0;
+        public const uint REQUEST_STATS = 1;
+        public const uint OPEN_INVENTORY = 2;
 
         public uint action;
 
-        public ClientStatus() {}
+        public ClientStatus() : this(0) {}
 
         public ClientStatus(uint action)
         {
@@ -203,39 +203,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(action);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //action = _buffer.ReadVaruint();
         }
 
         public static ClientStatus FromBuffer(byte[] buffer)
         {
             var ret = new ClientStatus();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ClientSettings : Packet
+    public class ClientSettings : sul.Utils.Packet
     {
 
         public const uint Id = 4;
@@ -244,22 +244,22 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // chat mode
-        public const uint Enabled = 0;
-        public const uint CommandsOnly = 1;
-        public const uint Disabled = 2;
+        public const uint ENABLED = 0;
+        public const uint COMMANDS_ONLY = 1;
+        public const uint DISABLED = 2;
 
         // displayed skin parts
-        public const byte Cape = 1;
-        public const byte Jacket = 2;
-        public const byte LeftSleeve = 4;
-        public const byte RightSleeve = 8;
-        public const byte LeftPants = 16;
-        public const byte RightPants = 32;
-        public const byte Hat = 64;
+        public const byte CAPE = 1;
+        public const byte JACKET = 2;
+        public const byte LEFT_SLEEVE = 4;
+        public const byte RIGHT_SLEEVE = 8;
+        public const byte LEFT_PANTS = 16;
+        public const byte RIGHT_PANTS = 32;
+        public const byte HAT = 64;
 
         // main hand
-        public const byte Right = 0;
-        public const byte Left = 1;
+        public const byte RIGHT = 0;
+        public const byte LEFT = 1;
 
         public string language;
         public byte viewDistance;
@@ -268,7 +268,7 @@ namespace sul.Minecraft108.Serverbound
         public byte displayedSkinParts;
         public byte mainHand;
 
-        public ClientSettings() {}
+        public ClientSettings() : this("", 0, 0, false, 0, 0) {}
 
         public ClientSettings(string language, byte viewDistance, uint chatMode, bool chatColors, byte displayedSkinParts, byte mainHand)
         {
@@ -282,20 +282,20 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
             _buffer.WriteUbyte(viewDistance);
@@ -305,26 +305,26 @@ namespace sul.Minecraft108.Serverbound
             _buffer.WriteUbyte(mainHand);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
+            //language = _buffer.ReadString();
+            //viewDistance = _buffer.ReadUbyte();
+            //chatMode = _buffer.ReadVaruint();
+            //chatColors = _buffer.ReadBool();
+            //displayedSkinParts = _buffer.ReadUbyte();
+            //mainHand = _buffer.ReadUbyte();
         }
 
         public static ClientSettings FromBuffer(byte[] buffer)
         {
             var ret = new ClientSettings();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ConfirmTransaction : Packet
+    public class ConfirmTransaction : sul.Utils.Packet
     {
 
         public const uint Id = 5;
@@ -336,7 +336,7 @@ namespace sul.Minecraft108.Serverbound
         public ushort action;
         public bool accepted;
 
-        public ConfirmTransaction() {}
+        public ConfirmTransaction() : this(0, 0, false) {}
 
         public ConfirmTransaction(byte window, ushort action, bool accepted)
         {
@@ -347,43 +347,43 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteBigEndianUshort(action);
             _buffer.WriteBool(accepted);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //window = _buffer.ReadUbyte();
+            //action = _buffer.ReadBigEndianUshort();
+            //accepted = _buffer.ReadBool();
         }
 
         public static ConfirmTransaction FromBuffer(byte[] buffer)
         {
             var ret = new ConfirmTransaction();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class EnchantItem : Packet
+    public class EnchantItem : sul.Utils.Packet
     {
 
         public const uint Id = 6;
@@ -394,7 +394,7 @@ namespace sul.Minecraft108.Serverbound
         public byte window;
         public byte enchantment;
 
-        public EnchantItem() {}
+        public EnchantItem() : this(0, 0) {}
 
         public EnchantItem(byte window, byte enchantment)
         {
@@ -404,41 +404,41 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteUbyte(enchantment);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //window = _buffer.ReadUbyte();
+            //enchantment = _buffer.ReadUbyte();
         }
 
         public static EnchantItem FromBuffer(byte[] buffer)
         {
             var ret = new EnchantItem();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ClickWindow : Packet
+    public class ClickWindow : sul.Utils.Packet
     {
 
         public const uint Id = 7;
@@ -451,11 +451,11 @@ namespace sul.Minecraft108.Serverbound
         public byte button;
         public ushort action;
         public uint mode;
-        public Types.Slot clickedItem;
+        public Slot clickedItem;
 
-        public ClickWindow() {}
+        public ClickWindow() : this(0, 0, 0, 0, 0, new Slot()) {}
 
-        public ClickWindow(byte window, ushort slot, byte button, ushort action, uint mode, Types.Slot clickedItem)
+        public ClickWindow(byte window, ushort slot, byte button, ushort action, uint mode, Slot clickedItem)
         {
             this.window = window;
             this.slot = slot;
@@ -467,20 +467,20 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
             _buffer.WriteBigEndianUshort(slot);
@@ -490,26 +490,26 @@ namespace sul.Minecraft108.Serverbound
             clickedItem.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
+            //window = _buffer.ReadUbyte();
+            //slot = _buffer.ReadBigEndianUshort();
+            //button = _buffer.ReadUbyte();
+            //action = _buffer.ReadBigEndianUshort();
+            //mode = _buffer.ReadVaruint();
+            //clickedItem.DecodeBody(_buffer);
         }
 
         public static ClickWindow FromBuffer(byte[] buffer)
         {
             var ret = new ClickWindow();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class CloseWindow : Packet
+    public class CloseWindow : sul.Utils.Packet
     {
 
         public const uint Id = 8;
@@ -519,7 +519,7 @@ namespace sul.Minecraft108.Serverbound
 
         public byte window;
 
-        public CloseWindow() {}
+        public CloseWindow() : this(0) {}
 
         public CloseWindow(byte window)
         {
@@ -528,39 +528,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(window);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //window = _buffer.ReadUbyte();
         }
 
         public static CloseWindow FromBuffer(byte[] buffer)
         {
             var ret = new CloseWindow();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PluginMessage : Packet
+    public class PluginMessage : sul.Utils.Packet
     {
 
         public const uint Id = 9;
@@ -571,7 +571,7 @@ namespace sul.Minecraft108.Serverbound
         public string channel;
         public byte[] data;
 
-        public PluginMessage() {}
+        public PluginMessage() : this("", new byte[]{}) {}
 
         public PluginMessage(string channel, byte[] data)
         {
@@ -581,41 +581,41 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(channel)); _buffer.WriteString(channel);
             _buffer.WriteBytes(data);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //channel = _buffer.ReadString();
+            //data = _buffer.ReadBytes();
         }
 
         public static PluginMessage FromBuffer(byte[] buffer)
         {
             var ret = new PluginMessage();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UseEntity : Packet
+    public class UseEntity : sul.Utils.Packet
     {
 
         public const uint Id = 10;
@@ -624,22 +624,22 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // type
-        public const uint Interact = 0;
-        public const uint Attack = 1;
-        public const uint InteractAt = 2;
+        public const uint INTERACT = 0;
+        public const uint ATTACK = 1;
+        public const uint INTERACT_AT = 2;
 
         // hand
-        public const uint MainHand = 0;
-        public const uint OffHand = 1;
+        public const uint MAIN_HAND = 0;
+        public const uint OFF_HAND = 1;
 
         public uint target;
         public uint type;
-        public Tuple<float, float, float> targetPosition;
+        public System.Tuple<float, float, float> targetPosition;
         public uint hand;
 
-        public UseEntity() {}
+        public UseEntity() : this(0, 0, null, 0) {}
 
-        public UseEntity(uint target, uint type, Tuple<float, float, float> targetPosition, uint hand)
+        public UseEntity(uint target, uint type, System.Tuple<float, float, float> targetPosition, uint hand)
         {
             this.target = target;
             this.type = type;
@@ -649,45 +649,45 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(target);
             _buffer.WriteVaruint(type);
-            if(type==2){ _buffer.WriteBigEndianFloat(targetPosition[0]); _buffer.WriteBigEndianFloat(targetPosition[1]); _buffer.WriteBigEndianFloat(targetPosition[2]); }
+            if(type==2){ _buffer.WriteBigEndianFloat(targetPosition.Item1); _buffer.WriteBigEndianFloat(targetPosition.Item2); _buffer.WriteBigEndianFloat(targetPosition.Item3); }
             if(type==2){ _buffer.WriteVaruint(hand); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-            if(type==2){  }
-            if(type==2){  }
+            //target = _buffer.ReadVaruint();
+            //type = _buffer.ReadVaruint();
+            //if(type==2){ targetPosition.Item1 = _buffer.ReadBigEndianFloat(); targetPosition.Item2 = _buffer.ReadBigEndianFloat(); targetPosition.Item3 = _buffer.ReadBigEndianFloat(); }
+            //if(type==2){ hand = _buffer.ReadVaruint(); }
         }
 
         public static UseEntity FromBuffer(byte[] buffer)
         {
             var ret = new UseEntity();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class KeepAlive : Packet
+    public class KeepAlive : sul.Utils.Packet
     {
 
         public const uint Id = 11;
@@ -697,7 +697,7 @@ namespace sul.Minecraft108.Serverbound
 
         public uint id;
 
-        public KeepAlive() {}
+        public KeepAlive() : this(0) {}
 
         public KeepAlive(uint id)
         {
@@ -706,39 +706,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(id);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //id = _buffer.ReadVaruint();
         }
 
         public static KeepAlive FromBuffer(byte[] buffer)
         {
             var ret = new KeepAlive();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerPosition : Packet
+    public class PlayerPosition : sul.Utils.Packet
     {
 
         public const uint Id = 12;
@@ -746,12 +746,12 @@ namespace sul.Minecraft108.Serverbound
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Tuple<double, double, double> position;
+        public System.Tuple<double, double, double> position;
         public bool onGround;
 
-        public PlayerPosition() {}
+        public PlayerPosition() : this(null, false) {}
 
-        public PlayerPosition(Tuple<double, double, double> position, bool onGround)
+        public PlayerPosition(System.Tuple<double, double, double> position, bool onGround)
         {
             this.position = position;
             this.onGround = onGround;
@@ -759,41 +759,41 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
+            _buffer.WriteBigEndianDouble(position.Item1); _buffer.WriteBigEndianDouble(position.Item2); _buffer.WriteBigEndianDouble(position.Item3);
             _buffer.WriteBool(onGround);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //position.Item1 = _buffer.ReadBigEndianDouble(); position.Item2 = _buffer.ReadBigEndianDouble(); position.Item3 = _buffer.ReadBigEndianDouble();
+            //onGround = _buffer.ReadBool();
         }
 
         public static PlayerPosition FromBuffer(byte[] buffer)
         {
             var ret = new PlayerPosition();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerPositionAndLook : Packet
+    public class PlayerPositionAndLook : sul.Utils.Packet
     {
 
         public const uint Id = 13;
@@ -801,14 +801,14 @@ namespace sul.Minecraft108.Serverbound
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Tuple<double, double, double> position;
+        public System.Tuple<double, double, double> position;
         public float yaw;
         public float pitch;
         public bool onGround;
 
-        public PlayerPositionAndLook() {}
+        public PlayerPositionAndLook() : this(null, 0, 0, false) {}
 
-        public PlayerPositionAndLook(Tuple<double, double, double> position, float yaw, float pitch, bool onGround)
+        public PlayerPositionAndLook(System.Tuple<double, double, double> position, float yaw, float pitch, bool onGround)
         {
             this.position = position;
             this.yaw = yaw;
@@ -818,45 +818,45 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
+            _buffer.WriteBigEndianDouble(position.Item1); _buffer.WriteBigEndianDouble(position.Item2); _buffer.WriteBigEndianDouble(position.Item3);
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
             _buffer.WriteBool(onGround);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //position.Item1 = _buffer.ReadBigEndianDouble(); position.Item2 = _buffer.ReadBigEndianDouble(); position.Item3 = _buffer.ReadBigEndianDouble();
+            //yaw = _buffer.ReadBigEndianFloat();
+            //pitch = _buffer.ReadBigEndianFloat();
+            //onGround = _buffer.ReadBool();
         }
 
         public static PlayerPositionAndLook FromBuffer(byte[] buffer)
         {
             var ret = new PlayerPositionAndLook();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerLook : Packet
+    public class PlayerLook : sul.Utils.Packet
     {
 
         public const uint Id = 14;
@@ -868,7 +868,7 @@ namespace sul.Minecraft108.Serverbound
         public float pitch;
         public bool onGround;
 
-        public PlayerLook() {}
+        public PlayerLook() : this(0, 0, false) {}
 
         public PlayerLook(float yaw, float pitch, bool onGround)
         {
@@ -879,43 +879,43 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
             _buffer.WriteBool(onGround);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //yaw = _buffer.ReadBigEndianFloat();
+            //pitch = _buffer.ReadBigEndianFloat();
+            //onGround = _buffer.ReadBool();
         }
 
         public static PlayerLook FromBuffer(byte[] buffer)
         {
             var ret = new PlayerLook();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Player : Packet
+    public class Player : sul.Utils.Packet
     {
 
         public const uint Id = 15;
@@ -925,7 +925,7 @@ namespace sul.Minecraft108.Serverbound
 
         public bool onGround;
 
-        public Player() {}
+        public Player() : this(false) {}
 
         public Player(bool onGround)
         {
@@ -934,39 +934,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(onGround);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //onGround = _buffer.ReadBool();
         }
 
         public static Player FromBuffer(byte[] buffer)
         {
             var ret = new Player();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class VehicleMove : Packet
+    public class VehicleMove : sul.Utils.Packet
     {
 
         public const uint Id = 16;
@@ -974,13 +974,13 @@ namespace sul.Minecraft108.Serverbound
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Tuple<double, double, double> position;
+        public System.Tuple<double, double, double> position;
         public float yaw;
         public float pitch;
 
-        public VehicleMove() {}
+        public VehicleMove() : this(null, 0, 0) {}
 
-        public VehicleMove(Tuple<double, double, double> position, float yaw, float pitch)
+        public VehicleMove(System.Tuple<double, double, double> position, float yaw, float pitch)
         {
             this.position = position;
             this.yaw = yaw;
@@ -989,43 +989,43 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteBigEndianDouble(position[0]); _buffer.WriteBigEndianDouble(position[1]); _buffer.WriteBigEndianDouble(position[2]);
+            _buffer.WriteBigEndianDouble(position.Item1); _buffer.WriteBigEndianDouble(position.Item2); _buffer.WriteBigEndianDouble(position.Item3);
             _buffer.WriteBigEndianFloat(yaw);
             _buffer.WriteBigEndianFloat(pitch);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //position.Item1 = _buffer.ReadBigEndianDouble(); position.Item2 = _buffer.ReadBigEndianDouble(); position.Item3 = _buffer.ReadBigEndianDouble();
+            //yaw = _buffer.ReadBigEndianFloat();
+            //pitch = _buffer.ReadBigEndianFloat();
         }
 
         public static VehicleMove FromBuffer(byte[] buffer)
         {
             var ret = new VehicleMove();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SteerBoat : Packet
+    public class SteerBoat : sul.Utils.Packet
     {
 
         public const uint Id = 17;
@@ -1036,7 +1036,7 @@ namespace sul.Minecraft108.Serverbound
         public bool rightPaddleTurning;
         public bool leftPaddleTurning;
 
-        public SteerBoat() {}
+        public SteerBoat() : this(false, false) {}
 
         public SteerBoat(bool rightPaddleTurning, bool leftPaddleTurning)
         {
@@ -1046,41 +1046,41 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBool(rightPaddleTurning);
             _buffer.WriteBool(leftPaddleTurning);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //rightPaddleTurning = _buffer.ReadBool();
+            //leftPaddleTurning = _buffer.ReadBool();
         }
 
         public static SteerBoat FromBuffer(byte[] buffer)
         {
             var ret = new SteerBoat();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerAbilities : Packet
+    public class PlayerAbilities : sul.Utils.Packet
     {
 
         public const uint Id = 18;
@@ -1089,16 +1089,16 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // flags
-        public const byte CreativeMode = 1;
-        public const byte Flying = 2;
-        public const byte AllowFlying = 4;
-        public const byte Invincible = 8;
+        public const byte CREATIVE_MODE = 1;
+        public const byte FLYING = 2;
+        public const byte ALLOW_FLYING = 4;
+        public const byte INVINCIBLE = 8;
 
         public byte flags;
         public float flyingSpeed;
         public float walkingSpeed;
 
-        public PlayerAbilities() {}
+        public PlayerAbilities() : this(0, 0, 0) {}
 
         public PlayerAbilities(byte flags, float flyingSpeed, float walkingSpeed)
         {
@@ -1109,43 +1109,43 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(flags);
             _buffer.WriteBigEndianFloat(flyingSpeed);
             _buffer.WriteBigEndianFloat(walkingSpeed);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //flags = _buffer.ReadUbyte();
+            //flyingSpeed = _buffer.ReadBigEndianFloat();
+            //walkingSpeed = _buffer.ReadBigEndianFloat();
         }
 
         public static PlayerAbilities FromBuffer(byte[] buffer)
         {
             var ret = new PlayerAbilities();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerDigging : Packet
+    public class PlayerDigging : sul.Utils.Packet
     {
 
         public const uint Id = 19;
@@ -1154,20 +1154,20 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // status
-        public const uint StartDigging = 0;
-        public const uint CancelDigging = 1;
-        public const uint FinishDigging = 2;
-        public const uint DropItemStack = 3;
-        public const uint DropItem = 4;
-        public const uint ShootArrow = 5;
-        public const uint FinishEating = 5;
-        public const uint SwapItemInHand = 6;
+        public const uint START_DIGGING = 0;
+        public const uint CANCEL_DIGGING = 1;
+        public const uint FINISH_DIGGING = 2;
+        public const uint DROP_ITEM_STACK = 3;
+        public const uint DROP_ITEM = 4;
+        public const uint SHOOT_ARROW = 5;
+        public const uint FINISH_EATING = 5;
+        public const uint SWAP_ITEM_IN_HAND = 6;
 
         public uint status;
         public ulong position;
         public byte face;
 
-        public PlayerDigging() {}
+        public PlayerDigging() : this(0, 0, 0) {}
 
         public PlayerDigging(uint status, ulong position, byte face)
         {
@@ -1178,43 +1178,43 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(status);
             _buffer.WriteBigEndianUlong(position);
             _buffer.WriteUbyte(face);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //status = _buffer.ReadVaruint();
+            //position = _buffer.ReadBigEndianUlong();
+            //face = _buffer.ReadUbyte();
         }
 
         public static PlayerDigging FromBuffer(byte[] buffer)
         {
             var ret = new PlayerDigging();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class EntityAction : Packet
+    public class EntityAction : sul.Utils.Packet
     {
 
         public const uint Id = 20;
@@ -1223,21 +1223,21 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // action
-        public const uint StartSneaking = 0;
-        public const uint StopSneaking = 1;
-        public const uint LeaveBed = 2;
-        public const uint StartSprinting = 3;
-        public const uint StopSprinting = 4;
-        public const uint StartHorseJump = 5;
-        public const uint StopHorseJump = 6;
-        public const uint OpenHorseInventory = 7;
-        public const uint StartElytraFlying = 8;
+        public const uint START_SNEAKING = 0;
+        public const uint STOP_SNEAKING = 1;
+        public const uint LEAVE_BED = 2;
+        public const uint START_SPRINTING = 3;
+        public const uint STOP_SPRINTING = 4;
+        public const uint START_HORSE_JUMP = 5;
+        public const uint STOP_HORSE_JUMP = 6;
+        public const uint OPEN_HORSE_INVENTORY = 7;
+        public const uint START_ELYTRA_FLYING = 8;
 
         public uint entityId;
         public uint action;
         public uint jumpBoost;
 
-        public EntityAction() {}
+        public EntityAction() : this(0, 0, 0) {}
 
         public EntityAction(uint entityId, uint action, uint jumpBoost)
         {
@@ -1248,43 +1248,43 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(entityId);
             _buffer.WriteVaruint(action);
             if(action==5){ _buffer.WriteVaruint(jumpBoost); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-            if(action==5){  }
+            //entityId = _buffer.ReadVaruint();
+            //action = _buffer.ReadVaruint();
+            //if(action==5){ jumpBoost = _buffer.ReadVaruint(); }
         }
 
         public static EntityAction FromBuffer(byte[] buffer)
         {
             var ret = new EntityAction();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class SteerVehicle : Packet
+    public class SteerVehicle : sul.Utils.Packet
     {
 
         public const uint Id = 21;
@@ -1293,14 +1293,14 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // flags
-        public const byte Jump = 1;
-        public const byte Unmount = 2;
+        public const byte JUMP = 1;
+        public const byte UNMOUNT = 2;
 
         public float sideways;
         public float forward;
         public byte flags;
 
-        public SteerVehicle() {}
+        public SteerVehicle() : this(0, 0, 0) {}
 
         public SteerVehicle(float sideways, float forward, byte flags)
         {
@@ -1311,43 +1311,43 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianFloat(sideways);
             _buffer.WriteBigEndianFloat(forward);
             _buffer.WriteUbyte(flags);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //sideways = _buffer.ReadBigEndianFloat();
+            //forward = _buffer.ReadBigEndianFloat();
+            //flags = _buffer.ReadUbyte();
         }
 
         public static SteerVehicle FromBuffer(byte[] buffer)
         {
             var ret = new SteerVehicle();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ResourcePackStatus : Packet
+    public class ResourcePackStatus : sul.Utils.Packet
     {
 
         public const uint Id = 22;
@@ -1356,15 +1356,15 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // result
-        public const uint Loaded = 0;
-        public const uint Declined = 1;
-        public const uint Failed = 2;
-        public const uint Accepted = 3;
+        public const uint LOADED = 0;
+        public const uint DECLINED = 1;
+        public const uint FAILED = 2;
+        public const uint ACCEPTED = 3;
 
         public string hash;
         public uint result;
 
-        public ResourcePackStatus() {}
+        public ResourcePackStatus() : this("", 0) {}
 
         public ResourcePackStatus(string hash, uint result)
         {
@@ -1374,41 +1374,41 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(hash)); _buffer.WriteString(hash);
             _buffer.WriteVaruint(result);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //hash = _buffer.ReadString();
+            //result = _buffer.ReadVaruint();
         }
 
         public static ResourcePackStatus FromBuffer(byte[] buffer)
         {
             var ret = new ResourcePackStatus();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class HeldItemChange : Packet
+    public class HeldItemChange : sul.Utils.Packet
     {
 
         public const uint Id = 23;
@@ -1418,7 +1418,7 @@ namespace sul.Minecraft108.Serverbound
 
         public ushort slot;
 
-        public HeldItemChange() {}
+        public HeldItemChange() : this(0) {}
 
         public HeldItemChange(ushort slot)
         {
@@ -1427,39 +1427,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(slot);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //slot = _buffer.ReadBigEndianUshort();
         }
 
         public static HeldItemChange FromBuffer(byte[] buffer)
         {
             var ret = new HeldItemChange();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class CreativeInventoryAction : Packet
+    public class CreativeInventoryAction : sul.Utils.Packet
     {
 
         public const uint Id = 24;
@@ -1468,11 +1468,11 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         public ushort slot;
-        public Types.Slot clickedItem;
+        public Slot clickedItem;
 
-        public CreativeInventoryAction() {}
+        public CreativeInventoryAction() : this(0, new Slot()) {}
 
-        public CreativeInventoryAction(ushort slot, Types.Slot clickedItem)
+        public CreativeInventoryAction(ushort slot, Slot clickedItem)
         {
             this.slot = slot;
             this.clickedItem = clickedItem;
@@ -1480,41 +1480,41 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUshort(slot);
             clickedItem.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //slot = _buffer.ReadBigEndianUshort();
+            //clickedItem.DecodeBody(_buffer);
         }
 
         public static CreativeInventoryAction FromBuffer(byte[] buffer)
         {
             var ret = new CreativeInventoryAction();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateSign : Packet
+    public class UpdateSign : sul.Utils.Packet
     {
 
         public const uint Id = 25;
@@ -1523,11 +1523,11 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         public ulong position;
-        public string[4] lines;
+        public string[] lines;
 
-        public UpdateSign() {}
+        public UpdateSign() : this(0, new string[4]) {}
 
-        public UpdateSign(ulong position, string[4] lines)
+        public UpdateSign(ulong position, string[] lines)
         {
             this.position = position;
             this.lines = lines;
@@ -1535,41 +1535,41 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUlong(position);
-            foreach(string linesChild in lines){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(linesChild)); _buffer.WriteString(linesChild); }
+            foreach (string linesChild in lines){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(linesChild)); _buffer.WriteString(linesChild); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //position = _buffer.ReadBigEndianUlong();
+            //lines.DecodeBody(_buffer);
         }
 
         public static UpdateSign FromBuffer(byte[] buffer)
         {
             var ret = new UpdateSign();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Animation : Packet
+    public class Animation : sul.Utils.Packet
     {
 
         public const uint Id = 26;
@@ -1578,12 +1578,12 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // hand
-        public const uint MainHand = 0;
-        public const uint OffHand = 1;
+        public const uint MAIN_HAND = 0;
+        public const uint OFF_HAND = 1;
 
         public uint hand;
 
-        public Animation() {}
+        public Animation() : this(0) {}
 
         public Animation(uint hand)
         {
@@ -1592,39 +1592,39 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hand);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //hand = _buffer.ReadVaruint();
         }
 
         public static Animation FromBuffer(byte[] buffer)
         {
             var ret = new Animation();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Spectate : Packet
+    public class Spectate : sul.Utils.Packet
     {
 
         public const uint Id = 27;
@@ -1632,50 +1632,50 @@ namespace sul.Minecraft108.Serverbound
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public Guid player;
+        public System.Guid player;
 
-        public Spectate() {}
+        public Spectate() : this(System.Guid.Empty) {}
 
-        public Spectate(Guid player)
+        public Spectate(System.Guid player)
         {
             this.player = player;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(player);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //player = _buffer.ReadUuid();
         }
 
         public static Spectate FromBuffer(byte[] buffer)
         {
             var ret = new Spectate();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class PlayerBlockPlacement : Packet
+    public class PlayerBlockPlacement : sul.Utils.Packet
     {
 
         public const uint Id = 28;
@@ -1684,17 +1684,17 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // hand
-        public const uint MainHand = 0;
-        public const uint OffHand = 1;
+        public const uint MAIN_HAND = 0;
+        public const uint OFF_HAND = 1;
 
         public ulong position;
         public uint face;
         public uint hand;
-        public Tuple<byte, byte, byte> cursorPosition;
+        public System.Tuple<byte, byte, byte> cursorPosition;
 
-        public PlayerBlockPlacement() {}
+        public PlayerBlockPlacement() : this(0, 0, 0, null) {}
 
-        public PlayerBlockPlacement(ulong position, uint face, uint hand, Tuple<byte, byte, byte> cursorPosition)
+        public PlayerBlockPlacement(ulong position, uint face, uint hand, System.Tuple<byte, byte, byte> cursorPosition)
         {
             this.position = position;
             this.face = face;
@@ -1704,45 +1704,45 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianUlong(position);
             _buffer.WriteVaruint(face);
             _buffer.WriteVaruint(hand);
-            _buffer.WriteUbyte(cursorPosition[0]); _buffer.WriteUbyte(cursorPosition[1]); _buffer.WriteUbyte(cursorPosition[2]);
+            _buffer.WriteUbyte(cursorPosition.Item1); _buffer.WriteUbyte(cursorPosition.Item2); _buffer.WriteUbyte(cursorPosition.Item3);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //position = _buffer.ReadBigEndianUlong();
+            //face = _buffer.ReadVaruint();
+            //hand = _buffer.ReadVaruint();
+            //cursorPosition.Item1 = _buffer.ReadUbyte(); cursorPosition.Item2 = _buffer.ReadUbyte(); cursorPosition.Item3 = _buffer.ReadUbyte();
         }
 
         public static PlayerBlockPlacement FromBuffer(byte[] buffer)
         {
             var ret = new PlayerBlockPlacement();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UseItem : Packet
+    public class UseItem : sul.Utils.Packet
     {
 
         public const uint Id = 29;
@@ -1751,12 +1751,12 @@ namespace sul.Minecraft108.Serverbound
         public const bool Serverbound = true;
 
         // hand
-        public const uint MainHand = 0;
-        public const uint OffHand = 1;
+        public const uint MAIN_HAND = 0;
+        public const uint OFF_HAND = 1;
 
         public uint hand;
 
-        public UseItem() {}
+        public UseItem() : this(0) {}
 
         public UseItem(uint hand)
         {
@@ -1765,33 +1765,33 @@ namespace sul.Minecraft108.Serverbound
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(hand);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //hand = _buffer.ReadVaruint();
         }
 
         public static UseItem FromBuffer(byte[] buffer)
         {
             var ret = new UseItem();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

@@ -5,9 +5,7 @@
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
  */
-using Utils.Stream;
-
-namespace Utils
+namespace sul.Utils
 {
 
     public abstract class Packet : Stream
@@ -30,7 +28,7 @@ namespace Utils
             var buffer = Buffer.Writer();
             EncodeId(buffer);
             EncodeBody(buffer);
-            return buffer.buffer;
+            return buffer.ToArray();
         }
 
         public override Stream Decode(byte[] _buffer)

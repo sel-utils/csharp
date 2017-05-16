@@ -5,34 +5,32 @@
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
  */
-using Utils.Buffer;
-
-namespace Utils
+namespace sul.Utils
 {
 
     public abstract class Stream
     {
 
-        public byte[] Encode()
+        public virtual byte[] Encode()
         {
             var buffer = Buffer.Writer();
             EncodeImpl(buffer);
-            return buffer.buffer;
+            return buffer.ToArray();
         }
 
-        public Stream Decode(byte[] _buffer)
+        public virtual Stream Decode(byte[] _buffer)
         {
             var buffer = Buffer.Reader(_buffer);
             DecodeImpl(buffer);
             return this;
         }
 
-        public void EncodeBody(Buffer buffer)
+        public virtual void EncodeBody(Buffer buffer)
         {
             EncodeImpl(buffer);
         }
 
-        public void DecodeBody(Buffer buffer)
+        public virtual void DecodeBody(Buffer buffer)
         {
             DecodeImpl(buffer);
         }

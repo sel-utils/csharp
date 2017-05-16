@@ -5,9 +5,7 @@
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
  */
-using Utils.Stream;
-
-namespace Utils
+namespace sul.Utils
 {
 
     public abstract class LengthPrefixedType : Stream
@@ -17,13 +15,14 @@ namespace Utils
         {
             var _buffer = Buffer.Writer();
             EncodeImpl(_buffer);
-            EncodeLength(_buffer.length, buffer);
-            buffer.WriteBytes(_buffer.buffer);
+            var encoded = _buffer.ToArray();
+            EncodeLength(encoded.Length, buffer);
+            buffer.WriteBytes(encoded);
         }
 
         public override void DecodeBody(Buffer buffer)
         {
-            DecodeImpl(buffer.ReadBytes(DecodeLength(buffer)));
+            DecodeImpl(Buffer.Reader(buffer.ReadBytes(DecodeLength(buffer))));
         }
 
         protected abstract void EncodeLength(int length, Buffer buffer);

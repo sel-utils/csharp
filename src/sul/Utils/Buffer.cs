@@ -6,8 +6,9 @@
  * Repository: https://github.com/sel-project/sel-utils
  */
 using System.IO;
+using System.Text;
 
-namespace Utils
+namespace sul.Utils
 {
 
     public class Buffer
@@ -26,22 +27,121 @@ namespace Utils
             this.reader = reader;
         }
 
+        public byte[] ToArray()
+        {
+            return ((MemoryStream)writer.BaseStream).ToArray();
+        }
+
+        // writing
+
+        public void WriteBytes(byte[] value)
+        {
+            this.writer.Write(value);
+        }
+
+        public void WriteString(string value)
+        {
+            WriteBytes(Encoding.UTF8.GetBytes(value));
+        }
+
         public void WriteBool(bool value)
         {
-            writer.WriteBoolean(value);
+            this.writer.Write(value);
         }
 
         public void WriteByte(sbyte value)
         {
-            writer.WriteSByte(value);
+            this.writer.Write(value);
         }
 
         public void WriteUbyte(byte value)
         {
-            writer.WriteByte(value);
+            this.writer.Write(value);
         }
 
-        //
+        public void WriteBigEndianShort(short value) {}
+
+        public void WriteLittleEndianShort(short value) {}
+
+        public void WriteBigEndianUshort(ushort value) {}
+
+        public void WriteLittleEndianUshort(ushort value) {}
+
+        public void WriteBigEndianUshort(int value)
+        {
+            WriteBigEndianUshort((ushort)value);
+        }
+
+        public void WriteLittleEndianUshort(int value)
+        {
+            WriteLittleEndianUshort((ushort)value);
+        }
+
+        public void WriteBigEndianTriad(int value) {}
+
+        public void WriteLittleEndianTriad(int value) {}
+
+        public void WriteBigEndianInt(int value) {}
+
+        public void WriteLittleEndianInt(int value) {}
+
+        public void WriteBigEndianUint(uint value) {}
+
+        public void WriteLittleEndianUint(uint value) {}
+
+        public void WriteBigEndianUint(int value)
+        {
+            WriteBigEndianUint((uint)value);
+        }
+
+        public void WriteLittleEndianUint(int value)
+        {
+            WriteLittleEndianUint((uint)value);
+        }
+
+        public void WriteBigEndianLong(long value) {}
+
+        public void WriteLittleEndianLong(long value) {}
+
+        public void WriteBigEndianUlong(ulong value) {}
+
+        public void WriteLittleEndianUlong(ulong value) {}
+
+        public void WriteBigEndianFloat(float value) {}
+
+        public void WriteLittleEndianFloat(float value) {}
+
+        public void WriteBigEndianDouble(double value) {}
+
+        public void WriteLittleEndianDouble(double value) {}
+
+        public void WriteVarshort(short value) {}
+
+        public void WriteVarushort(ushort value) {}
+
+        public void WriteVarint(int value) {}
+
+        public void WriteVaruint(uint value) {}
+
+        public void WriteVaruint(int value)
+        {
+            WriteVaruint((uint)value);
+        }
+
+        public void WriteVarlong(long value) {}
+
+        public void WriteVarulong(ulong value) {}
+
+        public void WriteUuid(System.Guid value) {
+            WriteBytes(value.ToByteArray());
+        }
+
+        // reading
+
+        public byte[] ReadBytes(int length)
+        {
+            return reader.ReadBytes(length);
+        }
 
         public bool ReadBool()
         {
@@ -50,12 +150,17 @@ namespace Utils
 
         public sbyte ReadByte()
         {
-            return reader.readSByte();
+            return reader.ReadSByte();
         }
 
-        public byte readUbyte()
+        public byte ReadUbyte()
         {
-            return reader.readByte();
+            return reader.ReadByte();
+        }
+
+        public uint ReadVaruint()
+        {
+            return 0; //TODO
         }
 
         //

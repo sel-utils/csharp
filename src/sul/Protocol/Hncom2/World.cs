@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/hncom2.xml
  */
-using Types = sul.Hncom2.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Hncom2.Types;
 
 namespace sul.Hncom2.World
 {
 
-    public class Add : Packet
+    public class Add : sul.Utils.Packet
     {
 
         public const byte Id = 31;
@@ -23,26 +23,26 @@ namespace sul.Hncom2.World
         public const bool Serverbound = true;
 
         // dimension
-        public const byte Overworld = 0;
-        public const byte Nether = 1;
-        public const byte End = 2;
+        public const byte OVERWORLD = 0;
+        public const byte NETHER = 1;
+        public const byte END = 2;
 
         // generator
-        public const byte Default = 0;
-        public const byte Flat = 1;
+        public const byte DEFAULT = 0;
+        public const byte FLAT = 1;
 
         // difficulty
-        public const byte Peaceful = 0;
-        public const byte Easy = 1;
-        public const byte Normal = 2;
-        public const byte Hard = 3;
-        public const byte Hardcore = 4;
+        public const byte PEACEFUL = 0;
+        public const byte EASY = 1;
+        public const byte NORMAL = 2;
+        public const byte HARD = 3;
+        public const byte HARDCORE = 4;
 
         // gamemode
-        public const byte Survival = 0;
-        public const byte Creative = 1;
-        public const byte Adventure = 2;
-        public const byte Spectator = 3;
+        public const byte SURVIVAL = 0;
+        public const byte CREATIVE = 1;
+        public const byte ADVENTURE = 2;
+        public const byte SPECTATOR = 3;
 
         public uint worldId;
         public string name;
@@ -50,14 +50,14 @@ namespace sul.Hncom2.World
         public byte generator;
         public byte difficulty;
         public byte gamemode;
-        public Tuple<int, int> spawnPoint;
+        public System.Tuple<int, int> spawnPoint;
         public short time;
         public int seed;
-        public int parent = -1;
+        public int parent;
 
-        public Add() {}
+        public Add() : this(0, "", 0, 0, 0, 0, null, 0, 0, -1) {}
 
-        public Add(uint worldId, string name, byte dimension, byte generator, byte difficulty, byte gamemode, Tuple<int, int> spawnPoint, short time, int seed, int parent)
+        public Add(uint worldId, string name, byte dimension, byte generator, byte difficulty, byte gamemode, System.Tuple<int, int> spawnPoint, short time, int seed, int parent)
         {
             this.worldId = worldId;
             this.name = name;
@@ -73,20 +73,20 @@ namespace sul.Hncom2.World
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(worldId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
@@ -94,36 +94,36 @@ namespace sul.Hncom2.World
             _buffer.WriteUbyte(generator);
             _buffer.WriteUbyte(difficulty);
             _buffer.WriteUbyte(gamemode);
-            _buffer.WriteVarint(spawnPoint[0]); _buffer.WriteVarint(spawnPoint[1]);
+            _buffer.WriteVarint(spawnPoint.Item1); _buffer.WriteVarint(spawnPoint.Item2);
             _buffer.WriteBigEndianShort(time);
             _buffer.WriteVarint(seed);
             _buffer.WriteVarint(parent);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-
-
-
+            //worldId = _buffer.ReadVaruint();
+            //name = _buffer.ReadString();
+            //dimension = _buffer.ReadUbyte();
+            //generator = _buffer.ReadUbyte();
+            //difficulty = _buffer.ReadUbyte();
+            //gamemode = _buffer.ReadUbyte();
+            //spawnPoint.Item1 = _buffer.ReadVarint(); spawnPoint.Item2 = _buffer.ReadVarint();
+            //time = _buffer.ReadBigEndianShort();
+            //seed = _buffer.ReadVarint();
+            //parent = _buffer.ReadVarint();
         }
 
         public static Add FromBuffer(byte[] buffer)
         {
             var ret = new Add();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Remove : Packet
+    public class Remove : sul.Utils.Packet
     {
 
         public const byte Id = 32;
@@ -133,7 +133,7 @@ namespace sul.Hncom2.World
 
         public uint worldId;
 
-        public Remove() {}
+        public Remove() : this(0) {}
 
         public Remove(uint worldId)
         {
@@ -142,39 +142,39 @@ namespace sul.Hncom2.World
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(worldId);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //worldId = _buffer.ReadVaruint();
         }
 
         public static Remove FromBuffer(byte[] buffer)
         {
             var ret = new Remove();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateDifficulty : Packet
+    public class UpdateDifficulty : sul.Utils.Packet
     {
 
         public const byte Id = 33;
@@ -185,7 +185,7 @@ namespace sul.Hncom2.World
         public uint worldId;
         public byte difficulty;
 
-        public UpdateDifficulty() {}
+        public UpdateDifficulty() : this(0, 0) {}
 
         public UpdateDifficulty(uint worldId, byte difficulty)
         {
@@ -195,41 +195,41 @@ namespace sul.Hncom2.World
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(worldId);
             _buffer.WriteUbyte(difficulty);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //worldId = _buffer.ReadVaruint();
+            //difficulty = _buffer.ReadUbyte();
         }
 
         public static UpdateDifficulty FromBuffer(byte[] buffer)
         {
             var ret = new UpdateDifficulty();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class UpdateGamemode : Packet
+    public class UpdateGamemode : sul.Utils.Packet
     {
 
         public const byte Id = 34;
@@ -240,7 +240,7 @@ namespace sul.Hncom2.World
         public uint worldId;
         public byte gamemode;
 
-        public UpdateGamemode() {}
+        public UpdateGamemode() : this(0, 0) {}
 
         public UpdateGamemode(uint worldId, byte gamemode)
         {
@@ -250,41 +250,41 @@ namespace sul.Hncom2.World
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(worldId);
             _buffer.WriteUbyte(gamemode);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //worldId = _buffer.ReadVaruint();
+            //gamemode = _buffer.ReadUbyte();
         }
 
         public static UpdateGamemode FromBuffer(byte[] buffer)
         {
             var ret = new UpdateGamemode();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class RequestCreation : Packet
+    public class RequestCreation : sul.Utils.Packet
     {
 
         public const byte Id = 35;
@@ -298,9 +298,9 @@ namespace sul.Hncom2.World
         public byte difficulty;
         public byte gamemode;
         public int seed;
-        public int parent = -1;
+        public int parent;
 
-        public RequestCreation() {}
+        public RequestCreation() : this("", 0, 0, 0, 0, 0, -1) {}
 
         public RequestCreation(string name, byte dimension, byte generator, byte difficulty, byte gamemode, int seed, int parent)
         {
@@ -315,20 +315,20 @@ namespace sul.Hncom2.World
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteUbyte(dimension);
@@ -339,21 +339,21 @@ namespace sul.Hncom2.World
             _buffer.WriteVarint(parent);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
+            //name = _buffer.ReadString();
+            //dimension = _buffer.ReadUbyte();
+            //generator = _buffer.ReadUbyte();
+            //difficulty = _buffer.ReadUbyte();
+            //gamemode = _buffer.ReadUbyte();
+            //seed = _buffer.ReadVarint();
+            //parent = _buffer.ReadVarint();
         }
 
         public static RequestCreation FromBuffer(byte[] buffer)
         {
             var ret = new RequestCreation();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

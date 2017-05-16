@@ -8,12 +8,14 @@
 namespace sul.Utils
 {
 
-    public class About
+    public class Metadata : Stream
     {
 
-        public const string Website = "https://github.com/sel-project/sel-utils";
+        protected override void EncodeImpl(Buffer _buffer)
+        {}
 
-        public const int Version = 109;
+        protected override void DecodeImpl(Buffer _buffer)
+        {}
 
     }
 

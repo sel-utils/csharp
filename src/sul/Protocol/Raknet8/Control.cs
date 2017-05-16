@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/raknet8.xml
  */
-using Types = sul.Raknet8.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Raknet8.Types;
 
 namespace sul.Raknet8.Control
 {
 
-    public class Ack : Packet
+    public class Ack : sul.Utils.Packet
     {
 
         public const byte Id = 192;
@@ -22,50 +22,50 @@ namespace sul.Raknet8.Control
         public const bool Clientbound = true;
         public const bool Serverbound = true;
 
-        public Types.Acknowledge[] packets;
+        public Acknowledge[] packets;
 
-        public Ack() {}
+        public Ack() : this(new Acknowledge[]{}) {}
 
-        public Ack(Types.Acknowledge[] packets)
+        public Ack(Acknowledge[] packets)
         {
             this.packets = packets;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteBigEndianUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(packets.Length); foreach (Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //packets.DecodeBody(_buffer);
         }
 
         public static Ack FromBuffer(byte[] buffer)
         {
             var ret = new Ack();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Nack : Packet
+    public class Nack : sul.Utils.Packet
     {
 
         public const byte Id = 160;
@@ -73,50 +73,50 @@ namespace sul.Raknet8.Control
         public const bool Clientbound = true;
         public const bool Serverbound = true;
 
-        public Types.Acknowledge[] packets;
+        public Acknowledge[] packets;
 
-        public Nack() {}
+        public Nack() : this(new Acknowledge[]{}) {}
 
-        public Nack(Types.Acknowledge[] packets)
+        public Nack(Acknowledge[] packets)
         {
             this.packets = packets;
         }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteBigEndianUshort(packets.Length); foreach(Types.Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
+            _buffer.WriteBigEndianUshort(packets.Length); foreach (Acknowledge packetsChild in packets){ packetsChild.EncodeBody(_buffer); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //packets.DecodeBody(_buffer);
         }
 
         public static Nack FromBuffer(byte[] buffer)
         {
             var ret = new Nack();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Encapsulated : Packet
+    public class Encapsulated : sul.Utils.Packet
     {
 
         public const byte Id = 132;
@@ -125,11 +125,11 @@ namespace sul.Raknet8.Control
         public const bool Serverbound = true;
 
         public int count;
-        public Types.Encapsulation encapsulation;
+        public Encapsulation encapsulation;
 
-        public Encapsulated() {}
+        public Encapsulated() : this(0, new Encapsulation()) {}
 
-        public Encapsulated(int count, Types.Encapsulation encapsulation)
+        public Encapsulated(int count, Encapsulation encapsulation)
         {
             this.count = count;
             this.encapsulation = encapsulation;
@@ -137,35 +137,35 @@ namespace sul.Raknet8.Control
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteLittleEndianTriad(count);
             encapsulation.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //count = _buffer.ReadLittleEndianTriad();
+            //encapsulation.DecodeBody(_buffer);
         }
 
         public static Encapsulated FromBuffer(byte[] buffer)
         {
             var ret = new Encapsulated();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

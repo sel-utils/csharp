@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/hncom2.xml
  */
-using Types = sul.Hncom2.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Hncom2.Types;
 
 namespace sul.Hncom2.Login
 {
 
-    public class ConnectionRequest : Packet
+    public class ConnectionRequest : sul.Utils.Packet
     {
 
         public const byte Id = 3;
@@ -25,9 +25,9 @@ namespace sul.Hncom2.Login
         public uint protocol;
         public string password;
         public string name;
-        public bool main = true;
+        public bool main;
 
-        public ConnectionRequest() {}
+        public ConnectionRequest() : this(0, "", "", true) {}
 
         public ConnectionRequest(uint protocol, string password, string name, bool main)
         {
@@ -39,20 +39,20 @@ namespace sul.Hncom2.Login
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(protocol);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(password)); _buffer.WriteString(password);
@@ -60,24 +60,24 @@ namespace sul.Hncom2.Login
             _buffer.WriteBool(main);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //protocol = _buffer.ReadVaruint();
+            //password = _buffer.ReadString();
+            //name = _buffer.ReadString();
+            //main = _buffer.ReadBool();
         }
 
         public static ConnectionRequest FromBuffer(byte[] buffer)
         {
             var ret = new ConnectionRequest();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class ConnectionResponse : Packet
+    public class ConnectionResponse : sul.Utils.Packet
     {
 
         public const byte Id = 4;
@@ -86,20 +86,20 @@ namespace sul.Hncom2.Login
         public const bool Serverbound = false;
 
         // status
-        public const byte Ok = 0;
-        public const byte OutdatedHub = 1;
-        public const byte OutdatedNode = 2;
-        public const byte PasswordRequired = 3;
-        public const byte WrongPassword = 4;
-        public const byte InvalidNameLength = 5;
-        public const byte InvalidNameCharacters = 6;
-        public const byte NameAlreadyUsed = 7;
-        public const byte NameReserved = 8;
+        public const byte OK = 0;
+        public const byte OUTDATED_HUB = 1;
+        public const byte OUTDATED_NODE = 2;
+        public const byte PASSWORD_REQUIRED = 3;
+        public const byte WRONG_PASSWORD = 4;
+        public const byte INVALID_NAME_LENGTH = 5;
+        public const byte INVALID_NAME_CHARACTERS = 6;
+        public const byte NAME_ALREADY_USED = 7;
+        public const byte NAME_RESERVED = 8;
 
         public byte status;
         public uint protocol;
 
-        public ConnectionResponse() {}
+        public ConnectionResponse() : this(0, 0) {}
 
         public ConnectionResponse(byte status, uint protocol)
         {
@@ -109,41 +109,41 @@ namespace sul.Hncom2.Login
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(status);
             if(status==1||status==2){ _buffer.WriteVaruint(protocol); }
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-            if(status==1||status==2){  }
+            //status = _buffer.ReadUbyte();
+            //if(status==1||status==2){ protocol = _buffer.ReadVaruint(); }
         }
 
         public static ConnectionResponse FromBuffer(byte[] buffer)
         {
             var ret = new ConnectionResponse();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class HubInfo : Packet
+    public class HubInfo : sul.Utils.Packet
     {
 
         public const byte Id = 5;
@@ -152,22 +152,22 @@ namespace sul.Hncom2.Login
         public const bool Serverbound = false;
 
         // max
-        public const int Unlimited = -1;
+        public const int UNLIMITED = -1;
 
         public ulong time;
         public ulong serverId;
         public ulong reservedUuids;
         public string displayName;
-        public Types.GameInfo[] gamesInfo;
+        public GameInfo[] gamesInfo;
         public uint online;
         public int max;
         public string language;
         public string[] acceptedLanguages;
         public string additionalJson;
 
-        public HubInfo() {}
+        public HubInfo() : this(0, 0, 0, "", new GameInfo[]{}, 0, 0, "", new string[]{}, "") {}
 
-        public HubInfo(ulong time, ulong serverId, ulong reservedUuids, string displayName, Types.GameInfo[] gamesInfo, uint online, int max, string language, string[] acceptedLanguages, string additionalJson)
+        public HubInfo(ulong time, ulong serverId, ulong reservedUuids, string displayName, GameInfo[] gamesInfo, uint online, int max, string language, string[] acceptedLanguages, string additionalJson)
         {
             this.time = time;
             this.serverId = serverId;
@@ -183,57 +183,57 @@ namespace sul.Hncom2.Login
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarulong(time);
             _buffer.WriteVarulong(serverId);
             _buffer.WriteVarulong(reservedUuids);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
-            _buffer.WriteVaruint(gamesInfo.Length); foreach(Types.GameInfo gamesInfoChild in gamesInfo){ gamesInfoChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(gamesInfo.Length); foreach (GameInfo gamesInfoChild in gamesInfo){ gamesInfoChild.EncodeBody(_buffer); }
             _buffer.WriteVaruint(online);
             _buffer.WriteVarint(max);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(language)); _buffer.WriteString(language);
-            _buffer.WriteVaruint(acceptedLanguages.Length); foreach(string acceptedLanguagesChild in acceptedLanguages){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(acceptedLanguagesChild)); _buffer.WriteString(acceptedLanguagesChild); }
+            _buffer.WriteVaruint(acceptedLanguages.Length); foreach (string acceptedLanguagesChild in acceptedLanguages){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(acceptedLanguagesChild)); _buffer.WriteString(acceptedLanguagesChild); }
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(additionalJson)); _buffer.WriteString(additionalJson);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
-
-
-
-
+            //time = _buffer.ReadVarulong();
+            //serverId = _buffer.ReadVarulong();
+            //reservedUuids = _buffer.ReadVarulong();
+            //displayName = _buffer.ReadString();
+            //gamesInfo.DecodeBody(_buffer);
+            //online = _buffer.ReadVaruint();
+            //max = _buffer.ReadVarint();
+            //language = _buffer.ReadString();
+            //acceptedLanguages.DecodeBody(_buffer);
+            //additionalJson = _buffer.ReadString();
         }
 
         public static HubInfo FromBuffer(byte[] buffer)
         {
             var ret = new HubInfo();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class NodeInfo : Packet
+    public class NodeInfo : sul.Utils.Packet
     {
 
         public const byte Id = 6;
@@ -242,17 +242,17 @@ namespace sul.Hncom2.Login
         public const bool Serverbound = true;
 
         // max
-        public const uint Unlimited = 0;
+        public const uint UNLIMITED = 0;
 
         public ulong time;
         public uint max;
-        public Types.Game[] acceptedGames;
-        public Types.Plugin[] plugins;
+        public Game[] acceptedGames;
+        public Plugin[] plugins;
         public string additionalJson;
 
-        public NodeInfo() {}
+        public NodeInfo() : this(0, 0, new Game[]{}, new Plugin[]{}, "") {}
 
-        public NodeInfo(ulong time, uint max, Types.Game[] acceptedGames, Types.Plugin[] plugins, string additionalJson)
+        public NodeInfo(ulong time, uint max, Game[] acceptedGames, Plugin[] plugins, string additionalJson)
         {
             this.time = time;
             this.max = max;
@@ -263,41 +263,41 @@ namespace sul.Hncom2.Login
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadUbyte();
+            //_buffer.ReadUbyte();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarulong(time);
             _buffer.WriteVaruint(max);
-            _buffer.WriteVaruint(acceptedGames.Length); foreach(Types.Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeBody(_buffer); }
-            _buffer.WriteVaruint(plugins.Length); foreach(Types.Plugin pluginsChild in plugins){ pluginsChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(acceptedGames.Length); foreach (Game acceptedGamesChild in acceptedGames){ acceptedGamesChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(plugins.Length); foreach (Plugin pluginsChild in plugins){ pluginsChild.EncodeBody(_buffer); }
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(additionalJson)); _buffer.WriteString(additionalJson);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //time = _buffer.ReadVarulong();
+            //max = _buffer.ReadVaruint();
+            //acceptedGames.DecodeBody(_buffer);
+            //plugins.DecodeBody(_buffer);
+            //additionalJson = _buffer.ReadString();
         }
 
         public static NodeInfo FromBuffer(byte[] buffer)
         {
             var ret = new NodeInfo();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 

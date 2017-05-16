@@ -6,21 +6,19 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket102.xml
  */
-using Utils.Buffer;
-using Utils.LengthPrefixedType;
-using Utils.Stream;
+using System.Text;
 
 namespace sul.Pocket102.Types
 {
 
-    public class PackWithSize : Stream
+    public class PackWithSize : sul.Utils.Stream
     {
 
         public string id;
         public string version;
         public ulong size;
 
-        public PackWithSize() {}
+        public PackWithSize() : this("", "", 0) {}
 
         public PackWithSize(string id, string version, ulong size)
         {
@@ -29,29 +27,29 @@ namespace sul.Pocket102.Types
             this.size = size;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(version)); _buffer.WriteString(version);
             _buffer.WriteLittleEndianUlong(size);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //id = _buffer.ReadString();
+            //version = _buffer.ReadString();
+            //size = _buffer.ReadLittleEndianUlong();
         }
 
     }
 
-    public class Pack : Stream
+    public class Pack : sul.Utils.Stream
     {
 
         public string id;
         public string version;
 
-        public Pack() {}
+        public Pack() : this("", "") {}
 
         public Pack(string id, string version)
         {
@@ -59,28 +57,28 @@ namespace sul.Pocket102.Types
             this.version = version;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(id)); _buffer.WriteString(id);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(version)); _buffer.WriteString(version);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //id = _buffer.ReadString();
+            //version = _buffer.ReadString();
         }
 
     }
 
-    public class Slot : Stream
+    public class Slot : sul.Utils.Stream
     {
 
         public int id;
         public int metaAndCount;
         public byte[] nbt;
 
-        public Slot() {}
+        public Slot() : this(0, 0, new byte[]{}) {}
 
         public Slot(int id, int metaAndCount, byte[] nbt)
         {
@@ -89,23 +87,23 @@ namespace sul.Pocket102.Types
             this.nbt = nbt;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(id);
             if(id>0){ _buffer.WriteVarint(metaAndCount); }
             if(id>0){ _buffer.WriteLittleEndianUshort(nbt.Length); _buffer.WriteBytes(nbt); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-            if(id>0){  }
-            if(id>0){  }
+            //id = _buffer.ReadVarint();
+            //if(id>0){ metaAndCount = _buffer.ReadVarint(); }
+            //if(id>0){ nbt.DecodeBody(_buffer); }
         }
 
     }
 
-    public class Attribute : Stream
+    public class Attribute : sul.Utils.Stream
     {
 
         public float min;
@@ -114,7 +112,7 @@ namespace sul.Pocket102.Types
         public float @default;
         public string name;
 
-        public Attribute() {}
+        public Attribute() : this(0, 0, 0, 0, "") {}
 
         public Attribute(float min, float max, float @value, float @default, string name)
         {
@@ -125,7 +123,7 @@ namespace sul.Pocket102.Types
             this.name = name;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteLittleEndianFloat(min);
             _buffer.WriteLittleEndianFloat(max);
@@ -134,25 +132,25 @@ namespace sul.Pocket102.Types
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //min = _buffer.ReadLittleEndianFloat();
+            //max = _buffer.ReadLittleEndianFloat();
+            //@value = _buffer.ReadLittleEndianFloat();
+            //@default = _buffer.ReadLittleEndianFloat();
+            //name = _buffer.ReadString();
         }
 
     }
 
-    public class BlockPosition : Stream
+    public class BlockPosition : sul.Utils.Stream
     {
 
         public int x;
         public uint y;
         public int z;
 
-        public BlockPosition() {}
+        public BlockPosition() : this(0, 0, 0) {}
 
         public BlockPosition(int x, uint y, int z)
         {
@@ -161,29 +159,29 @@ namespace sul.Pocket102.Types
             this.z = z;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(x);
             _buffer.WriteVaruint(y);
             _buffer.WriteVarint(z);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //x = _buffer.ReadVarint();
+            //y = _buffer.ReadVaruint();
+            //z = _buffer.ReadVarint();
         }
 
     }
 
-    public class Skin : Stream
+    public class Skin : sul.Utils.Stream
     {
 
         public string name;
         public byte[] data;
 
-        public Skin() {}
+        public Skin() : this("", new byte[]{}) {}
 
         public Skin(string name, byte[] data)
         {
@@ -191,31 +189,31 @@ namespace sul.Pocket102.Types
             this.data = data;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //name = _buffer.ReadString();
+            //data.DecodeBody(_buffer);
         }
 
     }
 
-    public class PlayerList : Stream
+    public class PlayerList : sul.Utils.Stream
     {
 
-        public Guid uuid;
+        public System.Guid uuid;
         public long entityId;
         public string displayName;
-        public Types.Skin skin;
+        public Skin skin;
 
-        public PlayerList() {}
+        public PlayerList() : this(System.Guid.Empty, 0, "", new Skin()) {}
 
-        public PlayerList(Guid uuid, long entityId, string displayName, Types.Skin skin)
+        public PlayerList(System.Guid uuid, long entityId, string displayName, Skin skin)
         {
             this.uuid = uuid;
             this.entityId = entityId;
@@ -223,7 +221,7 @@ namespace sul.Pocket102.Types
             this.skin = skin;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUuid(uuid);
             _buffer.WriteVarlong(entityId);
@@ -231,29 +229,29 @@ namespace sul.Pocket102.Types
             skin.EncodeBody(_buffer);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //uuid = _buffer.ReadUuid();
+            //entityId = _buffer.ReadVarlong();
+            //displayName = _buffer.ReadString();
+            //skin.DecodeBody(_buffer);
         }
 
     }
 
-    public class Link : Stream
+    public class Link : sul.Utils.Stream
     {
 
         // action
-        public const byte Add = 0;
-        public const byte Ride = 1;
-        public const byte Remove = 2;
+        public const byte ADD = 0;
+        public const byte RIDE = 1;
+        public const byte REMOVE = 2;
 
         public long from;
         public long to;
         public byte action;
 
-        public Link() {}
+        public Link() : this(0, 0, 0) {}
 
         public Link(long from, long to, byte action)
         {
@@ -262,36 +260,36 @@ namespace sul.Pocket102.Types
             this.action = action;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(from);
             _buffer.WriteVarlong(to);
             _buffer.WriteUbyte(action);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //from = _buffer.ReadVarlong();
+            //to = _buffer.ReadVarlong();
+            //action = _buffer.ReadUbyte();
         }
 
     }
 
-    public class Recipe : Stream
+    public class Recipe : sul.Utils.Stream
     {
 
         // type
-        public const int Shapeless = 0;
-        public const int Shaped = 1;
-        public const int Furnace = 2;
-        public const int FurnaceData = 3;
-        public const int Multi = 4;
+        public const int SHAPELESS = 0;
+        public const int SHAPED = 1;
+        public const int FURNACE = 2;
+        public const int FURNACE_DATA = 3;
+        public const int MULTI = 4;
 
         public int type;
         public byte[] data;
 
-        public Recipe() {}
+        public Recipe() : this(0, new byte[]{}) {}
 
         public Recipe(int type, byte[] data)
         {
@@ -299,33 +297,33 @@ namespace sul.Pocket102.Types
             this.data = data;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(type);
             _buffer.WriteBytes(data);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //type = _buffer.ReadVarint();
+            //data = _buffer.ReadBytes();
         }
 
     }
 
-    public class ChunkData : LengthPrefixedType
+    public class ChunkData : sul.Utils.LengthPrefixedType
     {
 
-        public Types.Section[] sections;
-        public ushort[256] heights;
-        public byte[256] biomes;
+        public Section[] sections;
+        public ushort[] heights;
+        public byte[] biomes;
         public byte[] borders;
-        public Types.ExtraData[] extraData;
+        public ExtraData[] extraData;
         public byte[] blockEntities;
 
-        public ChunkData() {}
+        public ChunkData() : this(new Section[]{}, new ushort[256], new byte[256], new byte[]{}, new ExtraData[]{}, new byte[]{}) {}
 
-        public ChunkData(Types.Section[] sections, ushort[256] heights, byte[256] biomes, byte[] borders, Types.ExtraData[] extraData, byte[] blockEntities)
+        public ChunkData(Section[] sections, ushort[] heights, byte[] biomes, byte[] borders, ExtraData[] extraData, byte[] blockEntities)
         {
             this.sections = sections;
             this.heights = heights;
@@ -335,50 +333,50 @@ namespace sul.Pocket102.Types
             this.blockEntities = blockEntities;
         }
 
-        protected override void EncodeLength(int length, Buffer buffer)
+        protected override void EncodeLength(int length, sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(length);
         }
 
-        protected override int DecodeLength(Buffer buffer)
+        protected override int DecodeLength(sul.Utils.Buffer _buffer)
         {
-
+            return (int)_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVaruint(sections.Length); foreach(Types.Section sectionsChild in sections){ sectionsChild.EncodeBody(_buffer); }
-            foreach(ushort heightsChild in heights){ _buffer.WriteBigEndianUshort(heightsChild); }
-            foreach(byte biomesChild in biomes){ _buffer.WriteUbyte(biomesChild); }
+            _buffer.WriteVaruint(sections.Length); foreach (Section sectionsChild in sections){ sectionsChild.EncodeBody(_buffer); }
+            foreach (ushort heightsChild in heights){ _buffer.WriteBigEndianUshort(heightsChild); }
+            foreach (byte biomesChild in biomes){ _buffer.WriteUbyte(biomesChild); }
             _buffer.WriteVaruint(borders.Length); _buffer.WriteBytes(borders);
-            _buffer.WriteVaruint(extraData.Length); foreach(Types.ExtraData extraDataChild in extraData){ extraDataChild.EncodeBody(_buffer); }
+            _buffer.WriteVaruint(extraData.Length); foreach (ExtraData extraDataChild in extraData){ extraDataChild.EncodeBody(_buffer); }
             _buffer.WriteBytes(blockEntities);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
-
+            //sections.DecodeBody(_buffer);
+            //heights.DecodeBody(_buffer);
+            //biomes.DecodeBody(_buffer);
+            //borders.DecodeBody(_buffer);
+            //extraData.DecodeBody(_buffer);
+            //blockEntities = _buffer.ReadBytes();
         }
 
     }
 
-    public class Section : Stream
+    public class Section : sul.Utils.Stream
     {
 
-        public byte storageVersion = 0;
-        public byte[4096] blockIds;
-        public byte[2048] blockMetas;
-        public byte[2048] skyLight;
-        public byte[2048] blockLight;
+        public byte storageVersion;
+        public byte[] blockIds;
+        public byte[] blockMetas;
+        public byte[] skyLight;
+        public byte[] blockLight;
 
-        public Section() {}
+        public Section() : this(0, new byte[4096], new byte[2048], new byte[2048], new byte[2048]) {}
 
-        public Section(byte storageVersion, byte[4096] blockIds, byte[2048] blockMetas, byte[2048] skyLight, byte[2048] blockLight)
+        public Section(byte storageVersion, byte[] blockIds, byte[] blockMetas, byte[] skyLight, byte[] blockLight)
         {
             this.storageVersion = storageVersion;
             this.blockIds = blockIds;
@@ -387,33 +385,33 @@ namespace sul.Pocket102.Types
             this.blockLight = blockLight;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(storageVersion);
-            foreach(byte blockIdsChild in blockIds){ _buffer.WriteUbyte(blockIdsChild); }
-            foreach(byte blockMetasChild in blockMetas){ _buffer.WriteUbyte(blockMetasChild); }
-            foreach(byte skyLightChild in skyLight){ _buffer.WriteUbyte(skyLightChild); }
-            foreach(byte blockLightChild in blockLight){ _buffer.WriteUbyte(blockLightChild); }
+            foreach (byte blockIdsChild in blockIds){ _buffer.WriteUbyte(blockIdsChild); }
+            foreach (byte blockMetasChild in blockMetas){ _buffer.WriteUbyte(blockMetasChild); }
+            foreach (byte skyLightChild in skyLight){ _buffer.WriteUbyte(skyLightChild); }
+            foreach (byte blockLightChild in blockLight){ _buffer.WriteUbyte(blockLightChild); }
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
-
+            //storageVersion = _buffer.ReadUbyte();
+            //blockIds.DecodeBody(_buffer);
+            //blockMetas.DecodeBody(_buffer);
+            //skyLight.DecodeBody(_buffer);
+            //blockLight.DecodeBody(_buffer);
         }
 
     }
 
-    public class ExtraData : Stream
+    public class ExtraData : sul.Utils.Stream
     {
 
         public uint key;
         public ushort @value;
 
-        public ExtraData() {}
+        public ExtraData() : this(0, 0) {}
 
         public ExtraData(uint key, ushort @value)
         {
@@ -421,31 +419,31 @@ namespace sul.Pocket102.Types
             this.@value = @value;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(key);
             _buffer.WriteLittleEndianUshort(@value);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
+            //key = _buffer.ReadVaruint();
+            //@value = _buffer.ReadLittleEndianUshort();
         }
 
     }
 
-    public class Decoration : Stream
+    public class Decoration : sul.Utils.Stream
     {
 
         public int rotationAndIcon;
-        public Tuple<byte, byte> position;
+        public System.Tuple<byte, byte> position;
         public string label;
         public uint color;
 
-        public Decoration() {}
+        public Decoration() : this(0, null, "", 0) {}
 
-        public Decoration(int rotationAndIcon, Tuple<byte, byte> position, string label, uint color)
+        public Decoration(int rotationAndIcon, System.Tuple<byte, byte> position, string label, uint color)
         {
             this.rotationAndIcon = rotationAndIcon;
             this.position = position;
@@ -453,39 +451,39 @@ namespace sul.Pocket102.Types
             this.color = color;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarint(rotationAndIcon);
-            _buffer.WriteUbyte(position[0]); _buffer.WriteUbyte(position[1]);
+            _buffer.WriteUbyte(position.Item1); _buffer.WriteUbyte(position.Item2);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(label)); _buffer.WriteString(label);
             _buffer.WriteLittleEndianUint(color);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //rotationAndIcon = _buffer.ReadVarint();
+            //position.Item1 = _buffer.ReadUbyte(); position.Item2 = _buffer.ReadUbyte();
+            //label = _buffer.ReadString();
+            //color = _buffer.ReadLittleEndianUint();
         }
 
     }
 
-    public class Rule : Stream
+    public class Rule : sul.Utils.Stream
     {
 
         // name
-        public const string DrowningDamage = "drowningdamage";
-        public const string FallDamage = "falldamage";
-        public const string FireDamage = "firedamage";
-        public const string ImmutableWorld = "immutableworld";
-        public const string Pvp = "pvp";
+        public const string DROWNING_DAMAGE = "drowningdamage";
+        public const string FALL_DAMAGE = "falldamage";
+        public const string FIRE_DAMAGE = "firedamage";
+        public const string IMMUTABLE_WORLD = "immutableworld";
+        public const string PVP = "pvp";
 
         public string name;
         public bool @value;
         public bool unknown2;
 
-        public Rule() {}
+        public Rule() : this("", false, false) {}
 
         public Rule(string name, bool @value, bool unknown2)
         {
@@ -494,18 +492,18 @@ namespace sul.Pocket102.Types
             this.unknown2 = unknown2;
         }
 
-        protected override void EncodeImpl(Buffer buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteBool(@value);
             _buffer.WriteBool(unknown2);
         }
 
-        protected override void DecodeImpl(Buffer buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
+            //name = _buffer.ReadString();
+            //@value = _buffer.ReadBool();
+            //unknown2 = _buffer.ReadBool();
         }
 
     }

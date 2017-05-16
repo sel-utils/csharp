@@ -6,15 +6,15 @@
  * Repository: https://github.com/sel-project/sel-utils
  * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft109.xml
  */
-using Types = sul.Minecraft109.Types;
+using System.Text;
 
-using Utils.Buffer;
-using Utils.Packet;
+using sul.Utils;
+using sul.Minecraft109.Types;
 
 namespace sul.Minecraft109.Status
 {
 
-    public class Handshake : Packet
+    public class Handshake : sul.Utils.Packet
     {
 
         public const uint Id = 0;
@@ -23,15 +23,15 @@ namespace sul.Minecraft109.Status
         public const bool Serverbound = true;
 
         // next
-        public const uint Status = 1;
-        public const uint Login = 2;
+        public const uint STATUS = 1;
+        public const uint LOGIN = 2;
 
         public uint protocol;
         public string serverAddress;
         public ushort serverPort;
         public uint next;
 
-        public Handshake() {}
+        public Handshake() : this(0, "", 0, 0) {}
 
         public Handshake(uint protocol, string serverAddress, ushort serverPort, uint next)
         {
@@ -43,20 +43,20 @@ namespace sul.Minecraft109.Status
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(protocol);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(serverAddress)); _buffer.WriteString(serverAddress);
@@ -64,24 +64,24 @@ namespace sul.Minecraft109.Status
             _buffer.WriteVaruint(next);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
-
-
-
+            //protocol = _buffer.ReadVaruint();
+            //serverAddress = _buffer.ReadString();
+            //serverPort = _buffer.ReadBigEndianUshort();
+            //next = _buffer.ReadVaruint();
         }
 
         public static Handshake FromBuffer(byte[] buffer)
         {
             var ret = new Handshake();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Request : Packet
+    public class Request : sul.Utils.Packet
     {
 
         public const uint Id = 0;
@@ -91,29 +91,32 @@ namespace sul.Minecraft109.Status
 
 
 
-        public Request() {}
+        public Request()
+        {
+
+        }
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
 
         }
@@ -121,13 +124,13 @@ namespace sul.Minecraft109.Status
         public static Request FromBuffer(byte[] buffer)
         {
             var ret = new Request();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Response : Packet
+    public class Response : sul.Utils.Packet
     {
 
         public const uint Id = 0;
@@ -137,7 +140,7 @@ namespace sul.Minecraft109.Status
 
         public string json;
 
-        public Response() {}
+        public Response() : this("") {}
 
         public Response(string json)
         {
@@ -146,39 +149,39 @@ namespace sul.Minecraft109.Status
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(json)); _buffer.WriteString(json);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //json = _buffer.ReadString();
         }
 
         public static Response FromBuffer(byte[] buffer)
         {
             var ret = new Response();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
     }
 
-    public class Latency : Packet
+    public class Latency : sul.Utils.Packet
     {
 
         public const uint Id = 1;
@@ -188,7 +191,7 @@ namespace sul.Minecraft109.Status
 
         public long id;
 
-        public Latency() {}
+        public Latency() : this(0) {}
 
         public Latency(long id)
         {
@@ -197,33 +200,33 @@ namespace sul.Minecraft109.Status
 
         public override int GetId()
         {
-            return Id;
+            return (int)Id;
         }
 
-        protected override void EncodeId(Buffer _buffer)
+        protected override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(Buffer _buffer)
+        protected override void DecodeId(sul.Utils.Buffer _buffer)
         {
-            _buffer.ReadVaruint();
+            //_buffer.ReadVaruint();
         }
 
-        protected override void EncodeImpl(Buffer _buffer)
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteBigEndianLong(id);
         }
 
-        protected override void DecodeImpl(Buffer _buffer)
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-
+            //id = _buffer.ReadBigEndianLong();
         }
 
         public static Latency FromBuffer(byte[] buffer)
         {
             var ret = new Latency();
-            ret.decode(buffer);
+            ret.Decode(buffer);
             return ret;
         }
 
