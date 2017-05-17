@@ -42,12 +42,12 @@ namespace sul.Externalconsole1.Login
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -99,12 +99,12 @@ namespace sul.Externalconsole1.Login
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -150,12 +150,12 @@ namespace sul.Externalconsole1.Login
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -176,6 +176,122 @@ namespace sul.Externalconsole1.Login
             ret.Decode(buffer);
             return ret;
         }
+
+        public AcceptedVariant Accepted(bool remoteCommands, string software, byte[] versions, string displayName, Game[] games, string[] connectedNodes)
+        {
+            var _variant = new AcceptedVariant(this);
+            _variant.remoteCommands = remoteCommands;
+            _variant.software = software;
+            _variant.versions = versions;
+            _variant.displayName = displayName;
+            _variant.games = games;
+            _variant.connectedNodes = connectedNodes;
+            return _variant;
+        }
+
+        public sealed class AcceptedVariant : sul.Utils.Variant
+        {
+
+            private Welcome _parent;
+
+            public bool remoteCommands;
+            public string software;
+            public byte[] versions;
+            public string displayName;
+            public Game[] games;
+            public string[] connectedNodes;
+
+            public AcceptedVariant(Welcome parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.status = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteBool(remoteCommands);
+                _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(software)); _buffer.WriteString(software);
+                foreach (byte versionsChild in versions){ _buffer.WriteUbyte(versionsChild); }
+                _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
+                _buffer.WriteBigEndianUshort(games.Length); foreach (Game gamesChild in games){ gamesChild.EncodeBody(_buffer); }
+                _buffer.WriteBigEndianUshort(connectedNodes.Length); foreach (string connectedNodesChild in connectedNodes){ _buffer.WriteBigEndianUshort(Encoding.UTF8.GetByteCount(connectedNodesChild)); _buffer.WriteString(connectedNodesChild); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public WrongHashVariant WrongHash()
+        {
+            var _variant = new WrongHashVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class WrongHashVariant : sul.Utils.Variant
+        {
+
+            private Welcome _parent;
+
+
+
+            public WrongHashVariant(Welcome parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.status = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public TimedOutVariant TimedOut()
+        {
+            var _variant = new TimedOutVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class TimedOutVariant : sul.Utils.Variant
+        {
+
+            private Welcome _parent;
+
+
+
+            public TimedOutVariant(Welcome parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.status = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 

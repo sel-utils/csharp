@@ -42,12 +42,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -99,12 +99,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -152,12 +152,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -207,12 +207,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -265,12 +265,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -322,12 +322,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -388,12 +388,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -458,12 +458,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -527,12 +527,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -557,6 +557,110 @@ namespace sul.Hncom2.Status
             ret.Decode(buffer);
             return ret;
         }
+
+        public ByHubIdVariant ByHubId(uint hubId)
+        {
+            var _variant = new ByHubIdVariant(this);
+            _variant.hubId = hubId;
+            return _variant;
+        }
+
+        public sealed class ByHubIdVariant : sul.Utils.Variant
+        {
+
+            private UpdateList _parent;
+
+            public uint hubId;
+
+            public ByHubIdVariant(UpdateList parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(hubId);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public ByNameVariant ByName(string username)
+        {
+            var _variant = new ByNameVariant(this);
+            _variant.username = username;
+            return _variant;
+        }
+
+        public sealed class ByNameVariant : sul.Utils.Variant
+        {
+
+            private UpdateList _parent;
+
+            public string username;
+
+            public ByNameVariant(UpdateList parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(username)); _buffer.WriteString(username);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public ByUuidVariant ByUuid(byte game, System.Guid uuid)
+        {
+            var _variant = new ByUuidVariant(this);
+            _variant.game = game;
+            _variant.uuid = uuid;
+            return _variant;
+        }
+
+        public sealed class ByUuidVariant : sul.Utils.Variant
+        {
+
+            private UpdateList _parent;
+
+            public byte game;
+            public System.Guid uuid;
+
+            public ByUuidVariant(UpdateList parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteUbyte(game);
+                _buffer.WriteUuid(uuid);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -590,12 +694,12 @@ namespace sul.Hncom2.Status
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }

@@ -50,12 +50,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -119,12 +119,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -181,12 +181,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -252,12 +252,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -333,12 +333,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -402,12 +402,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -473,12 +473,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -526,12 +526,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -581,12 +581,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -648,12 +648,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -731,12 +731,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -790,12 +790,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -845,12 +845,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -873,6 +873,221 @@ namespace sul.Minecraft107.Clientbound
             ret.Decode(buffer);
             return ret;
         }
+
+        public AddVariant Add(string title, float health, uint color, uint division, byte flags)
+        {
+            var _variant = new AddVariant(this);
+            _variant.title = title;
+            _variant.health = health;
+            _variant.color = color;
+            _variant.division = division;
+            _variant.flags = flags;
+            return _variant;
+        }
+
+        public sealed class AddVariant : sul.Utils.Variant
+        {
+
+            private BossBar _parent;
+
+            public string title;
+            public float health;
+            public uint color;
+            public uint division;
+            public byte flags;
+
+            public AddVariant(BossBar parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
+                _buffer.WriteBigEndianFloat(health);
+                _buffer.WriteVaruint(color);
+                _buffer.WriteVaruint(division);
+                _buffer.WriteUbyte(flags);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public RemoveVariant Remove()
+        {
+            var _variant = new RemoveVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class RemoveVariant : sul.Utils.Variant
+        {
+
+            private BossBar _parent;
+
+
+
+            public RemoveVariant(BossBar parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateHealthVariant UpdateHealth(float health)
+        {
+            var _variant = new UpdateHealthVariant(this);
+            _variant.health = health;
+            return _variant;
+        }
+
+        public sealed class UpdateHealthVariant : sul.Utils.Variant
+        {
+
+            private BossBar _parent;
+
+            public float health;
+
+            public UpdateHealthVariant(BossBar parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteBigEndianFloat(health);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateTitleVariant UpdateTitle(string title)
+        {
+            var _variant = new UpdateTitleVariant(this);
+            _variant.title = title;
+            return _variant;
+        }
+
+        public sealed class UpdateTitleVariant : sul.Utils.Variant
+        {
+
+            private BossBar _parent;
+
+            public string title;
+
+            public UpdateTitleVariant(BossBar parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 3;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateStyleVariant UpdateStyle(uint color, uint division)
+        {
+            var _variant = new UpdateStyleVariant(this);
+            _variant.color = color;
+            _variant.division = division;
+            return _variant;
+        }
+
+        public sealed class UpdateStyleVariant : sul.Utils.Variant
+        {
+
+            private BossBar _parent;
+
+            public uint color;
+            public uint division;
+
+            public UpdateStyleVariant(BossBar parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 4;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(color);
+                _buffer.WriteVaruint(division);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateFlagsVariant UpdateFlags(byte flags)
+        {
+            var _variant = new UpdateFlagsVariant(this);
+            _variant.flags = flags;
+            return _variant;
+        }
+
+        public sealed class UpdateFlagsVariant : sul.Utils.Variant
+        {
+
+            private BossBar _parent;
+
+            public byte flags;
+
+            public UpdateFlagsVariant(BossBar parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 5;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteUbyte(flags);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -904,12 +1119,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -955,12 +1170,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1013,12 +1228,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1068,12 +1283,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1125,12 +1340,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1180,12 +1395,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1237,12 +1452,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1296,12 +1511,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1374,12 +1589,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1433,12 +1648,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1490,12 +1705,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1545,12 +1760,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1606,12 +1821,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1665,12 +1880,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1750,12 +1965,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1809,12 +2024,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1866,12 +2081,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1943,12 +2158,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -1996,12 +2211,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2053,12 +2268,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2143,12 +2358,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2260,12 +2475,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2358,12 +2573,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2435,12 +2650,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2504,12 +2719,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2567,12 +2782,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2632,12 +2847,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2689,12 +2904,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2744,12 +2959,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2799,12 +3014,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2860,12 +3075,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2915,12 +3130,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2941,6 +3156,116 @@ namespace sul.Minecraft107.Clientbound
             ret.Decode(buffer);
             return ret;
         }
+
+        public EnterCombatVariant EnterCombat()
+        {
+            var _variant = new EnterCombatVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class EnterCombatVariant : sul.Utils.Variant
+        {
+
+            private CombatEvent _parent;
+
+
+
+            public EnterCombatVariant(CombatEvent parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.eventId = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public EndCombatVariant EndCombat(uint duration, uint entityId)
+        {
+            var _variant = new EndCombatVariant(this);
+            _variant.duration = duration;
+            _variant.entityId = entityId;
+            return _variant;
+        }
+
+        public sealed class EndCombatVariant : sul.Utils.Variant
+        {
+
+            private CombatEvent _parent;
+
+            public uint duration;
+            public uint entityId;
+
+            public EndCombatVariant(CombatEvent parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.eventId = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(duration);
+                _buffer.WriteBigEndianUint(entityId);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public EntityDeadVariant EntityDead(uint playerId, uint entityId, string message)
+        {
+            var _variant = new EntityDeadVariant(this);
+            _variant.playerId = playerId;
+            _variant.entityId = entityId;
+            _variant.message = message;
+            return _variant;
+        }
+
+        public sealed class EntityDeadVariant : sul.Utils.Variant
+        {
+
+            private CombatEvent _parent;
+
+            public uint playerId;
+            public uint entityId;
+            public string message;
+
+            public EntityDeadVariant(CombatEvent parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.eventId = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(playerId);
+                _buffer.WriteBigEndianUint(entityId);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -2966,12 +3291,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -2992,6 +3317,173 @@ namespace sul.Minecraft107.Clientbound
             ret.Decode(buffer);
             return ret;
         }
+
+        public AddPlayerVariant AddPlayer(ListAddPlayer[] players)
+        {
+            var _variant = new AddPlayerVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class AddPlayerVariant : sul.Utils.Variant
+        {
+
+            private PlayerListItem _parent;
+
+            public ListAddPlayer[] players;
+
+            public AddPlayerVariant(PlayerListItem parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (ListAddPlayer playersChild in players){ playersChild.EncodeBody(_buffer); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateGamemodeVariant UpdateGamemode(ListUpdateGamemode[] players)
+        {
+            var _variant = new UpdateGamemodeVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class UpdateGamemodeVariant : sul.Utils.Variant
+        {
+
+            private PlayerListItem _parent;
+
+            public ListUpdateGamemode[] players;
+
+            public UpdateGamemodeVariant(PlayerListItem parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (ListUpdateGamemode playersChild in players){ playersChild.EncodeBody(_buffer); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateLatencyVariant UpdateLatency(ListUpdateLatency[] players)
+        {
+            var _variant = new UpdateLatencyVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class UpdateLatencyVariant : sul.Utils.Variant
+        {
+
+            private PlayerListItem _parent;
+
+            public ListUpdateLatency[] players;
+
+            public UpdateLatencyVariant(PlayerListItem parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (ListUpdateLatency playersChild in players){ playersChild.EncodeBody(_buffer); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateDisplayNameVariant UpdateDisplayName(ListUpdateDisplayName[] players)
+        {
+            var _variant = new UpdateDisplayNameVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class UpdateDisplayNameVariant : sul.Utils.Variant
+        {
+
+            private PlayerListItem _parent;
+
+            public ListUpdateDisplayName[] players;
+
+            public UpdateDisplayNameVariant(PlayerListItem parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 3;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (ListUpdateDisplayName playersChild in players){ playersChild.EncodeBody(_buffer); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public RemovePlayerVariant RemovePlayer(System.Guid[] players)
+        {
+            var _variant = new RemovePlayerVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class RemovePlayerVariant : sul.Utils.Variant
+        {
+
+            private PlayerListItem _parent;
+
+            public System.Guid[] players;
+
+            public RemovePlayerVariant(PlayerListItem parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 4;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (System.Guid playersChild in players){ _buffer.WriteUuid(playersChild); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -3032,12 +3524,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3093,12 +3585,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3146,12 +3638,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3199,12 +3691,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3254,12 +3746,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3336,12 +3828,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3395,12 +3887,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3448,12 +3940,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3474,6 +3966,230 @@ namespace sul.Minecraft107.Clientbound
             ret.Decode(buffer);
             return ret;
         }
+
+        public SetSizeVariant SetSize(double diameter)
+        {
+            var _variant = new SetSizeVariant(this);
+            _variant.diameter = diameter;
+            return _variant;
+        }
+
+        public sealed class SetSizeVariant : sul.Utils.Variant
+        {
+
+            private WorldBorder _parent;
+
+            public double diameter;
+
+            public SetSizeVariant(WorldBorder parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteBigEndianDouble(diameter);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public LerpSizeVariant LerpSize(double oldDiameter, double newDiameter, ulong speed)
+        {
+            var _variant = new LerpSizeVariant(this);
+            _variant.oldDiameter = oldDiameter;
+            _variant.newDiameter = newDiameter;
+            _variant.speed = speed;
+            return _variant;
+        }
+
+        public sealed class LerpSizeVariant : sul.Utils.Variant
+        {
+
+            private WorldBorder _parent;
+
+            public double oldDiameter;
+            public double newDiameter;
+            public ulong speed;
+
+            public LerpSizeVariant(WorldBorder parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteBigEndianDouble(oldDiameter);
+                _buffer.WriteBigEndianDouble(newDiameter);
+                _buffer.WriteVarulong(speed);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public SetCenterVariant SetCenter(System.Tuple<double, double, double> center)
+        {
+            var _variant = new SetCenterVariant(this);
+            _variant.center = center;
+            return _variant;
+        }
+
+        public sealed class SetCenterVariant : sul.Utils.Variant
+        {
+
+            private WorldBorder _parent;
+
+            public System.Tuple<double, double, double> center;
+
+            public SetCenterVariant(WorldBorder parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteBigEndianDouble(center.Item1); _buffer.WriteBigEndianDouble(center.Item2); _buffer.WriteBigEndianDouble(center.Item3);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public InitializeVariant Initialize(System.Tuple<double, double, double> center, double oldDiameter, double newDiameter, ulong speed, uint portalTeleportBoundary, uint warningTime, uint warningBlocks)
+        {
+            var _variant = new InitializeVariant(this);
+            _variant.center = center;
+            _variant.oldDiameter = oldDiameter;
+            _variant.newDiameter = newDiameter;
+            _variant.speed = speed;
+            _variant.portalTeleportBoundary = portalTeleportBoundary;
+            _variant.warningTime = warningTime;
+            _variant.warningBlocks = warningBlocks;
+            return _variant;
+        }
+
+        public sealed class InitializeVariant : sul.Utils.Variant
+        {
+
+            private WorldBorder _parent;
+
+            public System.Tuple<double, double, double> center;
+            public double oldDiameter;
+            public double newDiameter;
+            public ulong speed;
+            public uint portalTeleportBoundary;
+            public uint warningTime;
+            public uint warningBlocks;
+
+            public InitializeVariant(WorldBorder parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 3;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteBigEndianDouble(center.Item1); _buffer.WriteBigEndianDouble(center.Item2); _buffer.WriteBigEndianDouble(center.Item3);
+                _buffer.WriteBigEndianDouble(oldDiameter);
+                _buffer.WriteBigEndianDouble(newDiameter);
+                _buffer.WriteVarulong(speed);
+                _buffer.WriteVaruint(portalTeleportBoundary);
+                _buffer.WriteVaruint(warningTime);
+                _buffer.WriteVaruint(warningBlocks);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public SetWarningTimeVariant SetWarningTime(uint warningTime)
+        {
+            var _variant = new SetWarningTimeVariant(this);
+            _variant.warningTime = warningTime;
+            return _variant;
+        }
+
+        public sealed class SetWarningTimeVariant : sul.Utils.Variant
+        {
+
+            private WorldBorder _parent;
+
+            public uint warningTime;
+
+            public SetWarningTimeVariant(WorldBorder parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 4;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(warningTime);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public SetWarningBlocksVariant SetWarningBlocks(uint warningBlocks)
+        {
+            var _variant = new SetWarningBlocksVariant(this);
+            _variant.warningBlocks = warningBlocks;
+            return _variant;
+        }
+
+        public sealed class SetWarningBlocksVariant : sul.Utils.Variant
+        {
+
+            private WorldBorder _parent;
+
+            public uint warningBlocks;
+
+            public SetWarningBlocksVariant(WorldBorder parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 5;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(warningBlocks);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -3499,12 +4215,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3550,12 +4266,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3608,12 +4324,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3663,12 +4379,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3718,12 +4434,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3773,12 +4489,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3830,12 +4546,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3889,12 +4605,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -3948,12 +4664,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4018,12 +4734,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4077,12 +4793,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4132,12 +4848,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4160,6 +4876,212 @@ namespace sul.Minecraft107.Clientbound
             ret.Decode(buffer);
             return ret;
         }
+
+        public CreateTeamVariant CreateTeam(string displayName, string prefix, string suffix, byte friendlyFlags, string nametagVisibility, string collisionRule, byte color, string[] players)
+        {
+            var _variant = new CreateTeamVariant(this);
+            _variant.displayName = displayName;
+            _variant.prefix = prefix;
+            _variant.suffix = suffix;
+            _variant.friendlyFlags = friendlyFlags;
+            _variant.nametagVisibility = nametagVisibility;
+            _variant.collisionRule = collisionRule;
+            _variant.color = color;
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class CreateTeamVariant : sul.Utils.Variant
+        {
+
+            private Teams _parent;
+
+            public string displayName;
+            public string prefix;
+            public string suffix;
+            public byte friendlyFlags;
+            public string nametagVisibility;
+            public string collisionRule;
+            public byte color;
+            public string[] players;
+
+            public CreateTeamVariant(Teams parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.mode = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(prefix)); _buffer.WriteString(prefix);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(suffix)); _buffer.WriteString(suffix);
+                _buffer.WriteUbyte(friendlyFlags);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(nametagVisibility)); _buffer.WriteString(nametagVisibility);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(collisionRule)); _buffer.WriteString(collisionRule);
+                _buffer.WriteUbyte(color);
+                _buffer.WriteVaruint(players.Length); foreach (string playersChild in players){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(playersChild)); _buffer.WriteString(playersChild); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public RemoveTeamVariant RemoveTeam()
+        {
+            var _variant = new RemoveTeamVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class RemoveTeamVariant : sul.Utils.Variant
+        {
+
+            private Teams _parent;
+
+
+
+            public RemoveTeamVariant(Teams parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.mode = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public UpdateTeamInfoVariant UpdateTeamInfo(string displayName, string prefix, string suffix, byte friendlyFlags, string nametagVisibility, string collisionRule, byte color)
+        {
+            var _variant = new UpdateTeamInfoVariant(this);
+            _variant.displayName = displayName;
+            _variant.prefix = prefix;
+            _variant.suffix = suffix;
+            _variant.friendlyFlags = friendlyFlags;
+            _variant.nametagVisibility = nametagVisibility;
+            _variant.collisionRule = collisionRule;
+            _variant.color = color;
+            return _variant;
+        }
+
+        public sealed class UpdateTeamInfoVariant : sul.Utils.Variant
+        {
+
+            private Teams _parent;
+
+            public string displayName;
+            public string prefix;
+            public string suffix;
+            public byte friendlyFlags;
+            public string nametagVisibility;
+            public string collisionRule;
+            public byte color;
+
+            public UpdateTeamInfoVariant(Teams parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.mode = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(prefix)); _buffer.WriteString(prefix);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(suffix)); _buffer.WriteString(suffix);
+                _buffer.WriteUbyte(friendlyFlags);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(nametagVisibility)); _buffer.WriteString(nametagVisibility);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(collisionRule)); _buffer.WriteString(collisionRule);
+                _buffer.WriteUbyte(color);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public AddPlayersVariant AddPlayers(string[] players)
+        {
+            var _variant = new AddPlayersVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class AddPlayersVariant : sul.Utils.Variant
+        {
+
+            private Teams _parent;
+
+            public string[] players;
+
+            public AddPlayersVariant(Teams parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.mode = 3;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (string playersChild in players){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(playersChild)); _buffer.WriteString(playersChild); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public RemovePlayersVariant RemovePlayers(string[] players)
+        {
+            var _variant = new RemovePlayersVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class RemovePlayersVariant : sul.Utils.Variant
+        {
+
+            private Teams _parent;
+
+            public string[] players;
+
+            public RemovePlayersVariant(Teams parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.mode = 4;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (string playersChild in players){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(playersChild)); _buffer.WriteString(playersChild); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -4195,12 +5117,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4252,12 +5174,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4305,12 +5227,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4358,12 +5280,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4384,6 +5306,179 @@ namespace sul.Minecraft107.Clientbound
             ret.Decode(buffer);
             return ret;
         }
+
+        public SetTitleVariant SetTitle(string text)
+        {
+            var _variant = new SetTitleVariant(this);
+            _variant.text = text;
+            return _variant;
+        }
+
+        public sealed class SetTitleVariant : sul.Utils.Variant
+        {
+
+            private Title _parent;
+
+            public string text;
+
+            public SetTitleVariant(Title parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(text)); _buffer.WriteString(text);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public SetSubtitleVariant SetSubtitle(string text)
+        {
+            var _variant = new SetSubtitleVariant(this);
+            _variant.text = text;
+            return _variant;
+        }
+
+        public sealed class SetSubtitleVariant : sul.Utils.Variant
+        {
+
+            private Title _parent;
+
+            public string text;
+
+            public SetSubtitleVariant(Title parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(text)); _buffer.WriteString(text);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public SetTimingsVariant SetTimings(uint fadeIn, uint stay, uint fadeOut)
+        {
+            var _variant = new SetTimingsVariant(this);
+            _variant.fadeIn = fadeIn;
+            _variant.stay = stay;
+            _variant.fadeOut = fadeOut;
+            return _variant;
+        }
+
+        public sealed class SetTimingsVariant : sul.Utils.Variant
+        {
+
+            private Title _parent;
+
+            public uint fadeIn;
+            public uint stay;
+            public uint fadeOut;
+
+            public SetTimingsVariant(Title parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteBigEndianUint(fadeIn);
+                _buffer.WriteBigEndianUint(stay);
+                _buffer.WriteBigEndianUint(fadeOut);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public HideVariant Hide()
+        {
+            var _variant = new HideVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class HideVariant : sul.Utils.Variant
+        {
+
+            private Title _parent;
+
+
+
+            public HideVariant(Title parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 3;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public ResetVariant Reset()
+        {
+            var _variant = new ResetVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class ResetVariant : sul.Utils.Variant
+        {
+
+            private Title _parent;
+
+
+
+            public ResetVariant(Title parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 4;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -4411,12 +5506,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4472,12 +5567,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4533,12 +5628,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4588,12 +5683,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4649,12 +5744,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4710,12 +5805,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }
@@ -4771,12 +5866,12 @@ namespace sul.Minecraft107.Clientbound
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint();
         }

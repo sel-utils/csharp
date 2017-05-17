@@ -44,12 +44,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -108,12 +108,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -161,12 +161,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -212,12 +212,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -265,12 +265,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -322,12 +322,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -381,12 +381,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -444,12 +444,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -497,12 +497,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -523,6 +523,287 @@ namespace sul.Pocket112.Play
             ret.Decode(buffer);
             return ret;
         }
+
+        public RawVariant Raw(string message)
+        {
+            var _variant = new RawVariant(this);
+            _variant.message = message;
+            return _variant;
+        }
+
+        public sealed class RawVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string message;
+
+            public RawVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public ChatVariant Chat(string sender, string message)
+        {
+            var _variant = new ChatVariant(this);
+            _variant.sender = sender;
+            _variant.message = message;
+            return _variant;
+        }
+
+        public sealed class ChatVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string sender;
+            public string message;
+
+            public ChatVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(sender)); _buffer.WriteString(sender);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public TranslationVariant Translation(string message, string[] parameters)
+        {
+            var _variant = new TranslationVariant(this);
+            _variant.message = message;
+            _variant.parameters = parameters;
+            return _variant;
+        }
+
+        public sealed class TranslationVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string message;
+            public string[] parameters;
+
+            public TranslationVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+                _buffer.WriteVaruint(parameters.Length); foreach (string parametersChild in parameters){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(parametersChild)); _buffer.WriteString(parametersChild); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public PopupVariant Popup(string title, string subtitle)
+        {
+            var _variant = new PopupVariant(this);
+            _variant.title = title;
+            _variant.subtitle = subtitle;
+            return _variant;
+        }
+
+        public sealed class PopupVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string title;
+            public string subtitle;
+
+            public PopupVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 3;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(subtitle)); _buffer.WriteString(subtitle);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public TipVariant Tip(string message)
+        {
+            var _variant = new TipVariant(this);
+            _variant.message = message;
+            return _variant;
+        }
+
+        public sealed class TipVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string message;
+
+            public TipVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 4;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public SystemVariant System(string message)
+        {
+            var _variant = new SystemVariant(this);
+            _variant.message = message;
+            return _variant;
+        }
+
+        public sealed class SystemVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string message;
+
+            public SystemVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 5;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public WhisperVariant Whisper(string sender, string message)
+        {
+            var _variant = new WhisperVariant(this);
+            _variant.sender = sender;
+            _variant.message = message;
+            return _variant;
+        }
+
+        public sealed class WhisperVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string sender;
+            public string message;
+
+            public WhisperVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 6;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(sender)); _buffer.WriteString(sender);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public AnnouncementVariant Announcement(string announcer, string message)
+        {
+            var _variant = new AnnouncementVariant(this);
+            _variant.announcer = announcer;
+            _variant.message = message;
+            return _variant;
+        }
+
+        public sealed class AnnouncementVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string announcer;
+            public string message;
+
+            public AnnouncementVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 7;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(announcer)); _buffer.WriteString(announcer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -548,12 +829,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -668,12 +949,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -783,12 +1064,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -872,12 +1153,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -941,12 +1222,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1002,12 +1283,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1069,12 +1350,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1128,12 +1409,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1193,12 +1474,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1280,12 +1561,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1349,12 +1630,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1400,12 +1681,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1461,12 +1742,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1524,12 +1805,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1587,12 +1868,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1760,12 +2041,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1878,12 +2159,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -1935,12 +2216,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2008,12 +2289,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2078,12 +2359,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2141,12 +2422,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2202,12 +2483,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2263,12 +2544,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2324,12 +2605,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2379,12 +2660,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2444,12 +2725,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2529,12 +2810,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2590,12 +2871,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2645,12 +2926,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2698,12 +2979,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2753,12 +3034,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2815,12 +3096,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2870,12 +3151,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2925,12 +3206,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -2988,12 +3269,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3043,12 +3324,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3099,12 +3380,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3158,12 +3439,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3221,12 +3502,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3278,12 +3559,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3337,12 +3618,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3400,12 +3681,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3461,12 +3742,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3518,12 +3799,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3577,12 +3858,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3657,12 +3938,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3712,12 +3993,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3769,12 +4050,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3826,12 +4107,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3879,12 +4160,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3936,12 +4217,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -3996,12 +4277,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4056,12 +4337,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4107,12 +4388,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4133,6 +4414,74 @@ namespace sul.Pocket112.Play
             ret.Decode(buffer);
             return ret;
         }
+
+        public AddVariant Add(PlayerList[] players)
+        {
+            var _variant = new AddVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class AddVariant : sul.Utils.Variant
+        {
+
+            private PlayerList _parent;
+
+            public PlayerList[] players;
+
+            public AddVariant(PlayerList parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 0;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (PlayerList playersChild in players){ playersChild.EncodeBody(_buffer); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public RemoveVariant Remove(McpeUuid[] players)
+        {
+            var _variant = new RemoveVariant(this);
+            _variant.players = players;
+            return _variant;
+        }
+
+        public sealed class RemoveVariant : sul.Utils.Variant
+        {
+
+            private PlayerList _parent;
+
+            public McpeUuid[] players;
+
+            public RemoveVariant(PlayerList parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.action = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(players.Length); foreach (McpeUuid playersChild in players){ playersChild.EncodeBody(_buffer); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
 
     }
 
@@ -4156,12 +4505,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4209,12 +4558,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4264,12 +4613,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4334,12 +4683,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4397,12 +4746,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4448,12 +4797,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4499,12 +4848,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4552,12 +4901,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4605,12 +4954,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4656,12 +5005,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4709,12 +5058,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4762,12 +5111,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4820,12 +5169,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4879,12 +5228,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -4934,12 +5283,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5001,12 +5350,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5084,12 +5433,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5169,12 +5518,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5234,12 +5583,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5293,12 +5642,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5358,12 +5707,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5417,12 +5766,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5472,12 +5821,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5531,12 +5880,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5590,12 +5939,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5659,12 +6008,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5716,12 +6065,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5765,12 +6114,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5814,12 +6163,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -5863,12 +6212,12 @@ namespace sul.Pocket112.Play
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }

@@ -42,12 +42,12 @@ namespace sul.Externalconsole1.Connected
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -99,12 +99,12 @@ namespace sul.Externalconsole1.Connected
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -148,12 +148,12 @@ namespace sul.Externalconsole1.Connected
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }

@@ -39,9 +39,9 @@ namespace sul.Utils
             return this;
         }
 
-        protected abstract void EncodeId(Buffer buffer);
+        public abstract void EncodeId(Buffer buffer);
 
-        protected abstract void DecodeId(Buffer buffer);
+        public abstract void DecodeId(Buffer buffer);
 
     }
 

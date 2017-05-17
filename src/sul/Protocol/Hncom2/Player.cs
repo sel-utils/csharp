@@ -83,12 +83,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -142,6 +142,119 @@ namespace sul.Hncom2.Player
             return ret;
         }
 
+        public PocketVariant Pocket(long xuid, bool edu, float packetLoss, byte deviceOs, string deviceModel)
+        {
+            var _variant = new PocketVariant(this);
+            _variant.xuid = xuid;
+            _variant.edu = edu;
+            _variant.packetLoss = packetLoss;
+            _variant.deviceOs = deviceOs;
+            _variant.deviceModel = deviceModel;
+            return _variant;
+        }
+
+        public sealed class PocketVariant : sul.Utils.Variant
+        {
+
+            private Add _parent;
+
+            public long xuid;
+            public bool edu;
+            public float packetLoss;
+            public byte deviceOs;
+            public string deviceModel;
+
+            public PocketVariant(Add parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 1;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVarlong(xuid);
+                _buffer.WriteBool(edu);
+                _buffer.WriteBigEndianFloat(packetLoss);
+                _buffer.WriteUbyte(deviceOs);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(deviceModel)); _buffer.WriteString(deviceModel);
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public MinecraftVariant Minecraft(Property[] properties)
+        {
+            var _variant = new MinecraftVariant(this);
+            _variant.properties = properties;
+            return _variant;
+        }
+
+        public sealed class MinecraftVariant : sul.Utils.Variant
+        {
+
+            private Add _parent;
+
+            public Property[] properties;
+
+            public MinecraftVariant(Add parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 2;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(properties.Length); foreach (Property propertiesChild in properties){ propertiesChild.EncodeBody(_buffer); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+        public ConsoleVariant Console()
+        {
+            var _variant = new ConsoleVariant(this);
+
+            return _variant;
+        }
+
+        public sealed class ConsoleVariant : sul.Utils.Variant
+        {
+
+            private Add _parent;
+
+
+
+            public ConsoleVariant(Add parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 3;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
+
+
     }
 
     public class Remove : sul.Utils.Packet
@@ -174,12 +287,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -233,12 +346,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -299,12 +412,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -356,12 +469,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -411,12 +524,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -466,12 +579,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -521,12 +634,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -576,12 +689,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -636,12 +749,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -691,12 +804,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -746,12 +859,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -801,12 +914,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
@@ -858,12 +971,12 @@ namespace sul.Hncom2.Player
             return (int)Id;
         }
 
-        protected override void EncodeId(sul.Utils.Buffer _buffer)
+        public override void EncodeId(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(Id);
         }
 
-        protected override void DecodeId(sul.Utils.Buffer _buffer)
+        public override void DecodeId(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte();
         }
