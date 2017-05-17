@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Raknet8.Types;
+using sul.Protocol.Raknet8.Types;
 
-namespace sul.Raknet8.Unconnected
+namespace sul.Protocol.Raknet8.Unconnected
 {
 
     public class Ping : sul.Utils.Packet

@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Minecraft316.Types;
+using sul.Protocol.Minecraft316.Types;
 
-namespace sul.Minecraft316.Status
+namespace sul.Protocol.Minecraft316.Status
 {
 
     public class Handshake : sul.Utils.Packet

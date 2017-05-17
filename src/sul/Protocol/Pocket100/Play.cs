@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Pocket100.Types;
+using sul.Protocol.Pocket100.Types;
 
-namespace sul.Pocket100.Play
+namespace sul.Protocol.Pocket100.Play
 {
 
     public class Login : sul.Utils.Packet

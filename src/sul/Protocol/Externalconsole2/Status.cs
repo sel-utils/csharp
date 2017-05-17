@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Externalconsole2.Types;
+using sul.Protocol.Externalconsole2.Types;
 
-namespace sul.Externalconsole2.Status
+namespace sul.Protocol.Externalconsole2.Status
 {
 
     public class KeepAlive : sul.Utils.Packet

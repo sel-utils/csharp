@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Hncom1.Types
+namespace sul.Protocol.Hncom1.Types
 {
 
     public class Address : sul.Utils.Stream

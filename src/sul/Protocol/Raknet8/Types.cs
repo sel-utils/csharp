@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Raknet8.Types
+namespace sul.Protocol.Raknet8.Types
 {
 
     public class Address : sul.Utils.Stream

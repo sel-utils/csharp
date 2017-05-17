@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Minecraft107.Types;
+using sul.Protocol.Minecraft107.Types;
 
-namespace sul.Minecraft107.Clientbound
+namespace sul.Protocol.Minecraft107.Clientbound
 {
 
     public class SpawnObject : sul.Utils.Packet

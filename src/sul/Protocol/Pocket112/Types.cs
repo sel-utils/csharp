@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Pocket112.Types
+namespace sul.Protocol.Pocket112.Types
 {
 
     public class LoginBody : sul.Utils.LengthPrefixedType

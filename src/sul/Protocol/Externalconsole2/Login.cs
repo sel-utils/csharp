@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Externalconsole2.Types;
+using sul.Protocol.Externalconsole2.Types;
 
-namespace sul.Externalconsole2.Login
+namespace sul.Protocol.Externalconsole2.Login
 {
 
     public class AuthCredentials : sul.Utils.Packet

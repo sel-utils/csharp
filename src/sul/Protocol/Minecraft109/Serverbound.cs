@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Minecraft109.Types;
+using sul.Protocol.Minecraft109.Types;
 
-namespace sul.Minecraft109.Serverbound
+namespace sul.Protocol.Minecraft109.Serverbound
 {
 
     public class TeleportConfirm : sul.Utils.Packet

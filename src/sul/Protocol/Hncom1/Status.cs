@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Hncom1.Types;
+using sul.Protocol.Hncom1.Types;
 
-namespace sul.Hncom1.Status
+namespace sul.Protocol.Hncom1.Status
 {
 
     public class AddNode : sul.Utils.Packet

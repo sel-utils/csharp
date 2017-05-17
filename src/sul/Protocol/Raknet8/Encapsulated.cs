@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Raknet8.Types;
+using sul.Protocol.Raknet8.Types;
 
-namespace sul.Raknet8.Encapsulated
+namespace sul.Protocol.Raknet8.Encapsulated
 {
 
     public class ClientConnect : sul.Utils.Packet

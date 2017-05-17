@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Externalconsole2.Types;
+using sul.Protocol.Externalconsole2.Types;
 
-namespace sul.Externalconsole2.Connected
+namespace sul.Protocol.Externalconsole2.Connected
 {
 
     public class ConsoleMessage : sul.Utils.Packet

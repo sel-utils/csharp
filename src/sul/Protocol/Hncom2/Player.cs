@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Hncom2.Types;
+using sul.Protocol.Hncom2.Types;
 
-namespace sul.Hncom2.Player
+namespace sul.Protocol.Hncom2.Player
 {
 
     public class Add : sul.Utils.Packet

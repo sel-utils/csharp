@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Pocket101.Types
+namespace sul.Protocol.Pocket101.Types
 {
 
     public class PackWithSize : sul.Utils.Stream

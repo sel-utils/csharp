@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Raknet8.Types;
+using sul.Protocol.Raknet8.Types;
 
-namespace sul.Raknet8.Control
+namespace sul.Protocol.Raknet8.Control
 {
 
     public class Ack : sul.Utils.Packet

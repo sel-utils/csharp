@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Minecraft108.Types;
+using sul.Protocol.Minecraft108.Types;
 
-namespace sul.Minecraft108.Login
+namespace sul.Protocol.Minecraft108.Login
 {
 
     public class Disconnect : sul.Utils.Packet

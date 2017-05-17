@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Hncom1.Types;
+using sul.Protocol.Hncom1.Types;
 
-namespace sul.Hncom1.Login
+namespace sul.Protocol.Hncom1.Login
 {
 
     public class ConnectionRequest : sul.Utils.Packet

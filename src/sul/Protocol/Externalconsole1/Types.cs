@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Externalconsole1.Types
+namespace sul.Protocol.Externalconsole1.Types
 {
 
     public class Game : sul.Utils.Stream

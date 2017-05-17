@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Minecraft109.Types
+namespace sul.Protocol.Minecraft109.Types
 {
 
     public class Statistic : sul.Utils.Stream
