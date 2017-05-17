@@ -1691,42 +1691,52 @@ namespace sul.Pocket112.Play
         public const byte ITEM_FIZZ = 59;
         public const byte CHEST_OPEN = 60;
         public const byte CHEST_CLOSED = 61;
-        public const byte POWER_ON = 62;
-        public const byte POWER_OFF = 63;
-        public const byte ATTACH = 64;
-        public const byte DETACH = 65;
-        public const byte DENY = 66;
-        public const byte TRIPOD = 67;
-        public const byte POP = 68;
-        public const byte DROP_SLOT = 69;
-        public const byte NOTE = 70;
-        public const byte THORNS = 71;
-        public const byte PISTON_IN = 72;
-        public const byte PISTON_OUT = 73;
-        public const byte PORTAL = 74;
-        public const byte WATER = 75;
-        public const byte LAVA_POP = 76;
-        public const byte LAVA = 77;
-        public const byte BURP = 78;
-        public const byte BUCKET_FILL_WATER = 79;
-        public const byte BUCKET_FILL_LAVA = 80;
-        public const byte BUCKET_EMPTY_WATER = 81;
-        public const byte BUCKET_EMPTY_LAVA = 82;
-        public const byte GUARDIAN_FLOP = 83;
-        public const byte ELDERGUARDIAN_CURSE = 84;
-        public const byte MOB_WARNING = 85;
-        public const byte MOB_WARNING_BABY = 86;
-        public const byte TELEPORT = 87;
-        public const byte SHULKER_OPEN = 88;
-        public const byte SHULKER_CLOSE = 89;
-        public const byte HAGGLE = 90;
-        public const byte HAGGLE_YES = 91;
-        public const byte HAGGLE_NO = 92;
-        public const byte HAGGLE_IDLE = 93;
-        public const byte CHORUS_GROW = 94;
-        public const byte CHORUS_DEATH = 95;
-        public const byte DEFAULT = 96;
-        public const byte UNDEFINED = 97;
+        public const byte SHULKER_BOX_OPEN = 62;
+        public const byte SHULKER_BOX_CLOSE = 63;
+        public const byte POWER_ON = 64;
+        public const byte POWER_OFF = 65;
+        public const byte ATTACH = 66;
+        public const byte DETACH = 67;
+        public const byte DENY = 68;
+        public const byte TRIPOD = 69;
+        public const byte POP = 70;
+        public const byte DROP_SLOT = 71;
+        public const byte NOTE = 72;
+        public const byte THORNS = 73;
+        public const byte PISTON_IN = 74;
+        public const byte PISTON_OUT = 75;
+        public const byte PORTAL = 76;
+        public const byte WATER = 77;
+        public const byte LAVA_POP = 78;
+        public const byte LAVA = 79;
+        public const byte BURP = 80;
+        public const byte BUCKET_FILL_WATER = 81;
+        public const byte BUCKET_FILL_LAVA = 82;
+        public const byte BUCKET_EMPTY_WATER = 83;
+        public const byte BUCKET_EMPTY_LAVA = 84;
+        public const byte GUARDIAN_FLOP = 85;
+        public const byte ELDERGUARDIAN_CURSE = 86;
+        public const byte MOB_WARNING = 87;
+        public const byte MOB_WARNING_BABY = 88;
+        public const byte TELEPORT = 89;
+        public const byte SHULKER_OPEN = 90;
+        public const byte SHULKER_CLOSE = 91;
+        public const byte HAGGLE = 92;
+        public const byte HAGGLE_YES = 93;
+        public const byte HAGGLE_NO = 94;
+        public const byte HAGGLE_IDLE = 95;
+        public const byte CHORUS_GROW = 96;
+        public const byte CHORUS_DEATH = 97;
+        public const byte GLASS = 98;
+        public const byte CAST_SPELL = 99;
+        public const byte PREPARE_ATTACK = 100;
+        public const byte PREPARE_SUMMON = 101;
+        public const byte PREPARE_WOLOLO = 102;
+        public const byte FANG = 103;
+        public const byte CHARGE = 104;
+        public const byte TAKE_PICTURE = 105;
+        public const byte DEFAULT = 106;
+        public const byte UNDEFINED = 107;
 
         public byte sound;
         public System.Tuple<float, float, float> position;
@@ -5501,19 +5511,19 @@ namespace sul.Pocket112.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public string unknown0;
+        public string name;
         public BlockPosition position;
-        public float unknown2;
-        public float unknown3;
+        public float volume;
+        public float pitch;
 
         public PlaySound() : this("", new BlockPosition(), 0, 0) {}
 
-        public PlaySound(string unknown0, BlockPosition position, float unknown2, float unknown3)
+        public PlaySound(string name, BlockPosition position, float volume, float pitch)
         {
-            this.unknown0 = unknown0;
+            this.name = name;
             this.position = position;
-            this.unknown2 = unknown2;
-            this.unknown3 = unknown3;
+            this.volume = volume;
+            this.pitch = pitch;
         }
 
         public override int GetId()
@@ -5533,18 +5543,18 @@ namespace sul.Pocket112.Play
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown0)); _buffer.WriteString(unknown0);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             position.EncodeBody(_buffer);
-            _buffer.WriteLittleEndianFloat(unknown2);
-            _buffer.WriteLittleEndianFloat(unknown3);
+            _buffer.WriteLittleEndianFloat(volume);
+            _buffer.WriteLittleEndianFloat(pitch);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadString();
+            //name = _buffer.ReadString();
             //position.DecodeBody(_buffer);
-            //unknown2 = _buffer.ReadLittleEndianFloat();
-            //unknown3 = _buffer.ReadLittleEndianFloat();
+            //volume = _buffer.ReadLittleEndianFloat();
+            //pitch = _buffer.ReadLittleEndianFloat();
         }
 
         public static PlaySound FromBuffer(byte[] buffer)
@@ -5564,15 +5574,15 @@ namespace sul.Pocket112.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public string unknown0;
-        public bool unknown1;
+        public string name;
+        public bool stopAll;
 
         public StopSound() : this("", false) {}
 
-        public StopSound(string unknown0, bool unknown1)
+        public StopSound(string name, bool stopAll)
         {
-            this.unknown0 = unknown0;
-            this.unknown1 = unknown1;
+            this.name = name;
+            this.stopAll = stopAll;
         }
 
         public override int GetId()
@@ -5592,14 +5602,14 @@ namespace sul.Pocket112.Play
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown0)); _buffer.WriteString(unknown0);
-            _buffer.WriteBool(unknown1);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
+            _buffer.WriteBool(stopAll);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadString();
-            //unknown1 = _buffer.ReadBool();
+            //name = _buffer.ReadString();
+            //stopAll = _buffer.ReadBool();
         }
 
         public static StopSound FromBuffer(byte[] buffer)
