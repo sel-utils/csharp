@@ -563,31 +563,44 @@ namespace sul.Protocol.Pocket112.Types
         public const string PVP = "pvp";
         public const string SEND_COMMAND_FEEDBACK = "sendcommandfeedback";
 
+        // type
+        public const byte BOOLEAN = 1;
+        public const byte INTEGER = 2;
+        public const byte FLOATING = 3;
+
         public string name;
-        public bool @value;
-        public bool unknown2;
+        public byte type;
+        public bool booleanValue;
+        public int integerValue;
+        public float floatingValue;
 
-        public Rule() : this("", false, false) {}
+        public Rule() : this("", 0, false, 0, 0) {}
 
-        public Rule(string name, bool @value, bool unknown2)
+        public Rule(string name, byte type, bool booleanValue, int integerValue, float floatingValue)
         {
             this.name = name;
-            this.@value = @value;
-            this.unknown2 = unknown2;
+            this.type = type;
+            this.booleanValue = booleanValue;
+            this.integerValue = integerValue;
+            this.floatingValue = floatingValue;
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
-            _buffer.WriteBool(@value);
-            _buffer.WriteBool(unknown2);
+            _buffer.WriteUbyte(type);
+            if(type==1){ _buffer.WriteBool(booleanValue); }
+            if(type==2){ _buffer.WriteBigEndianInt(integerValue); }
+            if(type==3){ _buffer.WriteLittleEndianFloat(floatingValue); }
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //name = _buffer.ReadString();
-            //@value = _buffer.ReadBool();
-            //unknown2 = _buffer.ReadBool();
+            //type = _buffer.ReadUbyte();
+            //if(type==1){ booleanValue = _buffer.ReadBool(); }
+            //if(type==2){ integerValue = _buffer.ReadBigEndianInt(); }
+            //if(type==3){ floatingValue = _buffer.ReadLittleEndianFloat(); }
         }
 
     }

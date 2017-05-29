@@ -3188,17 +3188,21 @@ namespace sul.Protocol.Pocket112.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public int unknown0;
+        // type
+        public const int PLAYER_SPAWN = 0;
+        public const int WORLD_SPAWN = 1;
+
+        public int type;
         public BlockPosition position;
-        public bool unknown2;
+        public bool forced;
 
         public SetSpawnPosition() : this(0, new BlockPosition(), false) {}
 
-        public SetSpawnPosition(int unknown0, BlockPosition position, bool unknown2)
+        public SetSpawnPosition(int type, BlockPosition position, bool forced)
         {
-            this.unknown0 = unknown0;
+            this.type = type;
             this.position = position;
-            this.unknown2 = unknown2;
+            this.forced = forced;
         }
 
         public override int GetId()
@@ -3218,16 +3222,16 @@ namespace sul.Protocol.Pocket112.Play
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVarint(unknown0);
+            _buffer.WriteVarint(type);
             position.EncodeBody(_buffer);
-            _buffer.WriteBool(unknown2);
+            _buffer.WriteBool(forced);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadVarint();
+            //type = _buffer.ReadVarint();
             //position.DecodeBody(_buffer);
-            //unknown2 = _buffer.ReadBool();
+            //forced = _buffer.ReadBool();
         }
 
         public static SetSpawnPosition FromBuffer(byte[] buffer)
