@@ -61,11 +61,15 @@ namespace sul.Utils
 
         public void WriteBigEndianShort(short value) {}
 
-        public void WriteLittleEndianShort(short value) {}
+        public void WriteLittleEndianShort(short value) {
+            this.writer.Write(value);
+        }
 
         public void WriteBigEndianUshort(ushort value) {}
 
-        public void WriteLittleEndianUshort(ushort value) {}
+        public void WriteLittleEndianUshort(ushort value) {
+            this.writer.Write(value);
+        }
 
         public void WriteBigEndianUshort(int value)
         {
@@ -83,11 +87,15 @@ namespace sul.Utils
 
         public void WriteBigEndianInt(int value) {}
 
-        public void WriteLittleEndianInt(int value) {}
+        public void WriteLittleEndianInt(int value) {
+            this.writer.Write(value);
+        }
 
         public void WriteBigEndianUint(uint value) {}
 
-        public void WriteLittleEndianUint(uint value) {}
+        public void WriteLittleEndianUint(uint value) {
+            this.writer.Write(value);
+        }
 
         public void WriteBigEndianUint(int value)
         {
@@ -161,6 +169,11 @@ namespace sul.Utils
         public uint ReadVaruint()
         {
             return 0; //TODO
+        }
+
+        public Guid readUuid()
+        {
+            return Guid(ReadBytes(16));
         }
 
         //
