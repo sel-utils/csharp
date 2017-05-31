@@ -24,13 +24,15 @@ namespace sul.Protocol.Raknet8.Unconnected
 
         public long pingId;
         public byte[] magic;
+        public long guid;
 
-        public Ping() : this(0, new byte[16]) {}
+        public Ping() : this(0, new byte[16], 0) {}
 
-        public Ping(long pingId, byte[] magic)
+        public Ping(long pingId, byte[] magic, long guid)
         {
             this.pingId = pingId;
             this.magic = magic;
+            this.guid = guid;
         }
 
         public override int GetId()
@@ -52,12 +54,14 @@ namespace sul.Protocol.Raknet8.Unconnected
         {
             _buffer.WriteBigEndianLong(pingId);
             foreach (byte magicChild in magic){ _buffer.WriteUbyte(magicChild); }
+            _buffer.WriteBigEndianLong(guid);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //pingId = _buffer.ReadBigEndianLong();
             //magic.DecodeBody(_buffer);
+            //guid = _buffer.ReadBigEndianLong();
         }
 
         public static Ping FromBuffer(byte[] buffer)
