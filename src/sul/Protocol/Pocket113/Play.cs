@@ -914,10 +914,12 @@ namespace sul.Protocol.Pocket113.Play
         public string levelId;
         public string worldName;
         public string premiumWorldTemplate;
+        public bool unknown23;
+        public ulong worldTicks;
 
-        public StartGame() : this(0, 0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, false, false, new Rule[]{}, "", "", "") {}
+        public StartGame() : this(0, 0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, false, false, new Rule[]{}, "", "", "", false, 0) {}
 
-        public StartGame(long entityId, long runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, Rule[] gameRules, string levelId, string worldName, string premiumWorldTemplate)
+        public StartGame(long entityId, long runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, Rule[] gameRules, string levelId, string worldName, string premiumWorldTemplate, bool unknown23, ulong worldTicks)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -942,6 +944,8 @@ namespace sul.Protocol.Pocket113.Play
             this.levelId = levelId;
             this.worldName = worldName;
             this.premiumWorldTemplate = premiumWorldTemplate;
+            this.unknown23 = unknown23;
+            this.worldTicks = worldTicks;
         }
 
         public override int GetId()
@@ -984,6 +988,8 @@ namespace sul.Protocol.Pocket113.Play
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(levelId)); _buffer.WriteString(levelId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(worldName)); _buffer.WriteString(worldName);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(premiumWorldTemplate)); _buffer.WriteString(premiumWorldTemplate);
+            _buffer.WriteBool(unknown23);
+            _buffer.WriteLittleEndianUlong(worldTicks);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
@@ -1011,6 +1017,8 @@ namespace sul.Protocol.Pocket113.Play
             //levelId = _buffer.ReadString();
             //worldName = _buffer.ReadString();
             //premiumWorldTemplate = _buffer.ReadString();
+            //unknown23 = _buffer.ReadBool();
+            //worldTicks = _buffer.ReadLittleEndianUlong();
         }
 
         public static StartGame FromBuffer(byte[] buffer)
