@@ -65,11 +65,11 @@ namespace sul.Protocol.Externalconsole2.Connected
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //node = _buffer.ReadString();
-            //timestamp = _buffer.ReadBigEndianUlong();
-            //logger = _buffer.ReadString();
-            //message = _buffer.ReadString();
-            //commandId = _buffer.ReadBigEndianInt();
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianUlong()
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianInt()
         }
 
         public static ConsoleMessage FromBuffer(byte[] buffer)
@@ -123,8 +123,8 @@ namespace sul.Protocol.Externalconsole2.Connected
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //command = _buffer.ReadString();
-            //commandId = _buffer.ReadBigEndianUint();
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianUint()
         }
 
         public static Command FromBuffer(byte[] buffer)

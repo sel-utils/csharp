@@ -37,7 +37,7 @@ namespace sul.Protocol.Externalconsole2.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //protocols.DecodeBody(_buffer);
         }
 
@@ -71,10 +71,10 @@ namespace sul.Protocol.Externalconsole2.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
-            //tps = _buffer.ReadBigEndianFloat();
-            //ram = _buffer.ReadBigEndianUlong();
-            //cpu = _buffer.ReadBigEndianFloat();
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBigEndianUlong()
+            //_buffer.ReadBigEndianFloat()
         }
 
     }
