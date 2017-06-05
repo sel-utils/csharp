@@ -32,7 +32,7 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override int DecodeLength(sul.Utils.Buffer _buffer)
         {
-            return (int)_buffer.ReadVaruint()
+            return (int)_buffer.ReadVaruint();
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -414,7 +414,7 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override int DecodeLength(sul.Utils.Buffer _buffer)
         {
-            return (int)_buffer.ReadVaruint()
+            return (int)_buffer.ReadVaruint();
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
