@@ -61,7 +61,7 @@ namespace sul.Protocol.Hncom2.Panel
         {
             //hash.DecodeBody(_buffer);
             //address.DecodeBody(_buffer);
-            //worldId = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static Connection FromBuffer(byte[] buffer)

@@ -102,16 +102,16 @@ namespace sul.Protocol.Hncom2.World
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //worldId = _buffer.ReadVaruint();
-            //name = _buffer.ReadString();
-            //dimension = _buffer.ReadUbyte();
-            //generator = _buffer.ReadUbyte();
-            //difficulty = _buffer.ReadUbyte();
-            //gamemode = _buffer.ReadUbyte();
-            //spawnPoint.Item1 = _buffer.ReadVarint(); spawnPoint.Item2 = _buffer.ReadVarint();
-            //time = _buffer.ReadBigEndianShort();
-            //seed = _buffer.ReadVarint();
-            //parent = _buffer.ReadVarint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint() _buffer.ReadVarint()
+            //_buffer.ReadBigEndianShort()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
         }
 
         public static Add FromBuffer(byte[] buffer)
@@ -162,7 +162,7 @@ namespace sul.Protocol.Hncom2.World
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //worldId = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static Remove FromBuffer(byte[] buffer)
@@ -216,8 +216,8 @@ namespace sul.Protocol.Hncom2.World
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //worldId = _buffer.ReadVaruint();
-            //difficulty = _buffer.ReadUbyte();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadUbyte()
         }
 
         public static UpdateDifficulty FromBuffer(byte[] buffer)
@@ -271,8 +271,8 @@ namespace sul.Protocol.Hncom2.World
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //worldId = _buffer.ReadVaruint();
-            //gamemode = _buffer.ReadUbyte();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadUbyte()
         }
 
         public static UpdateGamemode FromBuffer(byte[] buffer)
@@ -341,13 +341,13 @@ namespace sul.Protocol.Hncom2.World
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
-            //dimension = _buffer.ReadUbyte();
-            //generator = _buffer.ReadUbyte();
-            //difficulty = _buffer.ReadUbyte();
-            //gamemode = _buffer.ReadUbyte();
-            //seed = _buffer.ReadVarint();
-            //parent = _buffer.ReadVarint();
+            //_buffer.ReadString()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
         }
 
         public static RequestCreation FromBuffer(byte[] buffer)
