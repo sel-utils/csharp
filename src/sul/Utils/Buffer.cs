@@ -177,7 +177,7 @@ namespace sul.Utils
 
         public System.Guid readUuid()
         {
-            return System.Guid(ReadBytes(16));
+            return new System.Guid(ReadBytes(16));
         }
 
         //
