@@ -107,8 +107,8 @@ namespace sul.Protocol.Hncom2.Util
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //size = _buffer.ReadVaruint();
-            //payload = _buffer.ReadBytes();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBytes()
         }
 
         public static Compressed FromBuffer(byte[] buffer)

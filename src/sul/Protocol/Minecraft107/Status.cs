@@ -66,10 +66,10 @@ namespace sul.Protocol.Minecraft107.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //protocol = _buffer.ReadVaruint();
-            //serverAddress = _buffer.ReadString();
-            //serverPort = _buffer.ReadBigEndianUshort();
-            //next = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadVaruint()
         }
 
         public static Handshake FromBuffer(byte[] buffer)
@@ -169,7 +169,7 @@ namespace sul.Protocol.Minecraft107.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //json = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static Response FromBuffer(byte[] buffer)
@@ -220,7 +220,7 @@ namespace sul.Protocol.Minecraft107.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
         }
 
         public static Latency FromBuffer(byte[] buffer)

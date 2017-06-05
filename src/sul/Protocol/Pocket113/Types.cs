@@ -32,7 +32,7 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override int DecodeLength(sul.Utils.Buffer _buffer)
         {
-            return (int)_buffer.ReadVaruint();
+            return (int)_buffer.ReadVaruint()
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -74,9 +74,9 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadString();
-            //version = _buffer.ReadString();
-            //size = _buffer.ReadLittleEndianUlong();
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadLittleEndianUlong()
         }
 
     }
@@ -103,8 +103,8 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadString();
-            //version = _buffer.ReadString();
+            //_buffer.ReadString()
+            //_buffer.ReadString()
         }
 
     }
@@ -140,8 +140,8 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadVarint();
-            //if(id>0){ metaAndCount = _buffer.ReadVarint(); }
+            //_buffer.ReadVarint()
+            //if(id>0){ _buffer.ReadVarint() }
             //if(id>0){ nbt.DecodeBody(_buffer); }
             //canPlaceOn.DecodeBody(_buffer);
             //canDestroy.DecodeBody(_buffer);
@@ -180,11 +180,11 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //min = _buffer.ReadLittleEndianFloat();
-            //max = _buffer.ReadLittleEndianFloat();
-            //@value = _buffer.ReadLittleEndianFloat();
-            //@default = _buffer.ReadLittleEndianFloat();
-            //name = _buffer.ReadString();
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadString()
         }
 
     }
@@ -214,9 +214,9 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //x = _buffer.ReadVarint();
-            //y = _buffer.ReadVaruint();
-            //z = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVarint()
         }
 
     }
@@ -243,8 +243,8 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //mostSignificantBits = _buffer.ReadLittleEndianLong();
-            //leastSignificantBits = _buffer.ReadLittleEndianLong();
+            //_buffer.ReadLittleEndianLong()
+            //_buffer.ReadLittleEndianLong()
         }
 
     }
@@ -271,7 +271,7 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
+            //_buffer.ReadString()
             //data.DecodeBody(_buffer);
         }
 
@@ -306,8 +306,8 @@ namespace sul.Protocol.Pocket113.Types
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //uuid.DecodeBody(_buffer);
-            //entityId = _buffer.ReadVarlong();
-            //displayName = _buffer.ReadString();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadString()
             //skin.DecodeBody(_buffer);
         }
 
@@ -343,9 +343,9 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //from = _buffer.ReadVarlong();
-            //to = _buffer.ReadVarlong();
-            //action = _buffer.ReadUbyte();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadUbyte()
         }
 
     }
@@ -379,8 +379,8 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadVarint();
-            //data = _buffer.ReadBytes();
+            //_buffer.ReadVarint()
+            //_buffer.ReadBytes()
         }
 
     }
@@ -414,7 +414,7 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override int DecodeLength(sul.Utils.Buffer _buffer)
         {
-            return (int)_buffer.ReadVaruint();
+            return (int)_buffer.ReadVaruint()
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -434,7 +434,7 @@ namespace sul.Protocol.Pocket113.Types
             //biomes.DecodeBody(_buffer);
             //borders.DecodeBody(_buffer);
             //extraData.DecodeBody(_buffer);
-            //blockEntities = _buffer.ReadBytes();
+            //_buffer.ReadBytes()
         }
 
     }
@@ -470,7 +470,7 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //storageVersion = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //blockIds.DecodeBody(_buffer);
             //blockMetas.DecodeBody(_buffer);
             //skyLight.DecodeBody(_buffer);
@@ -501,8 +501,8 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //key = _buffer.ReadVaruint();
-            //@value = _buffer.ReadLittleEndianUshort();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadLittleEndianUshort()
         }
 
     }
@@ -535,10 +535,10 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //rotationAndIcon = _buffer.ReadVarint();
-            //position.Item1 = _buffer.ReadUbyte(); position.Item2 = _buffer.ReadUbyte();
-            //label = _buffer.ReadString();
-            //color = _buffer.ReadLittleEndianUint();
+            //_buffer.ReadVarint()
+            //_buffer.ReadUbyte() _buffer.ReadUbyte()
+            //_buffer.ReadString()
+            //_buffer.ReadLittleEndianUint()
         }
 
     }
@@ -596,11 +596,11 @@ namespace sul.Protocol.Pocket113.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
-            //type = _buffer.ReadUbyte();
-            //if(type==1){ booleanValue = _buffer.ReadBool(); }
-            //if(type==2){ integerValue = _buffer.ReadBigEndianInt(); }
-            //if(type==3){ floatingValue = _buffer.ReadLittleEndianFloat(); }
+            //_buffer.ReadString()
+            //_buffer.ReadUbyte()
+            //if(type==1){ _buffer.ReadBool() }
+            //if(type==2){ _buffer.ReadBigEndianInt() }
+            //if(type==3){ _buffer.ReadLittleEndianFloat() }
         }
 
     }

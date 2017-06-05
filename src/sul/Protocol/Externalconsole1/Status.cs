@@ -53,7 +53,7 @@ namespace sul.Protocol.Externalconsole1.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //count = _buffer.ReadBigEndianUint();
+            //_buffer.ReadBigEndianUint()
         }
 
         public static KeepAlive FromBuffer(byte[] buffer)
@@ -111,8 +111,8 @@ namespace sul.Protocol.Externalconsole1.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadUbyte();
-            //node = _buffer.ReadString();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadString()
         }
 
         public static UpdateNodes FromBuffer(byte[] buffer)
@@ -227,11 +227,11 @@ namespace sul.Protocol.Externalconsole1.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //onlinePlayers = _buffer.ReadBigEndianUint();
-            //maxPlayers = _buffer.ReadBigEndianUint();
-            //uptime = _buffer.ReadBigEndianUint();
-            //upload = _buffer.ReadBigEndianUint();
-            //download = _buffer.ReadBigEndianUint();
+            //_buffer.ReadBigEndianUint()
+            //_buffer.ReadBigEndianUint()
+            //_buffer.ReadBigEndianUint()
+            //_buffer.ReadBigEndianUint()
+            //_buffer.ReadBigEndianUint()
             //nodes.DecodeBody(_buffer);
         }
 

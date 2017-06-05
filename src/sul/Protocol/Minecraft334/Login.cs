@@ -53,7 +53,7 @@ namespace sul.Protocol.Minecraft334.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //reason = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static Disconnect FromBuffer(byte[] buffer)
@@ -104,7 +104,7 @@ namespace sul.Protocol.Minecraft334.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //username = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static LoginStart FromBuffer(byte[] buffer)
@@ -161,7 +161,7 @@ namespace sul.Protocol.Minecraft334.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //serverId = _buffer.ReadString();
+            //_buffer.ReadString()
             //publicKey.DecodeBody(_buffer);
             //verifyToken.DecodeBody(_buffer);
         }
@@ -272,8 +272,8 @@ namespace sul.Protocol.Minecraft334.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //uuid = _buffer.ReadString();
-            //username = _buffer.ReadString();
+            //_buffer.ReadString()
+            //_buffer.ReadString()
         }
 
         public static LoginSuccess FromBuffer(byte[] buffer)
@@ -324,7 +324,7 @@ namespace sul.Protocol.Minecraft334.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //thresold = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static SetCompression FromBuffer(byte[] buffer)

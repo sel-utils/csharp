@@ -158,7 +158,7 @@ namespace sul.Protocol.Raknet8.Control
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //count = _buffer.ReadLittleEndianTriad();
+            //_buffer.ReadLittleEndianTriad()
             //encapsulation.DecodeBody(_buffer);
         }
 

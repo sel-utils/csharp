@@ -62,10 +62,10 @@ namespace sul.Protocol.Hncom1.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //protocol = _buffer.ReadVaruint();
-            //password = _buffer.ReadString();
-            //name = _buffer.ReadString();
-            //main = _buffer.ReadBool();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
         }
 
         public static ConnectionRequest FromBuffer(byte[] buffer)
@@ -130,8 +130,8 @@ namespace sul.Protocol.Hncom1.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //status = _buffer.ReadUbyte();
-            //if(status==1||status==2){ protocol = _buffer.ReadVaruint(); }
+            //_buffer.ReadUbyte()
+            //if(status==1||status==2){ _buffer.ReadVaruint() }
         }
 
         public static ConnectionResponse FromBuffer(byte[] buffer)
@@ -215,17 +215,17 @@ namespace sul.Protocol.Hncom1.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //time = _buffer.ReadVarulong();
-            //serverId = _buffer.ReadVarulong();
-            //reservedUuids = _buffer.ReadVarulong();
-            //displayName = _buffer.ReadString();
-            //onlineMode = _buffer.ReadBool();
+            //_buffer.ReadVarulong()
+            //_buffer.ReadVarulong()
+            //_buffer.ReadVarulong()
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
             //gamesInfo.DecodeBody(_buffer);
-            //online = _buffer.ReadVaruint();
-            //max = _buffer.ReadVarint();
-            //language = _buffer.ReadString();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadString()
             //acceptedLanguages.DecodeBody(_buffer);
-            //additionalJson = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static HubInfo FromBuffer(byte[] buffer)
@@ -291,11 +291,11 @@ namespace sul.Protocol.Hncom1.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //time = _buffer.ReadVarulong();
-            //max = _buffer.ReadVaruint();
+            //_buffer.ReadVarulong()
+            //_buffer.ReadVaruint()
             //acceptedGames.DecodeBody(_buffer);
             //plugins.DecodeBody(_buffer);
-            //additionalJson = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static NodeInfo FromBuffer(byte[] buffer)

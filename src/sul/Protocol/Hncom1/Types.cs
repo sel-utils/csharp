@@ -34,7 +34,7 @@ namespace sul.Protocol.Hncom1.Types
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //bytes.DecodeBody(_buffer);
-            //port = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadBigEndianUshort()
         }
 
     }
@@ -66,7 +66,7 @@ namespace sul.Protocol.Hncom1.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //protocols.DecodeBody(_buffer);
         }
 
@@ -98,8 +98,8 @@ namespace sul.Protocol.Hncom1.Types
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //game.DecodeBody(_buffer);
-            //motd = _buffer.ReadString();
-            //port = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianUshort()
         }
 
     }
@@ -126,8 +126,8 @@ namespace sul.Protocol.Hncom1.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
-            //version = _buffer.ReadString();
+            //_buffer.ReadString()
+            //_buffer.ReadString()
         }
 
     }
@@ -154,7 +154,7 @@ namespace sul.Protocol.Hncom1.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
+            //_buffer.ReadString()
             //data.DecodeBody(_buffer);
         }
 

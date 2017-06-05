@@ -63,8 +63,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //protocol = _buffer.ReadBigEndianUint();
-            //edition = _buffer.ReadUbyte();
+            //_buffer.ReadBigEndianUint()
+            //_buffer.ReadUbyte()
             //body.DecodeBody(_buffer);
         }
 
@@ -124,7 +124,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //status = _buffer.ReadBigEndianUint();
+            //_buffer.ReadBigEndianUint()
         }
 
         public static PlayStatus FromBuffer(byte[] buffer)
@@ -178,7 +178,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //serverPublicKey = _buffer.ReadString();
+            //_buffer.ReadString()
             //token.DecodeBody(_buffer);
         }
 
@@ -282,8 +282,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hideDisconnectionScreen = _buffer.ReadBool();
-            //if(hideDisconnectionScreen==false){ message = _buffer.ReadString(); }
+            //_buffer.ReadBool()
+            //if(hideDisconnectionScreen==false){ _buffer.ReadString() }
         }
 
         public static Disconnect FromBuffer(byte[] buffer)
@@ -391,7 +391,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //mustAccept = _buffer.ReadBool();
+            //_buffer.ReadBool()
             //behaviourPacks.DecodeBody(_buffer);
             //resourcePacks.DecodeBody(_buffer);
         }
@@ -450,7 +450,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //mustAccept = _buffer.ReadBool();
+            //_buffer.ReadBool()
             //behaviourPacks.DecodeBody(_buffer);
             //resourcePacks.DecodeBody(_buffer);
         }
@@ -512,7 +512,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //status = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //packIds.DecodeBody(_buffer);
         }
 
@@ -564,7 +564,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
         }
 
         public static Text FromBuffer(byte[] buffer)
@@ -863,8 +863,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //time = _buffer.ReadVarint();
-            //daylightCycle = _buffer.ReadBool();
+            //_buffer.ReadVarint()
+            //_buffer.ReadBool()
         }
 
         public static SetTime FromBuffer(byte[] buffer)
@@ -996,26 +996,26 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //runtimeId = _buffer.ReadVarlong();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //yaw = _buffer.ReadLittleEndianFloat();
-            //pitch = _buffer.ReadLittleEndianFloat();
-            //seed = _buffer.ReadVarint();
-            //dimension = _buffer.ReadVarint();
-            //generator = _buffer.ReadVarint();
-            //worldGamemode = _buffer.ReadVarint();
-            //difficulty = _buffer.ReadVarint();
-            //spawnPosition.Item1 = _buffer.ReadVarint(); spawnPosition.Item2 = _buffer.ReadVarint(); spawnPosition.Item3 = _buffer.ReadVarint();
-            //loadedInCreative = _buffer.ReadBool();
-            //time = _buffer.ReadVarint();
-            //edition = _buffer.ReadUbyte();
-            //rainLevel = _buffer.ReadLittleEndianFloat();
-            //lightingLevel = _buffer.ReadLittleEndianFloat();
-            //commandsEnabled = _buffer.ReadBool();
-            //textureRequired = _buffer.ReadBool();
-            //levelId = _buffer.ReadString();
-            //worldName = _buffer.ReadString();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint() _buffer.ReadVarint() _buffer.ReadVarint()
+            //_buffer.ReadBool()
+            //_buffer.ReadVarint()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadBool()
+            //_buffer.ReadBool()
+            //_buffer.ReadString()
+            //_buffer.ReadString()
         }
 
         public static StartGame FromBuffer(byte[] buffer)
@@ -1096,15 +1096,15 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //uuid = _buffer.ReadUuid();
-            //username = _buffer.ReadString();
-            //entityId = _buffer.ReadVarlong();
-            //runtimeId = _buffer.ReadVarlong();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
-            //pitch = _buffer.ReadLittleEndianFloat();
-            //headYaw = _buffer.ReadLittleEndianFloat();
-            //yaw = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadUuid()
+            //_buffer.ReadString()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
             //heldItem.DecodeBody(_buffer);
             //metadata.DecodeBody(_buffer);
         }
@@ -1184,13 +1184,13 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //runtimeId = _buffer.ReadVarlong();
-            //type = _buffer.ReadVaruint();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
-            //pitch = _buffer.ReadLittleEndianFloat();
-            //yaw = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
             //attributes.DecodeBody(_buffer);
             //metadata.DecodeBody(_buffer);
             //links.DecodeBody(_buffer);
@@ -1244,7 +1244,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
         }
 
         public static RemoveEntity FromBuffer(byte[] buffer)
@@ -1307,11 +1307,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //runtimeId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
             //item.DecodeBody(_buffer);
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
         }
 
         public static AddItemEntity FromBuffer(byte[] buffer)
@@ -1371,10 +1371,10 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //runtimeId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
             //position.DecodeBody(_buffer);
-            //unknown3 = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
         }
 
         public static AddHangingEntity FromBuffer(byte[] buffer)
@@ -1428,8 +1428,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //collected = _buffer.ReadVarlong();
-            //collector = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
         }
 
         public static TakeItemEntity FromBuffer(byte[] buffer)
@@ -1492,11 +1492,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //pitch = _buffer.ReadUbyte();
-            //headYaw = _buffer.ReadUbyte();
-            //yaw = _buffer.ReadUbyte();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
         }
 
         public static MoveEntity FromBuffer(byte[] buffer)
@@ -1570,13 +1570,13 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //pitch = _buffer.ReadLittleEndianFloat();
-            //headYaw = _buffer.ReadLittleEndianFloat();
-            //yaw = _buffer.ReadLittleEndianFloat();
-            //animation = _buffer.ReadUbyte();
-            //onGround = _buffer.ReadBool();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBool()
         }
 
         public static MovePlayer FromBuffer(byte[] buffer)
@@ -1627,7 +1627,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //rider = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
         }
 
         public static RiderJump FromBuffer(byte[] buffer)
@@ -1742,8 +1742,8 @@ namespace sul.Protocol.Pocket105.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //position.DecodeBody(_buffer);
-            //block = _buffer.ReadVaruint();
-            //flagsAndMeta = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
         }
 
         public static UpdateBlock FromBuffer(byte[] buffer)
@@ -1806,11 +1806,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //runtimeId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
             //position.DecodeBody(_buffer);
-            //direction = _buffer.ReadVarint();
-            //title = _buffer.ReadString();
+            //_buffer.ReadVarint()
+            //_buffer.ReadString()
         }
 
         public static AddPainting FromBuffer(byte[] buffer)
@@ -1867,8 +1867,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //radius = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
             //destroyedBlocks.DecodeBody(_buffer);
         }
 
@@ -2030,11 +2030,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //sound = _buffer.ReadUbyte();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //volume = _buffer.ReadVaruint();
-            //pitch = _buffer.ReadVarint();
-            //unknown4 = _buffer.ReadBool();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadBool()
         }
 
         public static LevelSoundEvent FromBuffer(byte[] buffer)
@@ -2141,9 +2141,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //eventId = _buffer.ReadVarint();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //data = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadVarint()
         }
 
         public static LevelEvent FromBuffer(byte[] buffer)
@@ -2271,9 +2271,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //eventId = _buffer.ReadUbyte();
-            //unknown2 = _buffer.ReadVarint();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
         }
 
         public static EntityEvent FromBuffer(byte[] buffer)
@@ -2344,12 +2344,12 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //eventId = _buffer.ReadUbyte();
-            //effect = _buffer.ReadVarint();
-            //amplifier = _buffer.ReadVarint();
-            //particles = _buffer.ReadBool();
-            //duration = _buffer.ReadVarint();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadBool()
+            //_buffer.ReadVarint()
         }
 
         public static MobEffect FromBuffer(byte[] buffer)
@@ -2403,7 +2403,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
             //attributes.DecodeBody(_buffer);
         }
 
@@ -2467,11 +2467,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
             //item.DecodeBody(_buffer);
-            //inventorySlot = _buffer.ReadUbyte();
-            //hotbarSlot = _buffer.ReadUbyte();
-            //unknown4 = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
         }
 
         public static MobEquipment FromBuffer(byte[] buffer)
@@ -2525,7 +2525,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
             //armor.DecodeBody(_buffer);
         }
 
@@ -2586,8 +2586,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadUbyte();
-            //target = _buffer.ReadVarlong();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarlong()
         }
 
         public static Interact FromBuffer(byte[] buffer)
@@ -2641,8 +2641,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadVarint(); position.Item2 = _buffer.ReadVarint(); position.Item3 = _buffer.ReadVarint();
-            //slot = _buffer.ReadUbyte();
+            //_buffer.ReadVarint() _buffer.ReadVarint() _buffer.ReadVarint()
+            //_buffer.ReadUbyte()
         }
 
         public static BlockPickRequest FromBuffer(byte[] buffer)
@@ -2712,11 +2712,11 @@ namespace sul.Protocol.Pocket105.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //blockPosition.DecodeBody(_buffer);
-            //hotbarSlot = _buffer.ReadVaruint();
-            //face = _buffer.ReadVarint();
-            //facePosition.Item1 = _buffer.ReadLittleEndianFloat(); facePosition.Item2 = _buffer.ReadLittleEndianFloat(); facePosition.Item3 = _buffer.ReadLittleEndianFloat();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //slot = _buffer.ReadVarint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadVarint()
             //item.DecodeBody(_buffer);
         }
 
@@ -2792,10 +2792,10 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //action = _buffer.ReadVarint();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarint()
             //position.DecodeBody(_buffer);
-            //face = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
         }
 
         public static PlayerAction FromBuffer(byte[] buffer)
@@ -2846,7 +2846,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //distance = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadLittleEndianFloat()
         }
 
         public static PlayerFall FromBuffer(byte[] buffer)
@@ -2897,7 +2897,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
         }
 
         public static HurtArmor FromBuffer(byte[] buffer)
@@ -2951,7 +2951,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
             //metadata.DecodeBody(_buffer);
         }
 
@@ -3006,8 +3006,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
         }
 
         public static SetEntityMotion FromBuffer(byte[] buffer)
@@ -3069,9 +3069,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //from = _buffer.ReadVarlong();
-            //to = _buffer.ReadVarlong();
-            //action = _buffer.ReadUbyte();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadUbyte()
         }
 
         public static SetEntityLink FromBuffer(byte[] buffer)
@@ -3122,7 +3122,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //health = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
         }
 
         public static SetHealth FromBuffer(byte[] buffer)
@@ -3179,9 +3179,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
             //position.DecodeBody(_buffer);
-            //unknown2 = _buffer.ReadBool();
+            //_buffer.ReadBool()
         }
 
         public static SetSpawnPosition FromBuffer(byte[] buffer)
@@ -3239,8 +3239,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadVarint();
-            //entityId = _buffer.ReadVarlong();
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarlong()
         }
 
         public static Animate FromBuffer(byte[] buffer)
@@ -3291,7 +3291,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
         }
 
         public static Respawn FromBuffer(byte[] buffer)
@@ -3348,7 +3348,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //item.DecodeBody(_buffer);
         }
 
@@ -3403,7 +3403,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
             //item.DecodeBody(_buffer);
         }
 
@@ -3467,11 +3467,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //type = _buffer.ReadUbyte();
-            //slotCount = _buffer.ReadVarint();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
             //position.DecodeBody(_buffer);
-            //entityId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
         }
 
         public static ContainerOpen FromBuffer(byte[] buffer)
@@ -3522,7 +3522,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
         }
 
         public static ContainerClose FromBuffer(byte[] buffer)
@@ -3585,11 +3585,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //slot = _buffer.ReadVarint();
-            //hotbarSlot = _buffer.ReadVarint();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
             //item.DecodeBody(_buffer);
-            //unknown4 = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
         }
 
         public static ContainerSetSlot FromBuffer(byte[] buffer)
@@ -3646,9 +3646,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //property = _buffer.ReadVarint();
-            //@value = _buffer.ReadVarint();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
         }
 
         public static ContainerSetData FromBuffer(byte[] buffer)
@@ -3705,7 +3705,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //slots.DecodeBody(_buffer);
             //hotbar.DecodeBody(_buffer);
         }
@@ -3821,9 +3821,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //type = _buffer.ReadVarint();
-            //uuid = _buffer.ReadUuid();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
+            //_buffer.ReadUuid()
             //input.DecodeBody(_buffer);
             //output.DecodeBody(_buffer);
         }
@@ -3897,8 +3897,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //flags = _buffer.ReadVaruint();
-            //permissions = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
         }
 
         public static AdventureSettings FromBuffer(byte[] buffer)
@@ -3953,7 +3953,7 @@ namespace sul.Protocol.Pocket105.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //position.DecodeBody(_buffer);
-            //nbt = _buffer.ReadBytes();
+            //_buffer.ReadBytes()
         }
 
         public static BlockEntityData FromBuffer(byte[] buffer)
@@ -4010,9 +4010,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //motion.Item1 = _buffer.ReadLittleEndianFloat(); motion.Item2 = _buffer.ReadLittleEndianFloat(); motion.Item3 = _buffer.ReadLittleEndianFloat();
-            //flags = _buffer.ReadUbyte();
-            //unknown2 = _buffer.ReadBool();
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBool()
         }
 
         public static PlayerInput FromBuffer(byte[] buffer)
@@ -4066,7 +4066,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadVarint(); position.Item2 = _buffer.ReadVarint();
+            //_buffer.ReadVarint() _buffer.ReadVarint()
             //data.DecodeBody(_buffer);
         }
 
@@ -4118,7 +4118,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //enabled = _buffer.ReadBool();
+            //_buffer.ReadBool()
         }
 
         public static SetCommandsEnabled FromBuffer(byte[] buffer)
@@ -4175,7 +4175,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //difficulty = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static SetDifficulty FromBuffer(byte[] buffer)
@@ -4237,9 +4237,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //dimension = _buffer.ReadVarint();
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //unknown2 = _buffer.ReadBool();
+            //_buffer.ReadVarint()
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadBool()
         }
 
         public static ChangeDimension FromBuffer(byte[] buffer)
@@ -4294,7 +4294,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //gamemode = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
         }
 
         public static SetPlayerGameType FromBuffer(byte[] buffer)
@@ -4345,7 +4345,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
         }
 
         public static PlayerList FromBuffer(byte[] buffer)
@@ -4467,8 +4467,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //eventId = _buffer.ReadVarint();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarint()
         }
 
         public static TelemetryEvent FromBuffer(byte[] buffer)
@@ -4522,8 +4522,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadLittleEndianFloat(); position.Item2 = _buffer.ReadLittleEndianFloat(); position.Item3 = _buffer.ReadLittleEndianFloat();
-            //count = _buffer.ReadVarint();
+            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
+            //_buffer.ReadVarint()
         }
 
         public static SpawnExperienceOrb FromBuffer(byte[] buffer)
@@ -4597,12 +4597,12 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //mapId = _buffer.ReadVarlong();
-            //update = _buffer.ReadVaruint();
-            //if(update==2||update==4){ scale = _buffer.ReadUbyte(); }
-            //if(update==2){ size.Item1 = _buffer.ReadVarint(); size.Item2 = _buffer.ReadVarint(); }
-            //if(update==2){ offset.Item1 = _buffer.ReadVarint(); offset.Item2 = _buffer.ReadVarint(); }
-            //if(update==2){ data = _buffer.ReadBytes(); }
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVaruint()
+            //if(update==2||update==4){ _buffer.ReadUbyte() }
+            //if(update==2){ _buffer.ReadVarint() _buffer.ReadVarint() }
+            //if(update==2){ _buffer.ReadVarint() _buffer.ReadVarint() }
+            //if(update==2){ _buffer.ReadBytes() }
             //if(update==4){ decorations.DecodeBody(_buffer); }
         }
 
@@ -4654,7 +4654,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //mapId = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
         }
 
         public static MapInfoRequest FromBuffer(byte[] buffer)
@@ -4705,7 +4705,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //radius = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
         }
 
         public static RequestChunkRadius FromBuffer(byte[] buffer)
@@ -4756,7 +4756,7 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //radius = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
         }
 
         public static ChunkRadiusUpdated FromBuffer(byte[] buffer)
@@ -4967,8 +4967,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadVarlong();
-            //unknown1 = _buffer.ReadVarlong();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
         }
 
         public static Camera FromBuffer(byte[] buffer)
@@ -5078,8 +5078,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //eventId = _buffer.ReadVaruint();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVaruint()
         }
 
         public static BossEvent FromBuffer(byte[] buffer)
@@ -5137,8 +5137,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVarlong();
-            //status = _buffer.ReadVarint();
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarint()
         }
 
         public static ShowCredits FromBuffer(byte[] buffer)
@@ -5192,8 +5192,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //commands = _buffer.ReadString();
-            //unknown1 = _buffer.ReadString();
+            //_buffer.ReadString()
+            //_buffer.ReadString()
         }
 
         public static AvailableCommands FromBuffer(byte[] buffer)
@@ -5265,14 +5265,14 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //command = _buffer.ReadString();
-            //overload = _buffer.ReadString();
-            //unknown2 = _buffer.ReadVaruint();
-            //currentStep = _buffer.ReadVaruint();
-            //done = _buffer.ReadBool();
-            //clientId = _buffer.ReadVarulong();
-            //input = _buffer.ReadString();
-            //output = _buffer.ReadString();
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBool()
+            //_buffer.ReadVarulong()
+            //_buffer.ReadString()
+            //_buffer.ReadString()
         }
 
         public static CommandStep FromBuffer(byte[] buffer)
@@ -5350,16 +5350,16 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //updateBlock = _buffer.ReadBool();
+            //_buffer.ReadBool()
             //if(updateBlock==true){ position.DecodeBody(_buffer); }
-            //if(updateBlock==true){ mode = _buffer.ReadVaruint(); }
-            //if(updateBlock==true){ redstoneMode = _buffer.ReadBool(); }
-            //if(updateBlock==true){ conditional = _buffer.ReadBool(); }
-            //if(updateBlock==false){ minecart = _buffer.ReadVarlong(); }
-            //command = _buffer.ReadString();
-            //lastOutput = _buffer.ReadString();
-            //hover = _buffer.ReadString();
-            //trackOutput = _buffer.ReadBool();
+            //if(updateBlock==true){ _buffer.ReadVaruint() }
+            //if(updateBlock==true){ _buffer.ReadBool() }
+            //if(updateBlock==true){ _buffer.ReadBool() }
+            //if(updateBlock==false){ _buffer.ReadVarlong() }
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
         }
 
         public static CommandBlockUpdate FromBuffer(byte[] buffer)
@@ -5434,15 +5434,15 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadUbyte();
-            //unknown1 = _buffer.ReadUbyte();
-            //unknown2 = _buffer.ReadVarint();
-            //unknown3 = _buffer.ReadVarint();
-            //unknown4 = _buffer.ReadBool();
-            //trader = _buffer.ReadVarlong();
-            //player = _buffer.ReadVarlong();
-            //unknown7 = _buffer.ReadString();
-            //offers = _buffer.ReadBytes();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadBool()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadVarlong()
+            //_buffer.ReadString()
+            //_buffer.ReadBytes()
         }
 
         public static UpdateTrade FromBuffer(byte[] buffer)
@@ -5505,11 +5505,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadString();
-            //maxChunkSize = _buffer.ReadLittleEndianUint();
-            //chunkCount = _buffer.ReadLittleEndianUint();
-            //compressedPackSize = _buffer.ReadLittleEndianUlong();
-            //sha256 = _buffer.ReadString();
+            //_buffer.ReadString()
+            //_buffer.ReadLittleEndianUint()
+            //_buffer.ReadLittleEndianUint()
+            //_buffer.ReadLittleEndianUlong()
+            //_buffer.ReadString()
         }
 
         public static ResourcePackDataInfo FromBuffer(byte[] buffer)
@@ -5569,9 +5569,9 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadString();
-            //chunkIndex = _buffer.ReadLittleEndianUint();
-            //progress = _buffer.ReadLittleEndianUlong();
+            //_buffer.ReadString()
+            //_buffer.ReadLittleEndianUint()
+            //_buffer.ReadLittleEndianUlong()
             //data.DecodeBody(_buffer);
         }
 
@@ -5626,8 +5626,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadString();
-            //chunkIndex = _buffer.ReadLittleEndianUint();
+            //_buffer.ReadString()
+            //_buffer.ReadLittleEndianUint()
         }
 
         public static ResourcePackChunkRequest FromBuffer(byte[] buffer)
@@ -5681,8 +5681,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //ip = _buffer.ReadString();
-            //port = _buffer.ReadLittleEndianUshort();
+            //_buffer.ReadString()
+            //_buffer.ReadLittleEndianUshort()
         }
 
         public static Transfer FromBuffer(byte[] buffer)
@@ -5742,10 +5742,10 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadString();
+            //_buffer.ReadString()
             //position.DecodeBody(_buffer);
-            //unknown2 = _buffer.ReadLittleEndianFloat();
-            //unknown3 = _buffer.ReadLittleEndianFloat();
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
         }
 
         public static PlaySound FromBuffer(byte[] buffer)
@@ -5799,8 +5799,8 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unknown0 = _buffer.ReadString();
-            //unknown1 = _buffer.ReadBool();
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
         }
 
         public static StopSound FromBuffer(byte[] buffer)
@@ -5871,11 +5871,11 @@ namespace sul.Protocol.Pocket105.Play
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadVarint();
-            //text = _buffer.ReadString();
-            //fadeIn = _buffer.ReadVarint();
-            //stay = _buffer.ReadVarint();
-            //fadeOut = _buffer.ReadVarint();
+            //_buffer.ReadVarint()
+            //_buffer.ReadString()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
+            //_buffer.ReadVarint()
         }
 
         public static SetTitle FromBuffer(byte[] buffer)
