@@ -53,7 +53,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //teleportId = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static TeleportConfirm FromBuffer(byte[] buffer)
@@ -113,8 +113,8 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //action = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBigEndianUshort()
             //returnEntry.DecodeBody(_buffer);
             //prepareEntry.DecodeBody(_buffer);
         }
@@ -176,10 +176,10 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //text = _buffer.ReadString();
-            //command = _buffer.ReadBool();
-            //hasPosition = _buffer.ReadBool();
-            //if(hasPosition==true){ block = _buffer.ReadBigEndianUlong(); }
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
+            //_buffer.ReadBool()
+            //if(hasPosition==true){ _buffer.ReadBigEndianUlong() }
         }
 
         public static TabComplete FromBuffer(byte[] buffer)
@@ -230,7 +230,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //text = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static ChatMessage FromBuffer(byte[] buffer)
@@ -285,7 +285,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static ClientStatus FromBuffer(byte[] buffer)
@@ -369,12 +369,12 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //language = _buffer.ReadString();
-            //viewDistance = _buffer.ReadUbyte();
-            //chatMode = _buffer.ReadVaruint();
-            //chatColors = _buffer.ReadBool();
-            //displayedSkinParts = _buffer.ReadUbyte();
-            //mainHand = _buffer.ReadUbyte();
+            //_buffer.ReadString()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBool()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
         }
 
         public static ClientSettings FromBuffer(byte[] buffer)
@@ -431,9 +431,9 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //action = _buffer.ReadBigEndianUshort();
-            //accepted = _buffer.ReadBool();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadBool()
         }
 
         public static ConfirmTransaction FromBuffer(byte[] buffer)
@@ -487,8 +487,8 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //enchantment = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
         }
 
         public static EnchantItem FromBuffer(byte[] buffer)
@@ -554,11 +554,11 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
-            //slot = _buffer.ReadBigEndianUshort();
-            //button = _buffer.ReadUbyte();
-            //action = _buffer.ReadBigEndianUshort();
-            //mode = _buffer.ReadVaruint();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadVaruint()
             //clickedItem.DecodeBody(_buffer);
         }
 
@@ -610,7 +610,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //window = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
         }
 
         public static CloseWindow FromBuffer(byte[] buffer)
@@ -664,8 +664,8 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //channel = _buffer.ReadString();
-            //data = _buffer.ReadBytes();
+            //_buffer.ReadString()
+            //_buffer.ReadBytes()
         }
 
         public static PluginMessage FromBuffer(byte[] buffer)
@@ -734,10 +734,10 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //target = _buffer.ReadVaruint();
-            //type = _buffer.ReadVaruint();
-            //if(type==2){ targetPosition.Item1 = _buffer.ReadBigEndianFloat(); targetPosition.Item2 = _buffer.ReadBigEndianFloat(); targetPosition.Item3 = _buffer.ReadBigEndianFloat(); }
-            //if(type==2){ hand = _buffer.ReadVaruint(); }
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
+            //if(type==2){ _buffer.ReadBigEndianFloat() _buffer.ReadBigEndianFloat() _buffer.ReadBigEndianFloat() }
+            //if(type==2){ _buffer.ReadVaruint() }
         }
 
         public static UseEntity FromBuffer(byte[] buffer)
@@ -788,7 +788,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static KeepAlive FromBuffer(byte[] buffer)
@@ -839,7 +839,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //onGround = _buffer.ReadBool();
+            //_buffer.ReadBool()
         }
 
         public static Player FromBuffer(byte[] buffer)
@@ -893,8 +893,8 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadBigEndianDouble(); position.Item2 = _buffer.ReadBigEndianDouble(); position.Item3 = _buffer.ReadBigEndianDouble();
-            //onGround = _buffer.ReadBool();
+            //_buffer.ReadBigEndianDouble() _buffer.ReadBigEndianDouble() _buffer.ReadBigEndianDouble()
+            //_buffer.ReadBool()
         }
 
         public static PlayerPosition FromBuffer(byte[] buffer)
@@ -954,10 +954,10 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadBigEndianDouble(); position.Item2 = _buffer.ReadBigEndianDouble(); position.Item3 = _buffer.ReadBigEndianDouble();
-            //yaw = _buffer.ReadBigEndianFloat();
-            //pitch = _buffer.ReadBigEndianFloat();
-            //onGround = _buffer.ReadBool();
+            //_buffer.ReadBigEndianDouble() _buffer.ReadBigEndianDouble() _buffer.ReadBigEndianDouble()
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBool()
         }
 
         public static PlayerPositionAndLook FromBuffer(byte[] buffer)
@@ -1014,9 +1014,9 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //yaw = _buffer.ReadBigEndianFloat();
-            //pitch = _buffer.ReadBigEndianFloat();
-            //onGround = _buffer.ReadBool();
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBool()
         }
 
         public static PlayerLook FromBuffer(byte[] buffer)
@@ -1073,9 +1073,9 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position.Item1 = _buffer.ReadBigEndianDouble(); position.Item2 = _buffer.ReadBigEndianDouble(); position.Item3 = _buffer.ReadBigEndianDouble();
-            //yaw = _buffer.ReadBigEndianFloat();
-            //pitch = _buffer.ReadBigEndianFloat();
+            //_buffer.ReadBigEndianDouble() _buffer.ReadBigEndianDouble() _buffer.ReadBigEndianDouble()
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBigEndianFloat()
         }
 
         public static VehicleMove FromBuffer(byte[] buffer)
@@ -1129,8 +1129,8 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //rightPaddleTurning = _buffer.ReadBool();
-            //leftPaddleTurning = _buffer.ReadBool();
+            //_buffer.ReadBool()
+            //_buffer.ReadBool()
         }
 
         public static SteerBoat FromBuffer(byte[] buffer)
@@ -1193,9 +1193,9 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //flags = _buffer.ReadUbyte();
-            //flyingSpeed = _buffer.ReadBigEndianFloat();
-            //walkingSpeed = _buffer.ReadBigEndianFloat();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBigEndianFloat()
         }
 
         public static PlayerAbilities FromBuffer(byte[] buffer)
@@ -1262,9 +1262,9 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //status = _buffer.ReadVaruint();
-            //position = _buffer.ReadBigEndianUlong();
-            //face = _buffer.ReadUbyte();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBigEndianUlong()
+            //_buffer.ReadUbyte()
         }
 
         public static PlayerDigging FromBuffer(byte[] buffer)
@@ -1332,9 +1332,9 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //entityId = _buffer.ReadVaruint();
-            //action = _buffer.ReadVaruint();
-            //if(action==5){ jumpBoost = _buffer.ReadVaruint(); }
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
+            //if(action==5){ _buffer.ReadVaruint() }
         }
 
         public static EntityAction FromBuffer(byte[] buffer)
@@ -1395,9 +1395,9 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //sideways = _buffer.ReadBigEndianFloat();
-            //forward = _buffer.ReadBigEndianFloat();
-            //flags = _buffer.ReadUbyte();
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadUbyte()
         }
 
         public static SteerVehicle FromBuffer(byte[] buffer)
@@ -1448,7 +1448,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static CraftingBookData FromBuffer(byte[] buffer)
@@ -1576,7 +1576,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //result = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static ResourcePackStatus FromBuffer(byte[] buffer)
@@ -1634,8 +1634,8 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //action = _buffer.ReadVaruint();
-            //if(action==0){ tab = _buffer.ReadString(); }
+            //_buffer.ReadVaruint()
+            //if(action==0){ _buffer.ReadString() }
         }
 
         public static AdvencementTab FromBuffer(byte[] buffer)
@@ -1686,7 +1686,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //slot = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadBigEndianUshort()
         }
 
         public static HeldItemChange FromBuffer(byte[] buffer)
@@ -1740,7 +1740,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //slot = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadBigEndianUshort()
             //clickedItem.DecodeBody(_buffer);
         }
 
@@ -1795,7 +1795,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position = _buffer.ReadBigEndianUlong();
+            //_buffer.ReadBigEndianUlong()
             //lines.DecodeBody(_buffer);
         }
 
@@ -1851,7 +1851,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hand = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static Animation FromBuffer(byte[] buffer)
@@ -1902,7 +1902,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //player = _buffer.ReadUuid();
+            //_buffer.ReadUuid()
         }
 
         public static Spectate FromBuffer(byte[] buffer)
@@ -1966,10 +1966,10 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //position = _buffer.ReadBigEndianUlong();
-            //face = _buffer.ReadVaruint();
-            //hand = _buffer.ReadVaruint();
-            //cursorPosition.Item1 = _buffer.ReadBigEndianFloat(); cursorPosition.Item2 = _buffer.ReadBigEndianFloat(); cursorPosition.Item3 = _buffer.ReadBigEndianFloat();
+            //_buffer.ReadBigEndianUlong()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBigEndianFloat() _buffer.ReadBigEndianFloat() _buffer.ReadBigEndianFloat()
         }
 
         public static PlayerBlockPlacement FromBuffer(byte[] buffer)
@@ -2024,7 +2024,7 @@ namespace sul.Protocol.Minecraft334.Serverbound
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hand = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static UseItem FromBuffer(byte[] buffer)
