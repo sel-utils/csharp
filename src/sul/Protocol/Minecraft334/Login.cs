@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft333.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft334.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Minecraft333.Types;
+using sul.Protocol.Minecraft334.Types;
 
-namespace sul.Protocol.Minecraft333.Login
+namespace sul.Protocol.Minecraft334.Login
 {
 
     public class Disconnect : sul.Utils.Packet

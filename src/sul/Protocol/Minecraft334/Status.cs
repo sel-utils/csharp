@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft333.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft334.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Minecraft333.Types;
+using sul.Protocol.Minecraft334.Types;
 
-namespace sul.Protocol.Minecraft333.Status
+namespace sul.Protocol.Minecraft334.Status
 {
 
     public class Handshake : sul.Utils.Packet
@@ -31,7 +31,7 @@ namespace sul.Protocol.Minecraft333.Status
         public ushort serverPort;
         public uint next;
 
-        public Handshake() : this(333, "", 0, 0) {}
+        public Handshake() : this(334, "", 0, 0) {}
 
         public Handshake(uint protocol, string serverAddress, ushort serverPort, uint next)
         {
