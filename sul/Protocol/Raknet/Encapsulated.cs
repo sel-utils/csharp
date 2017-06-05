@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Raknet8.Types;
+using sul.Protocol.Raknet.Types;
 
-namespace sul.Protocol.Raknet8.Encapsulated
+namespace sul.Protocol.Raknet.Encapsulated
 {
 
     public class ClientConnect : sul.Utils.Packet
@@ -56,8 +56,8 @@ namespace sul.Protocol.Raknet8.Encapsulated
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //clientId = _buffer.ReadBigEndianLong();
-            //pingId = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
+            //_buffer.ReadBigEndianLong()
         }
 
         public static ClientConnect FromBuffer(byte[] buffer)
@@ -121,10 +121,10 @@ namespace sul.Protocol.Raknet8.Encapsulated
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //clientAddress.DecodeBody(_buffer);
-            //mtuLength = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadBigEndianUshort()
             //systemAddresses.DecodeBody(_buffer);
-            //pingId = _buffer.ReadBigEndianLong();
-            //serverId = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
+            //_buffer.ReadBigEndianLong()
         }
 
         public static ServerHandshake FromBuffer(byte[] buffer)
@@ -186,8 +186,8 @@ namespace sul.Protocol.Raknet8.Encapsulated
         {
             //clientAddress.DecodeBody(_buffer);
             //systemAddresses.DecodeBody(_buffer);
-            //pingId = _buffer.ReadBigEndianLong();
-            //clientId = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
+            //_buffer.ReadBigEndianLong()
         }
 
         public static ClientHandshake FromBuffer(byte[] buffer)
@@ -287,7 +287,7 @@ namespace sul.Protocol.Raknet8.Encapsulated
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //time = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
         }
 
         public static Ping FromBuffer(byte[] buffer)
@@ -338,7 +338,7 @@ namespace sul.Protocol.Raknet8.Encapsulated
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //time = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
         }
 
         public static Pong FromBuffer(byte[] buffer)
@@ -389,7 +389,7 @@ namespace sul.Protocol.Raknet8.Encapsulated
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //packet = _buffer.ReadBytes();
+            //_buffer.ReadBytes()
         }
 
         public static Mcpe FromBuffer(byte[] buffer)

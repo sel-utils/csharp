@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Protocol.Raknet8.Types
+namespace sul.Protocol.Raknet.Types
 {
 
     public class Address : sul.Utils.Stream
@@ -39,10 +39,10 @@ namespace sul.Protocol.Raknet8.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadUbyte();
-            //if(type==4){ ipv4 = _buffer.ReadBigEndianUint(); }
+            //_buffer.ReadUbyte()
+            //if(type==4){ _buffer.ReadBigEndianUint() }
             //if(type==6){ ipv6.DecodeBody(_buffer); }
-            //port = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadBigEndianUshort()
         }
 
     }
@@ -72,9 +72,9 @@ namespace sul.Protocol.Raknet8.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //unique = _buffer.ReadBool();
-            //first = _buffer.ReadLittleEndianTriad();
-            //if(unique==false){ last = _buffer.ReadLittleEndianTriad(); }
+            //_buffer.ReadBool()
+            //_buffer.ReadLittleEndianTriad()
+            //if(unique==false){ _buffer.ReadLittleEndianTriad() }
         }
 
     }
@@ -116,13 +116,13 @@ namespace sul.Protocol.Raknet8.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //info = _buffer.ReadUbyte();
-            //length = _buffer.ReadBigEndianUshort();
-            //if((info&0x7F)>=64){ messageIndex = _buffer.ReadLittleEndianTriad(); }
-            //if((info&0x7F)>=96){ orderIndex = _buffer.ReadLittleEndianTriad(); }
-            //if((info&0x7F)>=96){ orderChannel = _buffer.ReadUbyte(); }
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBigEndianUshort()
+            //if((info&0x7F)>=64){ _buffer.ReadLittleEndianTriad() }
+            //if((info&0x7F)>=96){ _buffer.ReadLittleEndianTriad() }
+            //if((info&0x7F)>=96){ _buffer.ReadUbyte() }
             //if((info&0x10)!=0){ split.DecodeBody(_buffer); }
-            //payload = _buffer.ReadBytes();
+            //_buffer.ReadBytes()
         }
 
     }
@@ -152,9 +152,9 @@ namespace sul.Protocol.Raknet8.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //count = _buffer.ReadBigEndianUint();
-            //id = _buffer.ReadBigEndianUshort();
-            //order = _buffer.ReadBigEndianUint();
+            //_buffer.ReadBigEndianUint()
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadBigEndianUint()
         }
 
     }

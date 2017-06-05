@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Raknet8.Types;
+using sul.Protocol.Raknet.Types;
 
-namespace sul.Protocol.Raknet8.Control
+namespace sul.Protocol.Raknet.Control
 {
 
     public class Ack : sul.Utils.Packet
@@ -158,7 +158,7 @@ namespace sul.Protocol.Raknet8.Control
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //count = _buffer.ReadLittleEndianTriad();
+            //_buffer.ReadLittleEndianTriad()
             //encapsulation.DecodeBody(_buffer);
         }
 
