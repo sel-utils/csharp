@@ -33,8 +33,8 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
-            //@value = _buffer.ReadVaruint();
+            //_buffer.ReadString()
+            //_buffer.ReadVaruint()
         }
 
     }
@@ -64,9 +64,9 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //xz = _buffer.ReadUbyte();
-            //y = _buffer.ReadUbyte();
-            //block = _buffer.ReadVaruint();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVaruint()
         }
 
     }
@@ -99,10 +99,10 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //id = _buffer.ReadBigEndianShort();
-            //if(id>0){ count = _buffer.ReadUbyte(); }
-            //if(id>0){ damage = _buffer.ReadBigEndianUshort(); }
-            //if(id>0){ nbt = _buffer.ReadBytes(); }
+            //_buffer.ReadBigEndianShort()
+            //if(id>0){ _buffer.ReadUbyte() }
+            //if(id>0){ _buffer.ReadBigEndianUshort() }
+            //if(id>0){ _buffer.ReadBytes() }
         }
 
     }
@@ -141,8 +141,8 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //directionAndType = _buffer.ReadUbyte();
-            //position.Item1 = _buffer.ReadUbyte(); position.Item2 = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte() _buffer.ReadUbyte()
         }
 
     }
@@ -175,10 +175,10 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
-            //@value = _buffer.ReadString();
-            //signed = _buffer.ReadBool();
-            //if(signed==true){ signature = _buffer.ReadString(); }
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
+            //if(signed==true){ _buffer.ReadString() }
         }
 
     }
@@ -226,13 +226,13 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //uuid = _buffer.ReadUuid();
-            //name = _buffer.ReadString();
+            //_buffer.ReadUuid()
+            //_buffer.ReadString()
             //properties.DecodeBody(_buffer);
-            //gamemode = _buffer.ReadVaruint();
-            //latency = _buffer.ReadVaruint();
-            //hasDisplayName = _buffer.ReadBool();
-            //if(hasDisplayName==true){ displayName = _buffer.ReadString(); }
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBool()
+            //if(hasDisplayName==true){ _buffer.ReadString() }
         }
 
     }
@@ -265,8 +265,8 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //uuid = _buffer.ReadUuid();
-            //gamemode = _buffer.ReadVaruint();
+            //_buffer.ReadUuid()
+            //_buffer.ReadVaruint()
         }
 
     }
@@ -293,8 +293,8 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //uuid = _buffer.ReadUuid();
-            //latency = _buffer.ReadVaruint();
+            //_buffer.ReadUuid()
+            //_buffer.ReadVaruint()
         }
 
     }
@@ -324,9 +324,9 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //uuid = _buffer.ReadUuid();
-            //hasDisplayName = _buffer.ReadBool();
-            //if(hasDisplayName==true){ displayName = _buffer.ReadString(); }
+            //_buffer.ReadUuid()
+            //_buffer.ReadBool()
+            //if(hasDisplayName==true){ _buffer.ReadString() }
         }
 
     }
@@ -361,9 +361,9 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //uuid = _buffer.ReadUuid();
-            //amount = _buffer.ReadBigEndianDouble();
-            //operation = _buffer.ReadUbyte();
+            //_buffer.ReadUuid()
+            //_buffer.ReadBigEndianDouble()
+            //_buffer.ReadUbyte()
         }
 
     }
@@ -393,8 +393,8 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //key = _buffer.ReadString();
-            //@value = _buffer.ReadBigEndianDouble();
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianDouble()
             //modifiers.DecodeBody(_buffer);
         }
 
@@ -422,8 +422,8 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hasPosition = _buffer.ReadBool();
-            //if(hasPosition==true){ position = _buffer.ReadBigEndianUlong(); }
+            //_buffer.ReadBool()
+            //if(hasPosition==true){ _buffer.ReadBigEndianUlong() }
         }
 
     }
@@ -450,8 +450,8 @@ namespace sul.Protocol.Minecraft315.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hasUuid = _buffer.ReadBool();
-            //uuid = _buffer.ReadUuid();
+            //_buffer.ReadBool()
+            //_buffer.ReadUuid()
         }
 
     }
