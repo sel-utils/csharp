@@ -59,9 +59,9 @@ namespace sul.Protocol.Raknet8.Unconnected
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //pingId = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
             //magic.DecodeBody(_buffer);
-            //guid = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
         }
 
         public static Ping FromBuffer(byte[] buffer)
@@ -121,10 +121,10 @@ namespace sul.Protocol.Raknet8.Unconnected
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //pingId = _buffer.ReadBigEndianLong();
-            //serverId = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
+            //_buffer.ReadBigEndianLong()
             //magic.DecodeBody(_buffer);
-            //status = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static Pong FromBuffer(byte[] buffer)
@@ -182,8 +182,8 @@ namespace sul.Protocol.Raknet8.Unconnected
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //magic.DecodeBody(_buffer);
-            //protocol = _buffer.ReadUbyte();
-            //mtu = _buffer.ReadBytes();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBytes()
         }
 
         public static OpenConnectionRequest1 FromBuffer(byte[] buffer)
@@ -244,9 +244,9 @@ namespace sul.Protocol.Raknet8.Unconnected
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //magic.DecodeBody(_buffer);
-            //serverId = _buffer.ReadBigEndianLong();
-            //security = _buffer.ReadBool();
-            //mtuLength = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadBigEndianLong()
+            //_buffer.ReadBool()
+            //_buffer.ReadBigEndianUshort()
         }
 
         public static OpenConnectionReply1 FromBuffer(byte[] buffer)
@@ -308,8 +308,8 @@ namespace sul.Protocol.Raknet8.Unconnected
         {
             //magic.DecodeBody(_buffer);
             //serverAddress.DecodeBody(_buffer);
-            //mtuLength = _buffer.ReadBigEndianUshort();
-            //clientId = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadBigEndianLong()
         }
 
         public static OpenConnectionRequest2 FromBuffer(byte[] buffer)
@@ -373,10 +373,10 @@ namespace sul.Protocol.Raknet8.Unconnected
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //magic.DecodeBody(_buffer);
-            //serverId = _buffer.ReadBigEndianLong();
+            //_buffer.ReadBigEndianLong()
             //clientAddress.DecodeBody(_buffer);
-            //mtuLength = _buffer.ReadBigEndianUshort();
-            //security = _buffer.ReadBool();
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadBool()
         }
 
         public static OpenConnectionReply2 FromBuffer(byte[] buffer)
