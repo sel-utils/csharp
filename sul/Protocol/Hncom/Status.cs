@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Hncom2.Types;
+using sul.Protocol.Hncom.Types;
 
-namespace sul.Protocol.Hncom2.Status
+namespace sul.Protocol.Hncom.Status
 {
 
     public class AddNode : sul.Utils.Packet
@@ -62,9 +62,9 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //name = _buffer.ReadString();
-            //main = _buffer.ReadBool();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
             //acceptedGames.DecodeBody(_buffer);
         }
 
@@ -116,7 +116,7 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static RemoveNode FromBuffer(byte[] buffer)
@@ -225,7 +225,7 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //sender = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
             //payload.DecodeBody(_buffer);
         }
 
@@ -283,8 +283,8 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //online = _buffer.ReadVaruint();
-            //max = _buffer.ReadVarint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVarint()
         }
 
         public static Players FromBuffer(byte[] buffer)
@@ -341,9 +341,9 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //tps = _buffer.ReadBigEndianFloat();
-            //ram = _buffer.ReadVarulong();
-            //cpu = _buffer.ReadBigEndianFloat();
+            //_buffer.ReadBigEndianFloat()
+            //_buffer.ReadVarulong()
+            //_buffer.ReadBigEndianFloat()
         }
 
         public static ResourcesUsage FromBuffer(byte[] buffer)
@@ -409,11 +409,11 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //timestamp = _buffer.ReadVarulong();
-            //world = _buffer.ReadVarint();
-            //if(world<0){ logger = _buffer.ReadString(); }
-            //message = _buffer.ReadString();
-            //commandId = _buffer.ReadVarint();
+            //_buffer.ReadVarulong()
+            //_buffer.ReadVarint()
+            //if(world<0){ _buffer.ReadString() }
+            //_buffer.ReadString()
+            //_buffer.ReadVarint()
         }
 
         public static Log FromBuffer(byte[] buffer)
@@ -478,10 +478,10 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //origin = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //if(origin!=0){ sender.DecodeBody(_buffer); }
-            //command = _buffer.ReadString();
-            //commandId = _buffer.ReadVarint();
+            //_buffer.ReadString()
+            //_buffer.ReadVarint()
         }
 
         public static RemoteCommand FromBuffer(byte[] buffer)
@@ -546,9 +546,9 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //list = _buffer.ReadUbyte();
-            //action = _buffer.ReadUbyte();
-            //type = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
         }
 
         public static UpdateList FromBuffer(byte[] buffer)
@@ -715,11 +715,11 @@ namespace sul.Protocol.Hncom2.Status
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //displayName = _buffer.ReadString();
+            //_buffer.ReadString()
             //motds.DecodeBody(_buffer);
-            //language = _buffer.ReadString();
+            //_buffer.ReadString()
             //acceptedLanguages.DecodeBody(_buffer);
-            //socialJson = _buffer.ReadString();
+            //_buffer.ReadString()
         }
 
         public static Reload FromBuffer(byte[] buffer)

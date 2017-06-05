@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Hncom2.Types;
+using sul.Protocol.Hncom.Types;
 
-namespace sul.Protocol.Hncom2.Player
+namespace sul.Protocol.Hncom.Player
 {
 
     public class Add : sul.Utils.Packet
@@ -116,23 +116,23 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //reason = _buffer.ReadUbyte();
-            //type = _buffer.ReadUbyte();
-            //protocol = _buffer.ReadVaruint();
-            //version = _buffer.ReadString();
-            //username = _buffer.ReadString();
-            //displayName = _buffer.ReadString();
-            //if(reason!=0){ dimension = _buffer.ReadUbyte(); }
-            //if(reason!=0){ viewDistance = _buffer.ReadVaruint(); }
+            //_buffer.ReadVaruint()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //_buffer.ReadString()
+            //if(reason!=0){ _buffer.ReadUbyte() }
+            //if(reason!=0){ _buffer.ReadVaruint() }
             //clientAddress.DecodeBody(_buffer);
-            //serverAddress = _buffer.ReadString();
-            //serverPort = _buffer.ReadBigEndianUshort();
-            //uuid = _buffer.ReadUuid();
+            //_buffer.ReadString()
+            //_buffer.ReadBigEndianUshort()
+            //_buffer.ReadUuid()
             //skin.DecodeBody(_buffer);
-            //language = _buffer.ReadString();
-            //inputMode = _buffer.ReadUbyte();
-            //latency = _buffer.ReadVaruint();
+            //_buffer.ReadString()
+            //_buffer.ReadUbyte()
+            //_buffer.ReadVaruint()
         }
 
         public static Add FromBuffer(byte[] buffer)
@@ -305,8 +305,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //reason = _buffer.ReadUbyte();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadUbyte()
         }
 
         public static Remove FromBuffer(byte[] buffer)
@@ -366,9 +366,9 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //reason = _buffer.ReadString();
-            //translation = _buffer.ReadBool();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
             //if(translation==true){ parameters.DecodeBody(_buffer); }
         }
 
@@ -431,9 +431,9 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //node = _buffer.ReadVaruint();
-            //onFail = _buffer.ReadUbyte();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadUbyte()
         }
 
         public static Transfer FromBuffer(byte[] buffer)
@@ -487,8 +487,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //displayName = _buffer.ReadString();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
         }
 
         public static UpdateDisplayName FromBuffer(byte[] buffer)
@@ -542,8 +542,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //world = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
         }
 
         public static UpdateWorld FromBuffer(byte[] buffer)
@@ -597,8 +597,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //viewDistance = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
         }
 
         public static UpdateViewDistance FromBuffer(byte[] buffer)
@@ -652,8 +652,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //language = _buffer.ReadString();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadString()
         }
 
         public static UpdateLanguage FromBuffer(byte[] buffer)
@@ -707,8 +707,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //gamemode = _buffer.ReadUbyte();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadUbyte()
         }
 
         public static UpdateGamemode FromBuffer(byte[] buffer)
@@ -767,8 +767,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //inputMode = _buffer.ReadUbyte();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadUbyte()
         }
 
         public static UpdateInputMode FromBuffer(byte[] buffer)
@@ -822,8 +822,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //latency = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
         }
 
         public static UpdateLatency FromBuffer(byte[] buffer)
@@ -877,8 +877,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //packetLoss = _buffer.ReadBigEndianFloat();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBigEndianFloat()
         }
 
         public static UpdatePacketLoss FromBuffer(byte[] buffer)
@@ -932,8 +932,8 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //packet = _buffer.ReadBytes();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBytes()
         }
 
         public static GamePacket FromBuffer(byte[] buffer)
@@ -990,9 +990,9 @@ namespace sul.Protocol.Hncom2.Player
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //hubId = _buffer.ReadVaruint();
-            //order = _buffer.ReadVaruint();
-            //packet = _buffer.ReadBytes();
+            //_buffer.ReadVaruint()
+            //_buffer.ReadVaruint()
+            //_buffer.ReadBytes()
         }
 
         public static OrderedGamePacket FromBuffer(byte[] buffer)

@@ -8,7 +8,7 @@
  */
 using System.Text;
 
-namespace sul.Protocol.Hncom2.Types
+namespace sul.Protocol.Hncom.Types
 {
 
     public class Address : sul.Utils.Stream
@@ -34,7 +34,7 @@ namespace sul.Protocol.Hncom2.Types
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //bytes.DecodeBody(_buffer);
-            //port = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadBigEndianUshort()
         }
 
     }
@@ -66,7 +66,7 @@ namespace sul.Protocol.Hncom2.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
             //protocols.DecodeBody(_buffer);
         }
 
@@ -101,9 +101,9 @@ namespace sul.Protocol.Hncom2.Types
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //game.DecodeBody(_buffer);
-            //motd = _buffer.ReadString();
-            //onlineMode = _buffer.ReadBool();
-            //port = _buffer.ReadBigEndianUshort();
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
+            //_buffer.ReadBigEndianUshort()
         }
 
     }
@@ -130,8 +130,8 @@ namespace sul.Protocol.Hncom2.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
-            //version = _buffer.ReadString();
+            //_buffer.ReadString()
+            //_buffer.ReadString()
         }
 
     }
@@ -163,8 +163,8 @@ namespace sul.Protocol.Hncom2.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //type = _buffer.ReadUbyte();
-            //motd = _buffer.ReadString();
+            //_buffer.ReadUbyte()
+            //_buffer.ReadString()
         }
 
     }
@@ -191,7 +191,7 @@ namespace sul.Protocol.Hncom2.Types
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //name = _buffer.ReadString();
+            //_buffer.ReadString()
             //data.DecodeBody(_buffer);
         }
 

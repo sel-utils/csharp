@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Hncom2.Types;
+using sul.Protocol.Hncom.Types;
 
-namespace sul.Protocol.Hncom2.Panel
+namespace sul.Protocol.Hncom.Panel
 {
 
     public class Connection : sul.Utils.Packet
@@ -61,7 +61,7 @@ namespace sul.Protocol.Hncom2.Panel
         {
             //hash.DecodeBody(_buffer);
             //address.DecodeBody(_buffer);
-            //worldId = _buffer.ReadVaruint();
+            //_buffer.ReadVaruint()
         }
 
         public static Connection FromBuffer(byte[] buffer)
