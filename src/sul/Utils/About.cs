@@ -13,7 +13,7 @@ namespace sul.Utils
 
         public const string Website = "https://github.com/sel-project/sel-utils";
 
-        public const int Version = 130;
+        public const int Version = 131;
 
     }
 
