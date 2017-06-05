@@ -9,9 +9,9 @@
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Externalconsole2.Types;
+using sul.Protocol.Externalconsole.Types;
 
-namespace sul.Protocol.Externalconsole2.Login
+namespace sul.Protocol.Externalconsole.Login
 {
 
     public class AuthCredentials : sul.Utils.Packet
@@ -62,9 +62,9 @@ namespace sul.Protocol.Externalconsole2.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //protocol = _buffer.ReadUbyte();
-            //hash = _buffer.ReadBool();
-            //if(hash==true){ hashAlgorithm = _buffer.ReadString(); }
+            //_buffer.ReadUbyte()
+            //_buffer.ReadBool()
+            //if(hash==true){ _buffer.ReadString() }
             //if(hash==true){ payload.DecodeBody(_buffer); }
         }
 
@@ -167,7 +167,7 @@ namespace sul.Protocol.Externalconsole2.Login
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //status = _buffer.ReadUbyte();
+            //_buffer.ReadUbyte()
         }
 
         public static Welcome FromBuffer(byte[] buffer)
