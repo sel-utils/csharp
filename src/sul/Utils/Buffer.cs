@@ -59,7 +59,9 @@ namespace sul.Utils
             this.writer.Write(value);
         }
 
-        public void WriteBigEndianShort(short value) {}
+        public void WriteBigEndianShort(short value) {
+
+        }
 
         public void WriteLittleEndianShort(short value) {
             this.writer.Write(value);
