@@ -4,11 +4,11 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft334.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/minecraft335.xml
  */
 using System.Text;
 
-namespace sul.Protocol.Minecraft334.Types
+namespace sul.Protocol.Minecraft335.Types
 {
 
     public class Statistic : sul.Utils.Stream
