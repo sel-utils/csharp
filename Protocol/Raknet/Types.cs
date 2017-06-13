@@ -17,15 +17,17 @@ namespace sul.Protocol.Raknet.Types
         public byte type;
         public uint ipv4;
         public byte[] ipv6;
+        public byte[] unknown3;
         public ushort port;
 
-        public Address() : this(0, 0, new byte[16], 0) {}
+        public Address() : this(0, 0, new byte[16], new byte[10], 0) {}
 
-        public Address(byte type, uint ipv4, byte[] ipv6, ushort port)
+        public Address(byte type, uint ipv4, byte[] ipv6, byte[] unknown3, ushort port)
         {
             this.type = type;
             this.ipv4 = ipv4;
             this.ipv6 = ipv6;
+            this.unknown3 = unknown3;
             this.port = port;
         }
 
@@ -34,6 +36,7 @@ namespace sul.Protocol.Raknet.Types
             _buffer.WriteUbyte(type);
             if(type==4){ _buffer.WriteBigEndianUint(ipv4); }
             if(type==6){ foreach (byte ipv6Child in ipv6){ _buffer.WriteUbyte(ipv6Child); } }
+            if(type==6){ foreach (byte unknown3Child in unknown3){ _buffer.WriteUbyte(unknown3Child); } }
             _buffer.WriteBigEndianUshort(port);
         }
 
@@ -42,6 +45,7 @@ namespace sul.Protocol.Raknet.Types
             //_buffer.ReadUbyte()
             //if(type==4){ _buffer.ReadBigEndianUint() }
             //if(type==6){ ipv6.DecodeBody(_buffer); }
+            //if(type==6){ unknown3.DecodeBody(_buffer); }
             //_buffer.ReadBigEndianUshort()
         }
 
