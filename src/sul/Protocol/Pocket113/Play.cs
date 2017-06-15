@@ -907,7 +907,7 @@ namespace sul.Protocol.Pocket113.Play
         public int time;
         public byte version;
         public float rainLevel;
-        public float lightingLevel;
+        public float lightningLevel;
         public bool commandsEnabled;
         public bool textureRequired;
         public Rule[] gameRules;
@@ -919,7 +919,7 @@ namespace sul.Protocol.Pocket113.Play
 
         public StartGame() : this(0, 0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, false, false, new Rule[]{}, "", "", "", false, 0) {}
 
-        public StartGame(long entityId, long runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, Rule[] gameRules, string levelId, string worldName, string premiumWorldTemplate, bool unknown23, ulong worldTicks)
+        public StartGame(long entityId, long runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightningLevel, bool commandsEnabled, bool textureRequired, Rule[] gameRules, string levelId, string worldName, string premiumWorldTemplate, bool unknown23, ulong worldTicks)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -937,7 +937,7 @@ namespace sul.Protocol.Pocket113.Play
             this.time = time;
             this.version = version;
             this.rainLevel = rainLevel;
-            this.lightingLevel = lightingLevel;
+            this.lightningLevel = lightningLevel;
             this.commandsEnabled = commandsEnabled;
             this.textureRequired = textureRequired;
             this.gameRules = gameRules;
@@ -981,7 +981,7 @@ namespace sul.Protocol.Pocket113.Play
             _buffer.WriteVarint(time);
             _buffer.WriteUbyte(version);
             _buffer.WriteLittleEndianFloat(rainLevel);
-            _buffer.WriteLittleEndianFloat(lightingLevel);
+            _buffer.WriteLittleEndianFloat(lightningLevel);
             _buffer.WriteBool(commandsEnabled);
             _buffer.WriteBool(textureRequired);
             _buffer.WriteVaruint(gameRules.Length); foreach (Rule gameRulesChild in gameRules){ gameRulesChild.EncodeBody(_buffer); }

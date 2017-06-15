@@ -923,7 +923,7 @@ namespace sul.Protocol.Pocket105.Play
         public int time;
         public byte edition;
         public float rainLevel;
-        public float lightingLevel;
+        public float lightningLevel;
         public bool commandsEnabled;
         public bool textureRequired;
         public string levelId;
@@ -931,7 +931,7 @@ namespace sul.Protocol.Pocket105.Play
 
         public StartGame() : this(0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, false, false, "", "") {}
 
-        public StartGame(long entityId, long runtimeId, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte edition, float rainLevel, float lightingLevel, bool commandsEnabled, bool textureRequired, string levelId, string worldName)
+        public StartGame(long entityId, long runtimeId, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte edition, float rainLevel, float lightningLevel, bool commandsEnabled, bool textureRequired, string levelId, string worldName)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -948,7 +948,7 @@ namespace sul.Protocol.Pocket105.Play
             this.time = time;
             this.edition = edition;
             this.rainLevel = rainLevel;
-            this.lightingLevel = lightingLevel;
+            this.lightningLevel = lightningLevel;
             this.commandsEnabled = commandsEnabled;
             this.textureRequired = textureRequired;
             this.levelId = levelId;
@@ -987,7 +987,7 @@ namespace sul.Protocol.Pocket105.Play
             _buffer.WriteVarint(time);
             _buffer.WriteUbyte(edition);
             _buffer.WriteLittleEndianFloat(rainLevel);
-            _buffer.WriteLittleEndianFloat(lightingLevel);
+            _buffer.WriteLittleEndianFloat(lightningLevel);
             _buffer.WriteBool(commandsEnabled);
             _buffer.WriteBool(textureRequired);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(levelId)); _buffer.WriteString(levelId);
