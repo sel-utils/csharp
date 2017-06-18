@@ -2543,8 +2543,8 @@ namespace sul.Protocol.Pocket101.Play
         public const bool Serverbound = true;
 
         // action
-        public const byte ATTACK = 1;
-        public const byte INTERACT = 2;
+        public const byte INTERACT = 1;
+        public const byte ATTACK = 2;
         public const byte LEAVE_VEHICLE = 3;
         public const byte HOVER = 4;
 
