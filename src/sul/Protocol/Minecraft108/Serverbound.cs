@@ -667,7 +667,7 @@ namespace sul.Protocol.Minecraft108.Serverbound
             _buffer.WriteVaruint(target);
             _buffer.WriteVaruint(type);
             if(type==2){ _buffer.WriteBigEndianFloat(targetPosition.Item1); _buffer.WriteBigEndianFloat(targetPosition.Item2); _buffer.WriteBigEndianFloat(targetPosition.Item3); }
-            if(type==2){ _buffer.WriteVaruint(hand); }
+            if(type==0||type==2){ _buffer.WriteVaruint(hand); }
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
@@ -675,7 +675,7 @@ namespace sul.Protocol.Minecraft108.Serverbound
             //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
             //if(type==2){ _buffer.ReadBigEndianFloat() _buffer.ReadBigEndianFloat() _buffer.ReadBigEndianFloat() }
-            //if(type==2){ _buffer.ReadVaruint() }
+            //if(type==0||type==2){ _buffer.ReadVaruint() }
         }
 
         public static UseEntity FromBuffer(byte[] buffer)
@@ -1265,14 +1265,14 @@ namespace sul.Protocol.Minecraft108.Serverbound
         {
             _buffer.WriteVaruint(entityId);
             _buffer.WriteVaruint(action);
-            if(action==5){ _buffer.WriteVaruint(jumpBoost); }
+            _buffer.WriteVaruint(jumpBoost);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
-            //if(action==5){ _buffer.ReadVaruint() }
+            //_buffer.ReadVaruint()
         }
 
         public static EntityAction FromBuffer(byte[] buffer)
