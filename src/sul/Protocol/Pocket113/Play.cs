@@ -4500,7 +4500,7 @@ namespace sul.Protocol.Pocket113.Play
     public class SimpleEvent : sul.Utils.Packet
     {
 
-        public const byte Id = 63;
+        public const byte Id = 64;
 
         public const bool Clientbound = true;
         public const bool Serverbound = true;
@@ -4549,7 +4549,7 @@ namespace sul.Protocol.Pocket113.Play
     public class TelemetryEvent : sul.Utils.Packet
     {
 
-        public const byte Id = 64;
+        public const byte Id = 65;
 
         public const bool Clientbound = true;
         public const bool Serverbound = false;
@@ -5500,28 +5500,28 @@ namespace sul.Protocol.Pocket113.Play
         public const bool Clientbound = true;
         public const bool Serverbound = false;
 
-        public byte unknown0;
-        public byte unknown1;
+        public byte window;
+        public byte windowType;
         public int unknown2;
         public int unknown3;
-        public bool unknown4;
+        public bool willing;
         public long trader;
         public long player;
-        public string unknown7;
+        public string displayName;
         public byte[] offers;
 
-        public UpdateTrade() : this(0, 0, 0, 0, false, 0, 0, "", new byte[]{}) {}
+        public UpdateTrade() : this(0, 15, 0, 0, false, 0, 0, "", new byte[]{}) {}
 
-        public UpdateTrade(byte unknown0, byte unknown1, int unknown2, int unknown3, bool unknown4, long trader, long player, string unknown7, byte[] offers)
+        public UpdateTrade(byte window, byte windowType, int unknown2, int unknown3, bool willing, long trader, long player, string displayName, byte[] offers)
         {
-            this.unknown0 = unknown0;
-            this.unknown1 = unknown1;
+            this.window = window;
+            this.windowType = windowType;
             this.unknown2 = unknown2;
             this.unknown3 = unknown3;
-            this.unknown4 = unknown4;
+            this.willing = willing;
             this.trader = trader;
             this.player = player;
-            this.unknown7 = unknown7;
+            this.displayName = displayName;
             this.offers = offers;
         }
 
@@ -5542,14 +5542,14 @@ namespace sul.Protocol.Pocket113.Play
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteUbyte(unknown0);
-            _buffer.WriteUbyte(unknown1);
+            _buffer.WriteUbyte(window);
+            _buffer.WriteUbyte(windowType);
             _buffer.WriteVarint(unknown2);
             _buffer.WriteVarint(unknown3);
-            _buffer.WriteBool(unknown4);
+            _buffer.WriteBool(willing);
             _buffer.WriteVarlong(trader);
             _buffer.WriteVarlong(player);
-            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown7)); _buffer.WriteString(unknown7);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
             _buffer.WriteBytes(offers);
         }
 
