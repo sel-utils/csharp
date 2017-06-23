@@ -4044,17 +4044,19 @@ namespace sul.Protocol.Pocket113.Play
         public const bool Clientbound = false;
         public const bool Serverbound = true;
 
-        public System.Tuple<float, float, float> motion;
-        public byte flags;
+        public float sideways;
+        public float forward;
         public bool unknown2;
+        public bool unknown3;
 
-        public PlayerInput() : this(null, 0, false) {}
+        public PlayerInput() : this(0, 0, false, false) {}
 
-        public PlayerInput(System.Tuple<float, float, float> motion, byte flags, bool unknown2)
+        public PlayerInput(float sideways, float forward, bool unknown2, bool unknown3)
         {
-            this.motion = motion;
-            this.flags = flags;
+            this.sideways = sideways;
+            this.forward = forward;
             this.unknown2 = unknown2;
+            this.unknown3 = unknown3;
         }
 
         public override int GetId()
@@ -4074,15 +4076,17 @@ namespace sul.Protocol.Pocket113.Play
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
-            _buffer.WriteUbyte(flags);
+            _buffer.WriteLittleEndianFloat(sideways);
+            _buffer.WriteLittleEndianFloat(forward);
             _buffer.WriteBool(unknown2);
+            _buffer.WriteBool(unknown3);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
-            //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
-            //_buffer.ReadUbyte()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadLittleEndianFloat()
+            //_buffer.ReadBool()
             //_buffer.ReadBool()
         }
 
