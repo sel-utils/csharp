@@ -3082,20 +3082,19 @@ namespace sul.Protocol.Pocket113.Play
         public const bool Serverbound = false;
 
         // action
-        public const byte ADD = 0;
-        public const byte RIDE = 1;
-        public const byte REMOVE = 2;
+        public const byte REMOVE = 0;
+        public const byte ADD = 1;
 
-        public long from;
-        public long to;
+        public long vehicle;
+        public long passenger;
         public byte action;
 
         public SetEntityLink() : this(0, 0, 0) {}
 
-        public SetEntityLink(long from, long to, byte action)
+        public SetEntityLink(long vehicle, long passenger, byte action)
         {
-            this.from = from;
-            this.to = to;
+            this.vehicle = vehicle;
+            this.passenger = passenger;
             this.action = action;
         }
 
@@ -3116,8 +3115,8 @@ namespace sul.Protocol.Pocket113.Play
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
-            _buffer.WriteVarlong(from);
-            _buffer.WriteVarlong(to);
+            _buffer.WriteVarlong(vehicle);
+            _buffer.WriteVarlong(passenger);
             _buffer.WriteUbyte(action);
         }
 
