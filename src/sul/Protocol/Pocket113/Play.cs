@@ -2278,6 +2278,7 @@ namespace sul.Protocol.Pocket113.Play
         public const byte SQUID_INK_CLOUD = 15;
         public const byte AMBIENT_SOUND = 16;
         public const byte RESPAWN = 17;
+        public const byte UNLEASH = 63;
 
         public long entityId;
         public byte eventId;
