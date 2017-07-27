@@ -3916,7 +3916,7 @@ namespace sul.Protocol.Pocket105.Play
         public const byte Id = 57;
 
         public const bool Clientbound = true;
-        public const bool Serverbound = false;
+        public const bool Serverbound = true;
 
         public BlockPosition position;
         public byte[] nbt;
