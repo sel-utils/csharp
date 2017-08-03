@@ -72,6 +72,8 @@
         <Compile Include="sul\Protocol\Minecraft316\Login.cs" />
         <Compile Include="sul\Protocol\Minecraft316\Clientbound.cs" />
         <Compile Include="sul\Protocol\Minecraft316\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Pocket130\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket130\Play.cs" />
         <Compile Include="sul\Protocol\Externalconsole2\Types.cs" />
         <Compile Include="sul\Protocol\Externalconsole2\Login.cs" />
         <Compile Include="sul\Protocol\Externalconsole2\Status.cs" />
