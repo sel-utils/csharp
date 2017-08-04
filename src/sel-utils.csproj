@@ -43,8 +43,11 @@
         <Compile Include="sul\Protocol\Minecraft335\Login.cs" />
         <Compile Include="sul\Protocol\Minecraft335\Clientbound.cs" />
         <Compile Include="sul\Protocol\Minecraft335\Serverbound.cs" />
-        <Compile Include="sul\Protocol\Pocket105\Types.cs" />
-        <Compile Include="sul\Protocol\Pocket105\Play.cs" />
+        <Compile Include="sul\Protocol\Minecraft338\Types.cs" />
+        <Compile Include="sul\Protocol\Minecraft338\Status.cs" />
+        <Compile Include="sul\Protocol\Minecraft338\Login.cs" />
+        <Compile Include="sul\Protocol\Minecraft338\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Minecraft338\Serverbound.cs" />
         <Compile Include="sul\Protocol\Pocket100\Types.cs" />
         <Compile Include="sul\Protocol\Pocket100\Play.cs" />
         <Compile Include="sul\Protocol\Pocket101\Types.cs" />
@@ -53,6 +56,8 @@
         <Compile Include="sul\Protocol\Hncom1\Login.cs" />
         <Compile Include="sul\Protocol\Hncom1\Status.cs" />
         <Compile Include="sul\Protocol\Hncom1\Player.cs" />
+        <Compile Include="sul\Protocol\Pocket105\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket105\Play.cs" />
         <Compile Include="sul\Protocol\Pocket113\Types.cs" />
         <Compile Include="sul\Protocol\Pocket113\Play.cs" />
         <Compile Include="sul\Protocol\Minecraft210\Types.cs" />
