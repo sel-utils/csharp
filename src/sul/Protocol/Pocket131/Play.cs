@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket130.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket131.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Pocket130.Types;
+using sul.Protocol.Pocket131.Types;
 
-namespace sul.Protocol.Pocket130.Play
+namespace sul.Protocol.Pocket131.Play
 {
 
     public class Login : sul.Utils.Packet
@@ -25,7 +25,7 @@ namespace sul.Protocol.Pocket130.Play
         public uint protocol;
         public LoginBody body;
 
-        public Login() : this(130, new LoginBody()) {}
+        public Login() : this(131, new LoginBody()) {}
 
         public Login(uint protocol, LoginBody body)
         {

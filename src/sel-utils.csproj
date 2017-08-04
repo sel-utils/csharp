@@ -72,8 +72,6 @@
         <Compile Include="sul\Protocol\Minecraft316\Login.cs" />
         <Compile Include="sul\Protocol\Minecraft316\Clientbound.cs" />
         <Compile Include="sul\Protocol\Minecraft316\Serverbound.cs" />
-        <Compile Include="sul\Protocol\Pocket130\Types.cs" />
-        <Compile Include="sul\Protocol\Pocket130\Play.cs" />
         <Compile Include="sul\Protocol\Externalconsole2\Types.cs" />
         <Compile Include="sul\Protocol\Externalconsole2\Login.cs" />
         <Compile Include="sul\Protocol\Externalconsole2\Status.cs" />
@@ -87,6 +85,8 @@
         <Compile Include="sul\Protocol\Minecraft315\Login.cs" />
         <Compile Include="sul\Protocol\Minecraft315\Clientbound.cs" />
         <Compile Include="sul\Protocol\Minecraft315\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Pocket131\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket131\Play.cs" />
         <Compile Include="sul\Utils\About.cs" />
         <Compile Include="sul\Utils\Buffer.cs" />
         <Compile Include="sul\Utils\LengthPrefixedType.cs" />

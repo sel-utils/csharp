@@ -4,11 +4,11 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket130.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket131.xml
  */
 using System.Text;
 
-namespace sul.Protocol.Pocket130.Types
+namespace sul.Protocol.Pocket131.Types
 {
 
     public class LoginBody : sul.Utils.LengthPrefixedType
@@ -254,25 +254,37 @@ namespace sul.Protocol.Pocket130.Types
 
         public string name;
         public byte[] data;
+        public byte[] capeData;
+        public string geometryName;
+        public byte[] geometryData;
 
-        public Skin() : this("", new byte[]{}) {}
+        public Skin() : this("", new byte[]{}, new byte[]{}, "", new byte[]{}) {}
 
-        public Skin(string name, byte[] data)
+        public Skin(string name, byte[] data, byte[] capeData, string geometryName, byte[] geometryData)
         {
             this.name = name;
             this.data = data;
+            this.capeData = capeData;
+            this.geometryName = geometryName;
+            this.geometryData = geometryData;
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteVaruint(data.Length); _buffer.WriteBytes(data);
+            _buffer.WriteVaruint(capeData.Length); _buffer.WriteBytes(capeData);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(geometryName)); _buffer.WriteString(geometryName);
+            _buffer.WriteVaruint(geometryData.Length); _buffer.WriteBytes(geometryData);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadString()
             //data.DecodeBody(_buffer);
+            //capeData.DecodeBody(_buffer);
+            //_buffer.ReadString()
+            //geometryData.DecodeBody(_buffer);
         }
 
     }
@@ -284,15 +296,17 @@ namespace sul.Protocol.Pocket130.Types
         public long entityId;
         public string displayName;
         public Skin skin;
+        public string xuid;
 
-        public PlayerList() : this(new McpeUuid(), 0, "", new Skin()) {}
+        public PlayerList() : this(new McpeUuid(), 0, "", new Skin(), "") {}
 
-        public PlayerList(McpeUuid uuid, long entityId, string displayName, Skin skin)
+        public PlayerList(McpeUuid uuid, long entityId, string displayName, Skin skin, string xuid)
         {
             this.uuid = uuid;
             this.entityId = entityId;
             this.displayName = displayName;
             this.skin = skin;
+            this.xuid = xuid;
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -301,6 +315,7 @@ namespace sul.Protocol.Pocket130.Types
             _buffer.WriteVarlong(entityId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
             skin.EncodeBody(_buffer);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(xuid)); _buffer.WriteString(xuid);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
@@ -309,6 +324,7 @@ namespace sul.Protocol.Pocket130.Types
             //_buffer.ReadVarlong()
             //_buffer.ReadString()
             //skin.DecodeBody(_buffer);
+            //_buffer.ReadString()
         }
 
     }
