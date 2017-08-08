@@ -4189,11 +4189,11 @@ namespace sul.Protocol.Pocket131.Play
         public const uint MUTED = 1024;
 
         // permission level
-        public const uint USER = 0;
-        public const uint OPERATOR = 1;
-        public const uint HOST = 2;
-        public const uint AUTOMATION = 3;
-        public const uint ADMIN = 4;
+        public const uint LEVEL_USER = 0;
+        public const uint LEVEL_OPERATOR = 1;
+        public const uint LEVEL_HOST = 2;
+        public const uint LEVEL_AUTOMATION = 3;
+        public const uint LEVEL_ADMIN = 4;
 
         // abilities
         public const uint BUILD_AND_MINE = 1;
