@@ -10,4 +10,4 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle ("sel-utils")]
 [assembly: AssemblyDescription ("Automatically generated libraries for Minecraft and Minecraft: Pocket Edition")]
-[assembly: AssemblyVersion ("1.2.80")]
+[assembly: AssemblyVersion ("1.2.83")]

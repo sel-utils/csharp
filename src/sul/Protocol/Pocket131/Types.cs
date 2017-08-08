@@ -401,6 +401,55 @@ namespace sul.Protocol.Pocket131.Types
 
     }
 
+    public class InventoryAction : sul.Utils.Stream
+    {
+
+        // source
+        public const uint CONTAINER = 0;
+        public const uint WORLD = 2;
+        public const uint CREATIVE = 3;
+
+        public uint source;
+        public int container;
+        public uint unknown2;
+        public uint slot;
+        public Slot oldItem;
+        public Slot newItem;
+
+        public InventoryAction() : this(0, -1, 0, 0, new Slot(), new Slot()) {}
+
+        public InventoryAction(uint source, int container, uint unknown2, uint slot, Slot oldItem, Slot newItem)
+        {
+            this.source = source;
+            this.container = container;
+            this.unknown2 = unknown2;
+            this.slot = slot;
+            this.oldItem = oldItem;
+            this.newItem = newItem;
+        }
+
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+        {
+            _buffer.WriteVaruint(source);
+            if(source==0){ _buffer.WriteVarint(container); }
+            if(source==2){ _buffer.WriteVaruint(unknown2); }
+            _buffer.WriteVaruint(slot);
+            oldItem.EncodeBody(_buffer);
+            newItem.EncodeBody(_buffer);
+        }
+
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+        {
+            //_buffer.ReadVaruint()
+            //if(source==0){ _buffer.ReadVarint() }
+            //if(source==2){ _buffer.ReadVaruint() }
+            //_buffer.ReadVaruint()
+            //oldItem.DecodeBody(_buffer);
+            //newItem.DecodeBody(_buffer);
+        }
+
+    }
+
     public class ChunkData : sul.Utils.LengthPrefixedType
     {
 
@@ -436,7 +485,7 @@ namespace sul.Protocol.Pocket131.Types
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(sections.Length); foreach (Section sectionsChild in sections){ sectionsChild.EncodeBody(_buffer); }
-            foreach (ushort heightsChild in heights){ _buffer.WriteBigEndianUshort(heightsChild); }
+            foreach (ushort heightsChild in heights){ _buffer.WriteLittleEndianUshort(heightsChild); }
             foreach (byte biomesChild in biomes){ _buffer.WriteUbyte(biomesChild); }
             _buffer.WriteVaruint(borders.Length); _buffer.WriteBytes(borders);
             _buffer.WriteVaruint(extraData.Length); foreach (ExtraData extraDataChild in extraData){ extraDataChild.EncodeBody(_buffer); }
@@ -579,12 +628,12 @@ namespace sul.Protocol.Pocket131.Types
         public string name;
         public byte type;
         public bool booleanValue;
-        public int integerValue;
+        public uint integerValue;
         public float floatingValue;
 
         public Rule() : this("", 0, false, 0, 0) {}
 
-        public Rule(string name, byte type, bool booleanValue, int integerValue, float floatingValue)
+        public Rule(string name, byte type, bool booleanValue, uint integerValue, float floatingValue)
         {
             this.name = name;
             this.type = type;
@@ -598,7 +647,7 @@ namespace sul.Protocol.Pocket131.Types
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
             _buffer.WriteUbyte(type);
             if(type==1){ _buffer.WriteBool(booleanValue); }
-            if(type==2){ _buffer.WriteBigEndianInt(integerValue); }
+            if(type==2){ _buffer.WriteVaruint(integerValue); }
             if(type==3){ _buffer.WriteLittleEndianFloat(floatingValue); }
         }
 
@@ -607,7 +656,7 @@ namespace sul.Protocol.Pocket131.Types
             //_buffer.ReadString()
             //_buffer.ReadUbyte()
             //if(type==1){ _buffer.ReadBool() }
-            //if(type==2){ _buffer.ReadBigEndianInt() }
+            //if(type==2){ _buffer.ReadVaruint() }
             //if(type==3){ _buffer.ReadLittleEndianFloat() }
         }
 
