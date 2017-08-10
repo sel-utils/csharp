@@ -65,6 +65,8 @@
         <Compile Include="sul\Protocol\Minecraft210\Login.cs" />
         <Compile Include="sul\Protocol\Minecraft210\Clientbound.cs" />
         <Compile Include="sul\Protocol\Minecraft210\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Pocket132\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket132\Play.cs" />
         <Compile Include="sul\Protocol\Hncom2\Types.cs" />
         <Compile Include="sul\Protocol\Hncom2\Util.cs" />
         <Compile Include="sul\Protocol\Hncom2\Login.cs" />
@@ -90,8 +92,6 @@
         <Compile Include="sul\Protocol\Minecraft315\Login.cs" />
         <Compile Include="sul\Protocol\Minecraft315\Clientbound.cs" />
         <Compile Include="sul\Protocol\Minecraft315\Serverbound.cs" />
-        <Compile Include="sul\Protocol\Pocket131\Types.cs" />
-        <Compile Include="sul\Protocol\Pocket131\Play.cs" />
         <Compile Include="sul\Utils\About.cs" />
         <Compile Include="sul\Utils\Buffer.cs" />
         <Compile Include="sul\Utils\LengthPrefixedType.cs" />

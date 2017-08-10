@@ -4,11 +4,11 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket131.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket132.xml
  */
 using System.Text;
 
-namespace sul.Protocol.Pocket131.Types
+namespace sul.Protocol.Pocket132.Types
 {
 
     public class LoginBody : sul.Utils.LengthPrefixedType
@@ -249,6 +249,46 @@ namespace sul.Protocol.Pocket131.Types
 
     }
 
+    public class PlayerList : sul.Utils.Stream
+    {
+
+        public McpeUuid uuid;
+        public long entityId;
+        public string displayName;
+        public Skin skin;
+        public string unknown4;
+
+        public PlayerList() : this(new McpeUuid(), 0, "", new Skin(), "") {}
+
+        public PlayerList(McpeUuid uuid, long entityId, string displayName, Skin skin, string unknown4)
+        {
+            this.uuid = uuid;
+            this.entityId = entityId;
+            this.displayName = displayName;
+            this.skin = skin;
+            this.unknown4 = unknown4;
+        }
+
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+        {
+            uuid.EncodeBody(_buffer);
+            _buffer.WriteVarlong(entityId);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
+            skin.EncodeBody(_buffer);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown4)); _buffer.WriteString(unknown4);
+        }
+
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+        {
+            //uuid.DecodeBody(_buffer);
+            //_buffer.ReadVarlong()
+            //_buffer.ReadString()
+            //skin.DecodeBody(_buffer);
+            //_buffer.ReadString()
+        }
+
+    }
+
     public class Skin : sul.Utils.Stream
     {
 
@@ -289,46 +329,6 @@ namespace sul.Protocol.Pocket131.Types
 
     }
 
-    public class PlayerList : sul.Utils.Stream
-    {
-
-        public McpeUuid uuid;
-        public long entityId;
-        public string displayName;
-        public Skin skin;
-        public string xuid;
-
-        public PlayerList() : this(new McpeUuid(), 0, "", new Skin(), "") {}
-
-        public PlayerList(McpeUuid uuid, long entityId, string displayName, Skin skin, string xuid)
-        {
-            this.uuid = uuid;
-            this.entityId = entityId;
-            this.displayName = displayName;
-            this.skin = skin;
-            this.xuid = xuid;
-        }
-
-        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
-        {
-            uuid.EncodeBody(_buffer);
-            _buffer.WriteVarlong(entityId);
-            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(displayName)); _buffer.WriteString(displayName);
-            skin.EncodeBody(_buffer);
-            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(xuid)); _buffer.WriteString(xuid);
-        }
-
-        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
-        {
-            //uuid.DecodeBody(_buffer);
-            //_buffer.ReadVarlong()
-            //_buffer.ReadString()
-            //skin.DecodeBody(_buffer);
-            //_buffer.ReadString()
-        }
-
-    }
-
     public class Link : sul.Utils.Stream
     {
 
@@ -340,14 +340,16 @@ namespace sul.Protocol.Pocket131.Types
         public long from;
         public long to;
         public byte action;
+        public byte unknown3;
 
-        public Link() : this(0, 0, 0) {}
+        public Link() : this(0, 0, 0, 0) {}
 
-        public Link(long from, long to, byte action)
+        public Link(long from, long to, byte action, byte unknown3)
         {
             this.from = from;
             this.to = to;
             this.action = action;
+            this.unknown3 = unknown3;
         }
 
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -355,12 +357,14 @@ namespace sul.Protocol.Pocket131.Types
             _buffer.WriteVarlong(from);
             _buffer.WriteVarlong(to);
             _buffer.WriteUbyte(action);
+            _buffer.WriteUbyte(unknown3);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVarlong()
             //_buffer.ReadVarlong()
+            //_buffer.ReadUbyte()
             //_buffer.ReadUbyte()
         }
 

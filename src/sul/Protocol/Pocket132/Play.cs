@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket131.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket132.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Pocket131.Types;
+using sul.Protocol.Pocket132.Types;
 
-namespace sul.Protocol.Pocket131.Play
+namespace sul.Protocol.Pocket132.Play
 {
 
     public class Login : sul.Utils.Packet
@@ -25,7 +25,7 @@ namespace sul.Protocol.Pocket131.Play
         public uint protocol;
         public LoginBody body;
 
-        public Login() : this(131, new LoginBody()) {}
+        public Login() : this(132, new LoginBody()) {}
 
         public Login(uint protocol, LoginBody body)
         {
@@ -911,19 +911,20 @@ namespace sul.Protocol.Pocket131.Play
         public bool textureRequired;
         public Rule[] gameRules;
         public bool bonusChestEnabled;
+        public bool startWithMapEnabled;
         public bool trustPlayersEnabled;
         public int permissionLevel;
-        public int unknown26;
+        public int unknown27;
         public string levelId;
         public string worldName;
         public string premiumWorldTemplate;
-        public bool unknown30;
+        public bool unknown31;
         public ulong worldTicks;
-        public int unknown32;
+        public int unknown33;
 
-        public StartGame() : this(0, 0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, true, false, false, false, false, new Rule[]{}, false, false, 0, 0, "", "", "", false, 0, 0) {}
+        public StartGame() : this(0, 0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, true, false, false, false, false, new Rule[]{}, false, false, false, 0, 0, "", "", "", false, 0, 0) {}
 
-        public StartGame(long entityId, long runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightningLevel, bool multiplayerGame, bool broadcastToLan, bool broadcastToXbl, bool commandsEnabled, bool textureRequired, Rule[] gameRules, bool bonusChestEnabled, bool trustPlayersEnabled, int permissionLevel, int unknown26, string levelId, string worldName, string premiumWorldTemplate, bool unknown30, ulong worldTicks, int unknown32)
+        public StartGame(long entityId, long runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightningLevel, bool multiplayerGame, bool broadcastToLan, bool broadcastToXbl, bool commandsEnabled, bool textureRequired, Rule[] gameRules, bool bonusChestEnabled, bool startWithMapEnabled, bool trustPlayersEnabled, int permissionLevel, int unknown27, string levelId, string worldName, string premiumWorldTemplate, bool unknown31, ulong worldTicks, int unknown33)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -949,15 +950,16 @@ namespace sul.Protocol.Pocket131.Play
             this.textureRequired = textureRequired;
             this.gameRules = gameRules;
             this.bonusChestEnabled = bonusChestEnabled;
+            this.startWithMapEnabled = startWithMapEnabled;
             this.trustPlayersEnabled = trustPlayersEnabled;
             this.permissionLevel = permissionLevel;
-            this.unknown26 = unknown26;
+            this.unknown27 = unknown27;
             this.levelId = levelId;
             this.worldName = worldName;
             this.premiumWorldTemplate = premiumWorldTemplate;
-            this.unknown30 = unknown30;
+            this.unknown31 = unknown31;
             this.worldTicks = worldTicks;
-            this.unknown32 = unknown32;
+            this.unknown33 = unknown33;
         }
 
         public override int GetId()
@@ -1001,15 +1003,16 @@ namespace sul.Protocol.Pocket131.Play
             _buffer.WriteBool(textureRequired);
             _buffer.WriteVaruint(gameRules.Length); foreach (Rule gameRulesChild in gameRules){ gameRulesChild.EncodeBody(_buffer); }
             _buffer.WriteBool(bonusChestEnabled);
+            _buffer.WriteBool(startWithMapEnabled);
             _buffer.WriteBool(trustPlayersEnabled);
             _buffer.WriteVarint(permissionLevel);
-            _buffer.WriteVarint(unknown26);
+            _buffer.WriteVarint(unknown27);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(levelId)); _buffer.WriteString(levelId);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(worldName)); _buffer.WriteString(worldName);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(premiumWorldTemplate)); _buffer.WriteString(premiumWorldTemplate);
-            _buffer.WriteBool(unknown30);
+            _buffer.WriteBool(unknown31);
             _buffer.WriteLittleEndianUlong(worldTicks);
-            _buffer.WriteVarint(unknown32);
+            _buffer.WriteVarint(unknown33);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
@@ -1037,6 +1040,7 @@ namespace sul.Protocol.Pocket131.Play
             //_buffer.ReadBool()
             //_buffer.ReadBool()
             //gameRules.DecodeBody(_buffer);
+            //_buffer.ReadBool()
             //_buffer.ReadBool()
             //_buffer.ReadBool()
             //_buffer.ReadVarint()
@@ -1082,10 +1086,11 @@ namespace sul.Protocol.Pocket131.Play
         public uint unknown13;
         public uint unknown14;
         public long unknown15;
+        public Link[] links;
 
-        public AddPlayer() : this(new McpeUuid(), "", 0, 0, null, null, 0, 0, 0, new Slot(), new Metadata(), 0, 0, 0, 0, 0) {}
+        public AddPlayer() : this(new McpeUuid(), "", 0, 0, null, null, 0, 0, 0, new Slot(), new Metadata(), 0, 0, 0, 0, 0, new Link[]{}) {}
 
-        public AddPlayer(McpeUuid uuid, string username, long entityId, long runtimeId, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Slot heldItem, Metadata metadata, uint unknown11, uint unknown12, uint unknown13, uint unknown14, long unknown15)
+        public AddPlayer(McpeUuid uuid, string username, long entityId, long runtimeId, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Slot heldItem, Metadata metadata, uint unknown11, uint unknown12, uint unknown13, uint unknown14, long unknown15, Link[] links)
         {
             this.uuid = uuid;
             this.username = username;
@@ -1103,6 +1108,7 @@ namespace sul.Protocol.Pocket131.Play
             this.unknown13 = unknown13;
             this.unknown14 = unknown14;
             this.unknown15 = unknown15;
+            this.links = links;
         }
 
         public override int GetId()
@@ -1138,6 +1144,7 @@ namespace sul.Protocol.Pocket131.Play
             _buffer.WriteVaruint(unknown13);
             _buffer.WriteVaruint(unknown14);
             _buffer.WriteLittleEndianLong(unknown15);
+            _buffer.WriteVaruint(links.Length); foreach (Link linksChild in links){ linksChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
@@ -1158,6 +1165,7 @@ namespace sul.Protocol.Pocket131.Play
             //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
             //_buffer.ReadLittleEndianLong()
+            //links.DecodeBody(_buffer);
         }
 
         public static AddPlayer FromBuffer(byte[] buffer)
@@ -6350,12 +6358,16 @@ namespace sul.Protocol.Pocket131.Play
         public const bool Serverbound = false;
 
         public string unknown0;
+        public bool unknown1;
+        public string unknown2;
 
-        public ShowStoreOffer() : this("") {}
+        public ShowStoreOffer() : this("", false, "") {}
 
-        public ShowStoreOffer(string unknown0)
+        public ShowStoreOffer(string unknown0, bool unknown1, string unknown2)
         {
             this.unknown0 = unknown0;
+            this.unknown1 = unknown1;
+            this.unknown2 = unknown2;
         }
 
         public override int GetId()
@@ -6376,10 +6388,14 @@ namespace sul.Protocol.Pocket131.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown0)); _buffer.WriteString(unknown0);
+            _buffer.WriteBool(unknown1);
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown2)); _buffer.WriteString(unknown2);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
+            //_buffer.ReadString()
+            //_buffer.ReadBool()
             //_buffer.ReadString()
         }
 
