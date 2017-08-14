@@ -5478,15 +5478,17 @@ namespace sul.Protocol.Pocket132.Play
         public const bool Serverbound = false;
 
         public string[] enumValues;
-        public uint unknown1;
+        public string[] unknown1;
+        public Enum[] enums;
         public Command[] commands;
 
-        public AvailableCommands() : this(new string[]{}, 0, new Command[]{}) {}
+        public AvailableCommands() : this(new string[]{}, new string[]{}, new Enum[]{}, new Command[]{}) {}
 
-        public AvailableCommands(string[] enumValues, uint unknown1, Command[] commands)
+        public AvailableCommands(string[] enumValues, string[] unknown1, Enum[] enums, Command[] commands)
         {
             this.enumValues = enumValues;
             this.unknown1 = unknown1;
+            this.enums = enums;
             this.commands = commands;
         }
 
@@ -5508,14 +5510,16 @@ namespace sul.Protocol.Pocket132.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVaruint(enumValues.Length); foreach (string enumValuesChild in enumValues){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(enumValuesChild)); _buffer.WriteString(enumValuesChild); }
-            _buffer.WriteVaruint(unknown1);
+            _buffer.WriteVaruint(unknown1.Length); foreach (string unknown1Child in unknown1){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(unknown1Child)); _buffer.WriteString(unknown1Child); }
+            _buffer.WriteVaruint(enums.Length); foreach (Enum enumsChild in enums){ enumsChild.EncodeBody(_buffer); }
             _buffer.WriteVaruint(commands.Length); foreach (Command commandsChild in commands){ commandsChild.EncodeBody(_buffer); }
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //enumValues.DecodeBody(_buffer);
-            //_buffer.ReadVaruint()
+            //unknown1.DecodeBody(_buffer);
+            //enums.DecodeBody(_buffer);
             //commands.DecodeBody(_buffer);
         }
 

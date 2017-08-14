@@ -666,6 +666,34 @@ namespace sul.Protocol.Pocket132.Types
 
     }
 
+    public class Enum : sul.Utils.Stream
+    {
+
+        public string name;
+        public ushort[] valuesIndexes;
+
+        public Enum() : this("", new ushort[]{}) {}
+
+        public Enum(string name, ushort[] valuesIndexes)
+        {
+            this.name = name;
+            this.valuesIndexes = valuesIndexes;
+        }
+
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+        {
+            _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(name)); _buffer.WriteString(name);
+            _buffer.WriteVaruint(valuesIndexes.Length); foreach (ushort valuesIndexesChild in valuesIndexes){ _buffer.WriteLittleEndianUshort(valuesIndexesChild); }
+        }
+
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+        {
+            //_buffer.ReadString()
+            //valuesIndexes.DecodeBody(_buffer);
+        }
+
+    }
+
     public class Command : sul.Utils.Stream
     {
 
@@ -673,18 +701,18 @@ namespace sul.Protocol.Pocket132.Types
         public string description;
         public byte unknown2;
         public byte permissionLevel;
-        public int aliasesId;
+        public int aliasesEnum;
         public Overload[] overloads;
 
         public Command() : this("", "", 0, 0, -1, new Overload[]{}) {}
 
-        public Command(string name, string description, byte unknown2, byte permissionLevel, int aliasesId, Overload[] overloads)
+        public Command(string name, string description, byte unknown2, byte permissionLevel, int aliasesEnum, Overload[] overloads)
         {
             this.name = name;
             this.description = description;
             this.unknown2 = unknown2;
             this.permissionLevel = permissionLevel;
-            this.aliasesId = aliasesId;
+            this.aliasesEnum = aliasesEnum;
             this.overloads = overloads;
         }
 
@@ -694,7 +722,7 @@ namespace sul.Protocol.Pocket132.Types
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(description)); _buffer.WriteString(description);
             _buffer.WriteUbyte(unknown2);
             _buffer.WriteUbyte(permissionLevel);
-            _buffer.WriteLittleEndianInt(aliasesId);
+            _buffer.WriteLittleEndianInt(aliasesEnum);
             _buffer.WriteVaruint(overloads.Length); foreach (Overload overloadsChild in overloads){ overloadsChild.EncodeBody(_buffer); }
         }
 
@@ -736,6 +764,21 @@ namespace sul.Protocol.Pocket132.Types
 
     public class Parameter : sul.Utils.Stream
     {
+
+        // type
+        public const uint VALID = 1048576;
+        public const uint INT = 1;
+        public const uint FLOAT = 2;
+        public const uint MIXED = 3;
+        public const uint TARGET = 4;
+        public const uint STRING = 12;
+        public const uint POSITION = 13;
+        public const uint RAWTEXT = 16;
+        public const uint TEXT = 18;
+        public const uint JSON = 21;
+        public const uint COMMAND = 28;
+        public const uint ENUM = 2097152;
+        public const uint TEMPLATE = 16777216;
 
         public string name;
         public uint type;
