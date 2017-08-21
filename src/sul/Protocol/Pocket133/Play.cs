@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket132.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket133.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Pocket132.Types;
+using sul.Protocol.Pocket133.Types;
 
-namespace sul.Protocol.Pocket132.Play
+namespace sul.Protocol.Pocket133.Play
 {
 
     public class Login : sul.Utils.Packet
@@ -25,7 +25,7 @@ namespace sul.Protocol.Pocket132.Play
         public uint protocol;
         public LoginBody body;
 
-        public Login() : this(132, new LoginBody()) {}
+        public Login() : this(133, new LoginBody()) {}
 
         public Login(uint protocol, LoginBody body)
         {
@@ -661,6 +661,42 @@ namespace sul.Protocol.Pocket132.Play
 
         }
 
+        public JukeboxPopupVariant JukeboxPopup(string message, string[] parameters)
+        {
+            var _variant = new JukeboxPopupVariant(this);
+            _variant.message = message;
+            _variant.parameters = parameters;
+            return _variant;
+        }
+
+        public sealed class JukeboxPopupVariant : sul.Utils.Variant
+        {
+
+            private Text _parent;
+
+            public string message;
+            public string[] parameters;
+
+            public JukeboxPopupVariant(Text parent) : base(parent)
+            {
+                this._parent = parent;
+                this._parent.type = 4;
+            }
+
+            protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+            {
+                _parent.EncodeImpl(_buffer);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+                _buffer.WriteVaruint(parameters.Length); foreach (string parametersChild in parameters){ _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(parametersChild)); _buffer.WriteString(parametersChild); }
+            }
+
+            protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+            {
+                //TODO
+            }
+
+        }
+
         public TipVariant Tip(string message)
         {
             var _variant = new TipVariant(this);
@@ -678,7 +714,7 @@ namespace sul.Protocol.Pocket132.Play
             public TipVariant(Text parent) : base(parent)
             {
                 this._parent = parent;
-                this._parent.type = 4;
+                this._parent.type = 5;
             }
 
             protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -711,7 +747,7 @@ namespace sul.Protocol.Pocket132.Play
             public SystemVariant(Text parent) : base(parent)
             {
                 this._parent = parent;
-                this._parent.type = 5;
+                this._parent.type = 6;
             }
 
             protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -746,7 +782,7 @@ namespace sul.Protocol.Pocket132.Play
             public WhisperVariant(Text parent) : base(parent)
             {
                 this._parent = parent;
-                this._parent.type = 6;
+                this._parent.type = 7;
             }
 
             protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -782,7 +818,7 @@ namespace sul.Protocol.Pocket132.Play
             public AnnouncementVariant(Text parent) : base(parent)
             {
                 this._parent = parent;
-                this._parent.type = 7;
+                this._parent.type = 8;
             }
 
             protected override void EncodeImpl(sul.Utils.Buffer _buffer)
@@ -888,7 +924,7 @@ namespace sul.Protocol.Pocket132.Play
         public const byte EDUCATION = 1;
 
         public long entityId;
-        public long runtimeId;
+        public ulong runtimeId;
         public int gamemode;
         public System.Tuple<float, float, float> position;
         public float yaw;
@@ -924,7 +960,7 @@ namespace sul.Protocol.Pocket132.Play
 
         public StartGame() : this(0, 0, 0, null, 0, 0, 0, 0, 1, 0, 0, null, false, 0, 0, 0, 0, true, false, false, false, false, new Rule[]{}, false, false, false, 0, 0, "", "", "", false, 0, 0) {}
 
-        public StartGame(long entityId, long runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightningLevel, bool multiplayerGame, bool broadcastToLan, bool broadcastToXbl, bool commandsEnabled, bool textureRequired, Rule[] gameRules, bool bonusChestEnabled, bool startWithMapEnabled, bool trustPlayersEnabled, int permissionLevel, int unknown27, string levelId, string worldName, string premiumWorldTemplate, bool unknown31, ulong worldTicks, int unknown33)
+        public StartGame(long entityId, ulong runtimeId, int gamemode, System.Tuple<float, float, float> position, float yaw, float pitch, int seed, int dimension, int generator, int worldGamemode, int difficulty, System.Tuple<int, int, int> spawnPosition, bool loadedInCreative, int time, byte version, float rainLevel, float lightningLevel, bool multiplayerGame, bool broadcastToLan, bool broadcastToXbl, bool commandsEnabled, bool textureRequired, Rule[] gameRules, bool bonusChestEnabled, bool startWithMapEnabled, bool trustPlayersEnabled, int permissionLevel, int unknown27, string levelId, string worldName, string premiumWorldTemplate, bool unknown31, ulong worldTicks, int unknown33)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -980,7 +1016,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteVarlong(runtimeId);
+            _buffer.WriteVarulong(runtimeId);
             _buffer.WriteVarint(gamemode);
             _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteLittleEndianFloat(yaw);
@@ -1018,7 +1054,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVarlong()
-            //_buffer.ReadVarlong()
+            //_buffer.ReadVarulong()
             //_buffer.ReadVarint()
             //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
             //_buffer.ReadLittleEndianFloat()
@@ -1073,7 +1109,7 @@ namespace sul.Protocol.Pocket132.Play
         public McpeUuid uuid;
         public string username;
         public long entityId;
-        public long runtimeId;
+        public ulong runtimeId;
         public System.Tuple<float, float, float> position;
         public System.Tuple<float, float, float> motion;
         public float pitch;
@@ -1085,12 +1121,13 @@ namespace sul.Protocol.Pocket132.Play
         public uint unknown12;
         public uint unknown13;
         public uint unknown14;
-        public long unknown15;
+        public uint unknown15;
+        public long unknown16;
         public Link[] links;
 
-        public AddPlayer() : this(new McpeUuid(), "", 0, 0, null, null, 0, 0, 0, new Slot(), new Metadata(), 0, 0, 0, 0, 0, new Link[]{}) {}
+        public AddPlayer() : this(new McpeUuid(), "", 0, 0, null, null, 0, 0, 0, new Slot(), new Metadata(), 0, 0, 0, 0, 0, 0, new Link[]{}) {}
 
-        public AddPlayer(McpeUuid uuid, string username, long entityId, long runtimeId, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Slot heldItem, Metadata metadata, uint unknown11, uint unknown12, uint unknown13, uint unknown14, long unknown15, Link[] links)
+        public AddPlayer(McpeUuid uuid, string username, long entityId, ulong runtimeId, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float headYaw, float yaw, Slot heldItem, Metadata metadata, uint unknown11, uint unknown12, uint unknown13, uint unknown14, uint unknown15, long unknown16, Link[] links)
         {
             this.uuid = uuid;
             this.username = username;
@@ -1108,6 +1145,7 @@ namespace sul.Protocol.Pocket132.Play
             this.unknown13 = unknown13;
             this.unknown14 = unknown14;
             this.unknown15 = unknown15;
+            this.unknown16 = unknown16;
             this.links = links;
         }
 
@@ -1131,7 +1169,7 @@ namespace sul.Protocol.Pocket132.Play
             uuid.EncodeBody(_buffer);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(username)); _buffer.WriteString(username);
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteVarlong(runtimeId);
+            _buffer.WriteVarulong(runtimeId);
             _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
             _buffer.WriteLittleEndianFloat(pitch);
@@ -1143,7 +1181,8 @@ namespace sul.Protocol.Pocket132.Play
             _buffer.WriteVaruint(unknown12);
             _buffer.WriteVaruint(unknown13);
             _buffer.WriteVaruint(unknown14);
-            _buffer.WriteLittleEndianLong(unknown15);
+            _buffer.WriteVaruint(unknown15);
+            _buffer.WriteLittleEndianLong(unknown16);
             _buffer.WriteVaruint(links.Length); foreach (Link linksChild in links){ linksChild.EncodeBody(_buffer); }
         }
 
@@ -1152,7 +1191,7 @@ namespace sul.Protocol.Pocket132.Play
             //uuid.DecodeBody(_buffer);
             //_buffer.ReadString()
             //_buffer.ReadVarlong()
-            //_buffer.ReadVarlong()
+            //_buffer.ReadVarulong()
             //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
             //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
             //_buffer.ReadLittleEndianFloat()
@@ -1160,6 +1199,7 @@ namespace sul.Protocol.Pocket132.Play
             //_buffer.ReadLittleEndianFloat()
             //heldItem.DecodeBody(_buffer);
             //metadata.DecodeBody(_buffer);
+            //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
@@ -1186,7 +1226,7 @@ namespace sul.Protocol.Pocket132.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public long runtimeId;
+        public ulong runtimeId;
         public uint type;
         public System.Tuple<float, float, float> position;
         public System.Tuple<float, float, float> motion;
@@ -1198,7 +1238,7 @@ namespace sul.Protocol.Pocket132.Play
 
         public AddEntity() : this(0, 0, 0, null, null, 0, 0, new Attribute[]{}, new Metadata(), new Link[]{}) {}
 
-        public AddEntity(long entityId, long runtimeId, uint type, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float yaw, Attribute[] attributes, Metadata metadata, Link[] links)
+        public AddEntity(long entityId, ulong runtimeId, uint type, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, float pitch, float yaw, Attribute[] attributes, Metadata metadata, Link[] links)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -1230,7 +1270,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteVarlong(runtimeId);
+            _buffer.WriteVarulong(runtimeId);
             _buffer.WriteVaruint(type);
             _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
@@ -1244,7 +1284,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVarlong()
-            //_buffer.ReadVarlong()
+            //_buffer.ReadVarulong()
             //_buffer.ReadVaruint()
             //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
             //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
@@ -1324,7 +1364,7 @@ namespace sul.Protocol.Pocket132.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public long runtimeId;
+        public ulong runtimeId;
         public Slot item;
         public System.Tuple<float, float, float> position;
         public System.Tuple<float, float, float> motion;
@@ -1332,7 +1372,7 @@ namespace sul.Protocol.Pocket132.Play
 
         public AddItemEntity() : this(0, 0, new Slot(), null, null, new Metadata()) {}
 
-        public AddItemEntity(long entityId, long runtimeId, Slot item, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, Metadata metadata)
+        public AddItemEntity(long entityId, ulong runtimeId, Slot item, System.Tuple<float, float, float> position, System.Tuple<float, float, float> motion, Metadata metadata)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -1360,7 +1400,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteVarlong(runtimeId);
+            _buffer.WriteVarulong(runtimeId);
             item.EncodeBody(_buffer);
             _buffer.WriteLittleEndianFloat(position.Item1); _buffer.WriteLittleEndianFloat(position.Item2); _buffer.WriteLittleEndianFloat(position.Item3);
             _buffer.WriteLittleEndianFloat(motion.Item1); _buffer.WriteLittleEndianFloat(motion.Item2); _buffer.WriteLittleEndianFloat(motion.Item3);
@@ -1370,7 +1410,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVarlong()
-            //_buffer.ReadVarlong()
+            //_buffer.ReadVarulong()
             //item.DecodeBody(_buffer);
             //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
             //_buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat() _buffer.ReadLittleEndianFloat()
@@ -1395,13 +1435,13 @@ namespace sul.Protocol.Pocket132.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public long runtimeId;
+        public ulong runtimeId;
         public BlockPosition position;
         public int unknown3;
 
         public AddHangingEntity() : this(0, 0, new BlockPosition(), 0) {}
 
-        public AddHangingEntity(long entityId, long runtimeId, BlockPosition position, int unknown3)
+        public AddHangingEntity(long entityId, ulong runtimeId, BlockPosition position, int unknown3)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -1427,7 +1467,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteVarlong(runtimeId);
+            _buffer.WriteVarulong(runtimeId);
             position.EncodeBody(_buffer);
             _buffer.WriteVarint(unknown3);
         }
@@ -1435,7 +1475,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVarlong()
-            //_buffer.ReadVarlong()
+            //_buffer.ReadVarulong()
             //position.DecodeBody(_buffer);
             //_buffer.ReadVarint()
         }
@@ -1797,14 +1837,14 @@ namespace sul.Protocol.Pocket132.Play
         public const bool Serverbound = false;
 
         public long entityId;
-        public long runtimeId;
+        public ulong runtimeId;
         public BlockPosition position;
         public int direction;
         public string title;
 
         public AddPainting() : this(0, 0, new BlockPosition(), 0, "") {}
 
-        public AddPainting(long entityId, long runtimeId, BlockPosition position, int direction, string title)
+        public AddPainting(long entityId, ulong runtimeId, BlockPosition position, int direction, string title)
         {
             this.entityId = entityId;
             this.runtimeId = runtimeId;
@@ -1831,7 +1871,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteVarlong(entityId);
-            _buffer.WriteVarlong(runtimeId);
+            _buffer.WriteVarulong(runtimeId);
             position.EncodeBody(_buffer);
             _buffer.WriteVarint(direction);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(title)); _buffer.WriteString(title);
@@ -1840,7 +1880,7 @@ namespace sul.Protocol.Pocket132.Play
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadVarlong()
-            //_buffer.ReadVarlong()
+            //_buffer.ReadVarulong()
             //position.DecodeBody(_buffer);
             //_buffer.ReadVarint()
             //_buffer.ReadString()
@@ -4222,17 +4262,19 @@ namespace sul.Protocol.Pocket132.Play
         public uint permissionLevel;
         public uint abilities;
         public uint playerRank;
-        public long unknown4;
+        public uint customPermissions;
+        public long entityId;
 
-        public AdventureSettings() : this(0, 0, 0, 0, 0) {}
+        public AdventureSettings() : this(0, 0, 0, 0, 0, 0) {}
 
-        public AdventureSettings(uint flags, uint permissionLevel, uint abilities, uint playerRank, long unknown4)
+        public AdventureSettings(uint flags, uint permissionLevel, uint abilities, uint playerRank, uint customPermissions, long entityId)
         {
             this.flags = flags;
             this.permissionLevel = permissionLevel;
             this.abilities = abilities;
             this.playerRank = playerRank;
-            this.unknown4 = unknown4;
+            this.customPermissions = customPermissions;
+            this.entityId = entityId;
         }
 
         public override int GetId()
@@ -4256,11 +4298,13 @@ namespace sul.Protocol.Pocket132.Play
             _buffer.WriteVaruint(permissionLevel);
             _buffer.WriteVaruint(abilities);
             _buffer.WriteVaruint(playerRank);
-            _buffer.WriteLittleEndianLong(unknown4);
+            _buffer.WriteVaruint(customPermissions);
+            _buffer.WriteLittleEndianLong(entityId);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
+            //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
             //_buffer.ReadVaruint()
@@ -7312,6 +7356,62 @@ namespace sul.Protocol.Pocket132.Play
         public static ShowProfile FromBuffer(byte[] buffer)
         {
             var ret = new ShowProfile();
+            ret.Decode(buffer);
+            return ret;
+        }
+
+    }
+
+    public class SetDefaultGameType : sul.Utils.Packet
+    {
+
+        public const uint Id = 105;
+
+        public const bool Clientbound = true;
+        public const bool Serverbound = false;
+
+        // game type
+        public const uint SURVIVAL = 0;
+        public const uint CREATIVE = 1;
+        public const uint ADVENTURE = 2;
+
+        public uint gameType;
+
+        public SetDefaultGameType() : this(0) {}
+
+        public SetDefaultGameType(uint gameType)
+        {
+            this.gameType = gameType;
+        }
+
+        public override int GetId()
+        {
+            return (int)Id;
+        }
+
+        public override void EncodeId(sul.Utils.Buffer _buffer)
+        {
+            _buffer.WriteVaruint(Id);
+        }
+
+        public override void DecodeId(sul.Utils.Buffer _buffer)
+        {
+            //_buffer.ReadVaruint();
+        }
+
+        protected override void EncodeImpl(sul.Utils.Buffer _buffer)
+        {
+            _buffer.WriteVaruint(gameType);
+        }
+
+        protected override void DecodeImpl(sul.Utils.Buffer _buffer)
+        {
+            //_buffer.ReadVaruint()
+        }
+
+        public static SetDefaultGameType FromBuffer(byte[] buffer)
+        {
+            var ret = new SetDefaultGameType();
             ret.Decode(buffer);
             return ret;
         }

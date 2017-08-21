@@ -49,6 +49,8 @@
         <Compile Include="sul\Protocol\Pocket100\Play.cs" />
         <Compile Include="sul\Protocol\Pocket101\Types.cs" />
         <Compile Include="sul\Protocol\Pocket101\Play.cs" />
+        <Compile Include="sul\Protocol\Pocket133\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket133\Play.cs" />
         <Compile Include="sul\Protocol\Java316\Types.cs" />
         <Compile Include="sul\Protocol\Java316\Status.cs" />
         <Compile Include="sul\Protocol\Java316\Login.cs" />
@@ -66,8 +68,6 @@
         <Compile Include="sul\Protocol\Java315\Login.cs" />
         <Compile Include="sul\Protocol\Java315\Clientbound.cs" />
         <Compile Include="sul\Protocol\Java315\Serverbound.cs" />
-        <Compile Include="sul\Protocol\Pocket132\Types.cs" />
-        <Compile Include="sul\Protocol\Pocket132\Play.cs" />
         <Compile Include="sul\Protocol\Java210\Types.cs" />
         <Compile Include="sul\Protocol\Java210\Status.cs" />
         <Compile Include="sul\Protocol\Java210\Login.cs" />

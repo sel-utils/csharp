@@ -4,11 +4,11 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket132.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket133.xml
  */
 using System.Text;
 
-namespace sul.Protocol.Pocket132.Types
+namespace sul.Protocol.Pocket133.Types
 {
 
     public class LoginBody : sul.Utils.LengthPrefixedType
