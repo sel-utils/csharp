@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket133.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket134.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Pocket133.Types;
+using sul.Protocol.Pocket134.Types;
 
-namespace sul.Protocol.Pocket133.Play
+namespace sul.Protocol.Pocket134.Play
 {
 
     public class Login : sul.Utils.Packet
@@ -25,7 +25,7 @@ namespace sul.Protocol.Pocket133.Play
         public uint protocol;
         public LoginBody body;
 
-        public Login() : this(133, new LoginBody()) {}
+        public Login() : this(134, new LoginBody()) {}
 
         public Login(uint protocol, LoginBody body)
         {
@@ -476,11 +476,11 @@ namespace sul.Protocol.Pocket133.Play
         public const bool Serverbound = true;
 
         public byte type;
-        public byte unknown1;
+        public bool unknown1;
 
-        public Text() : this(0, 0) {}
+        public Text() : this(0, false) {}
 
-        public Text(byte type, byte unknown1)
+        public Text(byte type, bool unknown1)
         {
             this.type = type;
             this.unknown1 = unknown1;
@@ -504,13 +504,13 @@ namespace sul.Protocol.Pocket133.Play
         protected override void EncodeImpl(sul.Utils.Buffer _buffer)
         {
             _buffer.WriteUbyte(type);
-            _buffer.WriteUbyte(unknown1);
+            _buffer.WriteBool(unknown1);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadUbyte()
-            //_buffer.ReadUbyte()
+            //_buffer.ReadBool()
         }
 
         public static Text FromBuffer(byte[] buffer)
@@ -520,10 +520,11 @@ namespace sul.Protocol.Pocket133.Play
             return ret;
         }
 
-        public RawVariant Raw(string message)
+        public RawVariant Raw(string message, string xuid)
         {
             var _variant = new RawVariant(this);
             _variant.message = message;
+            _variant.xuid = xuid;
             return _variant;
         }
 
@@ -533,6 +534,7 @@ namespace sul.Protocol.Pocket133.Play
             private Text _parent;
 
             public string message;
+            public string xuid;
 
             public RawVariant(Text parent) : base(parent)
             {
@@ -544,6 +546,7 @@ namespace sul.Protocol.Pocket133.Play
             {
                 _parent.EncodeImpl(_buffer);
                 _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(xuid)); _buffer.WriteString(xuid);
             }
 
             protected override void DecodeImpl(sul.Utils.Buffer _buffer)
@@ -553,11 +556,12 @@ namespace sul.Protocol.Pocket133.Play
 
         }
 
-        public ChatVariant Chat(string sender, string message)
+        public ChatVariant Chat(string sender, string message, string xuid)
         {
             var _variant = new ChatVariant(this);
             _variant.sender = sender;
             _variant.message = message;
+            _variant.xuid = xuid;
             return _variant;
         }
 
@@ -568,6 +572,7 @@ namespace sul.Protocol.Pocket133.Play
 
             public string sender;
             public string message;
+            public string xuid;
 
             public ChatVariant(Text parent) : base(parent)
             {
@@ -580,6 +585,7 @@ namespace sul.Protocol.Pocket133.Play
                 _parent.EncodeImpl(_buffer);
                 _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(sender)); _buffer.WriteString(sender);
                 _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(message)); _buffer.WriteString(message);
+                _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(xuid)); _buffer.WriteString(xuid);
             }
 
             protected override void DecodeImpl(sul.Utils.Buffer _buffer)
@@ -3142,18 +3148,19 @@ namespace sul.Protocol.Pocket133.Play
         public const int STOP_BREAK = 2;
         public const int GET_UPDATED_BLOCK = 3;
         public const int DROP_ITEM = 4;
-        public const int STOP_SLEEPING = 5;
-        public const int RESPAWN = 6;
-        public const int JUMP = 7;
-        public const int START_SPRINT = 8;
-        public const int STOP_SPRINT = 9;
-        public const int START_SNEAK = 10;
-        public const int STOP_SNEAK = 11;
-        public const int START_GLIDING = 14;
-        public const int STOP_GLIDING = 15;
-        public const int BUILD_DENIED = 16;
-        public const int CONTINUE_BREAK = 17;
-        public const int SET_ENCHANTMENT_SEED = 18;
+        public const int START_SLEEPING = 5;
+        public const int STOP_SLEEPING = 6;
+        public const int RESPAWN = 7;
+        public const int JUMP = 8;
+        public const int START_SPRINT = 9;
+        public const int STOP_SPRINT = 10;
+        public const int START_SNEAK = 11;
+        public const int STOP_SNEAK = 12;
+        public const int START_GLIDING = 15;
+        public const int STOP_GLIDING = 16;
+        public const int BUILD_DENIED = 17;
+        public const int CONTINUE_BREAK = 18;
+        public const int CHANGE_SKIN = 19;
 
         public long entityId;
         public int action;

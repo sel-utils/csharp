@@ -36,6 +36,8 @@
         <Compile Include="sul\Protocol\Raknet8\Control.cs" />
         <Compile Include="sul\Protocol\Raknet8\Unconnected.cs" />
         <Compile Include="sul\Protocol\Raknet8\Encapsulated.cs" />
+        <Compile Include="sul\Protocol\Pocket134\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket134\Play.cs" />
         <Compile Include="sul\Protocol\Pocket102\Types.cs" />
         <Compile Include="sul\Protocol\Pocket102\Play.cs" />
         <Compile Include="sul\Protocol\Java335\Types.cs" />
@@ -49,8 +51,6 @@
         <Compile Include="sul\Protocol\Pocket100\Play.cs" />
         <Compile Include="sul\Protocol\Pocket101\Types.cs" />
         <Compile Include="sul\Protocol\Pocket101\Play.cs" />
-        <Compile Include="sul\Protocol\Pocket133\Types.cs" />
-        <Compile Include="sul\Protocol\Pocket133\Play.cs" />
         <Compile Include="sul\Protocol\Java316\Types.cs" />
         <Compile Include="sul\Protocol\Java316\Status.cs" />
         <Compile Include="sul\Protocol\Java316\Login.cs" />
