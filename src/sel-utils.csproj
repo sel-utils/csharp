@@ -40,6 +40,11 @@
         <Compile Include="sul\Protocol\Pocket134\Play.cs" />
         <Compile Include="sul\Protocol\Pocket102\Types.cs" />
         <Compile Include="sul\Protocol\Pocket102\Play.cs" />
+        <Compile Include="sul\Protocol\Java340\Types.cs" />
+        <Compile Include="sul\Protocol\Java340\Status.cs" />
+        <Compile Include="sul\Protocol\Java340\Login.cs" />
+        <Compile Include="sul\Protocol\Java340\Clientbound.cs" />
+        <Compile Include="sul\Protocol\Java340\Serverbound.cs" />
         <Compile Include="sul\Protocol\Java335\Types.cs" />
         <Compile Include="sul\Protocol\Java335\Status.cs" />
         <Compile Include="sul\Protocol\Java335\Login.cs" />
