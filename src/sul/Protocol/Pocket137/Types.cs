@@ -4,11 +4,11 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket134.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket137.xml
  */
 using System.Text;
 
-namespace sul.Protocol.Pocket134.Types
+namespace sul.Protocol.Pocket137.Types
 {
 
     public class LoginBody : sul.Utils.LengthPrefixedType
@@ -771,12 +771,12 @@ namespace sul.Protocol.Pocket134.Types
         public const uint FLOAT = 2;
         public const uint MIXED = 3;
         public const uint TARGET = 4;
-        public const uint STRING = 12;
-        public const uint POSITION = 13;
-        public const uint RAWTEXT = 16;
-        public const uint TEXT = 18;
-        public const uint JSON = 21;
-        public const uint COMMAND = 28;
+        public const uint STRING = 13;
+        public const uint POSITION = 14;
+        public const uint RAWTEXT = 17;
+        public const uint TEXT = 19;
+        public const uint JSON = 22;
+        public const uint COMMAND = 29;
         public const uint ENUM = 2097152;
         public const uint TEMPLATE = 16777216;
 
