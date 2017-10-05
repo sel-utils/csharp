@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/pocket137.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/bedrock137.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Pocket137.Types;
+using sul.Protocol.Bedrock137.Types;
 
-namespace sul.Protocol.Pocket137.Play
+namespace sul.Protocol.Bedrock137.Play
 {
 
     public class Login : sul.Utils.Packet
