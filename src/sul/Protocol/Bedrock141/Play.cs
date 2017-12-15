@@ -4,14 +4,14 @@
  * 
  * License: https://github.com/sel-project/sel-utils/blob/master/LICENSE
  * Repository: https://github.com/sel-project/sel-utils
- * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/bedrock137.xml
+ * Generated from https://github.com/sel-project/sel-utils/blob/master/xml/protocol/bedrock141.xml
  */
 using System.Text;
 
 using sul.Utils;
-using sul.Protocol.Bedrock137.Types;
+using sul.Protocol.Bedrock141.Types;
 
-namespace sul.Protocol.Bedrock137.Play
+namespace sul.Protocol.Bedrock141.Play
 {
 
     public class Login : sul.Utils.Packet
@@ -25,7 +25,7 @@ namespace sul.Protocol.Bedrock137.Play
         public uint protocol;
         public LoginBody body;
 
-        public Login() : this(137, new LoginBody()) {}
+        public Login() : this(141, new LoginBody()) {}
 
         public Login(uint protocol, LoginBody body)
         {
@@ -2011,125 +2011,130 @@ namespace sul.Protocol.Bedrock137.Play
         public const byte THROW = 39;
         public const byte ATTACK = 40;
         public const byte ATTACK_NODAMAGE = 41;
-        public const byte WARN = 42;
-        public const byte SHEAR = 43;
-        public const byte MILK = 44;
-        public const byte THUNDER = 45;
-        public const byte EXPLODE = 46;
-        public const byte FIRE = 47;
-        public const byte IGNITE = 48;
-        public const byte FUSE = 49;
-        public const byte STARE = 50;
-        public const byte SPAWN = 51;
-        public const byte SHOOT = 52;
-        public const byte BREAK_BLOCK = 53;
-        public const byte LAUNCH = 54;
-        public const byte BLAST = 55;
-        public const byte LARGE_BLAST = 56;
-        public const byte TWINKLE = 57;
-        public const byte REMEDY = 58;
-        public const byte UNFECT = 59;
-        public const byte LEVELUP = 60;
-        public const byte BOW_HIT = 61;
-        public const byte BULLET_HIT = 62;
-        public const byte EXTINGUISH_FIRE = 63;
-        public const byte ITEM_FIZZ = 64;
-        public const byte CHEST_OPEN = 65;
-        public const byte CHEST_CLOSED = 66;
-        public const byte SHULKER_BOX_OPEN = 67;
-        public const byte SHULKER_BOX_CLOSE = 68;
-        public const byte POWER_ON = 69;
-        public const byte POWER_OFF = 70;
-        public const byte ATTACH = 71;
-        public const byte DETACH = 72;
-        public const byte DENY = 73;
-        public const byte TRIPOD = 74;
-        public const byte POP = 75;
-        public const byte DROP_SLOT = 76;
-        public const byte NOTE = 77;
-        public const byte THORNS = 78;
-        public const byte PISTON_IN = 79;
-        public const byte PISTON_OUT = 80;
-        public const byte PORTAL = 81;
-        public const byte WATER = 82;
-        public const byte LAVA_POP = 83;
-        public const byte LAVA = 84;
-        public const byte BURP = 85;
-        public const byte BUCKET_FILL_WATER = 86;
-        public const byte BUCKET_FILL_LAVA = 87;
-        public const byte BUCKET_EMPTY_WATER = 88;
-        public const byte BUCKET_EMPTY_LAVA = 89;
-        public const byte RECORD_13 = 90;
-        public const byte RECORD_CAT = 91;
-        public const byte RECORD_BLOCKS = 92;
-        public const byte RECORD_CHIRP = 93;
-        public const byte RECORD_FAR = 94;
-        public const byte RECORD_MALL = 95;
-        public const byte RECORD_MELLOHI = 96;
-        public const byte RECORD_STAL = 97;
-        public const byte RECORD_STRAD = 98;
-        public const byte RECORD_WARD = 99;
-        public const byte RECORD_11 = 100;
-        public const byte RECORD_WAIT = 101;
-        public const byte GUARDIAN_FLOP = 103;
-        public const byte ELDERGUARDIAN_CURSE = 104;
-        public const byte MOB_WARNING = 105;
-        public const byte MOB_WARNING_BABY = 106;
-        public const byte TELEPORT = 107;
-        public const byte SHULKER_OPEN = 108;
-        public const byte SHULKER_CLOSE = 109;
-        public const byte HAGGLE = 110;
-        public const byte HAGGLE_YES = 111;
-        public const byte HAGGLE_NO = 112;
-        public const byte HAGGLE_IDLE = 113;
-        public const byte CHORUS_GROW = 114;
-        public const byte CHORUS_DEATH = 115;
-        public const byte GLASS = 116;
-        public const byte CAST_SPELL = 117;
-        public const byte PREPARE_ATTACK = 118;
-        public const byte PREPARE_SUMMON = 119;
-        public const byte PREPARE_WOLOLO = 120;
-        public const byte FANG = 121;
-        public const byte CHARGE = 122;
-        public const byte CAMERA_TAKE_PICTURE = 123;
-        public const byte LEASHKNOT_PLACE = 124;
-        public const byte LEASHKNOT_BREAK = 125;
-        public const byte GROWL = 126;
-        public const byte WHINE = 127;
-        public const byte PANT = 128;
-        public const byte PURR = 129;
-        public const byte PURREOW = 130;
-        public const byte DEATH_MIN_VOLUME = 131;
-        public const byte DEATH_MID_VOLUME = 132;
-        public const byte INITIATE_BLAZE = 133;
-        public const byte INITIATE_CAVE_SPIDER = 134;
-        public const byte INITIATE_CREEPER = 135;
-        public const byte INITIATE_ELDER_GUARDIAN = 136;
-        public const byte INITIATE_ENDER_DRAGON = 137;
-        public const byte INITIATE_ENDERMAN = 138;
-        public const byte INITIATE_EVOCATION_ILLAGER = 140;
-        public const byte INITIATE_GHAST = 141;
-        public const byte INITIATE_HUSK = 142;
-        public const byte INITIATE_ILLUSION_ILLAGER = 143;
-        public const byte INITIATE_MAGMA_CUBE = 144;
-        public const byte INITIATE_POLAR_BEAR = 145;
-        public const byte INITIATE_SHULKER = 146;
-        public const byte INITIATE_SILVERFISH = 147;
-        public const byte INITIATE_SKELETON = 148;
-        public const byte INITIATE_SLIME = 149;
-        public const byte INITIATE_SPIDER = 150;
-        public const byte INITIATE_STRAY = 151;
-        public const byte INITIATE_VEX = 152;
-        public const byte INITIATE_VINDICATION_ILLAGER = 153;
-        public const byte INITIATE_WITCH = 154;
-        public const byte INITIATE_WITHER = 155;
-        public const byte INITIATE_WITHER_SKELETON = 156;
-        public const byte INITIATE_WOLF = 157;
-        public const byte INITIATE_ZOMBIE = 158;
-        public const byte INITIATE_ZOMBIE_PIGMAN = 159;
-        public const byte INITIATE_ZOMBIE_VILLAGER = 160;
-        public const byte DEFAULT = 161;
-        public const byte UNDEFINED = 162;
+        public const byte ATTACK_STRONG = 42;
+        public const byte WARN = 43;
+        public const byte SHEAR = 44;
+        public const byte MILK = 45;
+        public const byte THUNDER = 46;
+        public const byte EXPLODE = 47;
+        public const byte FIRE = 48;
+        public const byte IGNITE = 49;
+        public const byte FUSE = 50;
+        public const byte STARE = 51;
+        public const byte SPAWN = 52;
+        public const byte SHOOT = 53;
+        public const byte BREAK_BLOCK = 54;
+        public const byte LAUNCH = 55;
+        public const byte BLAST = 56;
+        public const byte LARGE_BLAST = 57;
+        public const byte TWINKLE = 58;
+        public const byte REMEDY = 59;
+        public const byte UNFECT = 60;
+        public const byte LEVELUP = 61;
+        public const byte BOW_HIT = 62;
+        public const byte BULLET_HIT = 63;
+        public const byte EXTINGUISH_FIRE = 64;
+        public const byte ITEM_FIZZ = 65;
+        public const byte CHEST_OPEN = 66;
+        public const byte CHEST_CLOSED = 67;
+        public const byte SHULKER_BOX_OPEN = 68;
+        public const byte SHULKER_BOX_CLOSE = 69;
+        public const byte POWER_ON = 70;
+        public const byte POWER_OFF = 71;
+        public const byte ATTACH = 72;
+        public const byte DETACH = 73;
+        public const byte DENY = 74;
+        public const byte TRIPOD = 75;
+        public const byte POP = 76;
+        public const byte DROP_SLOT = 77;
+        public const byte NOTE = 78;
+        public const byte THORNS = 79;
+        public const byte PISTON_IN = 80;
+        public const byte PISTON_OUT = 81;
+        public const byte PORTAL = 82;
+        public const byte WATER = 83;
+        public const byte LAVA_POP = 84;
+        public const byte LAVA = 85;
+        public const byte BURP = 86;
+        public const byte BUCKET_FILL_WATER = 87;
+        public const byte BUCKET_FILL_LAVA = 88;
+        public const byte BUCKET_EMPTY_WATER = 89;
+        public const byte BUCKET_EMPTY_LAVA = 90;
+        public const byte RECORD_13 = 91;
+        public const byte RECORD_CAT = 92;
+        public const byte RECORD_BLOCKS = 93;
+        public const byte RECORD_CHIRP = 94;
+        public const byte RECORD_FAR = 95;
+        public const byte RECORD_MALL = 96;
+        public const byte RECORD_MELLOHI = 97;
+        public const byte RECORD_STAL = 98;
+        public const byte RECORD_STRAD = 99;
+        public const byte RECORD_WARD = 100;
+        public const byte RECORD_11 = 101;
+        public const byte RECORD_WAIT = 102;
+        public const byte GUARDIAN_FLOP = 104;
+        public const byte ELDERGUARDIAN_CURSE = 105;
+        public const byte MOB_WARNING = 106;
+        public const byte MOB_WARNING_BABY = 107;
+        public const byte TELEPORT = 108;
+        public const byte SHULKER_OPEN = 109;
+        public const byte SHULKER_CLOSE = 110;
+        public const byte HAGGLE = 111;
+        public const byte HAGGLE_YES = 112;
+        public const byte HAGGLE_NO = 113;
+        public const byte HAGGLE_IDLE = 114;
+        public const byte CHORUS_GROW = 115;
+        public const byte CHORUS_DEATH = 116;
+        public const byte GLASS = 117;
+        public const byte CAST_SPELL = 118;
+        public const byte PREPARE_ATTACK = 119;
+        public const byte PREPARE_SUMMON = 120;
+        public const byte PREPARE_WOLOLO = 121;
+        public const byte FANG = 122;
+        public const byte CHARGE = 123;
+        public const byte CAMERA_TAKE_PICTURE = 124;
+        public const byte LEASHKNOT_PLACE = 125;
+        public const byte LEASHKNOT_BREAK = 126;
+        public const byte GROWL = 127;
+        public const byte WHINE = 128;
+        public const byte PANT = 129;
+        public const byte PURR = 130;
+        public const byte PURREOW = 131;
+        public const byte DEATH_MIN_VOLUME = 132;
+        public const byte DEATH_MID_VOLUME = 133;
+        public const byte INITIATE_BLAZE = 134;
+        public const byte INITIATE_CAVE_SPIDER = 135;
+        public const byte INITIATE_CREEPER = 136;
+        public const byte INITIATE_ELDER_GUARDIAN = 137;
+        public const byte INITIATE_ENDER_DRAGON = 138;
+        public const byte INITIATE_ENDERMAN = 139;
+        public const byte INITIATE_EVOCATION_ILLAGER = 141;
+        public const byte INITIATE_GHAST = 142;
+        public const byte INITIATE_HUSK = 143;
+        public const byte INITIATE_ILLUSION_ILLAGER = 144;
+        public const byte INITIATE_MAGMA_CUBE = 145;
+        public const byte INITIATE_POLAR_BEAR = 146;
+        public const byte INITIATE_SHULKER = 147;
+        public const byte INITIATE_SILVERFISH = 148;
+        public const byte INITIATE_SKELETON = 149;
+        public const byte INITIATE_SLIME = 150;
+        public const byte INITIATE_SPIDER = 151;
+        public const byte INITIATE_STRAY = 152;
+        public const byte INITIATE_VEX = 153;
+        public const byte INITIATE_VINDICATION_ILLAGER = 154;
+        public const byte INITIATE_WITCH = 155;
+        public const byte INITIATE_WITHER = 156;
+        public const byte INITIATE_WITHER_SKELETON = 157;
+        public const byte INITIATE_WOLF = 158;
+        public const byte INITIATE_ZOMBIE = 159;
+        public const byte INITIATE_ZOMBIE_PIGMAN = 160;
+        public const byte INITIATE_ZOMBIE_VILLAGER = 161;
+        public const byte BLOCK_END_PORTAL_FRAME_FILL = 162;
+        public const byte BLOCK_END_PORTAL_SPAWN = 163;
+        public const byte RANDOM_ANVIL_USE = 164;
+        public const byte BOTTLE_DRAGONBREATH = 165;
+        public const byte DEFAULT = 166;
+        public const byte UNDEFINED = 167;
 
         public byte sound;
         public System.Tuple<float, float, float> position;
@@ -2374,6 +2379,7 @@ namespace sul.Protocol.Bedrock137.Play
         // event id
         public const byte HURT_ANIMATION = 2;
         public const byte DEATH_ANIMATION = 3;
+        public const byte ARM_SWING = 4;
         public const byte TAME_FAIL = 6;
         public const byte TAME_SUCCESS = 7;
         public const byte SHAKE_WET = 8;
@@ -2384,9 +2390,31 @@ namespace sul.Protocol.Bedrock137.Play
         public const byte FISH_HOOK_HOOK = 13;
         public const byte FISH_HOOK_TEASE = 14;
         public const byte SQUID_INK_CLOUD = 15;
-        public const byte AMBIENT_SOUND = 16;
-        public const byte RESPAWN = 17;
-        public const byte UNLEASH = 63;
+        public const byte ZOMBIE_VILLAGER_CURE = 16;
+        public const byte RESPAWN = 18;
+        public const byte IRON_GOLEM_OFFER_FLOWER = 19;
+        public const byte IRON_GOLEM_WITHDRAW_FLOWER = 20;
+        public const byte LOVE_PARTICLES = 21;
+        public const byte WITCH_SPELL_ANIMATION = 24;
+        public const byte FIREWORK_PARTICLES = 25;
+        public const byte SILVERFISH_SPAWN_ANIMATION = 27;
+        public const byte WITCH_DRINK_POTION = 29;
+        public const byte WITCH_THROWN_POTION = 30;
+        public const byte MINECART_TNT_PRIME_FUSE = 31;
+        public const byte PLAYER_ADD_XP_LEVELS = 34;
+        public const byte ELDER_GUARDIAN_CURSE = 35;
+        public const byte AGENT_ARM_SWING = 36;
+        public const byte ENDER_DRAGON_DEATH = 37;
+        public const byte DUST_PARTICLES = 38;
+        public const byte EATING_ITEM = 57;
+        public const byte BABY_ANIMAL_FEED = 60;
+        public const byte DEATH_SMOKE_CLOUD = 61;
+        public const byte COMPLETE_TRADE = 62;
+        public const byte REMOVE_LEASH = 63;
+        public const byte CONSUME_TOTEM = 65;
+        public const byte ENTITY_SPAWN = 67;
+        public const byte DRAGON_PUKE = 68;
+        public const byte ITEM_ENTITY_MERGE = 69;
 
         public long entityId;
         public byte eventId;
@@ -5599,17 +5627,21 @@ namespace sul.Protocol.Bedrock137.Play
 
         public string command;
         public uint type;
+        public McpeUuid uuid;
         public string requestId;
         public int playerId;
+        public bool internal;
 
-        public CommandRequest() : this("", 0, "", 0) {}
+        public CommandRequest() : this("", 0, new McpeUuid(), "", 0, false) {}
 
-        public CommandRequest(string command, uint type, string requestId, int playerId)
+        public CommandRequest(string command, uint type, McpeUuid uuid, string requestId, int playerId, bool internal)
         {
             this.command = command;
             this.type = type;
+            this.uuid = uuid;
             this.requestId = requestId;
             this.playerId = playerId;
+            this.internal = internal;
         }
 
         public override int GetId()
@@ -5631,16 +5663,20 @@ namespace sul.Protocol.Bedrock137.Play
         {
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(command)); _buffer.WriteString(command);
             _buffer.WriteVaruint(type);
+            uuid.EncodeBody(_buffer);
             _buffer.WriteVaruint(Encoding.UTF8.GetByteCount(requestId)); _buffer.WriteString(requestId);
             if(type==3){ _buffer.WriteVarint(playerId); }
+            _buffer.WriteBool(internal);
         }
 
         protected override void DecodeImpl(sul.Utils.Buffer _buffer)
         {
             //_buffer.ReadString()
             //_buffer.ReadVaruint()
+            //uuid.DecodeBody(_buffer);
             //_buffer.ReadString()
             //if(type==3){ _buffer.ReadVarint() }
+            //_buffer.ReadBool()
         }
 
         public static CommandRequest FromBuffer(byte[] buffer)

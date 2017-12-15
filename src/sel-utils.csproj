@@ -36,6 +36,8 @@
         <Compile Include="sul\Protocol\Raknet8\Control.cs" />
         <Compile Include="sul\Protocol\Raknet8\Unconnected.cs" />
         <Compile Include="sul\Protocol\Raknet8\Encapsulated.cs" />
+        <Compile Include="sul\Protocol\Bedrock141\Types.cs" />
+        <Compile Include="sul\Protocol\Bedrock141\Play.cs" />
         <Compile Include="sul\Protocol\Pocket102\Types.cs" />
         <Compile Include="sul\Protocol\Pocket102\Play.cs" />
         <Compile Include="sul\Protocol\Java335\Types.cs" />
@@ -48,8 +50,10 @@
         <Compile Include="sul\Protocol\Java340\Login.cs" />
         <Compile Include="sul\Protocol\Java340\Clientbound.cs" />
         <Compile Include="sul\Protocol\Java340\Serverbound.cs" />
-        <Compile Include="sul\Protocol\Pocket105\Types.cs" />
-        <Compile Include="sul\Protocol\Pocket105\Play.cs" />
+        <Compile Include="sul\Protocol\Bedrock150\Types.cs" />
+        <Compile Include="sul\Protocol\Bedrock150\Play.cs" />
+        <Compile Include="sul\Protocol\Bedrock160\Types.cs" />
+        <Compile Include="sul\Protocol\Bedrock160\Play.cs" />
         <Compile Include="sul\Protocol\Pocket100\Types.cs" />
         <Compile Include="sul\Protocol\Pocket100\Play.cs" />
         <Compile Include="sul\Protocol\Pocket101\Types.cs" />
@@ -73,6 +77,8 @@
         <Compile Include="sul\Protocol\Java315\Login.cs" />
         <Compile Include="sul\Protocol\Java315\Clientbound.cs" />
         <Compile Include="sul\Protocol\Java315\Serverbound.cs" />
+        <Compile Include="sul\Protocol\Pocket105\Types.cs" />
+        <Compile Include="sul\Protocol\Pocket105\Play.cs" />
         <Compile Include="sul\Protocol\Java210\Types.cs" />
         <Compile Include="sul\Protocol\Java210\Status.cs" />
         <Compile Include="sul\Protocol\Java210\Login.cs" />
